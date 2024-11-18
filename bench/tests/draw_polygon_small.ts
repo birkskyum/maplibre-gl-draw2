@@ -1,10 +1,9 @@
 'use strict';
 
-import Evented from '../lib/evented';
-import SouthAmerica from '../fixtures/south-america.json';
+import Evented from '../lib/evented.ts';
 import formatNumber from '../lib/format_number';
-import fpsRunner from '../lib/fps';
-import DragMouse from '../lib/mouse_drag';
+import fpsRunner from '../lib/fps.ts';
+import DrawMouse from '../lib/mouse_draw.ts';
 
 const START = {x: 189, y: 293};
 
@@ -15,7 +14,7 @@ export default class Benchmark extends Evented {
     const out = options.createMap();
 
     // eslint-disable-next-line new-cap
-    const dragMouse = DragMouse(START, out.map);
+    const dragMouse = DrawMouse(START, out.map);
 
     const progressDiv = document.getElementById('progress');
     out.map.on('progress', (e) => {
@@ -23,8 +22,7 @@ export default class Benchmark extends Evented {
     });
 
     out.map.on('load', () => {
-      out.draw.add(SouthAmerica);
-      out.draw.changeMode('direct_select', { featureId: SouthAmerica.id });
+      out.draw.changeMode('draw_polygon');
 
       setTimeout(() => {
         const FPSControl = fpsRunner();
@@ -36,8 +34,11 @@ export default class Benchmark extends Evented {
           } else {
             this.fire('pass', {message: `${formatNumber(fps)} fps`});
           }
+          out.draw.changeMode('simple_select');
         });
       }, 2000);
     });
   }
 }
+
+

@@ -1,9 +1,9 @@
 'use strict';
 
-import Evented from '../lib/evented';
+import Evented from '../lib/evented.ts';
 import formatNumber from '../lib/format_number';
-import fpsRunner from '../lib/fps';
-import DrawMouse from '../lib/mouse_draw';
+import fpsRunner from '../lib/fps.ts';
+import DrawMouse from '../lib/mouse_draw.ts';
 
 const START = {x: 189, y: 293};
 
@@ -11,7 +11,7 @@ export default class Benchmark extends Evented {
   constructor(options) {
     super();
 
-    const out = options.createMap({width:1024});
+    const out = options.createMap();
 
     // eslint-disable-next-line new-cap
     const dragMouse = DrawMouse(START, out.map);
@@ -22,7 +22,7 @@ export default class Benchmark extends Evented {
     });
 
     out.map.on('load', () => {
-      out.draw.changeMode('draw_polygon');
+      out.draw.changeMode('draw_line_string');
 
       setTimeout(() => {
         const FPSControl = fpsRunner();
@@ -40,5 +40,3 @@ export default class Benchmark extends Evented {
     });
   }
 }
-
-

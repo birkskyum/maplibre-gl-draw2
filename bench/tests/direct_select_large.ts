@@ -1,24 +1,21 @@
 'use strict';
 
-import Evented from '../lib/evented';
+import Evented from '../lib/evented.ts';
+import SouthAmerica from '../fixtures/south-america.json';
 import formatNumber from '../lib/format_number';
-import fpsRunner from '../lib/fps';
-import DrawMouse from '../lib/mouse_draw';
+import fpsRunner from '../lib/fps.ts';
+import DragMouse from '../lib/mouse_drag.ts';
 
-const START = {x: 189, y: 293};
+const START = {x: 445, y: 293};
 
 export default class Benchmark extends Evented {
   constructor(options) {
     super();
 
-    const out = options.createMap({
-      width:1024,
-      center: [-75.5597469696618, -2.6084634090944974],
-      zoom: 5
-    });
+    const out = options.createMap({width: 1024});
 
     // eslint-disable-next-line new-cap
-    const dragMouse = DrawMouse(START, out.map);
+    const dragMouse = DragMouse(START, out.map);
 
     const progressDiv = document.getElementById('progress');
     out.map.on('progress', (e) => {
@@ -26,14 +23,11 @@ export default class Benchmark extends Evented {
     });
 
     out.map.on('load', () => {
-      out.map.on('draw.modechange', (e) => {
-        if (e.mode === 'simple_select') {
-          out.draw.changeMode('draw_point');
-        }
-      });
-      out.draw.changeMode('draw_point');
+      out.draw.add(SouthAmerica);
+      out.draw.changeMode('direct_select', { featureId: SouthAmerica.id });
 
       setTimeout(() => {
+        this.fire('log', {message: 'normal - 41fps'});
         const FPSControl = fpsRunner();
         FPSControl.start();
         dragMouse(() => {
@@ -43,7 +37,6 @@ export default class Benchmark extends Evented {
           } else {
             this.fire('pass', {message: `${formatNumber(fps)} fps`});
           }
-          out.draw.changeMode('simple_select');
         });
       }, 2000);
     });

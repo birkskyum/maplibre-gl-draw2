@@ -1,11 +1,11 @@
 'use strict';
 
-import Evented from '../lib/evented';
+import Evented from '../lib/evented.ts';
 import formatNumber from '../lib/format_number';
 import land from '../fixtures/land.json';
-import fpsRunner from '../lib/fps';
-import TraceMouse from '../lib/mouse_trace';
-import traceProgress from '../lib/trace_progress';
+import fpsRunner from '../lib/fps.ts';
+import TraceMouse from '../lib/mouse_trace.ts';
+import traceProgress from '../lib/trace_progress.ts';
 
 export default class Benchmark extends Evented {
   constructor(options) {

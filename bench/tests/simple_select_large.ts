@@ -1,34 +1,34 @@
 'use strict';
 
-import Evented from '../lib/evented';
+import Evented from '../lib/evented.ts';
+import SouthAmerica from '../fixtures/south-america.json';
 import formatNumber from '../lib/format_number';
-import fpsRunner from '../lib/fps';
-import DrawMouse from '../lib/mouse_draw';
+import fpsRunner from '../lib/fps.ts';
+import DragMouse from '../lib/mouse_drag.ts';
 
-const START = {x: 189, y: 293};
+const START = {
+  x: 431,
+  y: 278
+};
 
-export default class Benchmark extends Evented {
+export default class SimpleSelectLargeBenchmark extends Evented {
   constructor(options) {
     super();
-
-    const out = options.createMap({
-      width:1024,
-      center: [-75.5597469696618, -2.6084634090944974],
-      zoom: 5
-    });
-
-    // eslint-disable-next-line new-cap
-    const dragMouse = DrawMouse(START, out.map);
+    const out = options.createMap({width:1024});
 
     const progressDiv = document.getElementById('progress');
     out.map.on('progress', (e) => {
       progressDiv.style.width = `${e.done}%`;
     });
 
+    // eslint-disable-next-line new-cap
+    const dragMouse = DragMouse(START, out.map);
+
     out.map.on('load', () => {
-      out.draw.changeMode('draw_polygon');
+      out.draw.add(SouthAmerica);
 
       setTimeout(() => {
+        this.fire('log', {message: 'normal - 43fps'});
         const FPSControl = fpsRunner();
         FPSControl.start();
         dragMouse(() => {
@@ -38,7 +38,6 @@ export default class Benchmark extends Evented {
           } else {
             this.fire('pass', {message: `${formatNumber(fps)} fps`});
           }
-          out.draw.changeMode('simple_select');
         });
       }, 2000);
     });
