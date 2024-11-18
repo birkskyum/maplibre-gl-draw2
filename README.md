@@ -24,7 +24,7 @@ Draw ships with CSS, make sure you include it in your build.
 
 ```js
 import mapboxgl from 'mapbox-gl';
-import MapboxDraw from "@birkskyum/maplibre-gl-draw";
+import MapLibreDraw from "@birkskyum/maplibre-gl-draw";
 ```
 
 **When using a CDN**
@@ -65,7 +65,7 @@ var map = new mapboxgl.Map({
   zoom: 9
 });
 
-var Draw = new MapboxDraw();
+var Draw = new MapLibreDraw();
 
 // Map#addControl takes an optional second argument to set the position of the control.
 // If no position is specified the control defaults to `top-right`. See the docs

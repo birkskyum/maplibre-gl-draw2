@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import MapboxDraw from '../index.ts';
+import MapLibreDraw from '../index.ts';
 import createMap from './utils/create_map.ts';
 import mouseClick from './utils/mouse_click.ts';
 import touchTap from './utils/touch_tap.ts';
@@ -276,7 +276,7 @@ test('draw_polygon mouse interaction', async (t) => {
   const container = document.createElement('div');
   document.body.appendChild(container);
   const map = createMap({ container });
-  const Draw = new MapboxDraw();
+  const Draw = new MapLibreDraw();
   map.addControl(Draw);
 
   await map.on('load');
@@ -594,7 +594,7 @@ test('draw_polygon touch interaction', async (t) => {
   const container = document.createElement('div');
   document.body.appendChild(container);
   const map = createMap({ container });
-  const Draw = new MapboxDraw();
+  const Draw = new MapLibreDraw();
   map.addControl(Draw);
 
   await map.on('load');

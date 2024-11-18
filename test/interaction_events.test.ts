@@ -3,7 +3,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { spy } from 'sinon';
-import MapboxDraw from '../index.ts';
+import MapLibreDraw from '../index.ts';
 import click from './utils/mouse_click.ts';
 import createMap from './utils/create_map.ts';
 import { setupAfterNextRender } from './utils/after_next_render.ts';
@@ -21,7 +21,7 @@ test('ensure user interactions fire right events', async (t) => {
   const map = createMap({ container });
   const fireSpy = spy(map, 'fire');
   const afterNextRender = setupAfterNextRender(map);
-  const Draw = new MapboxDraw();
+  const Draw = new MapLibreDraw();
   const onAdd = Draw.onAdd.bind(Draw);
   let controlGroup = null;
 

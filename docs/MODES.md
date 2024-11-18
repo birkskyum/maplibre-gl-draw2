@@ -49,13 +49,13 @@ LotsOfPointsMode.toDisplayFeatures = function(state, geojson, display) {
   display(geojson);
 };
 
-// Add the new draw mode to the MapboxDraw object
-var draw = new MapboxDraw({
+// Add the new draw mode to the MapLibreDraw object
+var draw = new MapLibreDraw({
   defaultMode: 'lots_of_points',
   // Adds the LotsOfPointsMode to the built-in set of modes
   modes: Object.assign({
     lots_of_points: LotsOfPointsMode,
-  }, MapboxDraw.modes),
+  }, MapLibreDraw.modes),
 });
 ```
 

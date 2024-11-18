@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import {spy} from 'sinon';
 import Feature from '../src/feature_types/feature.ts';
 import Polygon from '../src/feature_types/polygon.ts';
-import MapboxDraw from '../index.ts';
+import MapLibreDraw from '../index.ts';
 import createFeature from './utils/create_feature.ts';
 import getPublicMemberKeys from './utils/get_public_member_keys.ts';
 import createMockCtx from './utils/create_mock_feature_context.ts';
@@ -123,7 +123,7 @@ test('Polygon#updateCoordinate, Polygon#getCoordinate', () => {
 test('Polygon integration', async () => {
   const polygonCoordinates = [[[0, 0], [30, 15], [32, 35], [15, 30], [0, 0]]];
   const map = createMap();
-  const Draw = new MapboxDraw();
+  const Draw = new MapLibreDraw();
   map.addControl(Draw);
 
   await map.on('load');

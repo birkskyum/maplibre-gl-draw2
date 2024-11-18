@@ -4,7 +4,7 @@ import assert from 'node:assert/strict';
 import {spy} from 'sinon';
 
 import * as Constants from '../src/constants.ts';
-import MapboxDraw from '../index.ts';
+import MapLibreDraw from '../index.ts';
 import createMap from './utils/create_map.ts';
 import getGeoJSON from './utils/get_geojson.ts';
 import {setupAfterNextRender} from './utils/after_next_render.ts';
@@ -19,7 +19,7 @@ let deleteSpy;
 beforeEach(() => {
   map = createMap();
   afterNextRender = setupAfterNextRender(map);
-  Draw = new MapboxDraw();
+  Draw = new MapLibreDraw();
   map.addControl(Draw);
   addSpy = spy(Draw, 'add');
   deleteSpy = spy(Draw, 'delete');

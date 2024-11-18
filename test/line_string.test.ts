@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import {spy} from 'sinon';
 import Feature from '../src/feature_types/feature.ts';
 import LineString from '../src/feature_types/line_string.ts';
-import MapboxDraw from '../index.ts';
+import MapLibreDraw from '../index.ts';
 import createFeature from './utils/create_feature.ts';
 import getPublicMemberKeys from './utils/get_public_member_keys.ts';
 import createMockCtx from './utils/create_mock_feature_context.ts';
@@ -99,7 +99,7 @@ test('LineString#updateCoordinate', () => {
 test('LineString integration', async () => {
   const lineStringCoordinates = [[0, 0], [40, 20], [20, 40]];
   const map = createMap();
-  const Draw = new MapboxDraw();
+  const Draw = new MapLibreDraw();
   map.addControl(Draw);
 
   await map.on('load');

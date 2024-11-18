@@ -7,7 +7,7 @@ To use Draw
 var map = new Map(mapOptions);
 
 // Create a Draw control
-var draw = new MapboxDraw(drawOptions);
+var draw = new MapLibreDraw(drawOptions);
 
 // Add the Draw control to your map
 map.addControl(draw);
@@ -33,13 +33,13 @@ All of the following options are optional.
 - `controls`, Object: Hide or show individual controls. Each property's name is a control, and value is a boolean indicating whether the control is on or off. Available control names are `point`, `line_string`, `polygon`, `trash`, `combine_features` and `uncombine_features`. By default, all controls are on. To change that default, use `displayControlsDefault`.
 - `displayControlsDefault`, boolean (default: `true`): The default value for `controls`. For example, if you would like all controls to be *off* by default, and specify an allowed list with `controls`, use `displayControlsDefault: false`.
 - `styles`, Array\<Object\>: An array of map style objects. By default, Draw provides a map style for you. To learn about overriding styles, see the [Styling Draw](#styling-draw) section below.
-- `modes`, Object: over ride the default modes with your own. `MapboxDraw.modes` can be used to see the default values. More information on custom modes [can be found here](https://github.com/mapbox/maplibre-gl-draw/blob/main/docs/MODES.md).
+- `modes`, Object: over ride the default modes with your own. `MapLibreDraw.modes` can be used to see the default values. More information on custom modes [can be found here](https://github.com/mapbox/maplibre-gl-draw/blob/main/docs/MODES.md).
 - `defaultMode`, String (default: `'simple_select'`): the mode (from `modes`) that user will first land in.
 - `userProperties`, boolean (default: `false`): properties of a feature will also be available for styling and prefixed with `user_`, e.g., `['==', 'user_custom_label', 'Example']`
 
 ## Modes
 
-By default MapboxDraw ships with a few modes. These modes aim to cover the basic needed functionally for MapboxDraw to create the core GeoJSON feature types. Along with these, MapboxDraw also supports [custom modes. Click here for more details](https://github.com/mapbox/maplibre-gl-draw/blob/main/docs/MODES.md).
+By default MapLibreDraw ships with a few modes. These modes aim to cover the basic needed functionally for MapLibreDraw to create the core GeoJSON feature types. Along with these, MapLibreDraw also supports [custom modes. Click here for more details](https://github.com/mapbox/maplibre-gl-draw/blob/main/docs/MODES.md).
 
 The mode name strings are available as an enum at `Draw.modes`.
 
@@ -83,7 +83,7 @@ Lets you draw a Point feature.
 
 ## API Methods
 
-`new MapboxDraw()` returns an instance of Draw with the following API:
+`new MapLibreDraw()` returns an instance of Draw with the following API:
 
 ### `add(geojson: Object) => Array<string>`
 

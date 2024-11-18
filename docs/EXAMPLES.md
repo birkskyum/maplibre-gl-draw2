@@ -10,7 +10,7 @@ With this style, all Point features are blue and have a black halo when active.
 No other features are rendered, even if they are present.
 
 ```js
-var draw = new MapboxDraw({
+var draw = new MapLibreDraw({
   // other draw options here
   // ...
   styles: [
@@ -47,7 +47,7 @@ var draw = new MapboxDraw({
 With this style, all line and polygon features are have dashed red outline and transparent fill while being drawn, including the point vertices. Point vertices use the same point filter, and render these points twice: once as a larger-radius halo, and again as the vertex inset point.
 
 ```js
-var draw = new MapboxDraw({
+var draw = new MapLibreDraw({
   // other draw options here
   // ...
   styles: [

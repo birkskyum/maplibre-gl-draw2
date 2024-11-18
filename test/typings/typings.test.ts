@@ -1,4 +1,4 @@
-import MapboxDraw, {
+import MapLibreDraw, {
     constants,
     DrawCustomMode,
     DrawEvent,
@@ -10,7 +10,7 @@ import MapboxDraw, {
     MapLibreDrawOptions,
 } from "@birkskyum/maplibre-gl-draw";
 
-const draw = new MapboxDraw({});
+const draw = new MapLibreDraw({});
 
 // @ts-expect-error
 const drawFeature: DrawFeature = {};
@@ -24,39 +24,39 @@ draw.add({
 });
 
 // accepts string
-// $ExpectType MapboxDraw
+// $ExpectType MapLibreDraw
 draw.delete("1");
 
 // accepts string[]
-// $ExpectType MapboxDraw
+// $ExpectType MapLibreDraw
 draw.delete(["1", "2"]);
 
 // $ExpectType string[]
 draw.getSelectedIds();
 
-// $ExpectType MapboxDraw
+// $ExpectType MapLibreDraw
 draw.changeMode("direct_select", { featureId: "1" });
 
 // @ts-expect-error
 draw.changeMode("direct_select");
 
-// $ExpectType MapboxDraw
+// $ExpectType MapLibreDraw
 draw.changeMode("simple_select");
 
 const drawLineSelect: DrawMode = "draw_line_string";
-// $ExpectType MapboxDraw
+// $ExpectType MapLibreDraw
 draw.changeMode(drawLineSelect, { featureId: "1", from: [1] });
 
-// $ExpectType MapboxDraw
+// $ExpectType MapLibreDraw
 draw.changeMode("draw_point");
 
 // @ts-expect-error
 draw.changeMode("draw_point", {});
 
-// $ExpectType MapboxDraw
+// $ExpectType MapLibreDraw
 draw.changeMode("custom_mode");
 
-// $ExpectType MapboxDraw
+// $ExpectType MapLibreDraw
 draw.changeMode("custom_mode", {});
 
 if (draw.getMode() === "draw_line_string") {
@@ -72,7 +72,7 @@ draw.modes.DIRECT_SELECT;
 constants.modes.SIMPLE_SELECT;
 
 // $ExpectType DrawCustomMode<any, any>
-MapboxDraw.modes.direct_select;
+MapLibreDraw.modes.direct_select;
 
 function callback(event: DrawUpdateEvent) {
     // $ExpectType "draw.update"
@@ -217,11 +217,11 @@ const CustomModeMissingDisplayFeatures: DrawCustomMode<{}, {}> = {};
 const options: MapLibreDrawOptions = {
     modes: {
         custom_mode: customMode,
-        ...MapboxDraw.modes,
+        ...MapLibreDraw.modes,
     },
 };
 
-const drawWithCustomMode = new MapboxDraw(options);
+const drawWithCustomMode = new MapLibreDraw(options);
 
 // $ExpectType void
 drawFeature.changed();

@@ -5,7 +5,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {fileURLToPath} from 'url';
 
-import MapboxDraw from '../index.ts';
+import MapLibreDraw from '../index.ts';
 import modes from '../src/modes/index.ts';
 
 const __dirname = fileURLToPath(new URL('.', import.meta.url));
@@ -13,7 +13,7 @@ const styleWithSourcesFixture = JSON.parse(fs.readFileSync(path.join(__dirname, 
 
 test('Options test', async (t) => {
   t.test('no options', () => {
-    const Draw = new MapboxDraw();
+    const Draw = new MapLibreDraw();
     const defaultOptions = {
       defaultMode: 'simple_select',
       modes,
@@ -39,7 +39,7 @@ test('Options test', async (t) => {
   });
 
   await t.test('use custom clickBuffer', () => {
-    const Draw = new MapboxDraw({ clickBuffer: 10 });
+    const Draw = new MapLibreDraw({ clickBuffer: 10 });
     const defaultOptions = {
       defaultMode: 'simple_select',
       modes,
@@ -65,7 +65,7 @@ test('Options test', async (t) => {
   });
 
   t.test('hide all controls', () => {
-    const Draw = new MapboxDraw({displayControlsDefault: false});
+    const Draw = new MapLibreDraw({displayControlsDefault: false});
     const defaultOptions = {
       defaultMode: 'simple_select',
       modes,
@@ -90,7 +90,7 @@ test('Options test', async (t) => {
   });
 
   await t.test('hide controls but show point', () => {
-    const Draw = new MapboxDraw({displayControlsDefault: false, controls: {point:true}});
+    const Draw = new MapLibreDraw({displayControlsDefault: false, controls: {point:true}});
     const defaultOptions = {
       defaultMode: 'simple_select',
       modes,
@@ -116,7 +116,7 @@ test('Options test', async (t) => {
   });
 
   t.test('hide only point control', () => {
-    const Draw = new MapboxDraw({ controls: {point:false}});
+    const Draw = new MapLibreDraw({ controls: {point:false}});
     const defaultOptions = {
       defaultMode: 'simple_select',
       modes,
@@ -142,7 +142,7 @@ test('Options test', async (t) => {
   });
 
   await t.test('disable touch interaction', () => {
-    const Draw = new MapboxDraw({ touchEnabled: false });
+    const Draw = new MapLibreDraw({ touchEnabled: false });
     const defaultOptions = {
       defaultMode: 'simple_select',
       modes,
@@ -168,7 +168,7 @@ test('Options test', async (t) => {
   });
 
   await t.test('custom styles', () => {
-    const Draw = new MapboxDraw({styles: [{
+    const Draw = new MapLibreDraw({styles: [{
       'id': 'custom-polygon',
       'type': 'fill',
       'filter': ['all', ['==', '$type', 'Polygon']],

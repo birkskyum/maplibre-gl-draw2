@@ -11,22 +11,22 @@ import {
     MapTouchEvent as MapboxMapTouchEvent,
 } from "mapbox-gl";
 
-export = MapboxDraw;
-export as namespace MapboxDraw;
+export = MapLibreDraw;
+export as namespace MapLibreDraw;
 
-declare namespace MapboxDraw {
+declare namespace MapLibreDraw {
     type DrawMode = DrawModes[keyof DrawModes];
 
     interface DrawEvents {
-        "draw.create": MapboxDraw.DrawCreateEvent;
-        "draw.delete": MapboxDraw.DrawDeleteEvent;
-        "draw.update": MapboxDraw.DrawUpdateEvent;
-        "draw.selectionchange": MapboxDraw.DrawSelectionChangeEvent;
-        "draw.render": MapboxDraw.DrawRenderEvent;
-        "draw.combine": MapboxDraw.DrawCombineEvent;
-        "draw.uncombine": MapboxDraw.DrawUncombineEvent;
-        "draw.modechange": MapboxDraw.DrawModeChangeEvent;
-        "draw.actionable": MapboxDraw.DrawActionableEvent;
+        "draw.create": MapLibreDraw.DrawCreateEvent;
+        "draw.delete": MapLibreDraw.DrawDeleteEvent;
+        "draw.update": MapLibreDraw.DrawUpdateEvent;
+        "draw.selectionchange": MapLibreDraw.DrawSelectionChangeEvent;
+        "draw.render": MapLibreDraw.DrawRenderEvent;
+        "draw.combine": MapLibreDraw.DrawCombineEvent;
+        "draw.uncombine": MapLibreDraw.DrawUncombineEvent;
+        "draw.modechange": MapLibreDraw.DrawModeChangeEvent;
+        "draw.actionable": MapLibreDraw.DrawActionableEvent;
     }
     type DrawEventType = keyof DrawEvents;
 
@@ -39,7 +39,7 @@ declare namespace MapboxDraw {
         STATIC: "static";
     }
 
-    interface MapboxDrawControls {
+    interface MapLibreDrawControls {
         point?: boolean | undefined;
         line_string?: boolean | undefined;
         polygon?: boolean | undefined;
@@ -542,7 +542,7 @@ declare namespace MapboxDraw {
         boxSelect?: boolean | undefined;
         clickBuffer?: number | undefined;
         touchBuffer?: number | undefined;
-        controls?: MapboxDrawControls | undefined;
+        controls?: MapLibreDrawControls | undefined;
         styles?: object[] | undefined;
         modes?: { [modeKey: string]: DrawCustomMode } | undefined;
         defaultMode?: string | undefined;
@@ -550,16 +550,16 @@ declare namespace MapboxDraw {
     }
 }
 
-declare class MapboxDraw implements IControl {
-    static modes: MapboxDraw.Modes;
-    static constants: MapboxDraw.Constants;
-    static lib: MapboxDraw.Lib;
+declare class MapLibreDraw implements IControl {
+    static modes: MapLibreDraw.Modes;
+    static constants: MapLibreDraw.Constants;
+    static lib: MapLibreDraw.Lib;
 
-    modes: MapboxDraw.DrawModes;
+    modes: MapLibreDraw.DrawModes;
 
     getDefaultPosition: () => ControlPosition;
 
-    constructor(options?: MapboxDraw.MapLibreDrawOptions);
+    constructor(options?: MapLibreDraw.MapLibreDrawOptions);
 
     add(geojson: Feature | FeatureCollection | Geometry): string[];
 
@@ -587,7 +587,7 @@ declare class MapboxDraw implements IControl {
 
     uncombineFeatures(): this;
 
-    getMode(): (MapboxDraw.DrawMode & {}) | string;
+    getMode(): (MapLibreDraw.DrawMode & {}) | string;
 
     changeMode(mode: "simple_select", options?: { featureIds: string[] }): this;
     changeMode(mode: "direct_select", options: { featureId: string }): this;
@@ -595,8 +595,8 @@ declare class MapboxDraw implements IControl {
         mode: "draw_line_string",
         options?: { featureId: string; from: Feature<Point> | Point | number[] },
     ): this;
-    changeMode(mode: Exclude<MapboxDraw.DrawMode, "direct_select" | "simple_select" | "draw_line_string">): this;
-    changeMode<T extends string>(mode: T & (T extends MapboxDraw.DrawMode ? never : T), options?: object): this;
+    changeMode(mode: Exclude<MapLibreDraw.DrawMode, "direct_select" | "simple_select" | "draw_line_string">): this;
+    changeMode<T extends string>(mode: T & (T extends MapLibreDraw.DrawMode ? never : T), options?: object): this;
 
     setFeatureProperty(featureId: string, property: string, value: any): this;
 

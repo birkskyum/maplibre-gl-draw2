@@ -4,7 +4,7 @@ import assert from 'node:assert/strict';
 import StaticMode from '@birkskyum/maplibre-gl-draw-static-mode';
 import {spy} from 'sinon';
 
-import MapboxDraw from '../index.ts';
+import MapLibreDraw from '../index.ts';
 import {setupAfterNextRender} from './utils/after_next_render.ts';
 import makeMouseEvent from './utils/make_mouse_event.ts';
 import getGeoJSON from './utils/get_geojson.ts';
@@ -18,7 +18,7 @@ test('static', async (t) => {
     },
     defaultMode: 'static'
   };
-  const Draw = new MapboxDraw(opts);
+  const Draw = new MapLibreDraw(opts);
   map.addControl(Draw);
 
   spy(map, 'fire');

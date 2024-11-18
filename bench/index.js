@@ -1,4 +1,4 @@
-/* global mapboxgl, MapboxDraw */
+/* global mapboxgl, MapLibreDraw */
 
 try {
   main();
@@ -122,7 +122,7 @@ function createMap(options) {
     style: 'mapbox://styles/mapbox/streets-v12'
   }, options));
 
-  const draw = new MapboxDraw(options);
+  const draw = new MapLibreDraw(options);
 
   map.addControl(draw);
 

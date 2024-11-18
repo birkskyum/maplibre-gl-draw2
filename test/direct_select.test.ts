@@ -5,7 +5,7 @@ import turfCentroid from '@turf/centroid';
 import createSyntheticEvent from 'synthetic-dom-events';
 import {spy} from 'sinon';
 
-import MapboxDraw from '../index.ts';
+import MapLibreDraw from '../index.ts';
 import click from './utils/mouse_click.ts';
 import tap from './utils/touch_tap.ts';
 import getGeoJSON from './utils/get_geojson.ts';
@@ -20,7 +20,7 @@ test('direct_select', async (t) => {
   document.body.appendChild(mapContainer);
   const map = createMap({ container: mapContainer });
 
-  const Draw = new MapboxDraw();
+  const Draw = new MapLibreDraw();
   map.addControl(Draw);
 
   spy(map, 'fire');

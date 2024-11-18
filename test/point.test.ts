@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import {spy} from 'sinon';
 import Feature from '../src/feature_types/feature.ts';
 import Point from '../src/feature_types/point.ts';
-import MapboxDraw from '../index.ts';
+import MapLibreDraw from '../index.ts';
 import createFeature from './utils/create_feature.ts';
 import getPublicMemberKeys from './utils/get_public_member_keys.ts';
 import createMockCtx from './utils/create_mock_feature_context.ts';
@@ -67,7 +67,7 @@ test('Point#updateCoordinate, Point#getCoordinate', () => {
 test('Point integration test', async () => {
   const pointCoordinates = [10, 10];
   const map = createMap();
-  const Draw = new MapboxDraw();
+  const Draw = new MapLibreDraw();
   map.addControl(Draw);
 
   await map.on('load');
