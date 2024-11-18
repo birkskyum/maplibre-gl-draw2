@@ -1,5 +1,5 @@
-import * as CommonSelectors from '../lib/common_selectors.js';
-import * as Constants from '../constants.js';
+import * as CommonSelectors from '../lib/common_selectors.ts';
+import * as Constants from '../constants.ts';
 
 const DrawPoint = {};
 

@@ -1,5 +1,5 @@
-import constrainFeatureMovement from './constrain_feature_movement.js';
-import * as Constants from '../constants.js';
+import constrainFeatureMovement from './constrain_feature_movement.ts';
+import * as Constants from '../constants.ts';
 
 export default function(features, delta) {
   const constrainedDelta = constrainFeatureMovement(features.map(feature => feature.toGeoJSON()), delta);

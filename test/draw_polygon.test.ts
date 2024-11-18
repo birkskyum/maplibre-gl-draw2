@@ -1,17 +1,17 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import MapboxDraw from '../index.js';
-import createMap from './utils/create_map.js';
-import mouseClick from './utils/mouse_click.js';
-import touchTap from './utils/touch_tap.js';
-import makeMouseEvent from './utils/make_mouse_event.js';
-import makeTouchEvent from './utils/make_touch_event.js';
-import drawPolygonModeObject from '../src/modes/draw_polygon.js';
-import Polygon from '../src/feature_types/polygon.js';
-import createMockDrawModeContext from './utils/create_mock_draw_mode_context.js';
-import createMockLifecycleContext from './utils/create_mock_lifecycle_context.js';
-import {setupAfterNextRender} from './utils/after_next_render.js';
-import objectToMode from '../src/modes/object_to_mode.js';
+import MapboxDraw from '../index.ts';
+import createMap from './utils/create_map.ts';
+import mouseClick from './utils/mouse_click.ts';
+import touchTap from './utils/touch_tap.ts';
+import makeMouseEvent from './utils/make_mouse_event.ts';
+import makeTouchEvent from './utils/make_touch_event.ts';
+import drawPolygonModeObject from '../src/modes/draw_polygon.ts';
+import Polygon from '../src/feature_types/polygon.ts';
+import createMockDrawModeContext from './utils/create_mock_draw_mode_context.ts';
+import createMockLifecycleContext from './utils/create_mock_lifecycle_context.ts';
+import {setupAfterNextRender} from './utils/after_next_render.ts';
+import objectToMode from '../src/modes/object_to_mode.ts';
 const drawPolygonMode = objectToMode(drawPolygonModeObject);
 
 import {
@@ -20,7 +20,7 @@ import {
   startLineStringEvent,
   startPolygonEvent,
   escapeEvent
-} from './utils/key_events.js';
+} from './utils/key_events.ts';
 
 test('draw_polygon mode initialization', () => {
   const context = createMockDrawModeContext();

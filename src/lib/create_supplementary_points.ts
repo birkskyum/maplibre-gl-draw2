@@ -1,6 +1,6 @@
-import createVertex from './create_vertex.js';
-import createMidpoint from './create_midpoint.js';
-import * as Constants from '../constants.js';
+import createVertex from './create_vertex.ts';
+import createMidpoint from './create_midpoint.ts';
+import * as Constants from '../constants.ts';
 
 function createSupplementaryPoints(geojson, options = {}, basePath = null) {
   const { type, coordinates } = geojson.geometry;

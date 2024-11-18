@@ -1,9 +1,9 @@
-import runSetup from './src/setup.js';
-import setupOptions from './src/options.js';
-import setupAPI from './src/api.js';
-import modes from './src/modes/index';
-import * as Constants from './src/constants.js';
-import * as lib from './src/lib/index';
+import runSetup from './src/setup.ts';
+import setupOptions from './src/options.ts';
+import setupAPI from './src/api.ts';
+import modes from './src/modes/index.ts';
+import * as Constants from './src/constants.ts';
+import * as lib from './src/lib/index.ts';
 
 const setupDraw = function(options, api) {
   options = setupOptions(options);

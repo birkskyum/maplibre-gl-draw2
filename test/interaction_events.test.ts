@@ -3,17 +3,17 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { spy } from 'sinon';
-import MapboxDraw from '../index.js';
-import click from './utils/mouse_click.js';
-import createMap from './utils/create_map.js';
-import { setupAfterNextRender } from './utils/after_next_render.js';
-import makeMouseEvent from './utils/make_mouse_event.js';
+import MapboxDraw from '../index.ts';
+import click from './utils/mouse_click.ts';
+import createMap from './utils/create_map.ts';
+import { setupAfterNextRender } from './utils/after_next_render.ts';
+import makeMouseEvent from './utils/make_mouse_event.ts';
 
 import {
   backspaceEvent,
   enterEvent,
   escapeEvent
-} from './utils/key_events.js';
+} from './utils/key_events.ts';
 
 test('ensure user interactions fire right events', async (t) => {
   const container = document.createElement('div');

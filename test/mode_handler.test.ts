@@ -1,9 +1,9 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {spy} from 'sinon';
-import modeHandler from '../src/lib/mode_handler.js';
-import createMockModeHandlerContext from './utils/create_mock_mode_handler_context.js';
-import createMockMode from './utils/create_mock_mode.js';
+import modeHandler from '../src/lib/mode_handler.ts';
+import createMockModeHandlerContext from './utils/create_mock_mode_handler_context.ts';
+import createMockMode from './utils/create_mock_mode.ts';
 
 test('returned API', () => {
   const mh = modeHandler(createMockMode(), createMockModeHandlerContext());

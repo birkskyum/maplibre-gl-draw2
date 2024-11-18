@@ -1,13 +1,13 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {spy} from 'sinon';
-import Feature from '../src/feature_types/feature.js';
-import Point from '../src/feature_types/point.js';
-import Polygon from '../src/feature_types/polygon.js';
-import LineString from '../src/feature_types/line_string.js';
-import MultiFeature from '../src/feature_types/multi_feature.js';
-import createMockCtx from './utils/create_mock_feature_context.js';
-import getPublicMemberKeys from './utils/get_public_member_keys.js';
+import Feature from '../src/feature_types/feature.ts';
+import Point from '../src/feature_types/point.ts';
+import Polygon from '../src/feature_types/polygon.ts';
+import LineString from '../src/feature_types/line_string.ts';
+import MultiFeature from '../src/feature_types/multi_feature.ts';
+import createMockCtx from './utils/create_mock_feature_context.ts';
+import getPublicMemberKeys from './utils/get_public_member_keys.ts';
 
 test('MultiPoint via MultiFeature', () => {
   assert.ok(MultiFeature.prototype instanceof Feature, 'inherits from Feature');

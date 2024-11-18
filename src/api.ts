@@ -1,15 +1,15 @@
 import isEqual from 'fast-deep-equal';
 import normalize from '@mapbox/geojson-normalize';
 import hat from 'hat';
-import featuresAt from './lib/features_at.js';
-import stringSetsAreEqual from './lib/string_sets_are_equal.js';
-import * as Constants from './constants.js';
-import StringSet from './lib/string_set.js';
+import featuresAt from './lib/features_at.ts';
+import stringSetsAreEqual from './lib/string_sets_are_equal.ts';
+import * as Constants from './constants.ts';
+import StringSet from './lib/string_set.ts';
 
-import Polygon from './feature_types/polygon.js';
-import LineString from './feature_types/line_string.js';
-import Point from './feature_types/point.js';
-import MultiFeature from './feature_types/multi_feature.js';
+import Polygon from './feature_types/polygon.ts';
+import LineString from './feature_types/line_string.ts';
+import Point from './feature_types/point.ts';
+import MultiFeature from './feature_types/multi_feature.ts';
 
 const featureTypes = {
   Polygon,

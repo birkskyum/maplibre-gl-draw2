@@ -1,4 +1,4 @@
-import ModeInterface from './mode_interface_accessors.js';
+import ModeInterface from './mode_interface_accessors.ts';
 export default ModeInterface;
 
 /**

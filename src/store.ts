@@ -1,7 +1,7 @@
-import toDenseArray from './lib/to_dense_array.js';
-import StringSet from './lib/string_set.js';
-import render from './render.js';
-import * as Constants from './constants.js';
+import toDenseArray from './lib/to_dense_array.ts';
+import StringSet from './lib/string_set.ts';
+import render from './render.ts';
+import * as Constants from './constants.ts';
 
 export default function Store(ctx) {
   this._features = {};

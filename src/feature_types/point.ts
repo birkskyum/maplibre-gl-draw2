@@ -1,4 +1,4 @@
-import Feature from './feature.js';
+import Feature from './feature.ts';
 
 const Point = function(ctx, geojson) {
   Feature.call(this, ctx, geojson);

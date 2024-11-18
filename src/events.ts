@@ -1,10 +1,10 @@
-import setupModeHandler from './lib/mode_handler.js';
-import getFeaturesAndSetCursor from './lib/get_features_and_set_cursor.js';
-import featuresAt from './lib/features_at.js';
-import isClick from './lib/is_click.js';
-import isTap from './lib/is_tap.js';
-import * as Constants from './constants.js';
-import objectToMode from './modes/object_to_mode.js';
+import setupModeHandler from './lib/mode_handler.ts';
+import getFeaturesAndSetCursor from './lib/get_features_and_set_cursor.ts';
+import featuresAt from './lib/features_at.ts';
+import isClick from './lib/is_click.ts';
+import isTap from './lib/is_tap.ts';
+import * as Constants from './constants.ts';
+import objectToMode from './modes/object_to_mode.ts';
 
 export default function(ctx) {
 

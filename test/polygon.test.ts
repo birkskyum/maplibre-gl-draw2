@@ -1,14 +1,14 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {spy} from 'sinon';
-import Feature from '../src/feature_types/feature.js';
-import Polygon from '../src/feature_types/polygon.js';
-import MapboxDraw from '../index.js';
-import createFeature from './utils/create_feature.js';
-import getPublicMemberKeys from './utils/get_public_member_keys.js';
-import createMockCtx from './utils/create_mock_feature_context.js';
-import {drawGeometry} from './utils/draw_geometry.js';
-import createMap from './utils/create_map.js';
+import Feature from '../src/feature_types/feature.ts';
+import Polygon from '../src/feature_types/polygon.ts';
+import MapboxDraw from '../index.ts';
+import createFeature from './utils/create_feature.ts';
+import getPublicMemberKeys from './utils/get_public_member_keys.ts';
+import createMockCtx from './utils/create_mock_feature_context.ts';
+import {drawGeometry} from './utils/draw_geometry.ts';
+import createMap from './utils/create_map.ts';
 
 test('Polygon constructor and API', () => {
   const rawPolygon = createFeature('polygon');

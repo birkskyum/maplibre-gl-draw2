@@ -1,6 +1,6 @@
-import click from './mouse_click.js';
-import {setupAfterNextRender} from './after_next_render.js';
-import makeMouseEvent from './make_mouse_event.js';
+import click from './mouse_click.ts';
+import {setupAfterNextRender} from './after_next_render.ts';
+import makeMouseEvent from './make_mouse_event.ts';
 
 /**
  * Draws a feature on a map.

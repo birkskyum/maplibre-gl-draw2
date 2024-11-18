@@ -1,17 +1,17 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import MapboxDraw from '../index.js';
-import mouseClick from './utils/mouse_click.js';
-import touchTap from './utils/touch_tap.js';
-import createMap from './utils/create_map.js';
-import makeMouseEvent from './utils/make_mouse_event.js';
-import makeTouchEvent from './utils/make_touch_event.js';
-import drawPointModeObject from '../src/modes/draw_point.js';
-import Point from '../src/feature_types/point.js';
-import createMockDrawModeContext from './utils/create_mock_draw_mode_context.js';
-import createMockLifecycleContext from './utils/create_mock_lifecycle_context.js';
-import {escapeEvent, enterEvent} from './utils/key_events.js';
-import objectToMode from '../src/modes/object_to_mode.js';
+import MapboxDraw from '../index.ts';
+import mouseClick from './utils/mouse_click.ts';
+import touchTap from './utils/touch_tap.ts';
+import createMap from './utils/create_map.ts';
+import makeMouseEvent from './utils/make_mouse_event.ts';
+import makeTouchEvent from './utils/make_touch_event.ts';
+import drawPointModeObject from '../src/modes/draw_point.ts';
+import Point from '../src/feature_types/point.ts';
+import createMockDrawModeContext from './utils/create_mock_draw_mode_context.ts';
+import createMockLifecycleContext from './utils/create_mock_lifecycle_context.ts';
+import {escapeEvent, enterEvent} from './utils/key_events.ts';
+import objectToMode from '../src/modes/object_to_mode.ts';
 const drawPointMode = objectToMode(drawPointModeObject);
 
 test('draw_point mode initialization', () => {

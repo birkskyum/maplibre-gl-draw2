@@ -1,8 +1,8 @@
-import * as CommonSelectors from '../lib/common_selectors.js';
-import doubleClickZoom from '../lib/double_click_zoom.js';
-import * as Constants from '../constants.js';
-import isEventAtCoordinates from '../lib/is_event_at_coordinates.js';
-import createVertex from '../lib/create_vertex.js';
+import * as CommonSelectors from '../lib/common_selectors.ts';
+import doubleClickZoom from '../lib/double_click_zoom.ts';
+import * as Constants from '../constants.ts';
+import isEventAtCoordinates from '../lib/is_event_at_coordinates.ts';
+import createVertex from '../lib/create_vertex.ts';
 
 const DrawPolygon = {};
 

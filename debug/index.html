@@ -4,7 +4,7 @@
   <meta http-equiv="x-ua-compatible" content="IE=edge">
   <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
   <meta charset=utf-8 />
-  <title>Mapbox GL Draw | Mapbox</title>
+  <title>MapLibre GL Draw | MapLibre</title>
   <style>
     body { margin:0; padding:0; }
     html, body, #map { height: 100%; }
@@ -51,30 +51,17 @@
 </script>
 
 <script type='module'>
-  import mapboxgl from 'mapbox-gl';
-  import 'mapbox-gl/dist/mapbox-gl.css';
-
-  import MapboxGeocoder from '@mapbox/mapbox-gl-geocoder';
-  import '@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css';
+  import mapboxgl from 'maplibre-gl';
+  import 'maplibre-gl/dist/maplibre-gl.css';
 
   import MapboxDraw from '../index.js';
-  import '../dist/mapbox-gl-draw.css';
-
-  import {getAccessToken} from './access_token_generated.js';
-
-  mapboxgl.accessToken = getAccessToken();
+  import '../dist/maplibre-gl-draw.css';
 
   const map = new mapboxgl.Map({
     container: 'map',
     zoom: 1,
     center: [0, 0],
   });
-
-  map.addControl(new MapboxGeocoder({
-    accessToken: mapboxgl.accessToken,
-    mapboxgl
-  }));
-
   map.addControl(new mapboxgl.NavigationControl(), 'top-left');
 
   const modes = MapboxDraw.modes;
@@ -101,10 +88,10 @@
 
     // Toggle the style between dark and streets
     const flipStyleButton = document.getElementById('flipStyleBtn');
-    let currentStyle = 'streets-v9';
+    let currentStyle = 'positron-gl-style';
     flipStyleButton.onclick = function () {
-      const style = currentStyle === 'streets-v9' ? 'dark-v9' : 'streets-v9';
-      map.setStyle(`mapbox://styles/mapbox/${style}`);
+      const style = currentStyle === 'positron-gl-style' ? 'dark-matter-gl-style' : 'positron-gl-style';
+      map.setStyle(`https://basemaps.cartocdn.com/gl/${currentStyle}/style.json`);
       currentStyle = style;
     };
 

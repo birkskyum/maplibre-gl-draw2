@@ -1,4 +1,4 @@
-import euclideanDistance from './euclidean_distance.js';
+import euclideanDistance from './euclidean_distance.ts';
 
 const FINE_TOLERANCE = 4;
 const GROSS_TOLERANCE = 12;
