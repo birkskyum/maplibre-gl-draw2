@@ -9,7 +9,7 @@ import {
     MapEvent,
     MapMouseEvent as MapboxMapMouseEvent,
     MapTouchEvent as MapboxMapTouchEvent,
-} from "mapbox-gl";
+} from "maplibre-gl";
 
 export = MapLibreDraw;
 export as namespace MapLibreDraw;

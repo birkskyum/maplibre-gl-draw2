@@ -46,7 +46,6 @@
   },
   "devDependencies": {
     "@mapbox/cloudfriend": "^8.1.0",
-    "@birkskyum/maplibre-gl-draw-static-mode": "^1.0.1",
     "@mapbox/mapbox-gl-geocoder": "^5.0.2",
     "@rollup/plugin-commonjs": "^28.0.0",
     "@rollup/plugin-json": "^6.1.0",
@@ -58,7 +57,7 @@
     "eslint": "8.57.1",
     "eslint-config-mourner": "3.0.0",
     "eslint-plugin-import": "^2.28.1",
-    "mapbox-gl": "^3.4.0",
+    "maplibre-gl": "^4.7.1",
     "mock-browser": "^0.92.14",
     "npm-run-all": "^4.1.5",
     "rollup": "^4.19.1",
