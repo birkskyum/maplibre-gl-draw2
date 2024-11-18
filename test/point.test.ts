@@ -44,8 +44,8 @@ test('Point constructor and API', () => {
 		'point.updateCoordinate',
 	);
 	assert.equal(
-		getPublicMemberKeys(Point.prototype).length,
-		3,
+		Object.getOwnPropertyNames(Point.prototype).length,
+		4,
 		'no unexpected prototype members',
 	);
 
