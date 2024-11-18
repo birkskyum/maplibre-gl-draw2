@@ -13,7 +13,7 @@ export default function getFeatureAtAndSetCursors(event, ctx) {
 		classes.feature = features[0].properties.meta;
 	}
 
-	if (ctx.events.currentModeName().indexOf('draw') !== -1) {
+	if (ctx.events.currentModeName.indexOf('draw') !== -1) {
 		classes.mouse = Constants.cursors.ADD;
 	}
 

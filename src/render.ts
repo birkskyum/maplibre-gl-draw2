@@ -8,7 +8,7 @@ export default function render() {
 		store.ctx.map.getSource(Constants.sources.HOT) !== undefined;
 	if (!mapExists) return cleanup();
 
-	const mode = store.ctx.events.currentModeName();
+	const mode = store.ctx.events.currentModeName;
 
 	store.ctx.ui.queueMapClasses({ mode });
 
