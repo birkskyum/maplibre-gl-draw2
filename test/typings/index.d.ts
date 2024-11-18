@@ -431,7 +431,7 @@ declare namespace MapLibreDraw {
         createVertex(parentId: string, coordinates: Position, path: string, selected: boolean): Feature<Point>;
 
         // TODO: define a proper type for ctx since is not exposed correctly
-        // https://github.com/mapbox/maplibre-gl-draw/issues/1156
+        // https://github.com/mapbox/mapbox-gl-draw/issues/1156
 
         doubleClickZoom: {
             enable: (ctx: DrawCustomModeThis) => void; // ?? ctx
