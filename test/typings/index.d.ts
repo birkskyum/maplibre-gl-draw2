@@ -279,8 +279,8 @@ declare namespace MapLibreDraw {
 
     interface Constants {
         readonly classes: {
-            CONTROL_BASE: "mapboxgl-ctrl";
-            CONTROL_PREFIX: "mapboxgl-ctrl-";
+            CONTROL_BASE: "maplibregl-ctrl";
+            CONTROL_PREFIX: "maplibregl-ctrl-";
             CONTROL_BUTTON: "maplibre-gl-draw_ctrl-draw-btn";
             CONTROL_BUTTON_LINE: "maplibre-gl-draw_line";
             CONTROL_BUTTON_POLYGON: "maplibre-gl-draw_polygon";
@@ -288,8 +288,8 @@ declare namespace MapLibreDraw {
             CONTROL_BUTTON_TRASH: "maplibre-gl-draw_trash";
             CONTROL_BUTTON_COMBINE_FEATURES: "maplibre-gl-draw_combine";
             CONTROL_BUTTON_UNCOMBINE_FEATURES: "maplibre-gl-draw_uncombine";
-            CONTROL_GROUP: "mapboxgl-ctrl-group";
-            ATTRIBUTION: "mapboxgl-ctrl-attrib";
+            CONTROL_GROUP: "maplibregl-ctrl-group";
+            ATTRIBUTION: "maplibregl-ctrl-attrib";
             ACTIVE_BUTTON: "active";
             BOX_SELECT: "maplibre-gl-draw_boxselect";
         };

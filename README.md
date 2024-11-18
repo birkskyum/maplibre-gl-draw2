@@ -2,9 +2,9 @@
 
 ![Build Status](https://github.com/mapbox/maplibre-gl-draw/actions/workflows/main.yml/badge.svg)
 
-Adds support for drawing and editing features on [mapbox-gl.js](https://www.mapbox.com/mapbox-gl-js/) maps. [See a live example here](https://www.mapbox.com/mapbox-gl-js/example/maplibre-gl-draw/)
+Adds support for drawing and editing features on [maplibre-gl.js](https://maplibre.org/maplibre-gl-js/docs/) maps. 
 
-**Requires [mapbox-gl-js](https://github.com/mapbox/mapbox-gl-js).**
+**Requires [maplibre-gl-js](https://github.com/mapbox/mapbox-gl-js).**
 
 **If you are developing with `maplibre-gl-draw`, see [API.md](https://github.com/mapbox/maplibre-gl-draw/blob/main/docs/API.md) for documentation.**
 
@@ -23,15 +23,12 @@ Draw ships with CSS, make sure you include it in your build.
 **When using modules**
 
 ```js
-import mapboxgl from 'mapbox-gl';
+import maplibregl from 'maplibre-gl';
 import MapLibreDraw from "@birkskyum/maplibre-gl-draw";
 ```
 
 **When using a CDN**
 
-```html
-<script src='https://api.mapbox.com/mapbox-gl-js/plugins/maplibre-gl-draw/v1.4.3/maplibre-gl-draw.js'></script>
-```
 
 #### CSS
 
@@ -41,9 +38,7 @@ import '@birkskyum/maplibre-gl-draw/dist/maplibre-gl-draw.css'
  ```
 
 **When using CDN**
-```html
-<link rel='stylesheet' href='https://api.mapbox.com/mapbox-gl-js/plugins/maplibre-gl-draw/v1.4.3/maplibre-gl-draw.css' type='text/css' />
-```
+
 
 ### Typescript
 
@@ -56,11 +51,10 @@ npm install @types/mapbox__maplibre-gl-draw
 ### Example usage
 
 ```js
-mapboxgl.accessToken = 'YOUR_ACCESS_TOKEN';
 
-var map = new mapboxgl.Map({
+var map = new maplibregl.Map({
   container: 'map',
-  style: 'mapbox://styles/mapbox/streets-v12',
+  style: 'https://demotiles.maplibre.org/style.json',
   center: [40, -74.50],
   zoom: 9
 });
@@ -78,15 +72,13 @@ map.on('load', function() {
 });
 ```
 
-https://www.mapbox.com/mapbox-gl-js/example/maplibre-gl-draw/
-
-### See [API.md](https://github.com/mapbox/maplibre-gl-draw/blob/main/docs/API.md) for complete reference.
+### See [API.md](https://github.com/birkskyum/maplibre-gl-draw/blob/main/docs/API.md) for complete reference.
 
 ### Enhancements and New Interactions
 
 For additional functionality [check out our list of custom modes](https://github.com/mapbox/maplibre-gl-draw/blob/main/docs/MODES.md#available-custom-modes).
 
-Mapbox Draw accepts functionality changes after the functionality has been proven out via a [custom mode](https://github.com/mapbox/maplibre-gl-draw/blob/main/docs/MODES.md#creating-modes-for-mapbox-draw). This lets users experiment and validate their mode before entering a review process, hopefully promoting innovation. When you write a custom mode, please open a PR adding it to our [list of custom modes](https://github.com/mapbox/maplibre-gl-draw/blob/main/docs/MODES.md#available-custom-modes).
+MapLibre Draw accepts functionality changes after the functionality has been proven out via a [custom mode](https://github.com/maplibre/maplibre-gl-draw/blob/main/docs/MODES.md#creating-modes-for-maplibre-draw). This lets users experiment and validate their mode before entering a review process, hopefully promoting innovation. When you write a custom mode, please open a PR adding it to our [list of custom modes](https://github.com/maplibre/maplibre-gl-draw/blob/main/docs/MODES.md#available-custom-modes).
 
 ### Developing and testing
 

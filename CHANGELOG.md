@@ -8,7 +8,7 @@
 
 ## 1.4.2
 
-* Fix key event handler checks for `mapboxgl-canvas` by @neodescis in https://github.com/mapbox/mapbox-gl-draw/pull/1165
+* Fix key event handler checks for `maplibregl-canvas` by @neodescis in https://github.com/mapbox/mapbox-gl-draw/pull/1165
 * Fix draw updates not firing consistently by @gynekolog in https://github.com/mapbox/mapbox-gl-draw/pull/1160
 * Fix boxZoom restoring after removal by @kibala145 in https://github.com/mapbox/mapbox-gl-draw/pull/1017
 
@@ -159,7 +159,7 @@
 
 #### ⚠️ Breaking changes ⚠️
 
-- Changes `mapboxglDraw` to `MapboxDraw` to match other control names.
+- Changes `maplibreglDraw` to `MapboxDraw` to match other control names.
 - Changes `MapboxDraw()` to `new MapboxDraw()` to match other control interfaces.
 - Provides clearer icon support for drag feature in `direct_select`.
 
@@ -167,7 +167,7 @@
 
 - Adds support for `mapbox-gl-js@0.28.0`.
 - Adds `Draw.setFeatureProperty(string, string, any)`.
-- Adds `mapboxglDraw({userProperties: boolean})` to add user properties to the data rendered by Draw.
+- Adds `maplibreglDraw({userProperties: boolean})` to add user properties to the data rendered by Draw.
 - Fixes bug where Draw would fail to attach to mapbox-gl-js if added while a style was loading.
 - Fixes bug where Firefox would treat all mousemove events as drag events.
 
@@ -178,7 +178,7 @@
 - Requires [mapbox-gl@0.27.0](https://github.com/mapbox/mapbox-gl-js/blob/main/CHANGELOG.md#0270-november-11-2016).
 - Detects style changes and reapplies Draw if it has been removed.
 - Fixes UMD support.
-- Changes `mapboxgl.Draw` to `mapboxglDraw` when in global scope.
+- Changes `maplibregl.Draw` to `maplibreglDraw` when in global scope.
 
 ## 0.13.2
 

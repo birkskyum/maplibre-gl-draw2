@@ -1,8 +1,8 @@
-# Creating modes for Mapbox Draw
+# Creating modes for MapLibre Draw
 
-In Mapbox Draw, modes are used to group sets of user interactions into one behavior. Internally Draw has the `draw_polygon` mode, which controls a bunch of interactions for drawing a polygon. Draw also has the `simple_select` mode which controls interactions when zero, one or many features are selected including transitioning to `direct_select` mode when a user's interactions imply that they want to do detailed edits of a single feature.
+In MapLibre Draw, modes are used to group sets of user interactions into one behavior. Internally Draw has the `draw_polygon` mode, which controls a bunch of interactions for drawing a polygon. Draw also has the `simple_select` mode which controls interactions when zero, one or many features are selected including transitioning to `direct_select` mode when a user's interactions imply that they want to do detailed edits of a single feature.
 
-To help developers have more control of their Mapbox Draw powered application, Draw provides an interface for writing and hooking in custom modes. Below we will see how to write these modes by working through a small example.
+To help developers have more control of their MapLibre Draw powered application, Draw provides an interface for writing and hooking in custom modes. Below we will see how to write these modes by working through a small example.
 
 ## Writing Custom Modes
 

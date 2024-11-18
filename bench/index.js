@@ -1,4 +1,4 @@
-/* global mapboxgl, MapLibreDraw */
+/* global maplibregl, MapLibreDraw */
 
 try {
   main();
@@ -115,9 +115,9 @@ function createMap(options) {
   mapElement.style.width = `${options.width}px`;
   mapElement.style.height = `${options.height}px`;
 
-  mapboxgl.accessToken = getAccessToken();
+  maplibregl.accessToken = getAccessToken();
 
-  const map = new mapboxgl.Map(Object.assign({
+  const map = new maplibregl.Map(Object.assign({
     container: 'map',
     style: 'mapbox://styles/mapbox/streets-v12'
   }, options));

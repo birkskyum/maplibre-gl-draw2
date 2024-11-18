@@ -9,7 +9,7 @@ function createMockContext({ position, controls } = {}) {
   document.body.appendChild(container);
 
   const controlContainer = document.createElement('div');
-  controlContainer.className = `mapboxgl-ctrl-${position || 'top-left'}`;
+  controlContainer.className = `maplibregl-ctrl-${position || 'top-left'}`;
   container.appendChild(controlContainer);
 
   return {
@@ -144,7 +144,7 @@ test('ui buttons control group container inserted above attribution control, in 
   const controlContainer = getControlContainer();
   const testUi = ui(context);
 
-  assert.equal(controlContainer.getElementsByClassName('mapboxgl-ctrl-group').length, 0,
+  assert.equal(controlContainer.getElementsByClassName('maplibregl-ctrl-group').length, 0,
     'confirm control group does not exist at first');
 
   const controlGroup = testUi.addButtons();
