@@ -95,7 +95,7 @@ test('MultiPoint', () => {
 	assert.equal(multiPoint.features.length, 3, 'multiPoint.features');
 	// multiPoint.changed gets counted because it's used below
 	assert.equal(
-		getPublicMemberKeys(multiPoint).length,
+		Object.getOwnPropertyNames(multiPoint).length,
 		7,
 		'no unexpected instance members',
 	);

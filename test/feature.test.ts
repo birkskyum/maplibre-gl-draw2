@@ -65,8 +65,8 @@ test('Feature contrusctor and API', () => {
 		'feature.setProperty',
 	);
 	assert.equal(
-		getPublicMemberKeys(Feature.prototype).length,
-		7,
+		Object.getOwnPropertyNames(Feature.prototype).length,
+		8,
 		'no unexpected prototype members',
 	);
 
