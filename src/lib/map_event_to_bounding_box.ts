@@ -1,7 +1,7 @@
 /**
  * Returns a bounding box representing the event's location.
  *
- * @param {Event} mapEvent - Mapbox GL JS map event, with a point properties.
+ * @param {Event} mapEvent - MapLibre GL JS map event, with a point properties.
  * @return {Array<Array<number>>} Bounding box.
  */
 function mapEventToBoundingBox(mapEvent, buffer = 0) {

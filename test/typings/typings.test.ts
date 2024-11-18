@@ -8,7 +8,7 @@ import MapboxDraw, {
     Lib,
     lib,
     MapLibreDrawOptions,
-} from "@mapbox/maplibre-gl-draw";
+} from "@birkskyum/maplibre-gl-draw";
 
 const draw = new MapboxDraw({});
 

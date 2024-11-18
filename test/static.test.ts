@@ -1,7 +1,7 @@
 /* eslint no-shadow:[0] */
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import StaticMode from '@mapbox/maplibre-gl-draw-static-mode';
+import StaticMode from '@birkskyum/maplibre-gl-draw-static-mode';
 import {spy} from 'sinon';
 
 import MapboxDraw from '../index.ts';

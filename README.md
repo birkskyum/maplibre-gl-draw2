@@ -1,4 +1,4 @@
-# @mapbox/maplibre-gl-draw
+# @birkskyum/maplibre-gl-draw
 
 ![Build Status](https://github.com/mapbox/maplibre-gl-draw/actions/workflows/main.yml/badge.svg)
 
@@ -11,7 +11,7 @@ Adds support for drawing and editing features on [mapbox-gl.js](https://www.mapb
 ### Installing
 
 ```
-npm install @mapbox/maplibre-gl-draw
+npm install @birkskyum/maplibre-gl-draw
 ```
 
 Draw ships with CSS, make sure you include it in your build.
@@ -24,7 +24,7 @@ Draw ships with CSS, make sure you include it in your build.
 
 ```js
 import mapboxgl from 'mapbox-gl';
-import MapboxDraw from "@mapbox/maplibre-gl-draw";
+import MapboxDraw from "@birkskyum/maplibre-gl-draw";
 ```
 
 **When using a CDN**
@@ -37,7 +37,7 @@ import MapboxDraw from "@mapbox/maplibre-gl-draw";
 
 **When using modules**
  ```js
-import '@mapbox/maplibre-gl-draw/dist/maplibre-gl-draw.css'
+import '@birkskyum/maplibre-gl-draw/dist/maplibre-gl-draw.css'
  ```
 
 **When using CDN**

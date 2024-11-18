@@ -3,7 +3,7 @@
 To use Draw
 
 ```js
-// Create a Mapbox GL JS map
+// Create a MapLibre GL JS map
 var map = new Map(mapOptions);
 
 // Create a Draw control
@@ -13,7 +13,7 @@ var draw = new MapboxDraw(drawOptions);
 map.addControl(draw);
 ```
 
-**Draw only works after the Mapbox GL JS map has loaded**, so you must interact with Draw only *after* your map's `load` event:
+**Draw only works after the MapLibre GL JS map has loaded**, so you must interact with Draw only *after* your map's `load` event:
 
 ```js
 map.on('load', function() {
@@ -359,7 +359,7 @@ This is helpful if you are using Draw's features as your primary data store in y
 
 ## Events
 
-Draw fires a number of events. All of these events are namespaced with `draw.` and are emitted from the Mapbox GL JS map object. All events are all triggered by user interaction.
+Draw fires a number of events. All of these events are namespaced with `draw.` and are emitted from the MapLibre GL JS map object. All events are all triggered by user interaction.
 
 ```js
 map.on('draw.create', function (e) {
@@ -502,7 +502,7 @@ The event data is an object with the following shape:
 
 ### `draw.render`
 
-Fired just after Draw calls `setData()` on the Mapbox GL JS map. This does not imply that the set data call has finished updating the map, just that the map is being updated.
+Fired just after Draw calls `setData()` on the MapLibre GL JS map. This does not imply that the set data call has finished updating the map, just that the map is being updated.
 
 
 ### `draw.actionable`
@@ -521,7 +521,7 @@ Fired as the state of Draw changes to enable and disable different actions. Foll
 
 ## Styling Draw
 
-Draw uses a map style that adheres to the [Mapbox GL Style Spec](https://www.mapbox.com/mapbox-gl-style-spec/) with a few caveats.
+Draw uses a map style that adheres to the [MapLibre GL Style Spec](https://www.mapbox.com/mapbox-gl-style-spec/) with a few caveats.
 
 **source**
 
@@ -543,7 +543,7 @@ meta | feature, midpoint, vertex | `midpoint` and `vertex` are used on points ad
 active | true, false | A feature is active when it is 'selected' in the current mode. `true` and `false` are strings.
 mode |  simple_select, direct_select, draw_point, draw_line_string, draw_polygon | Indicates which mode Draw is currently in.
 
-Draw also provides a few more properties on features, but they should not be used for styling. For details on them, see "Using Draw with Mapbox GL JS's `queryRenderedFeatures`" below.
+Draw also provides a few more properties on features, but they should not be used for styling. For details on them, see "Using Draw with MapLibre GL JS's `queryRenderedFeatures`" below.
 
 If `opts.userProperties` is set to `true` the properties of a feature will also be available for styling. All user properties are prefixed with `user_` to make sure they do not clash with the Draw properties.
 
@@ -551,7 +551,7 @@ If `opts.userProperties` is set to `true` the properties of a feature will also 
 
 See [EXAMPLES.md](https://github.com/mapbox/maplibre-gl-draw/blob/main/docs/EXAMPLES.md) for examples of custom styles.
 
-## Using Draw with Mapbox GL JS's `queryRenderedFeatures`
+## Using Draw with MapLibre GL JS's `queryRenderedFeatures`
 
 property | values | function
 --- | --- | ---

@@ -464,7 +464,7 @@ declare namespace MapboxDraw {
         /**
          * Returns a bounding box representing the event's location.
          *
-         * @param mapEvent - Mapbox GL JS map event, with a point properties.
+         * @param mapEvent - MapLibre GL JS map event, with a point properties.
          * @param [buffer=0]
          * @return Bounding box.
          */
