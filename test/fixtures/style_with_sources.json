@@ -26,7 +26,7 @@
       ],
       "fill-opacity": 0.1
     },
-    "source": "mapbox-gl-draw-cold"
+    "source": "maplibre-gl-draw-cold"
   },
   {
     "id": "gl-draw-lines.cold",
@@ -83,7 +83,7 @@
       ],
       "line-width": 2
     },
-    "source": "mapbox-gl-draw-cold"
+    "source": "maplibre-gl-draw-cold"
   },
   {
     "id": "gl-draw-point-outer.cold",
@@ -117,7 +117,7 @@
       ],
       "circle-color": "#fff"
     },
-    "source": "mapbox-gl-draw-cold"
+    "source": "maplibre-gl-draw-cold"
   },
   {
     "id": "gl-draw-point-inner.cold",
@@ -163,7 +163,7 @@
         "#3bb2d0"
       ]
     },
-    "source": "mapbox-gl-draw-cold"
+    "source": "maplibre-gl-draw-cold"
   },
   {
     "id": "gl-draw-vertex-outer.cold",
@@ -202,7 +202,7 @@
       ],
       "circle-color": "#fff"
     },
-    "source": "mapbox-gl-draw-cold"
+    "source": "maplibre-gl-draw-cold"
   },
   {
     "id": "gl-draw-vertex-inner.cold",
@@ -241,7 +241,7 @@
       ],
       "circle-color": "#fbb03b"
     },
-    "source": "mapbox-gl-draw-cold"
+    "source": "maplibre-gl-draw-cold"
   },
   {
     "id": "gl-draw-midpoint.cold",
@@ -258,7 +258,7 @@
       "circle-radius": 3,
       "circle-color": "#fbb03b"
     },
-    "source": "mapbox-gl-draw-cold"
+    "source": "maplibre-gl-draw-cold"
   },
   {
     "id": "gl-draw-polygon-fill.hot",
@@ -287,7 +287,7 @@
       ],
       "fill-opacity": 0.1
     },
-    "source": "mapbox-gl-draw-hot"
+    "source": "maplibre-gl-draw-hot"
   },
   {
     "id": "gl-draw-lines.hot",
@@ -344,7 +344,7 @@
       ],
       "line-width": 2
     },
-    "source": "mapbox-gl-draw-hot"
+    "source": "maplibre-gl-draw-hot"
   },
   {
     "id": "gl-draw-point-outer.hot",
@@ -378,7 +378,7 @@
       ],
       "circle-color": "#fff"
     },
-    "source": "mapbox-gl-draw-hot"
+    "source": "maplibre-gl-draw-hot"
   },
   {
     "id": "gl-draw-point-inner.hot",
@@ -424,7 +424,7 @@
         "#3bb2d0"
       ]
     },
-    "source": "mapbox-gl-draw-hot"
+    "source": "maplibre-gl-draw-hot"
   },
   {
     "id": "gl-draw-vertex-outer.hot",
@@ -463,7 +463,7 @@
       ],
       "circle-color": "#fff"
     },
-    "source": "mapbox-gl-draw-hot"
+    "source": "maplibre-gl-draw-hot"
   },
   {
     "id": "gl-draw-vertex-inner.hot",
@@ -502,7 +502,7 @@
       ],
       "circle-color": "#fbb03b"
     },
-    "source": "mapbox-gl-draw-hot"
+    "source": "maplibre-gl-draw-hot"
   },
   {
     "id": "gl-draw-midpoint.hot",
@@ -519,6 +519,6 @@
       "circle-radius": 3,
       "circle-color": "#fbb03b"
     },
-    "source": "mapbox-gl-draw-hot"
+    "source": "maplibre-gl-draw-hot"
   }
 ]

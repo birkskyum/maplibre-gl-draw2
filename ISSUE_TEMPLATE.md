@@ -6,12 +6,12 @@ If you are reporting a bug, please:
  - Include a link to a minimal demonstration of the bug. We recommend using https://jsbin.com
  - Ensure you can reproduce the bug using the latest release.
  - Check the console for relevant errors and warnings
- - Only post to report a bug or request a feature. Direct all other questions to https://stackoverflow.com/questions/tagged/mapbox-gl-draw
+ - Only post to report a bug or request a feature. Direct all other questions to https://stackoverflow.com/questions/tagged/maplibre-gl-draw
  
 -->
 
 **mapbox-gl-js version**:
-**mapbox-gl-draw version**:
+**maplibre-gl-draw version**:
 
 ### Steps to Trigger Behavior
 

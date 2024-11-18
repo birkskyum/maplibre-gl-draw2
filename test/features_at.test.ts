@@ -209,14 +209,14 @@ test('featuresAt with touch bounding box', () => {
 test('featuresAt should not include missing style layers', () => {
   const mockContext = createMockContext();
 
-  // mock of map's setStyle, which will remove all mapbox-gl-draw styles until the data event is fired, in which mapbox-gl-draw adds back in the styles.
+  // mock of map's setStyle, which will remove all maplibre-gl-draw styles until the data event is fired, in which maplibre-gl-draw adds back in the styles.
   mockContext.map.setStyle({});
 
   // featuresAt should return no features if the styles have not finished adding back in
   let result = featuresAt.touch(null, [[10, 10], [20, 20]], mockContext);
   assert.deepEqual(result, [], 'sorts, filters based on properties.meta, removes duplicates');
 
-  // mock adding layers back, similar to data event that fires and mapbox-gl-draw subsequently checks for any missing layers and adds them back in.
+  // mock adding layers back, similar to data event that fires and maplibre-gl-draw subsequently checks for any missing layers and adds them back in.
   addLayers(mockContext);
 
   result = featuresAt.touch(null, [[10, 10], [20, 20]], mockContext);

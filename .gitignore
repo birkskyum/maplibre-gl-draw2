@@ -1,10 +1,10 @@
 node_modules/
 npm-debug.log
 .vscode/
-dist/mapbox-gl-draw.js
-dist/mapbox-gl-draw.js.map
-dist/mapbox-gl-draw-unminified.js
-dist/mapbox-gl-draw-unminified.js.map
+dist/maplibre-gl-draw.js
+dist/maplibre-gl-draw.js.map
+dist/maplibre-gl-draw-unminified.js
+dist/maplibre-gl-draw-unminified.js.map
 dist/bench.js
 dist/bench.js.map
 coverage/

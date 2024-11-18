@@ -1,19 +1,19 @@
 {
-  "name": "@mapbox/mapbox-gl-draw",
+  "name": "@birkskyum/maplibre-gl-draw",
   "version": "1.4.3",
   "engines": {
     "node": "^18.0.0 || >=20.0.0"
   },
   "description": "A drawing component for Mapbox GL JS",
-  "author": "mapbox",
+  "author": "birkskyum",
   "license": "ISC",
-  "homepage": "https://github.com/mapbox/mapbox-gl-draw",
+  "homepage": "https://github.com/birkskyum/maplibre-gl-draw",
   "repository": {
     "type": "git",
-    "url": "git://github.com/mapbox/mapbox-gl-draw.git"
+    "url": "git://github.com/birkskyum/maplibre-gl-draw.git"
   },
   "bugs": {
-    "url": "https://github.com/mapbox/mapbox-gl-draw/issues"
+    "url": "https://github.com/birkskyum/maplibre-gl-draw/issues"
   },
   "keywords": [
     "webgl",
@@ -23,9 +23,9 @@
   ],
   "type": "module",
   "exports": "./index.js",
-  "main": "dist/mapbox-gl-draw.js",
-  "browser": "dist/mapbox-gl-draw.js",
-  "style": "dist/mapbox-gl-draw.css",
+  "main": "dist/maplibre-gl-draw.js",
+  "browser": "dist/maplibre-gl-draw.js",
+  "style": "dist/maplibre-gl-draw.css",
   "scripts": {
     "docs": "run-s docs-modes-life-cycle docs-modes-get-and-set",
     "docs-modes-get-and-set": "documentation readme --readme-file ./docs/MODES.md -s \"Setters and Getters\" src/modes/mode_interface_accessors.js --shallow",
@@ -46,7 +46,7 @@
   },
   "devDependencies": {
     "@mapbox/cloudfriend": "^8.1.0",
-    "@mapbox/mapbox-gl-draw-static-mode": "^1.0.1",
+    "@mapbox/maplibre-gl-draw-static-mode": "^1.0.1",
     "@mapbox/mapbox-gl-geocoder": "^5.0.2",
     "@rollup/plugin-commonjs": "^28.0.0",
     "@rollup/plugin-json": "^6.1.0",
@@ -79,6 +79,6 @@
   "files": [
     "src",
     "index.js",
-    "dist/mapbox-gl-draw*"
+    "dist/maplibre-gl-draw*"
   ]
 }

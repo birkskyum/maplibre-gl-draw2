@@ -1,17 +1,17 @@
-# @mapbox/mapbox-gl-draw
+# @mapbox/maplibre-gl-draw
 
-![Build Status](https://github.com/mapbox/mapbox-gl-draw/actions/workflows/main.yml/badge.svg)
+![Build Status](https://github.com/mapbox/maplibre-gl-draw/actions/workflows/main.yml/badge.svg)
 
-Adds support for drawing and editing features on [mapbox-gl.js](https://www.mapbox.com/mapbox-gl-js/) maps. [See a live example here](https://www.mapbox.com/mapbox-gl-js/example/mapbox-gl-draw/)
+Adds support for drawing and editing features on [mapbox-gl.js](https://www.mapbox.com/mapbox-gl-js/) maps. [See a live example here](https://www.mapbox.com/mapbox-gl-js/example/maplibre-gl-draw/)
 
 **Requires [mapbox-gl-js](https://github.com/mapbox/mapbox-gl-js).**
 
-**If you are developing with `mapbox-gl-draw`, see [API.md](https://github.com/mapbox/mapbox-gl-draw/blob/main/docs/API.md) for documentation.**
+**If you are developing with `maplibre-gl-draw`, see [API.md](https://github.com/mapbox/maplibre-gl-draw/blob/main/docs/API.md) for documentation.**
 
 ### Installing
 
 ```
-npm install @mapbox/mapbox-gl-draw
+npm install @mapbox/maplibre-gl-draw
 ```
 
 Draw ships with CSS, make sure you include it in your build.
@@ -24,33 +24,33 @@ Draw ships with CSS, make sure you include it in your build.
 
 ```js
 import mapboxgl from 'mapbox-gl';
-import MapboxDraw from "@mapbox/mapbox-gl-draw";
+import MapboxDraw from "@mapbox/maplibre-gl-draw";
 ```
 
 **When using a CDN**
 
 ```html
-<script src='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-draw/v1.4.3/mapbox-gl-draw.js'></script>
+<script src='https://api.mapbox.com/mapbox-gl-js/plugins/maplibre-gl-draw/v1.4.3/maplibre-gl-draw.js'></script>
 ```
 
 #### CSS
 
 **When using modules**
  ```js
-import '@mapbox/mapbox-gl-draw/dist/mapbox-gl-draw.css'
+import '@mapbox/maplibre-gl-draw/dist/maplibre-gl-draw.css'
  ```
 
 **When using CDN**
 ```html
-<link rel='stylesheet' href='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-draw/v1.4.3/mapbox-gl-draw.css' type='text/css' />
+<link rel='stylesheet' href='https://api.mapbox.com/mapbox-gl-js/plugins/maplibre-gl-draw/v1.4.3/maplibre-gl-draw.css' type='text/css' />
 ```
 
 ### Typescript
 
-Typescript definition files are available as part of the [DefinitelyTyped](https://github.com/DefinitelyTyped/DefinitelyTyped/tree/master/types/mapbox__mapbox-gl-draw) package.
+Typescript definition files are available as part of the [DefinitelyTyped](https://github.com/DefinitelyTyped/DefinitelyTyped/tree/master/types/mapbox__maplibre-gl-draw) package.
 
 ```
-npm install @types/mapbox__mapbox-gl-draw
+npm install @types/mapbox__maplibre-gl-draw
 ```
 
 ### Example usage
@@ -78,22 +78,22 @@ map.on('load', function() {
 });
 ```
 
-https://www.mapbox.com/mapbox-gl-js/example/mapbox-gl-draw/
+https://www.mapbox.com/mapbox-gl-js/example/maplibre-gl-draw/
 
-### See [API.md](https://github.com/mapbox/mapbox-gl-draw/blob/main/docs/API.md) for complete reference.
+### See [API.md](https://github.com/mapbox/maplibre-gl-draw/blob/main/docs/API.md) for complete reference.
 
 ### Enhancements and New Interactions
 
-For additional functionality [check out our list of custom modes](https://github.com/mapbox/mapbox-gl-draw/blob/main/docs/MODES.md#available-custom-modes).
+For additional functionality [check out our list of custom modes](https://github.com/mapbox/maplibre-gl-draw/blob/main/docs/MODES.md#available-custom-modes).
 
-Mapbox Draw accepts functionality changes after the functionality has been proven out via a [custom mode](https://github.com/mapbox/mapbox-gl-draw/blob/main/docs/MODES.md#creating-modes-for-mapbox-draw). This lets users experiment and validate their mode before entering a review process, hopefully promoting innovation. When you write a custom mode, please open a PR adding it to our [list of custom modes](https://github.com/mapbox/mapbox-gl-draw/blob/main/docs/MODES.md#available-custom-modes).
+Mapbox Draw accepts functionality changes after the functionality has been proven out via a [custom mode](https://github.com/mapbox/maplibre-gl-draw/blob/main/docs/MODES.md#creating-modes-for-mapbox-draw). This lets users experiment and validate their mode before entering a review process, hopefully promoting innovation. When you write a custom mode, please open a PR adding it to our [list of custom modes](https://github.com/mapbox/maplibre-gl-draw/blob/main/docs/MODES.md#available-custom-modes).
 
 ### Developing and testing
 
 Install dependencies, build the source files and crank up a server via:
 
 ```
-git clone git@github.com:mapbox/mapbox-gl-draw.git
+git clone git@github.com:mapbox/maplibre-gl-draw.git
 npm ci
 npm start & open "http://localhost:9967/debug/?access_token=<token>"
 ```
@@ -122,10 +122,10 @@ To CDN:
 git checkout v{x.y.z}
 npm ci
 npm run prepublish
-aws s3 cp --recursive --acl public-read dist s3://mapbox-gl-js/plugins/mapbox-gl-draw/v{x.y.z}
+aws s3 cp --recursive --acl public-read dist s3://mapbox-gl-js/plugins/maplibre-gl-draw/v{x.y.z}
 ```
 
-Update the version number in [the GL JS example](https://github.com/mapbox/mapbox-gl-js/blob/publisher-production/docs/pages/example/mapbox-gl-draw.html).
+Update the version number in [the GL JS example](https://github.com/mapbox/mapbox-gl-js/blob/publisher-production/docs/pages/example/maplibre-gl-draw.html).
 
 ### Naming actions
 
