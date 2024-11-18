@@ -1,10 +1,18 @@
 import * as Constants from './constants.ts';
 
-const classTypes = ['mode', 'feature', 'mouse'];
+type CLASS_TYPE = 'mode' | 'feature' | 'mouse';
+const classTypes: CLASS_TYPE[] = ['mode', 'feature', 'mouse'];
 
-export default function (ctx) {
-	const buttonElements = {};
-	let activeButton = null;
+
+const controls: Record<string, boolean> = {
+	line_string: true,
+	point :true,
+	polygon: true,
+	trash: true,
+} 
+export default function (ctx: { container: HTMLElement; options: { controls: typeof controls; keybindings: boolean }; events: {changeMode: (val: string)=>void; trash: ()=>void; combineFeatures:()=>void; uncombineFeatures:()=>void}}) {
+	const buttonElements: Record<string, HTMLButtonElement> = {};
+	let activeButton: HTMLButtonElement | null = null;
 
 	let currentMapClasses = {
 		mode: null, // e.g. mode-direct_select
@@ -23,15 +31,15 @@ export default function (ctx) {
 		updateMapClasses();
 	}
 
-	function queueMapClasses(options) {
+	function queueMapClasses(options: {mode?: string | null; feature?: string | null; mouse?: string | null}) {
 		nextMapClasses = Object.assign(nextMapClasses, options);
 	}
 
 	function updateMapClasses() {
 		if (!ctx.container) return;
 
-		const classesToRemove = [];
-		const classesToAdd = [];
+		const classesToRemove: string[] = [];
+		const classesToAdd: string[] = [];
 
 		classTypes.forEach((type) => {
 			if (nextMapClasses[type] === currentMapClasses[type]) return;
@@ -53,7 +61,7 @@ export default function (ctx) {
 		currentMapClasses = Object.assign(currentMapClasses, nextMapClasses);
 	}
 
-	function createControlButton(id, options = {}) {
+	function createControlButton(id: string, options: {className?: string; title: string; container: HTMLElement; onActivate: () => void; onDeactivate?: () => void}) {
 		const button = document.createElement('button');
 		button.className = `${Constants.classes.CONTROL_BUTTON} ${options.className}`;
 		button.setAttribute('title', options.title);
@@ -68,7 +76,9 @@ export default function (ctx) {
 				const clickedButton = e.target;
 				if (clickedButton === activeButton) {
 					deactivateButtons();
-					options.onDeactivate();
+					if (options.onDeactivate){
+						options.onDeactivate();
+					}
 					return;
 				}
 
@@ -87,7 +97,7 @@ export default function (ctx) {
 		activeButton = null;
 	}
 
-	function setActiveButton(id) {
+	function setActiveButton(id: string) {
 		deactivateButtons();
 
 		const button = buttonElements[id];
