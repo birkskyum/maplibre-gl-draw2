@@ -31,12 +31,7 @@ export default [
 		},
 		paint: {
 			'line-color': ['case', ['==', ['get', 'active'], 'true'], orange, blue],
-			'line-dasharray': [
-				'case',
-				['==', ['get', 'active'], 'true'],
-				[0.2, 2],
-				[2, 0],
-			],
+			'line-dasharray': [0.2, 2],
 			'line-width': 2,
 		},
 	},

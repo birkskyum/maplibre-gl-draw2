@@ -33,12 +33,7 @@
 				"#fbb03b",
 				"#3bb2d0"
 			],
-			"line-dasharray": [
-				"case",
-				["==", ["get", "active"], "true"],
-				[0.2, 2],
-				[2, 0]
-			],
+			"line-dasharray": [0.2, 2],
 			"line-width": 2
 		},
 		"source": "maplibre-gl-draw-cold"
@@ -142,12 +137,7 @@
 				"#fbb03b",
 				"#3bb2d0"
 			],
-			"line-dasharray": [
-				"case",
-				["==", ["get", "active"], "true"],
-				[0.2, 2],
-				[2, 0]
-			],
+			"line-dasharray": [0.2, 2],
 			"line-width": 2
 		},
 		"source": "maplibre-gl-draw-hot"
