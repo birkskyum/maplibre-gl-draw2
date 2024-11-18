@@ -12,7 +12,7 @@ const models = {
 	MultiPolygon,
 };
 
-const takeAction = (features, action, path, lng, lat) => {
+const takeAction = (features, action, path, lng?: number, lat?: number) => {
 	const parts = path.split('.');
 	const idx = parseInt(parts[0], 10);
 	const tail = !parts[1] ? null : parts.slice(1).join('.');
@@ -21,12 +21,12 @@ const takeAction = (features, action, path, lng, lat) => {
 
 class MultiFeature extends Feature {
 	private model;
-	private features;
+	private features: Feature[];
 
 	constructor(ctx, geojson) {
 		super(ctx, geojson);
 
-		delete this.coordinates;
+		this.coordinates = undefined;
 		this.model = models[geojson.geometry.type];
 		if (this.model === undefined) {
 			throw new TypeError(`${geojson.geometry.type} is not a valid type`);

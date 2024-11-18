@@ -96,7 +96,7 @@ test('MultiPoint', () => {
 	// multiPoint.changed gets counted because it's used below
 	assert.equal(
 		Object.getOwnPropertyNames(multiPoint).length,
-		7,
+		8,
 		'no unexpected instance members',
 	);
 

@@ -66,7 +66,7 @@ test('Feature contrusctor and API', () => {
 	);
 	assert.equal(
 		Object.getOwnPropertyNames(Feature.prototype).length,
-		8,
+		9,
 		'no unexpected prototype members',
 	);
 

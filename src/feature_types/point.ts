@@ -2,6 +2,13 @@ import Feature from './feature.ts';
 
 class Point extends Feature {
 
+	coordinates: GeoJSON.Position;
+
+	constructor(ctx: any, geojson: GeoJSON.Feature<GeoJSON.Point>) {
+		super(ctx, geojson);
+		this.coordinates = geojson.geometry.coordinates;
+	}
+
 	isValid() {
 		return (
 			typeof this.coordinates[0] === 'number' &&

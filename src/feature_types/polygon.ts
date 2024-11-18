@@ -1,7 +1,9 @@
 import Feature from './feature.ts';
 
 class Polygon extends Feature {
-	constructor(ctx, geojson) {
+	coordinates: GeoJSON.Position[][] = super.getCoordinates();
+
+	constructor(ctx, geojson: GeoJSON.Feature<GeoJSON.Polygon>) {
 		super(ctx, geojson);
 		this.coordinates = this.coordinates.map((ring) => ring.slice(0, -1));
 	}

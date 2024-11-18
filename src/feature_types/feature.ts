@@ -4,7 +4,7 @@ import * as Constants from '../constants.ts';
 class Feature {
 	ctx: any;
 	properties: Record<string, any>;
-	coordinates: any[];
+	coordinates?: any[];
 	id: string;
 	type: string;
 
@@ -14,6 +14,10 @@ class Feature {
 		this.coordinates = geojson.geometry.coordinates;
 		this.id = geojson.id || hat();
 		this.type = geojson.geometry.type;
+	}
+
+	isValid(): boolean {
+		return true;
 	}
 
 	changed(): void {
