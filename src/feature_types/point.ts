@@ -9,11 +9,11 @@ class Point extends Feature {
 		);
 	}
 
-	updateCoordinate(pathOrLng, lngOrLat, lat) {
-		if (arguments.length === 3) {
-			this.coordinates = [lngOrLat, lat];
+	updateCoordinate(pathOrLng: number | string, lngOrLat: number, lat?:number) {
+		if (lat) {
+			this.coordinates = [lngOrLat as number, lat];
 		} else {
-			this.coordinates = [pathOrLng, lngOrLat];
+			this.coordinates = [pathOrLng as number, lngOrLat as number];
 		}
 		this.changed();
 	}

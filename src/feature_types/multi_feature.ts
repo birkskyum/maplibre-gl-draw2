@@ -59,7 +59,7 @@ class MultiFeature extends Feature {
 		this.changed();
 	}
 
-	getCoordinate(path) {
+	getCoordinate(path: string) {
 		return takeAction(this.features, 'getCoordinate', path);
 	}
 
@@ -75,17 +75,17 @@ class MultiFeature extends Feature {
 		);
 	}
 
-	updateCoordinate(path, lng, lat) {
+	updateCoordinate(path: string, lng:number, lat:number) {
 		takeAction(this.features, 'updateCoordinate', path, lng, lat);
 		this.changed();
 	}
 
-	addCoordinate(path, lng, lat) {
+	addCoordinate(path: string, lng:number, lat:number) {
 		takeAction(this.features, 'addCoordinate', path, lng, lat);
 		this.changed();
 	}
 
-	removeCoordinate(path) {
+	removeCoordinate(path: string) {
 		takeAction(this.features, 'removeCoordinate', path);
 		this.changed();
 	}
