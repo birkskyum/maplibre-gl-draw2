@@ -85,8 +85,8 @@ test('Polygon constructor and API', () => {
 		'polygon.updateCoordinate',
 	);
 	assert.equal(
-		getPublicMemberKeys(Polygon.prototype).length,
-		8,
+		Object.getOwnPropertyNames(Polygon.prototype).length,
+		9,
 		'no unexpected prototype members',
 	);
 
