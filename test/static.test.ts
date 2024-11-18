@@ -1,7 +1,6 @@
 /* eslint no-shadow:[0] */
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import StaticMode from '@birkskyum/maplibre-gl-draw-static-mode';
 import { spy } from 'sinon';
 
 import MapLibreDraw from '../index.ts';
@@ -9,6 +8,7 @@ import { setupAfterNextRender } from './utils/after_next_render.ts';
 import makeMouseEvent from './utils/make_mouse_event.ts';
 import getGeoJSON from './utils/get_geojson.ts';
 import createMap from './utils/create_map.ts';
+import StaticMode from '../src/modes/static_mode.ts';
 
 test('static', async (t) => {
 	const map = createMap();

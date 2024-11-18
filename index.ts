@@ -25,6 +25,7 @@ const setupDraw = function (options, api) {
 	return api;
 };
 
+
 function MapLibreDraw(options) {
 	setupDraw(options, this);
 }

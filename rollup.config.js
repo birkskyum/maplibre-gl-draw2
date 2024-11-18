@@ -7,9 +7,10 @@ const outputFile = minified
 import commonjs from '@rollup/plugin-commonjs';
 import resolve from '@rollup/plugin-node-resolve';
 import terser from '@rollup/plugin-terser';
+import typescript from '@rollup/plugin-typescript';
 
 export default {
-	input: ['index.js'],
+	input: ['index.ts'],
 	output: {
 		name: 'MapLibreDraw',
 		file: outputFile,
@@ -33,6 +34,9 @@ export default {
 			// global keyword handling causes Webpack compatibility issues, so we disabled it:
 			// https://github.com/mapbox/mapbox-gl-js/pull/6956
 			ignoreGlobal: true,
+		}),
+		typescript({
+			tsconfig: './tsconfig.json',
 		}),
 	],
 };

@@ -1,3 +1,5 @@
+let StaticMode = {};
+
 StaticMode.onSetup = function () {
 	this.setActionableState(); // default actionable state is false for all actions
 	return {};
