@@ -63,7 +63,7 @@ var Draw = new MapLibreDraw();
 
 // Map#addControl takes an optional second argument to set the position of the control.
 // If no position is specified the control defaults to `top-right`. See the docs
-// for more details: https://docs.mapbox.com/mapbox-gl-js/api/#map#addcontrol
+// for more details: https://maplibre.org/maplibre-gl-js/docs/API/classes/Map/#addcontrol
 
 map.addControl(Draw, 'top-left');
 
