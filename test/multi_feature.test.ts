@@ -55,8 +55,8 @@ test('MultiPoint via MultiFeature', () => {
 	);
 
 	assert.equal(
-		getPublicMemberKeys(MultiFeature.prototype).length,
-		8,
+		Object.getOwnPropertyNames(MultiFeature.prototype).length,
+		10,
 		'no unexpected prototype members',
 	);
 });
