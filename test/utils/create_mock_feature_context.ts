@@ -1,4 +1,4 @@
-import {spy} from 'sinon';
+import { spy } from 'sinon';
 
 /**
  * Returns an mock ctx object with just those properties a Feature
@@ -6,13 +6,15 @@ import {spy} from 'sinon';
  *
  * @return {Object}
  */
-export default function createMockFeatureContext(opts = { userProperties: false}) {
-  return {
-    options: {
-      userProperties: opts.userProperties
-    },
-    store: {
-      featureChanged: spy()
-    }
-  };
+export default function createMockFeatureContext(
+	opts = { userProperties: false },
+) {
+	return {
+		options: {
+			userProperties: opts.userProperties,
+		},
+		store: {
+			featureChanged: spy(),
+		},
+	};
 }

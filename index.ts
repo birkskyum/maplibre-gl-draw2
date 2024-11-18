@@ -5,28 +5,28 @@ import modes from './src/modes/index.ts';
 import * as Constants from './src/constants.ts';
 import * as lib from './src/lib/index.ts';
 
-const setupDraw = function(options, api) {
-  options = setupOptions(options);
+const setupDraw = function (options, api) {
+	options = setupOptions(options);
 
-  const ctx = {
-    options
-  };
+	const ctx = {
+		options,
+	};
 
-  api = setupAPI(ctx, api);
-  ctx.api = api;
+	api = setupAPI(ctx, api);
+	ctx.api = api;
 
-  const setup = runSetup(ctx);
+	const setup = runSetup(ctx);
 
-  api.onAdd = setup.onAdd;
-  api.onRemove = setup.onRemove;
-  api.types = Constants.types;
-  api.options = options;
+	api.onAdd = setup.onAdd;
+	api.onRemove = setup.onRemove;
+	api.types = Constants.types;
+	api.options = options;
 
-  return api;
+	return api;
 };
 
 function MapLibreDraw(options) {
-  setupDraw(options, this);
+	setupDraw(options, this);
 }
 
 MapLibreDraw.modes = modes;

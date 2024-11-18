@@ -12,18 +12,20 @@ import * as Constants from '../constants.ts';
  * @return {GeoJSON} Point
  */
 
-export default function(parentId, coordinates, path, selected) {
-  return {
-    type: Constants.geojsonTypes.FEATURE,
-    properties: {
-      meta: Constants.meta.VERTEX,
-      parent: parentId,
-      coord_path: path,
-      active: (selected) ? Constants.activeStates.ACTIVE : Constants.activeStates.INACTIVE
-    },
-    geometry: {
-      type: Constants.geojsonTypes.POINT,
-      coordinates
-    }
-  };
+export default function (parentId, coordinates, path, selected) {
+	return {
+		type: Constants.geojsonTypes.FEATURE,
+		properties: {
+			meta: Constants.meta.VERTEX,
+			parent: parentId,
+			coord_path: path,
+			active: selected
+				? Constants.activeStates.ACTIVE
+				: Constants.activeStates.INACTIVE,
+		},
+		geometry: {
+			type: Constants.geojsonTypes.POINT,
+			coordinates,
+		},
+	};
 }

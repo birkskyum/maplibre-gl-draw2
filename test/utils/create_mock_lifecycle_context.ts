@@ -1,7 +1,7 @@
-import {spy} from 'sinon';
+import { spy } from 'sinon';
 
 export default function createMockLifecycleContext() {
-  return {
-    on: spy()
-  };
+	return {
+		on: spy(),
+	};
 }

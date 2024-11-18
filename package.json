@@ -1,84 +1,72 @@
 {
-  "name": "@birkskyum/maplibre-gl-draw",
-  "version": "1.4.3",
-  "engines": {
-    "node": "^18.0.0 || >=20.0.0"
-  },
-  "description": "A drawing component for MapLibre GL JS",
-  "author": "Birk Skyum",
-  "license": "ISC",
-  "homepage": "https://github.com/birkskyum/maplibre-gl-draw",
-  "repository": {
-    "type": "git",
-    "url": "git://github.com/birkskyum/maplibre-gl-draw.git"
-  },
-  "bugs": {
-    "url": "https://github.com/birkskyum/maplibre-gl-draw/issues"
-  },
-  "keywords": [
-    "webgl",
-    "mapbox",
-    "draw",
-    "drawing"
-  ],
-  "type": "module",
-  "exports": "./index.js",
-  "main": "dist/maplibre-gl-draw.js",
-  "browser": "dist/maplibre-gl-draw.js",
-  "style": "dist/maplibre-gl-draw.css",
-  "scripts": {
-    "docs": "run-s docs-modes-life-cycle docs-modes-get-and-set",
-    "docs-modes-get-and-set": "documentation readme --readme-file ./docs/MODES.md -s \"Setters and Getters\" src/modes/mode_interface_accessors.js --shallow",
-    "docs-modes-life-cycle": "documentation readme --readme-file ./docs/MODES.md -s \"Life Cycle Functions\" src/modes/mode_interface.js --shallow",
-    "lint": "eslint index.ts src test bench",
-    "pretest": "npm run lint",
-    "test": "node --test --import ./test/mock-browser.js",
-    "coverage": "node --test --import ./test/mock-browser.js --experimental-test-coverage",
-    "build-token": "node build/generate-access-token-script.js",
-    "build": "rollup -c",
-    "build-min": "rollup -c --environment MINIFY:true",
-    "prepublishOnly": "run-s build build-min",
-    "watch": "rollup -c --watch",
-    "watch-bench": "rollup -c bench/rollup.config.js --watch",
-    "start-server": "vite --config vite.config.js",
-    "start-bench": "run-p build-token watch watch-bench \"start-server --base . .\"",
-    "start": "run-p build-token start-server"
-  },
-  "devDependencies": {
-    "@mapbox/cloudfriend": "^8.1.0",
-    "@mapbox/mapbox-gl-geocoder": "^5.0.2",
-    "@rollup/plugin-commonjs": "^28.0.0",
-    "@rollup/plugin-json": "^6.1.0",
-    "@rollup/plugin-node-resolve": "^15.2.3",
-    "@rollup/plugin-replace": "^6.0.1",
-    "@rollup/plugin-terser": "^0.4.4",
-    "@turf/bbox-clip": "^7.0.0",
-    "@turf/centroid": "^7.0.0",
-    "eslint": "8.57.1",
-    "eslint-config-mourner": "3.0.0",
-    "eslint-plugin-import": "^2.28.1",
-    "maplibre-gl": "^4.7.1",
-    "mock-browser": "^0.92.14",
-    "npm-run-all": "^4.1.5",
-    "rollup": "^4.19.1",
-    "sinon": "^19.0.2",
-    "synthetic-dom-events": "0.3.0",
-    "vite": "^5.3.1",
-    "@typescript-eslint/eslint-plugin": "^6.0.0",
-    "@typescript-eslint/parser": "^6.0.0",
-    "typescript": "^5.0.0"
-  },
-  "dependencies": {
-    "@mapbox/geojson-area": "^0.2.2",
-    "@mapbox/geojson-normalize": "^0.0.1",
-    "@mapbox/point-geometry": "^0.1.0",
-    "@types/sinon": "^17.0.3",
-    "fast-deep-equal": "^3.1.3",
-    "hat": "0.0.3"
-  },
-  "files": [
-    "src",
-    "index.js",
-    "dist/maplibre-gl-draw*"
-  ]
+	"name": "@birkskyum/maplibre-gl-draw",
+	"version": "1.4.3",
+	"engines": {
+		"node": "^18.0.0 || >=20.0.0"
+	},
+	"description": "A drawing component for MapLibre GL JS",
+	"author": "Birk Skyum",
+	"license": "ISC",
+	"homepage": "https://github.com/birkskyum/maplibre-gl-draw",
+	"repository": {
+		"type": "git",
+		"url": "git://github.com/birkskyum/maplibre-gl-draw.git"
+	},
+	"bugs": {
+		"url": "https://github.com/birkskyum/maplibre-gl-draw/issues"
+	},
+	"keywords": ["webgl", "mapbox", "draw", "drawing"],
+	"type": "module",
+	"exports": "./index.js",
+	"main": "dist/maplibre-gl-draw.js",
+	"browser": "dist/maplibre-gl-draw.js",
+	"style": "dist/maplibre-gl-draw.css",
+	"scripts": {
+		"docs": "run-s docs-modes-life-cycle docs-modes-get-and-set",
+		"docs-modes-get-and-set": "documentation readme --readme-file ./docs/MODES.md -s \"Setters and Getters\" src/modes/mode_interface_accessors.js --shallow",
+		"docs-modes-life-cycle": "documentation readme --readme-file ./docs/MODES.md -s \"Life Cycle Functions\" src/modes/mode_interface.js --shallow",
+		"lint": "biome lint .",
+		"format": "biome format --write",
+		"pretest": "npm run lint",
+		"test": "node --test --import ./test/mock-browser.js",
+		"coverage": "node --test --import ./test/mock-browser.js --experimental-test-coverage",
+		"build-token": "node build/generate-access-token-script.js",
+		"build": "rollup -c",
+		"build-min": "rollup -c --environment MINIFY:true",
+		"prepublishOnly": "run-s build build-min",
+		"watch": "rollup -c --watch",
+		"watch-bench": "rollup -c bench/rollup.config.js --watch",
+		"start-server": "vite --config vite.config.js",
+		"start-bench": "run-p build-token watch watch-bench \"start-server --base . .\"",
+		"start": "run-p build-token start-server"
+	},
+	"devDependencies": {
+		"@biomejs/biome": "1.9.4",
+		"@mapbox/cloudfriend": "^8.1.0",
+		"@mapbox/mapbox-gl-geocoder": "^5.0.2",
+		"@rollup/plugin-commonjs": "^28.0.0",
+		"@rollup/plugin-json": "^6.1.0",
+		"@rollup/plugin-node-resolve": "^15.2.3",
+		"@rollup/plugin-replace": "^6.0.1",
+		"@rollup/plugin-terser": "^0.4.4",
+		"@turf/bbox-clip": "^7.0.0",
+		"@turf/centroid": "^7.0.0",
+		"maplibre-gl": "^4.7.1",
+		"mock-browser": "^0.92.14",
+		"npm-run-all": "^4.1.5",
+		"rollup": "^4.19.1",
+		"sinon": "^19.0.2",
+		"synthetic-dom-events": "0.3.0",
+		"typescript": "^5.0.0",
+		"vite": "^5.3.1"
+	},
+	"dependencies": {
+		"@mapbox/geojson-area": "^0.2.2",
+		"@mapbox/geojson-normalize": "^0.0.1",
+		"@mapbox/point-geometry": "^0.1.0",
+		"@types/sinon": "^17.0.3",
+		"fast-deep-equal": "^3.1.3",
+		"hat": "0.0.3"
+	}
+	
 }

@@ -2,36 +2,36 @@ import createSyntheticEvent from 'synthetic-dom-events';
 import * as Constants from '../../src/constants.ts';
 
 const classList = [Constants.classes.CANVAS];
-classList.contains = function(cls) {
-  return classList.indexOf(cls) >= 0;
+classList.contains = function (cls) {
+	return classList.indexOf(cls) >= 0;
 };
 
 export const enterEvent = createSyntheticEvent('keyup', {
-  srcElement: { classList },
-  keyCode: 13
+	srcElement: { classList },
+	keyCode: 13,
 });
 
 export const startPointEvent = createSyntheticEvent('keydown', {
-  srcElement: { classList },
-  keyCode: 49
+	srcElement: { classList },
+	keyCode: 49,
 });
 
 export const startLineStringEvent = createSyntheticEvent('keydown', {
-  srcElement: { classList },
-  keyCode: 50
+	srcElement: { classList },
+	keyCode: 50,
 });
 
 export const startPolygonEvent = createSyntheticEvent('keydown', {
-  srcElement: { classList },
-  keyCode: 51
+	srcElement: { classList },
+	keyCode: 51,
 });
 
 export const escapeEvent = createSyntheticEvent('keyup', {
-  srcElement: { classList },
-  keyCode: 27
+	srcElement: { classList },
+	keyCode: 27,
 });
 
 export const backspaceEvent = createSyntheticEvent('keydown', {
-  srcElement: { classList },
-  keyCode: 8
+	srcElement: { classList },
+	keyCode: 8,
 });
