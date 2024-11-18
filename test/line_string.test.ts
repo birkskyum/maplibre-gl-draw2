@@ -62,8 +62,8 @@ test('LineString constructor and API', () => {
 		'lineString.updateCoordinate',
 	);
 	assert.equal(
-		getPublicMemberKeys(LineString.prototype).length,
-		5,
+		Object.getOwnPropertyNames(LineString.prototype).length,
+		6,
 		'no unexpected prototype members',
 	);
 
