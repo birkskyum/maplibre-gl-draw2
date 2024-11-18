@@ -30,155 +30,162 @@ export class DrawEvents {
 		combineFeatures: false,
 		uncombineFeatures: false,
 	};
-	
+
 	constructor(ctx: any) {
 		this.ctx = ctx;
 		this.modes = Object.keys(ctx.options.modes).reduce((m: any, k: string) => {
 			m[k] = objectToMode(ctx.options.modes[k]);
 			return m;
 		}, {});
-		this.initializeEvents();
+		this.bindEvents();
 	}
 
-	private initializeEvents(): void {
-		this.events.drag = (event: any, isDrag: Function) => {
-			if (isDrag({
-				point: event.point,
-				time: new Date().getTime(),
-			})) {
-				this.ctx.ui.queueMapClasses({ mouse: Constants.cursors.DRAG });
-				this.currentMode.drag(event);
-			} else {
-				event.originalEvent.stopPropagation();
-			}
-		};
-
-		this.events.mousedrag = (event: any) => {
-			this.events.drag(event, (endInfo: EventInfo) => !isClick(this.mouseDownInfo, endInfo));
-		};
-
-		this.events.touchdrag = (event: any) => {
-			this.events.drag(event, (endInfo: EventInfo) => !isTap(this.touchStartInfo, endInfo));
-		};
-
-		this.events.mousemove = (event: any) => {
-			const button = event.originalEvent.buttons !== undefined ? event.originalEvent.buttons : event.originalEvent.which;
-			if (button === 1) {
-				return this.events.mousedrag(event);
-			}
-			const target = getFeaturesAndSetCursor(event, this.ctx);
-			event.featureTarget = target;
-			this.currentMode.mousemove(event);
-		};
-
-		this.events.mousedown = (event: any) => {
-			this.mouseDownInfo = {
-				time: new Date().getTime(),
-				point: event.point,
-			};
-			const target = getFeaturesAndSetCursor(event, this.ctx);
-			event.featureTarget = target;
-			this.currentMode.mousedown(event);
-		};
-
-		this.events.mouseup = (event: any) => {
-			const target = getFeaturesAndSetCursor(event, this.ctx);
-			event.featureTarget = target;
-
-			if (isClick(this.mouseDownInfo, { point: event.point, time: new Date().getTime() })) {
-				this.currentMode.click(event);
-			} else {
-				this.currentMode.mouseup(event);
-			}
-		};
-
-		this.events.mouseout = (event: any) => {
-			this.currentMode.mouseout(event);
-		};
-
-		this.events.touchstart = (event: any) => {
-			if (!this.ctx.options.touchEnabled) {
-				return;
-			}
-
-			this.touchStartInfo = {
-				time: new Date().getTime(),
-				point: event.point,
-			};
-			const target = featuresAt.touch(event, null, this.ctx)[0];
-			event.featureTarget = target;
-			this.currentMode.touchstart(event);
-		};
-
-		this.events.touchmove = (event: any) => {
-			if (!this.ctx.options.touchEnabled) {
-				return;
-			}
-
-			this.currentMode.touchmove(event);
-			return this.events.touchdrag(event);
-		};
-
-		this.events.touchend = (event: any) => {
-			event.originalEvent.preventDefault();
-			if (!this.ctx.options.touchEnabled) {
-				return;
-			}
-
-			const target = featuresAt.touch(event, null, this.ctx)[0];
-			event.featureTarget = target;
-			if (isTap(this.touchStartInfo, { time: new Date().getTime(), point: event.point })) {
-				this.currentMode.tap(event);
-			} else {
-				this.currentMode.touchend(event);
-			}
-		};
-
-		const isKeyModeValid = (code: number) => !(code === 8 || code === 46 || (code >= 48 && code <= 57));
-
-		this.events.keydown = (event: any) => {
-			const isMapElement = (event.srcElement || event.target).classList.contains(Constants.classes.CANVAS);
-			if (!isMapElement) return;
-
-			if ((event.keyCode === 8 || event.keyCode === 46) && this.ctx.options.controls.trash) {
-				event.preventDefault();
-				this.currentMode.trash();
-			} else if (isKeyModeValid(event.keyCode)) {
-				this.currentMode.keydown(event);
-			} else if (event.keyCode === 49 && this.ctx.options.controls.point) {
-				this.changeMode(Constants.modes.DRAW_POINT);
-			} else if (event.keyCode === 50 && this.ctx.options.controls.line_string) {
-				this.changeMode(Constants.modes.DRAW_LINE_STRING);
-			} else if (event.keyCode === 51 && this.ctx.options.controls.polygon) {
-				this.changeMode(Constants.modes.DRAW_POLYGON);
-			}
-		};
-
-		this.events.keyup = (event: any) => {
-			if (isKeyModeValid(event.keyCode)) {
-				this.currentMode.keyup(event);
-			}
-		};
-
-		this.events.zoomend = () => {
-			this.ctx.store.changeZoom();
-		};
-
-		this.events.data = (event: any) => {
-			if (event.dataType === 'style') {
-				const { setup, map, options, store } = this.ctx;
-				const hasLayers = options.styles.some((style: any) => map.getLayer(style.id));
-				if (!hasLayers) {
-					setup.addLayers();
-					store.setDirty();
-					store.render();
-				}
-			}
-		};
-
-		
+	public bindEvents(): void {
+		this.events.drag = this.handleDrag.bind(this);
+		this.events.mousedrag = this.handleMouseDrag.bind(this);
+		this.events.touchdrag = this.handleTouchDrag.bind(this);
+		this.events.mousemove = this.handleMouseMove.bind(this);
+		this.events.mousedown = this.handleMouseDown.bind(this);
+		this.events.mouseup = this.handleMouseUp.bind(this);
+		this.events.mouseout = this.handleMouseOut.bind(this);
+		this.events.touchstart = this.handleTouchStart.bind(this);
+		this.events.touchmove = this.handleTouchMove.bind(this);
+		this.events.touchend = this.handleTouchEnd.bind(this);
+		this.events.keydown = this.handleKeyDown.bind(this);
+		this.events.keyup = this.handleKeyUp.bind(this);
+		this.events.zoomend = this.handleZoomEnd.bind(this);
+		this.events.data = this.handleData.bind(this);
 	}
 
+	public handleDrag(event: any, isDrag: Function): void {
+		if (isDrag({
+			point: event.point,
+			time: new Date().getTime(),
+		})) {
+			this.ctx.ui.queueMapClasses({ mouse: Constants.cursors.DRAG });
+			this.currentMode.drag(event);
+		} else {
+			event.originalEvent.stopPropagation();
+		}
+	}
+
+	public handleMouseDrag(event: any): void {
+		this.events.drag(event, (endInfo: EventInfo) => !isClick(this.mouseDownInfo, endInfo));
+	}
+
+	public handleTouchDrag(event: any): void {
+		this.events.drag(event, (endInfo: EventInfo) => !isTap(this.touchStartInfo, endInfo));
+	}
+
+	public handleMouseMove(event: any): void {
+		const button = event.originalEvent.buttons !== undefined ? event.originalEvent.buttons : event.originalEvent.which;
+		if (button === 1) {
+			return this.events.mousedrag(event);
+		}
+		const target = getFeaturesAndSetCursor(event, this.ctx);
+		event.featureTarget = target;
+		this.currentMode.mousemove(event);
+	}
+
+	public handleMouseDown(event: any): void {
+		this.mouseDownInfo = {
+			time: new Date().getTime(),
+			point: event.point,
+		};
+		const target = getFeaturesAndSetCursor(event, this.ctx);
+		event.featureTarget = target;
+		this.currentMode.mousedown(event);
+	}
+
+	public handleMouseUp(event: any): void {
+		const target = getFeaturesAndSetCursor(event, this.ctx);
+		event.featureTarget = target;
+
+		if (isClick(this.mouseDownInfo, { point: event.point, time: new Date().getTime() })) {
+			this.currentMode.click(event);
+		} else {
+			this.currentMode.mouseup(event);
+		}
+	}
+
+	public handleMouseOut(event: any): void {
+		this.currentMode.mouseout(event);
+	}
+
+	public handleTouchStart(event: any): void {
+		if (!this.ctx.options.touchEnabled) return;
+
+		this.touchStartInfo = {
+			time: new Date().getTime(),
+			point: event.point,
+		};
+		const target = featuresAt.touch(event, null, this.ctx)[0];
+		event.featureTarget = target;
+		this.currentMode.touchstart(event);
+	}
+
+	public handleTouchMove(event: any): void {
+		if (!this.ctx.options.touchEnabled) return;
+		this.currentMode.touchmove(event);
+		return this.events.touchdrag(event);
+	}
+
+	public handleTouchEnd(event: any): void {
+		event.originalEvent.preventDefault();
+		if (!this.ctx.options.touchEnabled) return;
+
+		const target = featuresAt.touch(event, null, this.ctx)[0];
+		event.featureTarget = target;
+		if (isTap(this.touchStartInfo, { time: new Date().getTime(), point: event.point })) {
+			this.currentMode.tap(event);
+		} else {
+			this.currentMode.touchend(event);
+		}
+	}
+
+	public handleKeyDown(event: any): void {
+		const isMapElement = (event.srcElement || event.target).classList.contains(Constants.classes.CANVAS);
+		if (!isMapElement) return;
+
+		if ((event.keyCode === 8 || event.keyCode === 46) && this.ctx.options.controls.trash) {
+			event.preventDefault();
+			this.currentMode.trash();
+		} else if (this.isKeyModeValid(event.keyCode)) {
+			this.currentMode.keydown(event);
+		} else if (event.keyCode === 49 && this.ctx.options.controls.point) {
+			this.changeMode(Constants.modes.DRAW_POINT);
+		} else if (event.keyCode === 50 && this.ctx.options.controls.line_string) {
+			this.changeMode(Constants.modes.DRAW_LINE_STRING);
+		} else if (event.keyCode === 51 && this.ctx.options.controls.polygon) {
+			this.changeMode(Constants.modes.DRAW_POLYGON);
+		}
+	}
+
+	public handleKeyUp(event: any): void {
+		if (this.isKeyModeValid(event.keyCode)) {
+			this.currentMode.keyup(event);
+		}
+	}
+
+	public handleZoomEnd(): void {
+		this.ctx.store.changeZoom();
+	}
+
+	public handleData(event: any): void {
+		if (event.dataType === 'style') {
+			const { setup, map, options, store } = this.ctx;
+			const hasLayers = options.styles.some((style: any) => map.getLayer(style.id));
+			if (!hasLayers) {
+				setup.addLayers();
+				store.setDirty();
+				store.render();
+			}
+		}
+	}
+
+	public isKeyModeValid(code: number): boolean {
+		return !(code === 8 || code === 46 || (code >= 48 && code <= 57));
+	}
 	private changeMode(modename: string, nextModeOptions?: any, eventOptions: any = {}): void {
 		this.currentMode.stop();
 
