@@ -205,7 +205,7 @@ export class DrawEvents {
 		this.ctx.store.render();
 	}
 
-	private actionable(actions: Partial<ActionState>): void {
+	public actionable(actions: Partial<ActionState>): void {
 		let changed = false;
 		Object.keys(actions).forEach((action) => {
 			if (this.actionState[action as keyof ActionState] === undefined) {
