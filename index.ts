@@ -1,25 +1,23 @@
 import setupOptions from './src/options.ts';
-import setupAPI from './src/api.ts';
 import { ALL_MODES } from './src/modes/index.ts';
 import * as Constants from './src/constants.ts';
 import * as lib from './src/lib/index.ts';
 import { DrawEvents } from './src/events.ts';
-import Store from './src/store.ts';
-import ui from './src/ui.ts';
-import UI from './src/ui.ts';
-import Api from './src/api.ts';
+import DrawStore from './src/store.ts';
+import {DrawUI} from './src/ui.ts';
+import {DrawApi} from './src/api.ts';
 import type {Map as MapLibreMap} from 'maplibre-gl';
 
 export class DrawContext {
 	options: any;
-	api?: Api;
+	api?: DrawApi;
 	map?: MapLibreMap;
 	events?: DrawEvents;
-	ui?: UI;
-	container?: any;
-	store?: Store;
+	ui?: DrawUI;
+	container?: HTMLDivElement;
+	store?: DrawStore;
 
-	constructor(options: any) {
+	constructor(options) {
 		this.options = setupOptions(options);
 	}
 }
@@ -37,7 +35,7 @@ class MapLibreDraw {
 
 	constructor(options: any = {}) {
 		this.ctx = new DrawContext(options);
-		this.setupApi = new setupAPI(this.ctx, this);
+		this.setupApi = new DrawApi(this.ctx);
 		this.ctx.api = this.setupApi;
 		this.initialize();
 		return this.setupApi;
@@ -53,9 +51,9 @@ class MapLibreDraw {
 	private onAdd(map: any) {
 		this.ctx.map = map;
 		this.ctx.events = new DrawEvents(this.ctx);
-		this.ctx.ui = new ui(this.ctx);
+		this.ctx.ui = new DrawUI(this.ctx);
 		this.ctx.container = map.getContainer();
-		this.ctx.store = new Store(this.ctx);
+		this.ctx.store = new DrawStore(this.ctx);
 
 		this.controlContainer = this.ctx.ui.addButtons();
 

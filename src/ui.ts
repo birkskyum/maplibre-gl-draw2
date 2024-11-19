@@ -10,7 +10,7 @@ const controls: Record<string, boolean> = {
 	polygon: true,
 	trash: true,
 };
-export default class UI {
+export class DrawUI {
 	private buttonElements: Record<string, HTMLButtonElement> = {};
 	private activeButton: HTMLButtonElement | null = null;
 	private currentMapClasses = {

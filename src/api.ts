@@ -21,7 +21,7 @@ const featureTypes = {
 	MultiPoint: MultiFeature,
 };
 
-export default class Api {
+export class DrawApi {
 	public ctx: DrawContext;
 	public modes: typeof Constants.modes;
 

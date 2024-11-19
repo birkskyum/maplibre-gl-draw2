@@ -1,6 +1,6 @@
 import { DrawEvents } from './events.ts';
 import Store from './store.ts';
-import ui from './ui.ts';
+import {DrawUI} from './ui.ts';
 import * as Constants from './constants.ts';
 
 export default function (ctx) {
@@ -39,7 +39,7 @@ export default function (ctx) {
 		onAdd(map) {
 			ctx.map = map;
 			ctx.events = new DrawEvents(ctx);
-			ctx.ui = new ui(ctx);
+			ctx.ui = new DrawUI(ctx);
 			ctx.container = map.getContainer();
 			ctx.store = new Store(ctx);
 
