@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { spy } from 'sinon';
 import {DrawFeature} from '../src/feature_types/feature.ts';
-import LineString from '../src/feature_types/line_string.ts';
+import {LineString} from '../src/feature_types/line_string.ts';
 import MapLibreDraw from '../index.ts';
 import createFeature from './utils/create_feature.ts';
 import getPublicMemberKeys from './utils/get_public_member_keys.ts';

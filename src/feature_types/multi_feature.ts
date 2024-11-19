@@ -3,12 +3,12 @@ import {DrawFeature} from './feature.ts';
 import * as Constants from '../constants.ts';
 
 import {PointFeat} from './point.ts';
-import MultiLineString from './line_string.ts';
+import {LineString} from './line_string.ts';
 import {PolygonFeat} from './polygon.ts';
 
 const models = {
 	MultiPoint: PointFeat,
-	MultiLineString,
+	MultiLineString: LineString,
 	MultiPolygon: PolygonFeat,
 };
 

@@ -7,7 +7,7 @@ import * as Constants from './constants.ts';
 import StringSet from './lib/string_set.ts';
 
 import {PolygonFeat} from './feature_types/polygon.ts';
-import LineString from './feature_types/line_string.ts';
+import {LineString} from './feature_types/line_string.ts';
 import {PointFeat} from './feature_types/point.ts';
 import MultiFeature from './feature_types/multi_feature.ts';
 import type { DrawContext } from '../index.ts';

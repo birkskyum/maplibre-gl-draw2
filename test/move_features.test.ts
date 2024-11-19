@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import getGeoJSON from './utils/get_geojson.ts';
 import createMockFeatureContext from './utils/create_mock_feature_context.ts';
 import {PointFeat} from '../src/feature_types/point.ts';
-import LineString from '../src/feature_types/line_string.ts';
+import {LineString} from '../src/feature_types/line_string.ts';
 import {PolygonFeat} from '../src/feature_types/polygon.ts';
 import moveFeatures from '../src/lib/move_features.ts';
 
