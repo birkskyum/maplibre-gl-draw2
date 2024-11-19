@@ -1,4 +1,4 @@
-let StaticMode = {};
+export let StaticMode = {};
 
 StaticMode.onSetup = function () {
 	this.setActionableState(); // default actionable state is false for all actions
@@ -9,4 +9,4 @@ StaticMode.toDisplayFeatures = function (state, geojson, display) {
 	display(geojson);
 };
 
-export default StaticMode;
+
