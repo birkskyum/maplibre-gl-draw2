@@ -1,6 +1,6 @@
 import * as Constants from './constants.ts';
 
-export default function render() {
+export function render() {
 	// eslint-disable-next-line no-invalid-this
 	const store = this;
 	const mapExists =

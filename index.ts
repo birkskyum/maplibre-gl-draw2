@@ -1,4 +1,4 @@
-import setupOptions, {type  MapLibreDrawOptions } from './src/options.ts';
+import {setupOptions, type  MapLibreDrawOptions } from './src/options.ts';
 import { ALL_MODES } from './src/modes/index.ts';
 import * as Constants from './src/constants.ts';
 import * as lib from './src/lib/index.ts';
