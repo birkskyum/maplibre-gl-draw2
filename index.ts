@@ -7,7 +7,7 @@ import { DrawEvents } from './src/events.ts';
 import Store from './src/store.ts';
 import ui from './src/ui.ts';
 
-class DrawContext {
+export class DrawContext {
 	options: any;
 	api?: any;
 	map?: any;
@@ -21,18 +21,23 @@ class DrawContext {
 	}
 }
 
-class DrawManager {
+class MapLibreDraw {
+	static readonly modes = ALL_MODES;
+	static readonly constants = Constants;
+	static readonly lib = lib;
+
 	private ctx: DrawContext;
 	private setupApi: any;
 	private controlContainer: any = null;
 	private mapLoadedInterval: any = null;
 	private boxZoomInitial: boolean = false;
 
-	constructor(options: any, api: any) {
+	constructor(options: any = {}) {
 		this.ctx = new DrawContext(options);
-		this.setupApi = new setupAPI(this.ctx, api);
+		this.setupApi = new setupAPI(this.ctx, this);
 		this.ctx.api = this.setupApi;
 		this.initialize();
+		return this.setupApi;
 	}
 
 	private initialize(): void {
@@ -150,17 +155,6 @@ class DrawManager {
 	}
 }
 
-const setupDraw = (options: any, api: any): any => {
-	const drawManager = new DrawManager(options, api);
-	return drawManager.getApi();
-};
 
-export default class MapLibreDraw {
-	static readonly modes = ALL_MODES;
-	static readonly constants = Constants;
-	static readonly lib = lib;
 
-	constructor(options: any = {}) {
-		return setupDraw(options, this);
-	}
-}
+export default MapLibreDraw;
