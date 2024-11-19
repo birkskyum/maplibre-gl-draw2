@@ -73,7 +73,7 @@ function addSources(styles, sourceBucket) {
 	});
 }
 
-export default function (options = {}) {
+export default function (options: MapLibreDrawOptions = {}) {
 	let withDefaults = Object.assign({}, options);
 
 	if (!options.controls) {
