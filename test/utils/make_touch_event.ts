@@ -1,4 +1,4 @@
-export default function (lng = 0, lat = 0, eventProperties = {}) {
+export function makeTouchEvent (lng = 0, lat = 0, eventProperties = {}) {
 	const e = {
 		originalEvent: Object.assign(
 			{

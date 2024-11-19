@@ -2,7 +2,7 @@ import {createVertex} from './create_vertex.ts';
 import createMidpoint from './create_midpoint.ts';
 import * as Constants from '../constants.ts';
 
-function createSupplementaryPoints(geojson: Feat, options = {}, basePath = null) {
+function createSupplementaryPoints(geojson, options = {}, basePath = null) {
 	const { type, coordinates } = geojson.geometry;
 	const featureId = geojson.properties && geojson.properties.id;
 

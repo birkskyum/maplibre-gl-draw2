@@ -6,13 +6,13 @@ import createSyntheticEvent from 'synthetic-dom-events';
 import { spy } from 'sinon';
 
 import { MapLibreDraw } from '../index.ts';
-import click from './utils/mouse_click.ts';
-import tap from './utils/touch_tap.ts';
+import {mouseClick} from './utils/mouse_click.ts';
+import {touchTap} from './utils/touch_tap.ts';
 import { getGeoJSON } from './utils/get_geojson.ts';
 import { createMap } from './utils/create_map.ts';
 import { setupAfterNextRender } from './utils/after_next_render.ts';
-import makeMouseEvent from './utils/make_mouse_event.ts';
-import makeTouchEvent from './utils/make_touch_event.ts';
+import {makeMouseEvent} from './utils/make_mouse_event.ts';
+import {makeTouchEvent} from './utils/make_touch_event.ts';
 import * as Constants from '../src/constants.ts';
 
 test('direct_select', async (t) => {
@@ -109,7 +109,7 @@ test('direct_select', async (t) => {
 			const clickAt = getGeoJSON('polygon').geometry.coordinates[0][0];
 			await afterNextRender();
 
-			click(map, makeMouseEvent(clickAt[0], clickAt[1]));
+			mouseClick(map, makeMouseEvent(clickAt[0], clickAt[1]));
 
 			await afterNextRender();
 			const actionableArgs = getFireArgs().filter(
@@ -152,7 +152,7 @@ test('direct_select', async (t) => {
 			const tapAt = getGeoJSON('polygon').geometry.coordinates[0][0];
 			await afterNextRender();
 
-			tap(map, makeTouchEvent(tapAt[0], tapAt[1]));
+			touchTap(map, makeTouchEvent(tapAt[0], tapAt[1]));
 			await afterNextRender();
 
 			const actionableArgs = getFireArgs().filter(
@@ -217,9 +217,9 @@ test('direct_select', async (t) => {
 
 			await afterNextRender();
 			// select multiple nodes at indices 9, 10, 11
-			click(map, makeMouseEvent(70, 10, { shiftKey: true }));
-			click(map, makeMouseEvent(80, 10, { shiftKey: true }));
-			click(map, makeMouseEvent(60, 10, { shiftKey: true }));
+			mouseClick(map, makeMouseEvent(70, 10, { shiftKey: true }));
+			mouseClick(map, makeMouseEvent(80, 10, { shiftKey: true }));
+			mouseClick(map, makeMouseEvent(60, 10, { shiftKey: true }));
 			await afterNextRender();
 			Draw.trash();
 			const afterTrash = Draw.get(ids[0]);
@@ -249,7 +249,7 @@ test('direct_select', async (t) => {
 
 			const clickAt = getGeoJSON('polygon').geometry.coordinates[0][0];
 			await afterNextRender();
-			click(map, makeMouseEvent(clickAt[0], clickAt[1]));
+			mouseClick(map, makeMouseEvent(clickAt[0], clickAt[1]));
 			await afterNextRender();
 			map.fire('mousedown', makeMouseEvent(clickAt[0] + 15, clickAt[1] + 15));
 			map.fire(
@@ -277,7 +277,7 @@ test('direct_select', async (t) => {
 
 			const startPosition = getGeoJSON('polygon').geometry.coordinates[0][1];
 			await afterNextRender();
-			click(map, makeMouseEvent(startPosition[0], startPosition[1]));
+			mouseClick(map, makeMouseEvent(startPosition[0], startPosition[1]));
 			await afterNextRender();
 			map.fire.resetHistory();
 			map.fire('mousedown', makeMouseEvent(startPosition[0], startPosition[1]));
@@ -326,7 +326,7 @@ test('direct_select', async (t) => {
 
 			const startPosition = getGeoJSON('polygon').geometry.coordinates[0][1];
 			await afterNextRender();
-			click(map, makeMouseEvent(startPosition[0], startPosition[1]));
+			mouseClick(map, makeMouseEvent(startPosition[0], startPosition[1]));
 			await afterNextRender();
 			map.fire.resetHistory();
 			map.fire('mousedown', makeMouseEvent(startPosition[0], startPosition[1]));
@@ -378,7 +378,7 @@ test('direct_select', async (t) => {
 			const centroid = turfCentroid(getGeoJSON('polygon')).geometry.coordinates;
 			await afterNextRender();
 			map.fire.resetHistory();
-			click(map, makeMouseEvent(centroid[0], centroid[1]));
+			mouseClick(map, makeMouseEvent(centroid[0], centroid[1]));
 			map.fire('mousedown', makeMouseEvent(centroid[0], centroid[1]));
 			map.fire(
 				'mousemove',
@@ -423,7 +423,7 @@ test('direct_select', async (t) => {
 			await afterNextRender();
 
 			map.fire.resetHistory();
-			click(map, makeMouseEvent(startPosition[0], startPosition[1]));
+			mouseClick(map, makeMouseEvent(startPosition[0], startPosition[1]));
 			assert.deepEqual(
 				Draw.getSelectedPoints().features[0].geometry.coordinates,
 				startPosition,

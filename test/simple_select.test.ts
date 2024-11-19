@@ -6,9 +6,9 @@ import { spy } from 'sinon';
 
 import { MapLibreDraw } from '../index.ts';
 import { setupAfterNextRender } from './utils/after_next_render.ts';
-import makeMouseEvent from './utils/make_mouse_event.ts';
-import mouseClick from './utils/mouse_click.ts';
-import makeTouchEvent from './utils/make_touch_event.ts';
+import {makeMouseEvent} from './utils/make_mouse_event.ts';
+import {mouseClick} from './utils/mouse_click.ts';
+import {makeTouchEvent} from './utils/make_touch_event.ts';
 import { getGeoJSON } from './utils/get_geojson.ts';
 import { createMap } from './utils/create_map.ts';
 import createMockDrawModeContext from './utils/create_mock_draw_mode_context.ts';

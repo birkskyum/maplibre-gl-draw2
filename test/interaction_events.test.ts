@@ -4,10 +4,10 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { spy } from 'sinon';
 import { MapLibreDraw } from '../index.ts';
-import click from './utils/mouse_click.ts';
+import {mouseClick} from './utils/mouse_click.ts';
 import { createMap } from './utils/create_map.ts';
 import { setupAfterNextRender } from './utils/after_next_render.ts';
-import makeMouseEvent from './utils/make_mouse_event.ts';
+import {makeMouseEvent} from './utils/make_mouse_event.ts';
 
 import { backspaceEvent, enterEvent, escapeEvent } from './utils/key_events.ts';
 
@@ -128,7 +128,7 @@ test('ensure user interactions fire right events', async (t) => {
 		// Move around, then click to create the point
 		map.fire('mousemove', makeMouseEvent(10, 10));
 		map.fire('mousemove', makeMouseEvent(20, 20));
-		click(map, makeMouseEvent(25, 25));
+		mouseClick(map, makeMouseEvent(25, 25));
 		await afterNextRender();
 
 		firedWith('draw.create', {
@@ -156,7 +156,7 @@ test('ensure user interactions fire right events', async (t) => {
 		// Move around, then click away from the selected point
 		map.fire('mousemove', makeMouseEvent(10, 10));
 		map.fire('mousemove', makeMouseEvent(20, 20));
-		click(map, makeMouseEvent(5, 5));
+		mouseClick(map, makeMouseEvent(5, 5));
 		await afterNextRender();
 		firedWith('draw.selectionchange', {
 			features: [],
@@ -174,7 +174,7 @@ test('ensure user interactions fire right events', async (t) => {
 		// Move around, then click the existing point
 		map.fire('mousemove', makeMouseEvent(10, 10));
 		map.fire('mousemove', makeMouseEvent(20, 20));
-		click(map, makeMouseEvent(25, 25));
+		mouseClick(map, makeMouseEvent(25, 25));
 		await afterNextRender();
 		firedWith('draw.selectionchange', {
 			features: [pointA],
@@ -260,16 +260,16 @@ test('ensure user interactions fire right events', async (t) => {
 		// Move around, then click and move to create the line
 		map.fire('mousemove', makeMouseEvent(10, 10));
 		map.fire('mousemove', makeMouseEvent(20, 20));
-		click(map, makeMouseEvent(10, 10));
+		mouseClick(map, makeMouseEvent(10, 10));
 		repeat(20, (i) => {
 			map.fire('mousemove', makeMouseEvent(10 + i, 10 + i));
 		});
-		click(map, makeMouseEvent(30, 30));
+		mouseClick(map, makeMouseEvent(30, 30));
 		repeat(20, (i) => {
 			map.fire('mousemove', makeMouseEvent(30 + i, 30 + i));
 		});
-		click(map, makeMouseEvent(50, 50));
-		click(map, makeMouseEvent(50, 50));
+		mouseClick(map, makeMouseEvent(50, 50));
+		mouseClick(map, makeMouseEvent(50, 50));
 
 		await afterNextRender();
 
@@ -295,7 +295,7 @@ test('ensure user interactions fire right events', async (t) => {
 
 	await t.test('deselect that line', async () => {
 		// Now in `simple_select` mode ...
-		click(map, makeMouseEvent(5, 5));
+		mouseClick(map, makeMouseEvent(5, 5));
 		await afterNextRender();
 		firedWith('draw.selectionchange', {
 			features: [],
@@ -311,7 +311,7 @@ test('ensure user interactions fire right events', async (t) => {
 	await t.test('re-select that line', async () => {
 		// Now in `simple_select` mode ...
 		// Click somewhere on the line
-		click(map, makeMouseEvent(30, 30));
+		mouseClick(map, makeMouseEvent(30, 30));
 		await afterNextRender();
 		firedWith('draw.selectionchange', {
 			features: [lineA],
@@ -365,7 +365,7 @@ test('ensure user interactions fire right events', async (t) => {
 	await t.test('select a vertex', async () => {
 		// Now in `simple_select` mode ...
 		// Click a vertex
-		click(map, makeMouseEvent(40, 20));
+		mouseClick(map, makeMouseEvent(40, 20));
 
 		await afterNextRender();
 
@@ -448,7 +448,7 @@ test('ensure user interactions fire right events', async (t) => {
 	await t.test('add another vertex', async () => {
 		// Now in `direct_select` mode ...
 		// Click a midpoint of lineC
-		click(map, makeMouseEvent(41, 21));
+		mouseClick(map, makeMouseEvent(41, 21));
 		await afterNextRender();
 		firedWith('draw.update', {
 			action: 'change_coordinates',
@@ -477,7 +477,7 @@ test('ensure user interactions fire right events', async (t) => {
 	await t.test('delete a vertex with Backspace', async () => {
 		// Now in `direct_select` mode ...
 		// Click a vertex
-		click(map, makeMouseEvent(41, 21));
+		mouseClick(map, makeMouseEvent(41, 21));
 		container.dispatchEvent(backspaceEvent);
 		await afterNextRender();
 		firedWith('draw.update', {
@@ -535,20 +535,20 @@ test('ensure user interactions fire right events', async (t) => {
 
 	await t.test('create a polygon', async () => {
 		// Now in `draw_polygon` mode ...
-		click(map, makeMouseEvent(0, 0));
+		mouseClick(map, makeMouseEvent(0, 0));
 		repeat(20, (i) => {
 			map.fire('mousemove', makeMouseEvent(0, 0 + i));
 		});
-		click(map, makeMouseEvent(0, 30));
+		mouseClick(map, makeMouseEvent(0, 30));
 		repeat(20, (i) => {
 			map.fire('mousemove', makeMouseEvent(0 + i, 30));
 		});
-		click(map, makeMouseEvent(30, 30));
+		mouseClick(map, makeMouseEvent(30, 30));
 		repeat(20, (i) => {
 			map.fire('mousemove', makeMouseEvent(30, 30 - i));
 		});
-		click(map, makeMouseEvent(30, 0));
-		click(map, makeMouseEvent(30, 0));
+		mouseClick(map, makeMouseEvent(30, 0));
+		mouseClick(map, makeMouseEvent(30, 0));
 
 		await afterNextRender();
 
@@ -574,7 +574,7 @@ test('ensure user interactions fire right events', async (t) => {
 
 	await t.test('deselect the polygon', async () => {
 		// Now in `simple_select` mode ...
-		click(map, makeMouseEvent(-10, -10));
+		mouseClick(map, makeMouseEvent(-10, -10));
 
 		await afterNextRender();
 
@@ -671,7 +671,7 @@ test('ensure user interactions fire right events', async (t) => {
 
 	await t.test('deselect both', async () => {
 		// Now in `simple_select` mode ...
-		click(map, makeMouseEvent(-10, -10));
+		mouseClick(map, makeMouseEvent(-10, -10));
 
 		await afterNextRender();
 
@@ -688,7 +688,7 @@ test('ensure user interactions fire right events', async (t) => {
 
 	await t.test('select the polygon', async () => {
 		// Now in `simple_select` mode ...
-		click(map, makeMouseEvent(48, 0));
+		mouseClick(map, makeMouseEvent(48, 0));
 
 		await afterNextRender();
 
@@ -705,7 +705,7 @@ test('ensure user interactions fire right events', async (t) => {
 
 	await t.test('select a vertex', async () => {
 		// Now in `simple_select` mode ...
-		click(map, makeMouseEvent(20, -20));
+		mouseClick(map, makeMouseEvent(20, -20));
 
 		await afterNextRender();
 
@@ -736,7 +736,7 @@ test('ensure user interactions fire right events', async (t) => {
 
 	await t.test('add another vertex to the selection', async () => {
 		// Now in `simple_select` mode ...
-		click(map, makeMouseEvent(20, 10, { shiftKey: true }));
+		mouseClick(map, makeMouseEvent(20, 10, { shiftKey: true }));
 		await afterNextRender();
 		assert.deepEqual(
 			flushDrawEvents(),
@@ -807,7 +807,7 @@ test('ensure user interactions fire right events', async (t) => {
 	await t.test('add another vertex', async () => {
 		// Now in `direct_select` mode ...
 		// Click a midpoint
-		click(map, makeMouseEvent(25, 10));
+		mouseClick(map, makeMouseEvent(25, 10));
 
 		await afterNextRender();
 
@@ -842,8 +842,8 @@ test('ensure user interactions fire right events', async (t) => {
 		'select then delete two vertices with Draw.trash()',
 		async () => {
 			// Now in `direct_select` mode ...
-			click(map, makeMouseEvent(0, -20));
-			click(map, makeMouseEvent(25, 10, { shiftKey: true }));
+			mouseClick(map, makeMouseEvent(0, -20));
+			mouseClick(map, makeMouseEvent(25, 10, { shiftKey: true }));
 			Draw.trash();
 
 			await afterNextRender();
@@ -862,14 +862,14 @@ test('ensure user interactions fire right events', async (t) => {
 
 	await t.test('select the polygon', async () => {
 		// Deselect everything
-		click(map, makeMouseEvent(-200, -200));
+		mouseClick(map, makeMouseEvent(-200, -200));
 
 		await afterNextRender();
 
 		flushDrawEvents();
 		// Now in `simple_select` mode ...
 		// Click the polygon
-		click(map, makeMouseEvent(50, 10));
+		mouseClick(map, makeMouseEvent(50, 10));
 
 		await afterNextRender();
 
@@ -887,7 +887,7 @@ test('ensure user interactions fire right events', async (t) => {
 	await t.test('add the line to the selection', async () => {
 		// Now in `simple_select` mode ...
 		// shift-click to add to selection
-		click(map, makeMouseEvent(82, 22, { shiftKey: true }));
+		mouseClick(map, makeMouseEvent(82, 22, { shiftKey: true }));
 
 		await afterNextRender();
 
@@ -1011,8 +1011,8 @@ test('ensure user interactions fire right events', async (t) => {
 		async () => {
 			Draw.deleteAll();
 			Draw.changeMode('draw_line_string');
-			click(map, makeMouseEvent(240, 240));
-			click(map, makeMouseEvent(260, 260));
+			mouseClick(map, makeMouseEvent(240, 240));
+			mouseClick(map, makeMouseEvent(260, 260));
 			container.dispatchEvent(enterEvent);
 
 			await afterNextRender();
@@ -1055,8 +1055,8 @@ test('ensure user interactions fire right events', async (t) => {
 		async () => {
 			Draw.deleteAll();
 			Draw.changeMode('draw_line_string');
-			click(map, makeMouseEvent(0, 0));
-			click(map, makeMouseEvent(20, 20));
+			mouseClick(map, makeMouseEvent(0, 0));
+			mouseClick(map, makeMouseEvent(20, 20));
 			container.dispatchEvent(escapeEvent);
 
 			await afterNextRender();
@@ -1078,9 +1078,9 @@ test('ensure user interactions fire right events', async (t) => {
 		async () => {
 			Draw.deleteAll();
 			Draw.changeMode('draw_polygon');
-			click(map, makeMouseEvent(240, 240));
-			click(map, makeMouseEvent(260, 260));
-			click(map, makeMouseEvent(300, 200));
+			mouseClick(map, makeMouseEvent(240, 240));
+			mouseClick(map, makeMouseEvent(260, 260));
+			mouseClick(map, makeMouseEvent(300, 200));
 			container.dispatchEvent(enterEvent);
 
 			await afterNextRender();
@@ -1124,9 +1124,9 @@ test('ensure user interactions fire right events', async (t) => {
 	await t.test('start draw_polygon mode then exit with Escape', async () => {
 		Draw.deleteAll();
 		Draw.changeMode('draw_polygon');
-		click(map, makeMouseEvent(0, 0));
-		click(map, makeMouseEvent(20, 20));
-		click(map, makeMouseEvent(30, 30));
+		mouseClick(map, makeMouseEvent(0, 0));
+		mouseClick(map, makeMouseEvent(20, 20));
+		mouseClick(map, makeMouseEvent(30, 30));
 		container.dispatchEvent(escapeEvent);
 		await afterNextRender();
 
@@ -1144,8 +1144,8 @@ test('ensure user interactions fire right events', async (t) => {
 	await t.test('box selection includes no features', async () => {
 		Draw.deleteAll();
 		Draw.changeMode('simple_select');
-		click(map, makeMouseEvent(0, 0, { shiftKey: true }));
-		click(map, makeMouseEvent(100, 100, { shiftKey: true }));
+		mouseClick(map, makeMouseEvent(0, 0, { shiftKey: true }));
+		mouseClick(map, makeMouseEvent(100, 100, { shiftKey: true }));
 		await afterNextRender();
 		assert.deepEqual(flushDrawEvents(), [], 'no unexpected draw events');
 	});

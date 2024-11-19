@@ -1,6 +1,6 @@
-import click from './mouse_click.ts';
+import {mouseClick} from './mouse_click.ts';
 import { setupAfterNextRender } from './after_next_render.ts';
-import makeMouseEvent from './make_mouse_event.ts';
+import {makeMouseEvent} from './make_mouse_event.ts';
 
 /**
  * Draws a feature on a map.
@@ -22,7 +22,7 @@ export async function drawGeometry(map, draw, type, coordinates) {
 	if (type === 'LineString') drawCoordinates = coordinates;
 
 	for (const point of drawCoordinates) {
-		click(map, makeMouseEvent(point[0], point[1], false));
+		mouseClick(map, makeMouseEvent(point[0], point[1], false));
 		await afterNextRender();
 	}
 }
