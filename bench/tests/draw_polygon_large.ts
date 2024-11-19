@@ -1,6 +1,6 @@
 'use strict';
 
-import Evented from '../lib/evented.ts';
+import {Evented} from '../lib/evented.ts';
 import formatNumber from '../lib/format_number';
 import fpsRunner from '../lib/fps.ts';
 import DrawMouse from '../lib/mouse_draw.ts';

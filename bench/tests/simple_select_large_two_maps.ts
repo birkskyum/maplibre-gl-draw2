@@ -1,6 +1,6 @@
 'use strict';
 
-import Evented from '../lib/evented.ts';
+import {Evented} from '../lib/evented.ts';
 import SouthAmerica from '../fixtures/south-america.json';
 import formatNumber from '../lib/format_number';
 import fpsRunner from '../lib/fps.ts';

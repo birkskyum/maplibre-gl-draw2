@@ -1,4 +1,4 @@
-export default class Evented {
+export class Evented {
 
 	_listeners: any[] = [];
 
