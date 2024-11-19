@@ -1,5 +1,6 @@
 import area from '@mapbox/geojson-area';
 import * as Constants from '../constants.ts';
+import type { Feature } from 'geojson';
 
 const FEATURE_SORT_RANKS = {
 	Point: 0,
@@ -20,7 +21,7 @@ function comparator(a, b) {
 }
 
 // Sort in the order above, then sort polygons by area ascending.
-export function sortFeatures(features) {
+export function sortFeatures(features: Feature[]) {
 	return features
 		.map((feature) => {
 			if (feature.geometry.type === Constants.geojsonTypes.POLYGON) {
