@@ -6,15 +6,17 @@ import * as lib from './src/lib/index.ts';
 import { DrawEvents } from './src/events.ts';
 import Store from './src/store.ts';
 import ui from './src/ui.ts';
+import UI from './src/ui.ts';
+import Api from './src/api.ts';
 
 export class DrawContext {
 	options: any;
-	api?: any;
+	api?: Api;
 	map?: any;
-	events?: any;
-	ui?: any;
+	events?: DrawEvents;
+	ui?: UI;
 	container?: any;
-	store?: any;
+	store?: Store;
 
 	constructor(options: any) {
 		this.options = setupOptions(options);
