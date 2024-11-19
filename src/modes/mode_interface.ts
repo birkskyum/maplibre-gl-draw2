@@ -1,5 +1,4 @@
-import { ModeInterface } from './mode_interface_accessors.ts';
-export { ModeInterface };
+import { ModeInterfaceAccessors } from './mode_interface_accessors.ts';
 
 /**
  * Triggered while a mode is being transitioned into.
@@ -7,7 +6,7 @@ export { ModeInterface };
  * @name MODE.onSetup
  * @returns {Object} - this object will be passed to all other life cycle functions
  */
-class Mode extends ModeInterface {
+export default class ModeInterface extends ModeInterfaceAccessors {
 	onSetup() {}
 
 	/**
@@ -146,5 +145,3 @@ class Mode extends ModeInterface {
 		throw new Error('You must overwrite toDisplayFeatures');
 	}
 }
-
-export default Mode;

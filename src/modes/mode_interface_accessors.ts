@@ -5,7 +5,7 @@ import LineString from '../feature_types/line_string.ts';
 import Polygon from '../feature_types/polygon.ts';
 import MultiFeature from '../feature_types/multi_feature.ts';
 
-export class ModeInterface {
+export class ModeInterfaceAccessors {
 	protected map: any;
 	protected drawConfig: any;
 	protected _ctx: any;
