@@ -142,8 +142,7 @@ export class DrawApi {
 	public getAll(): FeatureCollection {
 		return {
 			type: Constants.geojsonTypes.FEATURE_COLLECTION,
-			features: this.ctx.store
-				.getAll()
+			features: this.ctx.store?.getAll()
 				.map((feature: any) => feature.toGeoJSON()),
 		};
 	}
