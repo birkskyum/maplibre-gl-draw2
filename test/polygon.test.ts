@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { spy } from 'sinon';
-import Feature from '../src/feature_types/feature.ts';
+import {DrawFeature} from '../src/feature_types/feature.ts';
 import Polygon from '../src/feature_types/polygon.ts';
 import MapLibreDraw from '../index.ts';
 import createFeature from './utils/create_feature.ts';
@@ -90,7 +90,7 @@ test('Polygon constructor and API', () => {
 		'no unexpected prototype members',
 	);
 
-	assert.ok(Polygon.prototype instanceof Feature, 'inherits from Feature');
+	assert.ok(Polygon.prototype instanceof DrawFeature, 'inherits from Feature');
 });
 
 test('Polygon#isValid', () => {

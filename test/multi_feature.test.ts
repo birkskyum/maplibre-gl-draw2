@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { spy } from 'sinon';
-import Feature from '../src/feature_types/feature.ts';
+import {DrawFeature} from '../src/feature_types/feature.ts';
 import Point from '../src/feature_types/point.ts';
 import Polygon from '../src/feature_types/polygon.ts';
 import LineString from '../src/feature_types/line_string.ts';
@@ -10,7 +10,7 @@ import createMockCtx from './utils/create_mock_feature_context.ts';
 import getPublicMemberKeys from './utils/get_public_member_keys.ts';
 
 test('MultiPoint via MultiFeature', () => {
-	assert.ok(MultiFeature.prototype instanceof Feature, 'inherits from Feature');
+	assert.ok(MultiFeature.prototype instanceof DrawFeature, 'inherits from Feature');
 
 	// Prototype members
 	assert.equal(

@@ -1,10 +1,10 @@
 import featuresAt from './features_at.ts';
 import * as Constants from '../constants.ts';
-import Feature from '../feature_types/feature.ts';
+import {DrawFeature} from '../feature_types/feature.ts';
 
 export default function getFeatureAtAndSetCursors(event, ctx) {
-	const features: Feature[] = featuresAt.click(event, null, ctx);
-	const classes: { mouse: string; feature?: Feature } = {
+	const features: DrawFeature[] = featuresAt.click(event, null, ctx);
+	const classes: { mouse: string; feature?: DrawFeature } = {
 		mouse: Constants.cursors.NONE,
 	};
 

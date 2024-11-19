@@ -2,7 +2,7 @@ import hat from 'hat';
 import * as Constants from '../constants.ts';
 import type { DrawContext } from '../../index.ts';
 
-class Feature {
+export class DrawFeature {
 	ctx: DrawContext;
 	properties: Record<string, any>;
 	coordinates?: any[];
@@ -81,5 +81,3 @@ class Feature {
 		};
 	}
 }
-
-export default Feature;

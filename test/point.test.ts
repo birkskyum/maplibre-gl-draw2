@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { spy } from 'sinon';
-import Feature from '../src/feature_types/feature.ts';
+import {DrawFeature} from '../src/feature_types/feature.ts';
 import Point from '../src/feature_types/point.ts';
 import MapLibreDraw from '../index.ts';
 import createFeature from './utils/create_feature.ts';
@@ -49,7 +49,7 @@ test('Point constructor and API', () => {
 		'no unexpected prototype members',
 	);
 
-	assert.ok(Point.prototype instanceof Feature, 'inherits from Feature');
+	assert.ok(Point.prototype instanceof DrawFeature, 'inherits from Feature');
 });
 
 test('Point#isValid', () => {

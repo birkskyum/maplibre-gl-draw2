@@ -9,8 +9,14 @@ import * as Constants from '../constants.ts';
 import type { BBox, GeoJSON } from 'geojson';
 import { DrawStore } from '../store.ts';
 import type { MapLibreDrawOptions } from '../options.ts';
-import Feature from '../feature_types/feature.ts';
+import {DrawFeature} from '../feature_types/feature.ts';
 
+
+type DrawActionableState = {
+	trash?: boolean;
+	combineFeatures?: boolean;
+	uncombineFeatures?: boolean;
+}
 
 export class ModeInterfaceAccessors {
 	protected map: MapLibre;
@@ -38,7 +44,7 @@ export class ModeInterfaceAccessors {
 		}, {});
 	}
 
-	getSelected(): Feature[] {
+	getSelected(): DrawFeature[] {
 		return this._ctx.store?.getSelected() ?? [];
 	}
 
@@ -50,7 +56,7 @@ export class ModeInterfaceAccessors {
 		return this._ctx.store?.isSelected(id) ?? false;
 	}
 
-	getFeature(id: string): Feature {
+	getFeature(id: string): DrawFeature {
 		return this._ctx.store?.get(id);
 	}
 
@@ -109,7 +115,7 @@ export class ModeInterfaceAccessors {
 		return featuresAt[bufferType](event, bbox, this._ctx);
 	}
 
-	newFeature(geojson: GeoJSON): Feature {
+	newFeature(geojson: GeoJSON): DrawFeature {
 		
 
 		const type = geojson.geometry.type;

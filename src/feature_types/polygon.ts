@@ -1,6 +1,6 @@
-import Feature from './feature.ts';
+import {DrawFeature} from './feature.ts';
 
-class Polygon extends Feature {
+class Polygon extends DrawFeature {
 	coordinates: GeoJSON.Position[][] = super.getCoordinates();
 
 	constructor(ctx, geojson: GeoJSON.Feature<GeoJSON.Polygon>) {

@@ -1,5 +1,5 @@
 import hat from 'hat';
-import Feature from './feature.ts';
+import {DrawFeature} from './feature.ts';
 import * as Constants from '../constants.ts';
 
 import MultiPoint from './point.ts';
@@ -19,9 +19,9 @@ const takeAction = (features, action, path, lng?: number, lat?: number) => {
 	return features[idx][action](tail, lng, lat);
 };
 
-class MultiFeature extends Feature {
+class MultiFeature extends DrawFeature {
 	private model;
-	private features: Feature[];
+	private features: DrawFeature[];
 
 	constructor(ctx, geojson) {
 		super(ctx, geojson);

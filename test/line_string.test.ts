@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { spy } from 'sinon';
-import Feature from '../src/feature_types/feature.ts';
+import {DrawFeature} from '../src/feature_types/feature.ts';
 import LineString from '../src/feature_types/line_string.ts';
 import MapLibreDraw from '../index.ts';
 import createFeature from './utils/create_feature.ts';
@@ -67,7 +67,7 @@ test('LineString constructor and API', () => {
 		'no unexpected prototype members',
 	);
 
-	assert.ok(LineString.prototype instanceof Feature, 'inherits from Feature');
+	assert.ok(LineString.prototype instanceof DrawFeature, 'inherits from Feature');
 });
 
 test('LineString#isValid', () => {
