@@ -4,8 +4,8 @@ import {DrawUI} from './ui.ts';
 import * as Constants from './constants.ts';
 
 export default function (ctx) {
-	let controlContainer = null;
-	let mapLoadedInterval = null;
+	let controlContainer;
+	let mapLoadedInterval: NodeJS.Timer;
 
 	const setup = {
 		onRemove() {
