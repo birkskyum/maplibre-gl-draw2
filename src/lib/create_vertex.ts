@@ -12,7 +12,7 @@ import * as Constants from '../constants.ts';
  * @return {GeoJSON} Point
  */
 
-export default function (parentId, coordinates, path, selected) {
+export function createVertex (parentId: string, coordinates: Array<number>, path: string, selected: boolean) {
 	return {
 		type: Constants.geojsonTypes.FEATURE,
 		properties: {

@@ -2,7 +2,7 @@ import * as CommonSelectors from './common_selectors.ts';
 import constrainFeatureMovement from './constrain_feature_movement.ts';
 import createMidPoint from './create_midpoint.ts';
 import createSupplementaryPoints from './create_supplementary_points.ts';
-import createVertex from './create_vertex.ts';
+import {createVertex} from './create_vertex.ts';
 import doubleClickZoom from './double_click_zoom.ts';
 import euclideanDistance from './euclidean_distance.ts';
 import featuresAt from './features_at.ts';
