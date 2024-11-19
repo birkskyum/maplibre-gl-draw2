@@ -12,7 +12,7 @@ import isEventAtCoordinates from './is_event_at_coordinates.ts';
 import isTap from './is_tap.ts';
 import mapEventToBoundingBox from './map_event_to_bounding_box.ts';
 import ModeHandler from './mode_handler.ts';
-import moveFeatures from './move_features.ts';
+import {moveFeatures} from './move_features.ts';
 import sortFeatures from './sort_features.ts';
 import StringSet from './string_set.ts';
 import {stringSetsAreEqual} from './string_sets_are_equal.ts';

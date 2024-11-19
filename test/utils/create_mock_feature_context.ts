@@ -6,7 +6,7 @@ import { spy } from 'sinon';
  *
  * @return {Object}
  */
-export default function createMockFeatureContext(
+export function createMockFeatureContext(
 	opts = { userProperties: false },
 ) {
 	return {

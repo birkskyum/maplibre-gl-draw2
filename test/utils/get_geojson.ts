@@ -231,6 +231,6 @@ const features = {
 	},
 };
 
-export default function getGeoJSON(type) {
+export function getGeoJSON(type) {
 	return JSON.parse(JSON.stringify(features[type]));
 }
