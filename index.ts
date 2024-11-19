@@ -8,12 +8,12 @@ import Store from './src/store.ts';
 import ui from './src/ui.ts';
 import UI from './src/ui.ts';
 import Api from './src/api.ts';
-import type {Map as MLMap} from 'maplibre-gl';
+import type {Map as MapLibreMap} from 'maplibre-gl';
 
 export class DrawContext {
 	options: any;
 	api?: Api;
-	map?: MLMap;
+	map?: MapLibreMap;
 	events?: DrawEvents;
 	ui?: UI;
 	container?: any;
