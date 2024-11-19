@@ -39,7 +39,7 @@ export default function (ctx) {
 		onAdd(map) {
 			ctx.map = map;
 			ctx.events = new DrawEvents(ctx);
-			ctx.ui = ui(ctx);
+			ctx.ui = new ui(ctx);
 			ctx.container = map.getContainer();
 			ctx.store = new Store(ctx);
 

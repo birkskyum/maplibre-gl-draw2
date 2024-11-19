@@ -43,7 +43,7 @@ function getButtons(div) {
 
 test('ui container classes', async (t) => {
 	const { context, cleanup } = createMockContext();
-	const testUi = ui(context);
+	const testUi = new ui(context);
 
 	assert.equal(
 		context.container.className,
@@ -158,7 +158,7 @@ test('ui container classes', async (t) => {
 
 test('ui buttons with no options.controls', () => {
 	const { context, cleanup } = createMockContext();
-	const testUi = ui(context);
+	const testUi = new ui(context);
 
 	const div = testUi.addButtons();
 	assert.deepEqual(getButtons(div), [], 'still no buttons');
@@ -174,7 +174,7 @@ test('ui buttons with one options.controls', () => {
 		},
 	});
 	/* eslint-enable */
-	const testUi = ui(context);
+	const testUi = new ui(context);
 
 	const div = testUi.addButtons();
 	const buttons = getButtons(div);
@@ -199,7 +199,7 @@ test('ui buttons control group container inserted above attribution control, in 
 	});
 
 	const controlContainer = getControlContainer();
-	const testUi = ui(context);
+	const testUi = new ui(context);
 
 	assert.equal(
 		controlContainer.getElementsByClassName('maplibregl-ctrl-group').length,
@@ -224,7 +224,7 @@ test('ui buttons with all options.controls, no attribution control', async (t) =
 		},
 	});
 	/* eslint-enable */
-	const testUi = ui(context);
+	const testUi = new ui(context);
 
 	const controlGroup = testUi.addButtons();
 	const buttons = getButtons(controlGroup);
