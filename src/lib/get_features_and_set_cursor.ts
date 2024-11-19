@@ -1,8 +1,14 @@
 import {featuresAt} from './features_at.ts';
 import * as Constants from '../constants.ts';
 import { Feat } from '../feature_types/feature.ts';
+import type { MapMouseEvent } from 'maplibre-gl';
+import { DrawContext } from '../../index.ts';
+import type { Feature } from 'geojson';
 
-export function getFeatureAtAndSetCursors(event, ctx) {
+export function getFeatureAtAndSetCursors(
+	event: MapMouseEvent,
+	ctx: DrawContext,
+): Feature {
 	const features: Feat[] = featuresAt.click(event, null, ctx);
 	const classes: { mouse: string; feature?: Feat } = {
 		mouse: Constants.cursors.NONE,
@@ -16,12 +22,12 @@ export function getFeatureAtAndSetCursors(event, ctx) {
 		classes.feature = features[0].properties.meta;
 	}
 
-	if (ctx.events.currentModeName.indexOf('draw') !== -1) {
+	if (ctx.events?.currentModeName?.indexOf('draw') !== -1) {
 		classes.mouse = Constants.cursors.ADD;
 	}
 
-	ctx.ui.queueMapClasses(classes);
-	ctx.ui.updateMapClasses();
+	ctx.ui?.queueMapClasses(classes);
+	ctx.ui?.updateMapClasses();
 
 	return features[0];
 }

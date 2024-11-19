@@ -2,6 +2,10 @@ import {sortFeatures} from './sort_features.ts';
 import {mapEventToBoundingBox} from './map_event_to_bounding_box.ts';
 import * as Constants from '../constants.ts';
 import {StringSet} from './string_set.ts';
+import type { Feature } from 'geojson';
+import { DrawContext } from '../../index.ts';
+import type { BBox } from 'geojson';
+import type { MapMouseEvent, MapTouchEvent } from 'maplibre-gl';
 
 const META_TYPES = [
 	Constants.meta.FEATURE,
@@ -15,15 +19,21 @@ export const featuresAt = {
 	touch: featuresAtTouch,
 };
 
-function featuresAtClick(event, bbox, ctx) {
+function featuresAtClick(
+	event: MapMouseEvent,
+	bbox: BBox,
+	ctx: DrawContext,
+): Feature[] {
 	return featuresAtHandler(event, bbox, ctx, ctx.options.clickBuffer);
 }
 
-function featuresAtTouch(event, bbox, ctx) {
+function featuresAtTouch(event: MapTouchEvent,
+	bbox: BBox,
+	ctx: DrawContext): Feature[] {
 	return featuresAtHandler(event, bbox, ctx, ctx.options.touchBuffer);
 }
 
-function featuresAtHandler(event, bbox, ctx, buffer) {
+function featuresAtHandler(event, bbox: BBox, ctx: DrawContext, buffer: number) {
 	if (ctx.map === null) return [];
 
 	const box = event ? mapEventToBoundingBox(event, buffer) : bbox;
