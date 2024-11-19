@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { spy } from 'sinon';
 
-import Store from '../src/store.ts';
+import {DrawStore} from '../src/store.ts';
 import createFeature from './utils/create_feature.ts';
 import getPublicMemberKeys from './utils/get_public_member_keys.ts';
 import createMap from './utils/create_map.ts';
@@ -15,18 +15,18 @@ function createStore() {
 		},
 	};
 
-	return new Store(ctx);
+	return new DrawStore(ctx);
 }
 
 test('Store has correct properties', () => {
-	assert.ok(Store, 'store exists');
-	assert.ok(typeof Store === 'function', 'store is a function');
+	assert.ok(DrawStore, 'store exists');
+	assert.ok(typeof DrawStore === 'function', 'store is a function');
 });
 
 test('Store constructor and public API', () => {
 	const map = createMap();
 	const ctx = { map };
-	const store = new Store(ctx);
+	const store = new DrawStore(ctx);
 
 	// instance members
 	assert.deepEqual(
@@ -50,120 +50,120 @@ test('Store constructor and public API', () => {
 
 	// prototype members
 	assert.equal(
-		typeof Store.prototype.setDirty,
+		typeof DrawStore.prototype.setDirty,
 		'function',
 		'exposes store.setDirty',
 	);
 	assert.equal(
-		typeof Store.prototype.createRenderBatch,
+		typeof DrawStore.prototype.createRenderBatch,
 		'function',
 		'exposes store.createRenderBatch',
 	);
 	assert.equal(
-		typeof Store.prototype.featureChanged,
+		typeof DrawStore.prototype.featureChanged,
 		'function',
 		'exposes store.featureChanged',
 	);
 	assert.equal(
-		typeof Store.prototype.getChangedIds,
+		typeof DrawStore.prototype.getChangedIds,
 		'function',
 		'exposes store.getChangedIds',
 	);
 	assert.equal(
-		typeof Store.prototype.clearChangedIds,
+		typeof DrawStore.prototype.clearChangedIds,
 		'function',
 		'exposes store.clearChangedIds',
 	);
 	assert.equal(
-		typeof Store.prototype.getAllIds,
+		typeof DrawStore.prototype.getAllIds,
 		'function',
 		'exposes store.getAllIds',
 	);
-	assert.equal(typeof Store.prototype.add, 'function', 'exposes store.add');
-	assert.equal(typeof Store.prototype.get, 'function', 'exposes store.get');
+	assert.equal(typeof DrawStore.prototype.add, 'function', 'exposes store.add');
+	assert.equal(typeof DrawStore.prototype.get, 'function', 'exposes store.get');
 	assert.equal(
-		typeof Store.prototype.getAll,
+		typeof DrawStore.prototype.getAll,
 		'function',
 		'exposes store.getAll',
 	);
 	assert.equal(
-		typeof Store.prototype.select,
+		typeof DrawStore.prototype.select,
 		'function',
 		'exposes store.select',
 	);
 	assert.equal(
-		typeof Store.prototype.deselect,
+		typeof DrawStore.prototype.deselect,
 		'function',
 		'exposes store.deselect',
 	);
 	assert.equal(
-		typeof Store.prototype.clearSelected,
+		typeof DrawStore.prototype.clearSelected,
 		'function',
 		'exposes store.clearSelected',
 	);
 	assert.equal(
-		typeof Store.prototype.getSelectedIds,
+		typeof DrawStore.prototype.getSelectedIds,
 		'function',
 		'exposes store.getSelectedIds',
 	);
 	assert.equal(
-		typeof Store.prototype.getSelected,
+		typeof DrawStore.prototype.getSelected,
 		'function',
 		'exposes store.getSelected',
 	);
 	assert.equal(
-		typeof Store.prototype.isSelected,
+		typeof DrawStore.prototype.isSelected,
 		'function',
 		'exposes store.isSelected',
 	);
 	assert.equal(
-		typeof Store.prototype.delete,
+		typeof DrawStore.prototype.delete,
 		'function',
 		'exposes store.delete',
 	);
 	assert.equal(
-		typeof Store.prototype.setSelected,
+		typeof DrawStore.prototype.setSelected,
 		'function',
 		'exposes store.setSelected',
 	);
 	assert.equal(
-		typeof Store.prototype.setSelectedCoordinates,
+		typeof DrawStore.prototype.setSelectedCoordinates,
 		'function',
 		'exposes store.setSelectedCoordinates',
 	);
 	assert.equal(
-		typeof Store.prototype.getSelectedCoordinates,
+		typeof DrawStore.prototype.getSelectedCoordinates,
 		'function',
 		'exposes store.getSelectedCoordinates',
 	);
 	assert.equal(
-		typeof Store.prototype.clearSelectedCoordinates,
+		typeof DrawStore.prototype.clearSelectedCoordinates,
 		'function',
 		'exposes store.clearSelectedCoordinates',
 	);
 	assert.equal(
-		typeof Store.prototype.setFeatureProperty,
+		typeof DrawStore.prototype.setFeatureProperty,
 		'function',
 		'exposes store.setFeatureProperty',
 	);
 	assert.equal(
-		typeof Store.prototype.storeMapConfig,
+		typeof DrawStore.prototype.storeMapConfig,
 		'function',
 		'exposes store.storeMapConfig',
 	);
 	assert.equal(
-		typeof Store.prototype.restoreMapConfig,
+		typeof DrawStore.prototype.restoreMapConfig,
 		'function',
 		'exposes store.restoreMapConfig',
 	);
 	assert.equal(
-		typeof Store.prototype.getInitialConfigValue,
+		typeof DrawStore.prototype.getInitialConfigValue,
 		'function',
 		'exposes store.getInitialConfigValue',
 	);
 
 	assert.equal(
-		Object.getOwnPropertyNames(Store.prototype).length,
+		Object.getOwnPropertyNames(DrawStore.prototype).length,
 		26,
 		'no untested prototype members',
 	);
@@ -385,7 +385,7 @@ test('Store#storeAndRestoreMapConfig', () => {
 		'Disables doubleClickZoom on the map',
 	);
 	const ctx = { map };
-	const store = new Store(ctx);
+	const store = new DrawStore(ctx);
 	store.storeMapConfig();
 	// Check we can get the initial state of it
 	assert.equal(

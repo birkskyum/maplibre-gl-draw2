@@ -3,7 +3,7 @@ import { ALL_MODES } from './src/modes/index.ts';
 import * as Constants from './src/constants.ts';
 import * as lib from './src/lib/index.ts';
 import { DrawEvents } from './src/events.ts';
-import DrawStore from './src/store.ts';
+import {DrawStore} from './src/store.ts';
 import {DrawUI} from './src/ui.ts';
 import {DrawApi} from './src/api.ts';
 import type {Map as MapLibreMap} from 'maplibre-gl';

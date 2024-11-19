@@ -4,7 +4,7 @@ import render from './render.ts';
 import * as Constants from './constants.ts';
 import type { DrawContext } from '../index.ts';
 
-export default class Store {
+export class DrawStore {
 	private _features: { [key: string]: any };
 	private _featureIds: StringSet;
 	private _selectedFeatureIds: StringSet;
