@@ -1,4 +1,4 @@
-import {DrawEvents} from './events.ts';
+import { DrawEvents } from './events.ts';
 import Store from './store.ts';
 import ui from './ui.ts';
 import * as Constants from './constants.ts';

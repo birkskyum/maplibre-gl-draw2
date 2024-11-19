@@ -58,10 +58,12 @@ export class DrawEvents {
 	}
 
 	public handleDrag(event: any, isDrag: Function): void {
-		if (isDrag({
-			point: event.point,
-			time: new Date().getTime(),
-		})) {
+		if (
+			isDrag({
+				point: event.point,
+				time: new Date().getTime(),
+			})
+		) {
 			this.ctx.ui.queueMapClasses({ mouse: Constants.cursors.DRAG });
 			this.currentMode.drag(event);
 		} else {
@@ -70,15 +72,24 @@ export class DrawEvents {
 	}
 
 	public handleMouseDrag(event: any): void {
-		this.events.drag(event, (endInfo: EventInfo) => !isClick(this.mouseDownInfo, endInfo));
+		this.events.drag(
+			event,
+			(endInfo: EventInfo) => !isClick(this.mouseDownInfo, endInfo),
+		);
 	}
 
 	public handleTouchDrag(event: any): void {
-		this.events.drag(event, (endInfo: EventInfo) => !isTap(this.touchStartInfo, endInfo));
+		this.events.drag(
+			event,
+			(endInfo: EventInfo) => !isTap(this.touchStartInfo, endInfo),
+		);
 	}
 
 	public handleMouseMove(event: any): void {
-		const button = event.originalEvent.buttons !== undefined ? event.originalEvent.buttons : event.originalEvent.which;
+		const button =
+			event.originalEvent.buttons !== undefined
+				? event.originalEvent.buttons
+				: event.originalEvent.which;
 		if (button === 1) {
 			return this.events.mousedrag(event);
 		}
@@ -101,7 +112,12 @@ export class DrawEvents {
 		const target = getFeaturesAndSetCursor(event, this.ctx);
 		event.featureTarget = target;
 
-		if (isClick(this.mouseDownInfo, { point: event.point, time: new Date().getTime() })) {
+		if (
+			isClick(this.mouseDownInfo, {
+				point: event.point,
+				time: new Date().getTime(),
+			})
+		) {
 			this.currentMode.click(event);
 		} else {
 			this.currentMode.mouseup(event);
@@ -136,7 +152,12 @@ export class DrawEvents {
 
 		const target = featuresAt.touch(event, null, this.ctx)[0];
 		event.featureTarget = target;
-		if (isTap(this.touchStartInfo, { time: new Date().getTime(), point: event.point })) {
+		if (
+			isTap(this.touchStartInfo, {
+				time: new Date().getTime(),
+				point: event.point,
+			})
+		) {
 			this.currentMode.tap(event);
 		} else {
 			this.currentMode.touchend(event);
@@ -144,10 +165,15 @@ export class DrawEvents {
 	}
 
 	public handleKeyDown(event: any): void {
-		const isMapElement = (event.srcElement || event.target).classList.contains(Constants.classes.CANVAS);
+		const isMapElement = (event.srcElement || event.target).classList.contains(
+			Constants.classes.CANVAS,
+		);
 		if (!isMapElement) return;
 
-		if ((event.keyCode === 8 || event.keyCode === 46) && this.ctx.options.controls.trash) {
+		if (
+			(event.keyCode === 8 || event.keyCode === 46) &&
+			this.ctx.options.controls.trash
+		) {
 			event.preventDefault();
 			this.currentMode.trash();
 		} else if (this.isKeyModeValid(event.keyCode)) {
@@ -174,7 +200,9 @@ export class DrawEvents {
 	public handleData(event: any): void {
 		if (event.dataType === 'style') {
 			const { setup, map, options, store } = this.ctx;
-			const hasLayers = options.styles.some((style: any) => map.getLayer(style.id));
+			const hasLayers = options.styles.some((style: any) =>
+				map.getLayer(style.id),
+			);
 			if (!hasLayers) {
 				setup.addLayers();
 				store.setDirty();
@@ -186,7 +214,11 @@ export class DrawEvents {
 	public isKeyModeValid(code: number): boolean {
 		return !(code === 8 || code === 46 || (code >= 48 && code <= 57));
 	}
-	private changeMode(modename: string, nextModeOptions?: any, eventOptions: any = {}): void {
+	private changeMode(
+		modename: string,
+		nextModeOptions?: any,
+		eventOptions: any = {},
+	): void {
 		this.currentMode.stop();
 
 		const modebuilder = this.modes[modename];
@@ -211,19 +243,28 @@ export class DrawEvents {
 			if (this.actionState[action as keyof ActionState] === undefined) {
 				throw new Error('Invalid action type');
 			}
-			if (this.actionState[action as keyof ActionState] !== actions[action as keyof ActionState]) {
+			if (
+				this.actionState[action as keyof ActionState] !==
+				actions[action as keyof ActionState]
+			) {
 				changed = true;
 			}
-			this.actionState[action as keyof ActionState] = actions[action as keyof ActionState]!;
+			this.actionState[action as keyof ActionState] =
+				actions[action as keyof ActionState]!;
 		});
 		if (changed) {
-			this.ctx.map.fire(Constants.events.ACTIONABLE, { actions: this.actionState });
+			this.ctx.map.fire(Constants.events.ACTIONABLE, {
+				actions: this.actionState,
+			});
 		}
 	}
 
 	public start(): void {
 		this.currentModeName = this.ctx.options.defaultMode;
-		this.currentMode = setupModeHandler(this.modes[this.currentModeName](this.ctx), this.ctx);
+		this.currentMode = setupModeHandler(
+			this.modes[this.currentModeName](this.ctx),
+			this.ctx,
+		);
 	}
 
 	public getMode(): string | null {

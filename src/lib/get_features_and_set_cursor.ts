@@ -4,7 +4,9 @@ import Feature from '../feature_types/feature.ts';
 
 export default function getFeatureAtAndSetCursors(event, ctx) {
 	const features: Feature[] = featuresAt.click(event, null, ctx);
-	const classes: { mouse: string; feature?: Feature } = { mouse: Constants.cursors.NONE };
+	const classes: { mouse: string; feature?: Feature } = {
+		mouse: Constants.cursors.NONE,
+	};
 
 	if (features[0]) {
 		classes.mouse =

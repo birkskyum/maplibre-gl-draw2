@@ -1,7 +1,6 @@
 import Feature from './feature.ts';
 
 class LineString extends Feature {
-	
 	coordinates: GeoJSON.Position[];
 
 	constructor(ctx, geojson: GeoJSON.Feature<GeoJSON.LineString>) {

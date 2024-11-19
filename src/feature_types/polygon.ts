@@ -25,14 +25,14 @@ class Polygon extends Feature {
 		this.changed();
 	}
 
-	addCoordinate(path: string, lng:number, lat:number) {
+	addCoordinate(path: string, lng: number, lat: number) {
 		this.changed();
 		const ids = path.split('.').map((x) => parseInt(x, 10));
 		const ring = this.coordinates[ids[0]];
 		ring.splice(ids[1], 0, [lng, lat]);
 	}
 
-	removeCoordinate(path:string) {
+	removeCoordinate(path: string) {
 		this.changed();
 		const ids = path.split('.').map((x) => parseInt(x, 10));
 		const ring = this.coordinates[ids[0]];
@@ -44,7 +44,7 @@ class Polygon extends Feature {
 		}
 	}
 
-	getCoordinate(path:string) {
+	getCoordinate(path: string) {
 		const ids = path.split('.').map((x) => parseInt(x, 10));
 		const ring = this.coordinates[ids[0]];
 		return JSON.parse(JSON.stringify(ring[ids[1]]));
@@ -54,7 +54,7 @@ class Polygon extends Feature {
 		return this.coordinates.map((coords) => coords.concat([coords[0]]));
 	}
 
-	updateCoordinate(path: string, lng:number, lat:number) {
+	updateCoordinate(path: string, lng: number, lat: number) {
 		this.changed();
 		const parts = path.split('.');
 		const ringId = parseInt(parts[0], 10);

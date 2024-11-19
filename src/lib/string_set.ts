@@ -8,7 +8,7 @@ class StringSet {
 		this._nums = {};
 		this._length = items ? items.length : 0;
 		if (!items) return;
-		
+
 		for (let i = 0, l = items.length; i < l; i++) {
 			this.add(items[i]);
 			if (items[i] === undefined) continue;
@@ -39,7 +39,7 @@ class StringSet {
 	}
 
 	values(): (string | number)[] {
-		const values: {k:string, v:number}[] = [];
+		const values: { k: string; v: number }[] = [];
 		Object.keys(this._items).forEach((k) => {
 			values.push({ k, v: this._items[k] });
 		});

@@ -1,7 +1,6 @@
 import Feature from './feature.ts';
 
 class Point extends Feature {
-
 	coordinates: GeoJSON.Position;
 
 	constructor(ctx: any, geojson: GeoJSON.Feature<GeoJSON.Point>) {
@@ -16,7 +15,7 @@ class Point extends Feature {
 		);
 	}
 
-	updateCoordinate(pathOrLng: number | string, lngOrLat: number, lat?:number) {
+	updateCoordinate(pathOrLng: number | string, lngOrLat: number, lat?: number) {
 		if (lat) {
 			this.coordinates = [lngOrLat as number, lat];
 		} else {

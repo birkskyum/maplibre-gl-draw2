@@ -19,7 +19,7 @@ const featureTypes = {
 	MultiLineString: MultiFeature,
 	MultiPoint: MultiFeature,
 };
- 
+
 export default class Api {
 	public ctx: any;
 	public modes: typeof Constants.modes;
@@ -51,14 +51,16 @@ export default class Api {
 	public getSelectedPoints() {
 		return {
 			type: Constants.geojsonTypes.FEATURE_COLLECTION,
-			features: this.ctx.store.getSelectedCoordinates().map((coordinate: any) => ({
-				type: Constants.geojsonTypes.FEATURE,
-				properties: {},
-				geometry: {
-					type: Constants.geojsonTypes.POINT,
-					coordinates: coordinate.coordinates,
-				},
-			})),
+			features: this.ctx.store
+				.getSelectedCoordinates()
+				.map((coordinate: any) => ({
+					type: Constants.geojsonTypes.FEATURE,
+					properties: {},
+					geometry: {
+						type: Constants.geojsonTypes.POINT,
+						coordinates: coordinate.coordinates,
+					},
+				})),
 		};
 	}
 
@@ -98,7 +100,8 @@ export default class Api {
 				this.ctx.store.get(feature.id) === undefined ||
 				this.ctx.store.get(feature.id).type !== feature.geometry.type
 			) {
-				const Model = featureTypes[feature.geometry.type as keyof typeof featureTypes];
+				const Model =
+					featureTypes[feature.geometry.type as keyof typeof featureTypes];
 				if (Model === undefined) {
 					throw new Error(`Invalid geometry type: ${feature.geometry.type}.`);
 				}
@@ -111,7 +114,12 @@ export default class Api {
 				if (!isEqual(originalProperties, feature.properties)) {
 					this.ctx.store.featureChanged(internalFeature.id);
 				}
-				if (!isEqual(internalFeature.getCoordinates(), feature.geometry.coordinates)) {
+				if (
+					!isEqual(
+						internalFeature.getCoordinates(),
+						feature.geometry.coordinates,
+					)
+				) {
 					internalFeature.incomingCoords(feature.geometry.coordinates);
 				}
 			}
@@ -132,7 +140,9 @@ export default class Api {
 	public getAll() {
 		return {
 			type: Constants.geojsonTypes.FEATURE_COLLECTION,
-			features: this.ctx.store.getAll().map((feature: any) => feature.toGeoJSON()),
+			features: this.ctx.store
+				.getAll()
+				.map((feature: any) => feature.toGeoJSON()),
 		};
 	}
 
@@ -168,7 +178,12 @@ export default class Api {
 			mode === Constants.modes.SIMPLE_SELECT &&
 			this.getMode() === Constants.modes.SIMPLE_SELECT
 		) {
-			if (stringSetsAreEqual(modeOptions.featureIds || [], this.ctx.store.getSelectedIds()))
+			if (
+				stringSetsAreEqual(
+					modeOptions.featureIds || [],
+					this.ctx.store.getSelectedIds(),
+				)
+			)
 				return this;
 			this.ctx.store.setSelected(modeOptions.featureIds, { silent: true });
 			this.ctx.store.render();
@@ -206,7 +221,11 @@ export default class Api {
 		return this;
 	}
 
-	public setFeatureProperty(featureId: string, property: string, value: any): this {
+	public setFeatureProperty(
+		featureId: string,
+		property: string,
+		value: any,
+	): this {
 		this.ctx.store.setFeatureProperty(featureId, property, value);
 		return this;
 	}

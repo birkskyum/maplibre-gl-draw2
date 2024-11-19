@@ -42,7 +42,9 @@ export default class Store {
 					// Fire deduplicated selection change event
 					if (this._emitSelectionChange) {
 						this.ctx.events.fire(Constants.events.SELECTION_CHANGE, {
-							features: this.getSelected().map((feature) => feature.toGeoJSON()),
+							features: this.getSelected().map((feature) =>
+								feature.toGeoJSON(),
+							),
 							points: this.getSelectedCoordinates().map((coordinate) => ({
 								type: Constants.geojsonTypes.FEATURE,
 								properties: {},
@@ -167,11 +169,16 @@ export default class Store {
 	}
 
 	clearSelected(options: { silent?: boolean } = {}) {
-		this.deselect(this._selectedFeatureIds.values(), { silent: options.silent });
+		this.deselect(this._selectedFeatureIds.values(), {
+			silent: options.silent,
+		});
 		return this;
 	}
 
-	setSelected(featureIds: string | string[] | undefined, options: { silent?: boolean } = {}) {
+	setSelected(
+		featureIds: string | string[] | undefined,
+		options: { silent?: boolean } = {},
+	) {
 		featureIds = toDenseArray(featureIds);
 
 		this.deselect(

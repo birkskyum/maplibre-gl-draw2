@@ -3,13 +3,12 @@ import * as Constants from './constants.ts';
 type CLASS_TYPE = 'mode' | 'feature' | 'mouse';
 const classTypes: CLASS_TYPE[] = ['mode', 'feature', 'mouse'];
 
-
 const controls: Record<string, boolean> = {
 	line_string: true,
-	point :true,
+	point: true,
 	polygon: true,
 	trash: true,
-} 
+};
 export default class UI {
 	private buttonElements: Record<string, HTMLButtonElement> = {};
 	private activeButton: HTMLButtonElement | null = null;
@@ -35,7 +34,11 @@ export default class UI {
 		this.updateMapClasses();
 	}
 
-	queueMapClasses(options: {mode?: string | null; feature?: string | null; mouse?: string | null}) {
+	queueMapClasses(options: {
+		mode?: string | null;
+		feature?: string | null;
+		mouse?: string | null;
+	}) {
 		this.nextMapClasses = Object.assign(this.nextMapClasses, options);
 	}
 
@@ -62,37 +65,47 @@ export default class UI {
 			this.ctx.container.classList.add(...classesToAdd);
 		}
 
-		this.currentMapClasses = Object.assign(this.currentMapClasses, this.nextMapClasses);
+		this.currentMapClasses = Object.assign(
+			this.currentMapClasses,
+			this.nextMapClasses,
+		);
 	}
 
-	private createControlButton(id: string, options: {
-		className?: string; 
-		title: string; 
-		container: HTMLElement; 
-		onActivate: () => void; 
-		onDeactivate?: () => void
-	}) {
+	private createControlButton(
+		id: string,
+		options: {
+			className?: string;
+			title: string;
+			container: HTMLElement;
+			onActivate: () => void;
+			onDeactivate?: () => void;
+		},
+	) {
 		const button = document.createElement('button');
 		button.className = `${Constants.classes.CONTROL_BUTTON} ${options.className}`;
 		button.setAttribute('title', options.title);
 		options.container.appendChild(button);
 
-		button.addEventListener('click', (e) => {
-			e.preventDefault();
-			e.stopPropagation();
+		button.addEventListener(
+			'click',
+			(e) => {
+				e.preventDefault();
+				e.stopPropagation();
 
-			const clickedButton = e.target;
-			if (clickedButton === this.activeButton) {
-				this.deactivateButtons();
-				if (options.onDeactivate) {
-					options.onDeactivate();
+				const clickedButton = e.target;
+				if (clickedButton === this.activeButton) {
+					this.deactivateButtons();
+					if (options.onDeactivate) {
+						options.onDeactivate();
+					}
+					return;
 				}
-				return;
-			}
 
-			this.setActiveButton(id);
-			options.onActivate();
-		}, true);
+				this.setActiveButton(id);
+				options.onActivate();
+			},
+			true,
+		);
 
 		return button;
 	}
@@ -129,9 +142,10 @@ export default class UI {
 					container: controlGroup,
 					className: Constants.classes.CONTROL_BUTTON_LINE,
 					title: `LineString tool ${this.ctx.options.keybindings ? '(l)' : ''}`,
-					onActivate: () => this.ctx.events.changeMode(Constants.modes.DRAW_LINE_STRING),
+					onActivate: () =>
+						this.ctx.events.changeMode(Constants.modes.DRAW_LINE_STRING),
 					onDeactivate: () => this.ctx.events.trash(),
-				}
+				},
 			);
 		}
 
@@ -142,9 +156,10 @@ export default class UI {
 					container: controlGroup,
 					className: Constants.classes.CONTROL_BUTTON_POLYGON,
 					title: `Polygon tool ${this.ctx.options.keybindings ? '(p)' : ''}`,
-					onActivate: () => this.ctx.events.changeMode(Constants.modes.DRAW_POLYGON),
+					onActivate: () =>
+						this.ctx.events.changeMode(Constants.modes.DRAW_POLYGON),
 					onDeactivate: () => this.ctx.events.trash(),
-				}
+				},
 			);
 		}
 
@@ -155,9 +170,10 @@ export default class UI {
 					container: controlGroup,
 					className: Constants.classes.CONTROL_BUTTON_POINT,
 					title: `Marker tool ${this.ctx.options.keybindings ? '(m)' : ''}`,
-					onActivate: () => this.ctx.events.changeMode(Constants.modes.DRAW_POINT),
+					onActivate: () =>
+						this.ctx.events.changeMode(Constants.modes.DRAW_POINT),
 					onDeactivate: () => this.ctx.events.trash(),
-				}
+				},
 			);
 		}
 
@@ -173,14 +189,17 @@ export default class UI {
 		}
 
 		if (controls.combine_features) {
-			this.buttonElements.combine_features = this.createControlButton('combineFeatures', {
-				container: controlGroup,
-				className: Constants.classes.CONTROL_BUTTON_COMBINE_FEATURES,
-				title: 'Combine',
-				onActivate: () => {
-					this.ctx.events.combineFeatures();
+			this.buttonElements.combine_features = this.createControlButton(
+				'combineFeatures',
+				{
+					container: controlGroup,
+					className: Constants.classes.CONTROL_BUTTON_COMBINE_FEATURES,
+					title: 'Combine',
+					onActivate: () => {
+						this.ctx.events.combineFeatures();
+					},
 				},
-			});
+			);
 		}
 
 		if (controls.uncombine_features) {
@@ -193,7 +212,7 @@ export default class UI {
 					onActivate: () => {
 						this.ctx.events.uncombineFeatures();
 					},
-				}
+				},
 			);
 		}
 

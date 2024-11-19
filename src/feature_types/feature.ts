@@ -50,8 +50,8 @@ class Feature {
 				geometry: {
 					coordinates: this.getCoordinates(),
 					type: this.type,
-				}
-			})
+				},
+			}),
 		);
 	}
 
@@ -61,7 +61,7 @@ class Feature {
 			meta: Constants.meta.FEATURE,
 			'meta:type': this.type,
 			active: Constants.activeStates.INACTIVE,
-			mode
+			mode,
 		};
 
 		if (this.ctx.options.userProperties) {
@@ -75,8 +75,8 @@ class Feature {
 			properties,
 			geometry: {
 				coordinates: this.getCoordinates(),
-				type: this.type
-			}
+				type: this.type,
+			},
 		};
 	}
 }

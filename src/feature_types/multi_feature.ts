@@ -75,12 +75,12 @@ class MultiFeature extends Feature {
 		);
 	}
 
-	updateCoordinate(path: string, lng:number, lat:number) {
+	updateCoordinate(path: string, lng: number, lat: number) {
 		takeAction(this.features, 'updateCoordinate', path, lng, lat);
 		this.changed();
 	}
 
-	addCoordinate(path: string, lng:number, lat:number) {
+	addCoordinate(path: string, lng: number, lat: number) {
 		takeAction(this.features, 'addCoordinate', path, lng, lat);
 		this.changed();
 	}

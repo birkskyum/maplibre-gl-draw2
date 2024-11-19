@@ -25,7 +25,7 @@ function sortFeatures(features) {
 		.map((feature) => {
 			if (feature.geometry.type === Constants.geojsonTypes.POLYGON) {
 				feature.area = area.geometry({
-					type: Constants.geojsonTypes.POLYGON as "Polygon",
+					type: Constants.geojsonTypes.POLYGON as 'Polygon',
 					coordinates: feature.geometry.coordinates,
 				});
 			}

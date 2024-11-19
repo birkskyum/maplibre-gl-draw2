@@ -67,7 +67,7 @@ function createSupplementaryPoints(geojson, options = {}, basePath = null) {
 		});
 	}
 
-	function isSelectedPath(path:string) {
+	function isSelectedPath(path: string) {
 		if (!options.selectedPaths) return false;
 		return options.selectedPaths.indexOf(path) !== -1;
 	}
