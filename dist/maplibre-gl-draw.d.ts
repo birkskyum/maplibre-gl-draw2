@@ -418,11 +418,6 @@ declare namespace MapLibreDraw {
 
 	
 		StringSet(items?: Array<string | number>): StringSet;
-
-		/**
-		 * Derive a dense array (no `undefined`s) from a single value or array.
-		 */
-		toDenseArray(x: any): Array<NonNullable<any>>;
 	}
 
 }

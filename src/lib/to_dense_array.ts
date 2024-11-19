@@ -4,8 +4,7 @@
  * @param {any} x
  * @return {Array<any>}
  */
-function toDenseArray(x) {
+export function toDenseArray(x: any): Array<NonNullable<any>>{
 	return [].concat(x).filter((y) => y !== undefined);
 }
 
-export default toDenseArray;

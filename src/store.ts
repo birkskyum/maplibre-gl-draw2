@@ -1,4 +1,4 @@
-import toDenseArray from './lib/to_dense_array.ts';
+import {toDenseArray} from './lib/to_dense_array.ts';
 import StringSet from './lib/string_set.ts';
 import render from './render.ts';
 import * as Constants from './constants.ts';

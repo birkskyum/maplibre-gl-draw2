@@ -17,7 +17,7 @@ import sortFeatures from './sort_features.ts';
 import StringSet from './string_set.ts';
 import {stringSetsAreEqual} from './string_sets_are_equal.ts';
 import theme from './theme.ts';
-import toDenseArray from './to_dense_array.ts';
+import {toDenseArray} from './to_dense_array.ts';
 
 export {
 	CommonSelectors,
