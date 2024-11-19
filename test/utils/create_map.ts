@@ -111,6 +111,6 @@ class MockMap extends Evented {
 	}
 }
 
-export default function createMap(mapOptions) {
+export  function createMap(mapOptions) {
 	return new MockMap(mapOptions);
 }

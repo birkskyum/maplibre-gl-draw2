@@ -5,7 +5,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { fileURLToPath } from 'url';
 
-import MapLibreDraw from '../index.ts';
+import {MapLibreDraw} from '../index.ts';
 import {ALL_MODES} from '../src/modes/index.ts';
 
 const __dirname = fileURLToPath(new URL('.', import.meta.url));

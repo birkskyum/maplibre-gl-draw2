@@ -22,7 +22,7 @@ export class DrawContext {
 	}
 }
 
-class MapLibreDraw implements IControl {
+export class MapLibreDraw implements IControl {
 	static readonly modes = ALL_MODES;
 	static readonly constants = Constants;
 	static readonly lib = lib;
@@ -151,5 +151,3 @@ class MapLibreDraw implements IControl {
 		return this.setupApi;
 	}
 }
-
-export default MapLibreDraw;

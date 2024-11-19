@@ -1,4 +1,4 @@
-// import MapLibreDraw, {
+// import {MapLibreDraw}, {
 // 	constants,
 // 	DrawCustomMode,
 // 	DrawEvent,

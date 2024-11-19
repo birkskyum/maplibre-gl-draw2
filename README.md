@@ -24,7 +24,7 @@ Draw ships with CSS, make sure you include it in your build.
 
 ```js
 import maplibregl from 'maplibre-gl';
-import MapLibreDraw from "@birkskyum/maplibre-gl-draw";
+import {MapLibreDraw} from "@birkskyum/maplibre-gl-draw";
 ```
 
 **When using a CDN**

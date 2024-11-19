@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import createMap from './utils/create_map.ts';
+import {createMap} from './utils/create_map.ts';
 import createSupplementaryPoints from '../src/lib/create_supplementary_points.ts';
 
 test('createSupplementaryPoints with a point', () => {
