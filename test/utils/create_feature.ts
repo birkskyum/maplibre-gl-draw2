@@ -1,12 +1,11 @@
-import hat from 'hat';
+import { nanoid } from 'nanoid';
 import { getGeoJSON } from './get_geojson.ts';
 
-const hatRack = hat.rack();
 
 export function createFeature(featureType) {
 	const feature = Object.assign(
 		{
-			id: hatRack(),
+			id: nanoid(),
 			properties: {},
 		},
 		getGeoJSON(featureType),

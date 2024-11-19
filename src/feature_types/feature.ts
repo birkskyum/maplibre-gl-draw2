@@ -1,4 +1,4 @@
-import hat from 'hat';
+import { nanoid } from 'nanoid';
 import * as Constants from '../constants.ts';
 import type { DrawContext } from '../../index.ts';
 
@@ -13,7 +13,7 @@ export class Feat {
 		this.ctx = ctx;
 		this.properties = geojson.properties || {};
 		this.coordinates = geojson.geometry.coordinates;
-		this.id = geojson.id || hat();
+		this.id = geojson.id || nanoid();
 		this.type = geojson.geometry.type;
 	}
 

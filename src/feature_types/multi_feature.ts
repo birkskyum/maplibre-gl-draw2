@@ -1,4 +1,4 @@
-import hat from 'hat';
+import { nanoid } from 'nanoid';
 import { Feat } from './feature.ts';
 import * as Constants from '../constants.ts';
 
@@ -39,7 +39,7 @@ class MultiFeature extends Feat {
 		return coordinates.map(
 			(coords) =>
 				new Model(this.ctx, {
-					id: hat(),
+					id: nanoid(),
 					type: Constants.geojsonTypes.FEATURE,
 					properties: {},
 					geometry: {

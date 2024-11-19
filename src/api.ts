@@ -1,6 +1,6 @@
 import isEqual from 'fast-deep-equal';
 import normalize from '@mapbox/geojson-normalize';
-import hat from 'hat';
+import { nanoid } from 'nanoid';
 import featuresAt from './lib/features_at.ts';
 import { stringSetsAreEqual } from './lib/string_sets_are_equal.ts';
 import * as Constants from './constants.ts';
@@ -92,7 +92,7 @@ export class DrawApi {
 		const featureCollection = JSON.parse(JSON.stringify(normalize(geojson)));
 
 		const ids = featureCollection.features.map((feature: any) => {
-			feature.id = feature.id || hat();
+			feature.id = feature.id || nanoid();
 
 			if (feature.geometry === null) {
 				throw new Error('Invalid geometry: null');
