@@ -1,17 +1,22 @@
 import {createVertex} from './create_vertex.ts';
 import createMidpoint from './create_midpoint.ts';
 import * as Constants from '../constants.ts';
+import type { Point, Feature } from 'geojson';
 
-function createSupplementaryPoints(geojson, options = {}, basePath = null) {
+function createSupplementaryPoints(
+			geojson: Feature,
+			options: { midpoints?: boolean; selectedPaths?: string[] } = {},
+			basePath: string|null = null,
+		): Array<Feature<Point>>{
 	const { type, coordinates } = geojson.geometry;
 	const featureId = geojson.properties && geojson.properties.id;
 
-	let supplementaryPoints = [];
+	let supplementaryPoints: any[] = [];
 
 	if (type === Constants.geojsonTypes.POINT) {
 		// For points, just create a vertex
 		supplementaryPoints.push(
-			createVertex(featureId, coordinates, basePath, isSelectedPath(basePath)),
+			createVertex(featureId, coordinates, basePath!, isSelectedPath(basePath!)),
 		);
 	} else if (type === Constants.geojsonTypes.POLYGON) {
 		// Cycle through a Polygon's rings and
