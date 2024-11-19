@@ -9,7 +9,7 @@ test('mapEventToBoundingBox', () => {
 				x: 1,
 				y: 2,
 			},
-		}),
+		}, 0),
 		[
 			[1, 2],
 			[1, 2],

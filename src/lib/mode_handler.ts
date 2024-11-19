@@ -1,4 +1,6 @@
-export const ModeHandler = function (mode, DrawContext) {
+import { DrawContext } from "../../index.ts";
+
+export const ModeHandler = function (mode: any, DrawContext: DrawContext) {
 	const handlers = {
 		drag: [],
 		click: [],
