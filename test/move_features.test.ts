@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import getGeoJSON from './utils/get_geojson.ts';
 import createMockFeatureContext from './utils/create_mock_feature_context.ts';
 import {PointFeat} from '../src/feature_types/point.ts';
-import {LineString} from '../src/feature_types/line_string.ts';
+import {LineStringFeat} from '../src/feature_types/line_string.ts';
 import {PolygonFeat} from '../src/feature_types/polygon.ts';
 import moveFeatures from '../src/lib/move_features.ts';
 
@@ -31,7 +31,7 @@ test('moveFeatures point beyond south limit', () => {
 });
 
 test('moveFeatures line', () => {
-	const line = new LineString(mockFeatureContext, getGeoJSON('line'));
+	const line = new LineStringFeat(mockFeatureContext, getGeoJSON('line'));
 	line.setCoordinates([
 		[10, 15],
 		[-10, -30],
@@ -46,7 +46,7 @@ test('moveFeatures line', () => {
 });
 
 test('moveFeatures line beyond north limit', () => {
-	const line = new LineString(mockFeatureContext, getGeoJSON('line'));
+	const line = new LineStringFeat(mockFeatureContext, getGeoJSON('line'));
 	line.setCoordinates([
 		[10, 15],
 		[-10, -30],
@@ -65,7 +65,7 @@ test('moveFeatures line beyond north limit', () => {
 });
 
 test('moveFeatures line beyond south pole', () => {
-	const line = new LineString(mockFeatureContext, getGeoJSON('line'));
+	const line = new LineStringFeat(mockFeatureContext, getGeoJSON('line'));
 	line.setCoordinates([
 		[10, 15],
 		[-10, -30],
@@ -160,7 +160,7 @@ test('moveFeatures polygon beyond south pole', () => {
 test('moveFeatures multiple features', () => {
 	const point = new PointFeat(mockFeatureContext, getGeoJSON('point'));
 	point.setCoordinates([10, 20]);
-	const line = new LineString(mockFeatureContext, getGeoJSON('line'));
+	const line = new LineStringFeat(mockFeatureContext, getGeoJSON('line'));
 	line.setCoordinates([
 		[10, 15],
 		[-10, -30],
@@ -204,7 +204,7 @@ test('moveFeatures multiple features', () => {
 test('moveFeatures multiple features beyond north limit', () => {
 	const point = new PointFeat(mockFeatureContext, getGeoJSON('point'));
 	point.setCoordinates([10, 45]);
-	const line = new LineString(mockFeatureContext, getGeoJSON('line'));
+	const line = new LineStringFeat(mockFeatureContext, getGeoJSON('line'));
 	line.setCoordinates([
 		[10, 15],
 		[-10, -30],
@@ -248,7 +248,7 @@ test('moveFeatures multiple features beyond north limit', () => {
 test('moveFeatures multiple features beyond south limit', () => {
 	const point = new PointFeat(mockFeatureContext, getGeoJSON('point'));
 	point.setCoordinates([10, 20]);
-	const line = new LineString(mockFeatureContext, getGeoJSON('line'));
+	const line = new LineStringFeat(mockFeatureContext, getGeoJSON('line'));
 	line.setCoordinates([
 		[10, 15],
 		[-10, -30],

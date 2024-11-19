@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { spy } from 'sinon';
 import {DrawFeature} from '../src/feature_types/feature.ts';
-import {LineString} from '../src/feature_types/line_string.ts';
+import {LineStringFeat} from '../src/feature_types/line_string.ts';
 import MapLibreDraw from '../index.ts';
 import createFeature from './utils/create_feature.ts';
 import getPublicMemberKeys from './utils/get_public_member_keys.ts';
@@ -13,7 +13,7 @@ import createMap from './utils/create_map.ts';
 test('LineString constructor and API', () => {
 	const rawLine = createFeature('line');
 	const ctx = createMockCtx();
-	const lineString = new LineString(ctx, rawLine);
+	const lineString = new LineStringFeat(ctx, rawLine);
 
 	// Instance members
 	assert.equal(lineString.ctx, ctx, 'lineString.ctx');
@@ -37,47 +37,47 @@ test('LineString constructor and API', () => {
 
 	// Prototype members
 	assert.equal(
-		typeof LineString.prototype.isValid,
+		typeof LineStringFeat.prototype.isValid,
 		'function',
 		'lineString.isValid',
 	);
 	assert.equal(
-		typeof LineString.prototype.addCoordinate,
+		typeof LineStringFeat.prototype.addCoordinate,
 		'function',
 		'lineString.addCoordinate',
 	);
 	assert.equal(
-		typeof LineString.prototype.getCoordinate,
+		typeof LineStringFeat.prototype.getCoordinate,
 		'function',
 		'lineString.getCoordinate',
 	);
 	assert.equal(
-		typeof LineString.prototype.removeCoordinate,
+		typeof LineStringFeat.prototype.removeCoordinate,
 		'function',
 		'lineString.removeCoordinate',
 	);
 	assert.equal(
-		typeof LineString.prototype.updateCoordinate,
+		typeof LineStringFeat.prototype.updateCoordinate,
 		'function',
 		'lineString.updateCoordinate',
 	);
 	assert.equal(
-		Object.getOwnPropertyNames(LineString.prototype).length,
+		Object.getOwnPropertyNames(LineStringFeat.prototype).length,
 		6,
 		'no unexpected prototype members',
 	);
 
-	assert.ok(LineString.prototype instanceof DrawFeature, 'inherits from Feature');
+	assert.ok(LineStringFeat.prototype instanceof DrawFeature, 'inherits from Feature');
 });
 
 test('LineString#isValid', () => {
 	const validRawLine = createFeature('line');
-	const validLineString = new LineString(createMockCtx(), validRawLine);
+	const validLineString = new LineStringFeat(createMockCtx(), validRawLine);
 	assert.equal(validLineString.isValid(), true, 'returns true when valid');
 
 	const invalidRawLineA = createFeature('line');
 	invalidRawLineA.geometry.coordinates = [3];
-	const invalidLineStringA = new LineString(createMockCtx(), invalidRawLineA);
+	const invalidLineStringA = new LineStringFeat(createMockCtx(), invalidRawLineA);
 	assert.equal(
 		invalidLineStringA.isValid(),
 		false,
@@ -86,7 +86,7 @@ test('LineString#isValid', () => {
 
 	const invalidRawLineB = createFeature('line');
 	invalidRawLineB.geometry.coordinates = [];
-	const invalidLineStringB = new LineString(createMockCtx(), invalidRawLineB);
+	const invalidLineStringB = new LineStringFeat(createMockCtx(), invalidRawLineB);
 	assert.equal(
 		invalidLineStringB.isValid(),
 		false,
@@ -100,7 +100,7 @@ test('LineString#addCoordinate', () => {
 		[1, 2],
 		[3, 4],
 	];
-	const lineString = new LineString(createMockCtx(), rawLine);
+	const lineString = new LineStringFeat(createMockCtx(), rawLine);
 	const changedSpy = spy(lineString, 'changed');
 
 	lineString.addCoordinate(1, 5, 6);
@@ -134,7 +134,7 @@ test('LineString#getCoordinate', () => {
 		[1, 2],
 		[3, 4],
 	];
-	const lineString = new LineString(createMockCtx(), rawLine);
+	const lineString = new LineStringFeat(createMockCtx(), rawLine);
 
 	assert.deepEqual(lineString.getCoordinate(0), [1, 2], 'number path works');
 	assert.deepEqual(lineString.getCoordinate('1'), [3, 4], 'string path works');
@@ -146,7 +146,7 @@ test('LineString#removeCoordinate', () => {
 		[1, 2],
 		[3, 4],
 	];
-	const lineString = new LineString(createMockCtx(), rawLine);
+	const lineString = new LineStringFeat(createMockCtx(), rawLine);
 	const changedSpy = spy(lineString, 'changed');
 
 	lineString.removeCoordinate(1);
@@ -165,7 +165,7 @@ test('LineString#updateCoordinate', () => {
 		[3, 4],
 		[5, 6],
 	];
-	const lineString = new LineString(createMockCtx(), rawLine);
+	const lineString = new LineStringFeat(createMockCtx(), rawLine);
 	const changedSpy = spy(lineString, 'changed');
 
 	lineString.updateCoordinate(1, 7, 8);

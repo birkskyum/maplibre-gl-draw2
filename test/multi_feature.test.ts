@@ -4,7 +4,7 @@ import { spy } from 'sinon';
 import {DrawFeature} from '../src/feature_types/feature.ts';
 import {PointFeat} from '../src/feature_types/point.ts';
 import {PolygonFeat} from '../src/feature_types/polygon.ts';
-import {LineString} from '../src/feature_types/line_string.ts';
+import {LineStringFeat} from '../src/feature_types/line_string.ts';
 import MultiFeature from '../src/feature_types/multi_feature.ts';
 import createMockCtx from './utils/create_mock_feature_context.ts';
 import getPublicMemberKeys from './utils/get_public_member_keys.ts';
@@ -334,7 +334,7 @@ test('MultiLineString via MultiFeature', () => {
 
 	assert.deepEqual(
 		lineStringA,
-		new LineString(ctx, {
+		new LineStringFeat(ctx, {
 			id: lineStringA.id,
 			type: 'Feature',
 			properties: {},
@@ -350,7 +350,7 @@ test('MultiLineString via MultiFeature', () => {
 	);
 	assert.deepEqual(
 		lineStringB,
-		new LineString(ctx, {
+		new LineStringFeat(ctx, {
 			id: lineStringB.id,
 			type: 'Feature',
 			properties: {},

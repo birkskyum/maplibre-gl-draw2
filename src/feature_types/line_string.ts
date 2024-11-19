@@ -1,6 +1,6 @@
 import {DrawFeature} from './feature.ts';
 
-export class LineString extends DrawFeature {
+export class LineStringFeat extends DrawFeature {
 	coordinates: GeoJSON.Position[];
 
 	constructor(ctx, geojson: GeoJSON.Feature<GeoJSON.LineString>) {

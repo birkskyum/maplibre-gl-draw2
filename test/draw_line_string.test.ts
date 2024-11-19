@@ -7,7 +7,7 @@ import createMap from './utils/create_map.ts';
 import makeMouseEvent from './utils/make_mouse_event.ts';
 import makeTouchEvent from './utils/make_touch_event.ts';
 import {DrawLineString} from '../src/modes/draw_line_string.ts';
-import {LineString} from '../src/feature_types/line_string.ts';
+import {LineStringFeat} from '../src/feature_types/line_string.ts';
 import createMockDrawModeContext from './utils/create_mock_draw_mode_context.ts';
 import createMockLifecycleContext from './utils/create_mock_lifecycle_context.ts';
 import objectToMode from '../src/modes/object_to_mode.ts';
@@ -31,7 +31,7 @@ test('draw_line_string mode initialization', () => {
 
 	assert.equal(context.store.add.callCount, 1, 'store.add called');
 
-	const emptyLine = new LineString(context, {
+	const emptyLine = new LineStringFeat(context, {
 		type: 'Feature',
 		properties: {},
 		geometry: {
@@ -747,7 +747,7 @@ test('draw_line_string continue LineString', () => {
 			coordinates: coordinates.slice(0),
 		},
 	};
-	const line = new LineString(context, geojson);
+	const line = new LineStringFeat(context, geojson);
 	context.store.add(line);
 	assert.throws(
 		() => drawLineStringMode(context, { featureId: 2 }).start(lifecycleContext),
