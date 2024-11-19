@@ -1,4 +1,4 @@
-import constrainFeatureMovement from './constrain_feature_movement.ts';
+import {constrainFeatureMovement} from './constrain_feature_movement.ts';
 import * as Constants from '../constants.ts';
 
 export function moveFeatures(features, delta) {

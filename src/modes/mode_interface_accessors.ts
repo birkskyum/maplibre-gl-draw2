@@ -2,7 +2,7 @@ import {featuresAt} from '../lib/features_at.ts';
 import { PointFeat } from '../feature_types/point.ts';
 import { LineStringFeat } from '../feature_types/line_string.ts';
 import { PolygonFeat } from '../feature_types/polygon.ts';
-import MultiFeature from '../feature_types/multi_feature.ts';
+import {MultiFeature} from '../feature_types/multi_feature.ts';
 import type { DrawContext } from '../../index.ts';
 import type { Map as MapLibre } from 'maplibre-gl';
 import * as Constants from '../constants.ts';

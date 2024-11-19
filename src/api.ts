@@ -9,7 +9,7 @@ import {StringSet} from './lib/string_set.ts';
 import { PolygonFeat } from './feature_types/polygon.ts';
 import { LineStringFeat } from './feature_types/line_string.ts';
 import { PointFeat } from './feature_types/point.ts';
-import MultiFeature from './feature_types/multi_feature.ts';
+import {MultiFeature} from './feature_types/multi_feature.ts';
 import type { DrawContext } from '../index.ts';
 import type { Feature, FeatureCollection, Geometry } from 'geojson';
 

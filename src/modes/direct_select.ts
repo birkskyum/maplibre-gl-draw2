@@ -6,7 +6,7 @@ import {
 	isShiftDown,
 } from '../lib/common_selectors.ts';
 import {createSupplementaryPoints} from '../lib/create_supplementary_points.ts';
-import constrainFeatureMovement from '../lib/constrain_feature_movement.ts';
+import {constrainFeatureMovement} from '../lib/constrain_feature_movement.ts';
 import {doubleClickZoom} from '../lib/double_click_zoom.ts';
 import * as Constants from '../constants.ts';
 import { moveFeatures } from '../lib/move_features.ts';

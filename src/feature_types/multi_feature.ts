@@ -19,7 +19,7 @@ const takeAction = (features, action, path, lng?: number, lat?: number) => {
 	return features[idx][action](tail, lng, lat);
 };
 
-class MultiFeature extends Feat {
+export class MultiFeature extends Feat {
 	private model;
 	private features: Feat[];
 
@@ -95,4 +95,3 @@ class MultiFeature extends Feat {
 	}
 }
 
-export default MultiFeature;
