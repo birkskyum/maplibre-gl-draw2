@@ -35,7 +35,7 @@ function createSupplementaryPoints(
 
 	function processLine(line, lineBasePath) {
 		let firstPointString = '';
-		let lastVertex = null;
+		let lastVertex;
 		line.forEach((point, pointIndex) => {
 			const pointPath =
 				lineBasePath !== undefined && lineBasePath !== null
