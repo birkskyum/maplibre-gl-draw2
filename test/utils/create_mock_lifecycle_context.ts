@@ -1,6 +1,6 @@
 import { spy } from 'sinon';
 
-export default function createMockLifecycleContext() {
+export function createMockLifecycleContext() {
 	return {
 		on: spy(),
 	};

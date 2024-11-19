@@ -1,6 +1,6 @@
 import { spy } from 'sinon';
 
-export default function createMockDrawModeContext() {
+export function createMockDrawModeContext() {
 	const _store = {};
 
 	const api = {

@@ -8,8 +8,8 @@ import {makeMouseEvent} from './utils/make_mouse_event.ts';
 import {makeTouchEvent} from './utils/make_touch_event.ts';
 import { DrawLineString } from '../src/modes/draw_line_string.ts';
 import { LineStringFeat } from '../src/feature_types/line_string.ts';
-import createMockDrawModeContext from './utils/create_mock_draw_mode_context.ts';
-import createMockLifecycleContext from './utils/create_mock_lifecycle_context.ts';
+import {createMockDrawModeContext} from './utils/create_mock_draw_mode_context.ts';
+import {createMockLifecycleContext} from './utils/create_mock_lifecycle_context.ts';
 import objectToMode from '../src/modes/object_to_mode.ts';
 import { setupAfterNextRender } from './utils/after_next_render.ts';
 
