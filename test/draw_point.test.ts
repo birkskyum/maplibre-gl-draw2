@@ -7,7 +7,7 @@ import createMap from './utils/create_map.ts';
 import makeMouseEvent from './utils/make_mouse_event.ts';
 import makeTouchEvent from './utils/make_touch_event.ts';
 import {DrawPointMode} from '../src/modes/draw_point.ts';
-import {DrawPoint} from '../src/feature_types/point.ts';
+import {PointFeat} from '../src/feature_types/point.ts';
 import createMockDrawModeContext from './utils/create_mock_draw_mode_context.ts';
 import createMockLifecycleContext from './utils/create_mock_lifecycle_context.ts';
 import { escapeEvent, enterEvent } from './utils/key_events.ts';
@@ -22,7 +22,7 @@ test('draw_point mode initialization', () => {
 
 	assert.equal(context.store.add.callCount, 1, 'store.add called');
 
-	const emptypoint = new DrawPoint(context, {
+	const emptypoint = new PointFeat(context, {
 		type: 'Feature',
 		properties: {},
 		geometry: {

@@ -1,7 +1,7 @@
 import type { DrawContext } from '../../index.ts';
 import {DrawFeature} from './feature.ts';
 
-export class DrawPoint extends DrawFeature {
+export class PointFeat extends DrawFeature {
 	coordinates: GeoJSON.Position;
 
 	constructor(ctx: DrawContext, geojson: GeoJSON.Feature<GeoJSON.Point>) {

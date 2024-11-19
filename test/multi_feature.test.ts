@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { spy } from 'sinon';
 import {DrawFeature} from '../src/feature_types/feature.ts';
-import {DrawPoint} from '../src/feature_types/point.ts';
+import {PointFeat} from '../src/feature_types/point.ts';
 import Polygon from '../src/feature_types/polygon.ts';
 import LineString from '../src/feature_types/line_string.ts';
 import MultiFeature from '../src/feature_types/multi_feature.ts';
@@ -106,7 +106,7 @@ test('MultiPoint', () => {
 
 	assert.deepEqual(
 		pointA,
-		new DrawPoint(ctx, {
+		new PointFeat(ctx, {
 			id: pointA.id,
 			type: 'Feature',
 			properties: {},
@@ -118,7 +118,7 @@ test('MultiPoint', () => {
 	);
 	assert.deepEqual(
 		pointB,
-		new DrawPoint(ctx, {
+		new PointFeat(ctx, {
 			id: pointB.id,
 			type: 'Feature',
 			properties: {},
@@ -130,7 +130,7 @@ test('MultiPoint', () => {
 	);
 	assert.deepEqual(
 		pointC,
-		new DrawPoint(ctx, {
+		new PointFeat(ctx, {
 			id: pointC.id,
 			type: 'Feature',
 			properties: {},
