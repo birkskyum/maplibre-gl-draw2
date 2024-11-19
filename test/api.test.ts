@@ -8,7 +8,7 @@ import MapLibreDraw from '../index.ts';
 import createMap from './utils/create_map.ts';
 import {getGeoJSON} from './utils/get_geojson.ts';
 import { setupAfterNextRender } from './utils/after_next_render.ts';
-import getPublicMemberKeys from './utils/get_public_member_keys.ts';
+import {getPublicMemberKeys} from './utils/get_public_member_keys.ts';
 
 let map;
 let afterNextRender;

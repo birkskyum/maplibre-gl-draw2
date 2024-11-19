@@ -5,7 +5,7 @@ import {DrawFeature} from '../src/feature_types/feature.ts';
 import {LineStringFeat} from '../src/feature_types/line_string.ts';
 import MapLibreDraw from '../index.ts';
 import {createFeature} from './utils/create_feature.ts';
-import getPublicMemberKeys from './utils/get_public_member_keys.ts';
+import {getPublicMemberKeys} from './utils/get_public_member_keys.ts';
 import {createMockFeatureContext} from './utils/create_mock_feature_context.ts';
 import { drawGeometry } from './utils/draw_geometry.ts';
 import createMap from './utils/create_map.ts';

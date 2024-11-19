@@ -5,6 +5,6 @@
  * @param {Object} instance
  * @return {Array<string>} Public members
  */
-export default function getPublicMemberKeys(instance) {
+export function getPublicMemberKeys(instance) {
 	return Object.keys(instance).filter((k) => k[0] !== '_');
 }

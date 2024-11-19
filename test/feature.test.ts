@@ -4,7 +4,7 @@ import assert from 'node:assert/strict';
 import { spy } from 'sinon';
 import {DrawFeature} from '../src/feature_types/feature.ts';
 import {createFeature} from './utils/create_feature.ts';
-import getPublicMemberKeys from './utils/get_public_member_keys.ts';
+import {getPublicMemberKeys} from './utils/get_public_member_keys.ts';
 import {createMockFeatureContext} from './utils/create_mock_feature_context.ts';
 
 test('Feature contrusctor and API', () => {
