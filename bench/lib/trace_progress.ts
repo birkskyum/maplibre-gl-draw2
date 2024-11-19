@@ -1,4 +1,4 @@
-export default function (features, map) {
+export function traceProgress (features, map) {
 	const sizes = [];
 	let total = 0;
 	for (const feature of features) {

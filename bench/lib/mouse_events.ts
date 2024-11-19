@@ -1,4 +1,4 @@
-export default function (map) {
+export function mouseEvents (map) {
 	const events = [];
 
 	events.push = function (event, point, dp) {

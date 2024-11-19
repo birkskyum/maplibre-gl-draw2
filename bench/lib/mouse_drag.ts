@@ -1,5 +1,5 @@
-import mouseEvents from './mouse_events';
-import mousePath from './mouse_path';
+import {mouseEvents} from './mouse_events';
+import {mousePath} from './mouse_path';
 
 export function DragMouse (start, map) {
 	const path = mousePath(start);

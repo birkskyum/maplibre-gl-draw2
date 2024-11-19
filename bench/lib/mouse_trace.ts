@@ -1,6 +1,6 @@
-import mouseEvents from './mouse_events';
+import {mouseEvents} from './mouse_events';
 
-export default function (ring, map) {
+export function TraceMouse (ring, map) {
 	const events = mouseEvents(map);
 
 	let lastPoint = null;

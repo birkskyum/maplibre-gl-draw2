@@ -17,7 +17,7 @@ const eventMapper = {
 
 const eventKeys = Object.keys(eventMapper);
 
-export default function (modeObject) {
+export function objectToMode(modeObject) {
 	const modeObjectKeys = Object.keys(modeObject);
 
 	return function (ctx, startOpts = {}) {

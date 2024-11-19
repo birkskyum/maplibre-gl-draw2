@@ -11,7 +11,7 @@ import { PolygonFeat } from '../src/feature_types/polygon.ts';
 import {createMockDrawModeContext} from './utils/create_mock_draw_mode_context.ts';
 import {createMockLifecycleContext} from './utils/create_mock_lifecycle_context.ts';
 import { setupAfterNextRender } from './utils/after_next_render.ts';
-import objectToMode from '../src/modes/object_to_mode.ts';
+import {objectToMode} from '../src/modes/object_to_mode.ts';
 const drawPolygonMode = objectToMode(DrawPolygon);
 
 import {

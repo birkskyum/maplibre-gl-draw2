@@ -1,7 +1,7 @@
-import mouseEvents from './mouse_events';
-import mousePath from './mouse_path';
+import {mouseEvents} from './mouse_events';
+import {mousePath} from './mouse_path';
 
-export default function (start, map) {
+export function DrawMouse (start, map) {
 	const path = mousePath(start);
 
 	const events = mouseEvents(map);

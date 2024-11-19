@@ -1,4 +1,4 @@
-export default function (start) {
+export function mousePath (start) {
 	const path = [];
 
 	for (let i = 0; i < 7; i += 0.04) {

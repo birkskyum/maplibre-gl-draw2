@@ -11,7 +11,7 @@ import { PointFeat } from '../src/feature_types/point.ts';
 import {createMockDrawModeContext} from './utils/create_mock_draw_mode_context.ts';
 import {createMockLifecycleContext} from './utils/create_mock_lifecycle_context.ts';
 import { escapeEvent, enterEvent } from './utils/key_events.ts';
-import objectToMode from '../src/modes/object_to_mode.ts';
+import {objectToMode} from '../src/modes/object_to_mode.ts';
 const drawPointMode = objectToMode(DrawPointMode);
 
 test('draw_point mode initialization', () => {
