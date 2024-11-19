@@ -4,6 +4,15 @@ import styles from './lib/theme.ts';
 import {ALL_MODES} from './modes/index.ts';
 
 
+interface MapLibreDrawControls {
+	point?: boolean | undefined;
+	line_string?: boolean | undefined;
+	polygon?: boolean | undefined;
+	trash?: boolean | undefined;
+	combine_features?: boolean | undefined;
+	uncombine_features?: boolean | undefined;
+}
+
 
 interface MapLibreDrawOptions {
 	displayControlsDefault?: boolean | undefined;
@@ -12,12 +21,13 @@ interface MapLibreDrawOptions {
 	boxSelect?: boolean | undefined;
 	clickBuffer?: number | undefined;
 	touchBuffer?: number | undefined;
-	controls?: any | undefined;
+	controls?: MapLibreDrawControls | undefined;
 	styles?: object[] | undefined;
 	modes?: { [modeKey: string]: any } | undefined;
 	defaultMode?: string | undefined;
 	userProperties?: boolean | undefined;
 }
+
 
 
 const defaultOptions: MapLibreDrawOptions = {
