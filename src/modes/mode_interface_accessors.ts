@@ -1,7 +1,7 @@
 import featuresAt from '../lib/features_at.ts';
 import {PointFeat} from '../feature_types/point.ts';
 import LineString from '../feature_types/line_string.ts';
-import Polygon from '../feature_types/polygon.ts';
+import {PolygonFeat} from '../feature_types/polygon.ts';
 import MultiFeature from '../feature_types/multi_feature.ts';
 import type { DrawContext } from '../../index.ts';
 import type { Map as MapLibre } from 'maplibre-gl';
@@ -124,7 +124,7 @@ export class ModeInterfaceAccessors {
 		if (type === Constants.geojsonTypes.LINE_STRING)
 			return new LineString(this._ctx, geojson);
 		if (type === Constants.geojsonTypes.POLYGON)
-			return new Polygon(this._ctx, geojson);
+			return new PolygonFeat(this._ctx, geojson);
 		return new MultiFeature(this._ctx, geojson);
 	}
 
@@ -133,7 +133,7 @@ export class ModeInterfaceAccessors {
 		if (type === Constants.geojsonTypes.LINE_STRING)
 			return feature instanceof LineString;
 		if (type === Constants.geojsonTypes.POLYGON)
-			return feature instanceof Polygon;
+			return feature instanceof PolygonFeat;
 		if (type === 'MultiFeature') return feature instanceof MultiFeature;
 		throw new Error(`Unknown feature class: ${type}`);
 	}

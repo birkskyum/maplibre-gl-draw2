@@ -6,7 +6,7 @@ import {stringSetsAreEqual} from './lib/string_sets_are_equal.ts';
 import * as Constants from './constants.ts';
 import StringSet from './lib/string_set.ts';
 
-import Polygon from './feature_types/polygon.ts';
+import {PolygonFeat} from './feature_types/polygon.ts';
 import LineString from './feature_types/line_string.ts';
 import {PointFeat} from './feature_types/point.ts';
 import MultiFeature from './feature_types/multi_feature.ts';
@@ -14,7 +14,7 @@ import type { DrawContext } from '../index.ts';
 import type { Feature, FeatureCollection, Geometry } from 'geojson';
 
 const featureTypes = {
-	Polygon,
+	Polygon: PolygonFeat,
 	LineString,
 	Point: PointFeat,
 	MultiPolygon: MultiFeature,

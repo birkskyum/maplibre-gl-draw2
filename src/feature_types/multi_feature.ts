@@ -4,12 +4,12 @@ import * as Constants from '../constants.ts';
 
 import {PointFeat} from './point.ts';
 import MultiLineString from './line_string.ts';
-import MultiPolygon from './polygon.ts';
+import {PolygonFeat} from './polygon.ts';
 
 const models = {
 	MultiPoint: PointFeat,
 	MultiLineString,
-	MultiPolygon,
+	MultiPolygon: PolygonFeat,
 };
 
 const takeAction = (features, action, path, lng?: number, lat?: number) => {

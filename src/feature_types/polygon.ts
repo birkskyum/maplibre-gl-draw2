@@ -1,6 +1,6 @@
 import {DrawFeature} from './feature.ts';
 
-class Polygon extends DrawFeature {
+export class PolygonFeat extends DrawFeature {
 	coordinates: GeoJSON.Position[][] = super.getCoordinates();
 
 	constructor(ctx, geojson: GeoJSON.Feature<GeoJSON.Polygon>) {
@@ -67,5 +67,3 @@ class Polygon extends DrawFeature {
 		this.coordinates[ringId][coordId] = [lng, lat];
 	}
 }
-
-export default Polygon;

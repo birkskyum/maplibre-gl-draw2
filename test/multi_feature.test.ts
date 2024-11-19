@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import { spy } from 'sinon';
 import {DrawFeature} from '../src/feature_types/feature.ts';
 import {PointFeat} from '../src/feature_types/point.ts';
-import Polygon from '../src/feature_types/polygon.ts';
+import {PolygonFeat} from '../src/feature_types/polygon.ts';
 import LineString from '../src/feature_types/line_string.ts';
 import MultiFeature from '../src/feature_types/multi_feature.ts';
 import createMockCtx from './utils/create_mock_feature_context.ts';
@@ -256,7 +256,7 @@ test('MultiPolygon via MultiFeature', () => {
 
 	assert.deepEqual(
 		polygonA,
-		new Polygon(ctx, {
+		new PolygonFeat(ctx, {
 			id: polygonA.id,
 			type: 'Feature',
 			properties: {},
@@ -276,7 +276,7 @@ test('MultiPolygon via MultiFeature', () => {
 	);
 	assert.deepEqual(
 		polygonB,
-		new Polygon(ctx, {
+		new PolygonFeat(ctx, {
 			id: polygonB.id,
 			type: 'Feature',
 			properties: {},

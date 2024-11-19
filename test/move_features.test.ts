@@ -4,7 +4,7 @@ import getGeoJSON from './utils/get_geojson.ts';
 import createMockFeatureContext from './utils/create_mock_feature_context.ts';
 import {PointFeat} from '../src/feature_types/point.ts';
 import LineString from '../src/feature_types/line_string.ts';
-import Polygon from '../src/feature_types/polygon.ts';
+import {PolygonFeat} from '../src/feature_types/polygon.ts';
 import moveFeatures from '../src/lib/move_features.ts';
 
 const mockFeatureContext = createMockFeatureContext();
@@ -84,7 +84,7 @@ test('moveFeatures line beyond south pole', () => {
 });
 
 test('moveFeatures polygon', () => {
-	const polygon = new Polygon(mockFeatureContext, getGeoJSON('polygon'));
+	const polygon = new PolygonFeat(mockFeatureContext, getGeoJSON('polygon'));
 	polygon.setCoordinates([
 		[
 			[0, 0],
@@ -106,7 +106,7 @@ test('moveFeatures polygon', () => {
 });
 
 test('moveFeatures polygon beyond north limit', () => {
-	const polygon = new Polygon(mockFeatureContext, getGeoJSON('polygon'));
+	const polygon = new PolygonFeat(mockFeatureContext, getGeoJSON('polygon'));
 	polygon.setCoordinates([
 		[
 			[0, 0],
@@ -132,7 +132,7 @@ test('moveFeatures polygon beyond north limit', () => {
 });
 
 test('moveFeatures polygon beyond south pole', () => {
-	const polygon = new Polygon(mockFeatureContext, getGeoJSON('polygon'));
+	const polygon = new PolygonFeat(mockFeatureContext, getGeoJSON('polygon'));
 	polygon.setCoordinates([
 		[
 			[0, 0],
@@ -166,7 +166,7 @@ test('moveFeatures multiple features', () => {
 		[-10, -30],
 		[17, 33],
 	]);
-	const polygon = new Polygon(mockFeatureContext, getGeoJSON('polygon'));
+	const polygon = new PolygonFeat(mockFeatureContext, getGeoJSON('polygon'));
 	polygon.setCoordinates([
 		[
 			[0, 0],
@@ -210,7 +210,7 @@ test('moveFeatures multiple features beyond north limit', () => {
 		[-10, -30],
 		[17, 33],
 	]);
-	const polygon = new Polygon(mockFeatureContext, getGeoJSON('polygon'));
+	const polygon = new PolygonFeat(mockFeatureContext, getGeoJSON('polygon'));
 	polygon.setCoordinates([
 		[
 			[0, 0],
@@ -254,7 +254,7 @@ test('moveFeatures multiple features beyond south limit', () => {
 		[-10, -30],
 		[17, 33],
 	]);
-	const polygon = new Polygon(mockFeatureContext, getGeoJSON('polygon'));
+	const polygon = new PolygonFeat(mockFeatureContext, getGeoJSON('polygon'));
 	polygon.setCoordinates([
 		[
 			[0, 0],

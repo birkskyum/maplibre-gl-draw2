@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { spy } from 'sinon';
 import {DrawFeature} from '../src/feature_types/feature.ts';
-import Polygon from '../src/feature_types/polygon.ts';
+import {PolygonFeat} from '../src/feature_types/polygon.ts';
 import MapLibreDraw from '../index.ts';
 import createFeature from './utils/create_feature.ts';
 import getPublicMemberKeys from './utils/get_public_member_keys.ts';
@@ -22,7 +22,7 @@ test('Polygon constructor and API', () => {
 		],
 	];
 	const ctx = createMockCtx();
-	const polygon = new Polygon(ctx, rawPolygon);
+	const polygon = new PolygonFeat(ctx, rawPolygon);
 
 	// Instance members
 	assert.equal(polygon.ctx, ctx, 'polygon.ctx');
@@ -48,54 +48,54 @@ test('Polygon constructor and API', () => {
 	);
 
 	// Prototype members
-	assert.equal(typeof Polygon.prototype.isValid, 'function', 'polygon.isValid');
+	assert.equal(typeof PolygonFeat.prototype.isValid, 'function', 'polygon.isValid');
 	assert.equal(
-		typeof Polygon.prototype.incomingCoords,
+		typeof PolygonFeat.prototype.incomingCoords,
 		'function',
 		'polygon.incomingCoords',
 	);
 	assert.equal(
-		typeof Polygon.prototype.setCoordinates,
+		typeof PolygonFeat.prototype.setCoordinates,
 		'function',
 		'polygon.setCoordinates',
 	);
 	assert.equal(
-		typeof Polygon.prototype.addCoordinate,
+		typeof PolygonFeat.prototype.addCoordinate,
 		'function',
 		'polygon.addCoordinate',
 	);
 	assert.equal(
-		typeof Polygon.prototype.getCoordinate,
+		typeof PolygonFeat.prototype.getCoordinate,
 		'function',
 		'polygon.getCoordinate',
 	);
 	assert.equal(
-		typeof Polygon.prototype.getCoordinates,
+		typeof PolygonFeat.prototype.getCoordinates,
 		'function',
 		'polygon.getCoordinates',
 	);
 	assert.equal(
-		typeof Polygon.prototype.removeCoordinate,
+		typeof PolygonFeat.prototype.removeCoordinate,
 		'function',
 		'polygon.removeCoordinate',
 	);
 	assert.equal(
-		typeof Polygon.prototype.updateCoordinate,
+		typeof PolygonFeat.prototype.updateCoordinate,
 		'function',
 		'polygon.updateCoordinate',
 	);
 	assert.equal(
-		Object.getOwnPropertyNames(Polygon.prototype).length,
+		Object.getOwnPropertyNames(PolygonFeat.prototype).length,
 		9,
 		'no unexpected prototype members',
 	);
 
-	assert.ok(Polygon.prototype instanceof DrawFeature, 'inherits from Feature');
+	assert.ok(PolygonFeat.prototype instanceof DrawFeature, 'inherits from Feature');
 });
 
 test('Polygon#isValid', () => {
 	const validRawPolygon = createFeature('polygon');
-	const validPolygon = new Polygon(createMockCtx(), validRawPolygon);
+	const validPolygon = new PolygonFeat(createMockCtx(), validRawPolygon);
 	assert.equal(validPolygon.isValid(), true, 'returns true for valid polygons');
 
 	const invalidRawPolygonA = createFeature('polygon');
@@ -110,7 +110,7 @@ test('Polygon#isValid', () => {
 			[9, 10],
 		],
 	];
-	const invalidPolygonA = new Polygon(createMockCtx(), invalidRawPolygonA);
+	const invalidPolygonA = new PolygonFeat(createMockCtx(), invalidRawPolygonA);
 	assert.equal(
 		invalidPolygonA.isValid(),
 		false,
@@ -120,7 +120,7 @@ test('Polygon#isValid', () => {
 
 test('Polygon#incomingCoords, Polygon#getCoordinates', () => {
 	const rawPolygon = createFeature('polygon');
-	const polygon = new Polygon(createMockCtx(), rawPolygon);
+	const polygon = new PolygonFeat(createMockCtx(), rawPolygon);
 	const changedSpy = spy(polygon, 'changed');
 
 	polygon.incomingCoords([
@@ -159,7 +159,7 @@ test('Polygon#incomingCoords, Polygon#getCoordinates', () => {
 
 test('Polygon#setCoordinates', () => {
 	const rawPolygon = createFeature('polygon');
-	const polygon = new Polygon(createMockCtx(), rawPolygon);
+	const polygon = new PolygonFeat(createMockCtx(), rawPolygon);
 	const changedSpy = spy(polygon, 'changed');
 
 	polygon.setCoordinates([
@@ -201,7 +201,7 @@ test('Polygon#addCoordinate, Polygon#removeCoordinate', () => {
 			[2, 1],
 		],
 	];
-	const polygon = new Polygon(createMockCtx(), rawPolygon);
+	const polygon = new PolygonFeat(createMockCtx(), rawPolygon);
 	const changedSpy = spy(polygon, 'changed');
 
 	changedSpy.resetHistory();
@@ -272,7 +272,7 @@ test('Polygon#updateCoordinate, Polygon#getCoordinate', () => {
 			[2, 1],
 		],
 	];
-	const polygon = new Polygon(createMockCtx(), rawPolygon);
+	const polygon = new PolygonFeat(createMockCtx(), rawPolygon);
 	const changedSpy = spy(polygon, 'changed');
 
 	changedSpy.resetHistory();
