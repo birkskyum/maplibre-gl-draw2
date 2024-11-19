@@ -10,8 +10,8 @@ export function setupAfterNextRender(map) {
 	const signal = AbortSignal.timeout(TIMEOUT);
 	signal.addEventListener('abort', () => controller.abort());
 
-	return function afterNextRender(msg) {
-		return new Promise((resolve, reject) => {
+	return function afterNextRender(msg?) {
+		return new Promise<void>((resolve, reject) => {
 			const lastRender = render;
 			const id = setInterval(() => {
 				if (controller.signal.aborted) {

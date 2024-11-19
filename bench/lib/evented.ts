@@ -1,5 +1,8 @@
 export default class Evented {
-	on(type, listener) {
+
+	_listeners: any[] = [];
+
+	on(type, listener?) {
 		if (!listener) {
 			return new Promise((resolve) => this.on(type, resolve));
 		}

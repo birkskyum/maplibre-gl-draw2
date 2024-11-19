@@ -8,8 +8,6 @@ import {DrawUI} from './src/ui.ts';
 import {DrawApi} from './src/api.ts';
 import type {IControl, Map as MapLibreMap} from 'maplibre-gl';
 
-
-
 export class DrawContext {
 	options: MapLibreDrawOptions;
 	api?: DrawApi;
@@ -39,15 +37,11 @@ class MapLibreDraw implements IControl {
 		this.ctx = new DrawContext(options);
 		this.setupApi = new DrawApi(this.ctx);
 		this.ctx.api = this.setupApi;
-		this.initialize();
-		return this.setupApi;
-	}
-
-	private initialize(): void {
 		this.setupApi.onAdd = this.onAdd.bind(this);
 		this.setupApi.onRemove = this.onRemove.bind(this);
 		this.setupApi.types = Constants.types;
 		this.setupApi.options = this.ctx.options;
+		return this.setupApi;
 	}
 
 	public onAdd(map: any) {
@@ -153,11 +147,9 @@ class MapLibreDraw implements IControl {
 		}
 	}
 
-	public getApi(): any {
+	public getApi(): DrawApi {
 		return this.setupApi;
 	}
 }
-
-
 
 export default MapLibreDraw;

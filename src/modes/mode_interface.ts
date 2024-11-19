@@ -15,7 +15,7 @@ export default class ModeInterface extends ModeInterfaceAccessors {
 	 * @param state {Object} - a mutible state object created by onSetup
 	 * @param e {Object} - the captured event that is triggering this life cycle event
 	 */
-	onDrag() {}
+	onDrag(state: object, e: object) {}
 
 	/**
 	 * Triggered when the mouse is clicked
@@ -23,7 +23,7 @@ export default class ModeInterface extends ModeInterfaceAccessors {
 	 * @param state {Object} - a mutible state object created by onSetup
 	 * @param e {Object} - the captured event that is triggering this life cycle event
 	 */
-	onClick() {}
+	onClick(state: object, e: object) {}
 
 	/**
 	 * Triggered with the mouse is moved
@@ -31,7 +31,7 @@ export default class ModeInterface extends ModeInterfaceAccessors {
 	 * @param state {Object} - a mutible state object created by onSetup
 	 * @param e {Object} - the captured event that is triggering this life cycle event
 	 */
-	onMouseMove() {}
+	onMouseMove(state: object, e: object) {}
 
 	/**
 	 * Triggered when the mouse button is pressed down
@@ -39,7 +39,7 @@ export default class ModeInterface extends ModeInterfaceAccessors {
 	 * @param state {Object} - a mutible state object created by onSetup
 	 * @param e {Object} - the captured event that is triggering this life cycle event
 	 */
-	onMouseDown() {}
+	onMouseDown(state: object, e: object) {}
 
 	/**
 	 * Triggered when the mouse button is released
@@ -47,7 +47,7 @@ export default class ModeInterface extends ModeInterfaceAccessors {
 	 * @param state {Object} - a mutible state object created by onSetup
 	 * @param e {Object} - the captured event that is triggering this life cycle event
 	 */
-	onMouseUp() {}
+	onMouseUp(state: object, e: object) {}
 
 	/**
 	 * Triggered when the mouse leaves the map's container
@@ -55,7 +55,7 @@ export default class ModeInterface extends ModeInterfaceAccessors {
 	 * @param state {Object} - a mutible state object created by onSetup
 	 * @param e {Object} - the captured event that is triggering this life cycle event
 	 */
-	onMouseOut() {}
+	onMouseOut(state: object, e: object) {}
 
 	/**
 	 * Triggered when a key up event is detected
@@ -63,7 +63,7 @@ export default class ModeInterface extends ModeInterfaceAccessors {
 	 * @param state {Object} - a mutible state object created by onSetup
 	 * @param e {Object} - the captured event that is triggering this life cycle event
 	 */
-	onKeyUp() {}
+	onKeyUp(state: object, e: object) {}
 
 	/**
 	 * Triggered when a key down event is detected
@@ -71,7 +71,7 @@ export default class ModeInterface extends ModeInterfaceAccessors {
 	 * @param state {Object} - a mutible state object created by onSetup
 	 * @param e {Object} - the captured event that is triggering this life cycle event
 	 */
-	onKeyDown() {}
+	onKeyDown(state: object, e: object) {}
 
 	/**
 	 * Triggered when a touch event is started
@@ -79,7 +79,7 @@ export default class ModeInterface extends ModeInterfaceAccessors {
 	 * @param state {Object} - a mutible state object created by onSetup
 	 * @param e {Object} - the captured event that is triggering this life cycle event
 	 */
-	onTouchStart() {}
+	onTouchStart(state: object, e: object) {}
 
 	/**
 	 * Triggered when one drags thier finger on a mobile device
@@ -87,7 +87,7 @@ export default class ModeInterface extends ModeInterfaceAccessors {
 	 * @param state {Object} - a mutible state object created by onSetup
 	 * @param e {Object} - the captured event that is triggering this life cycle event
 	 */
-	onTouchMove() {}
+	onTouchMove(state: object, e: object) {}
 
 	/**
 	 * Triggered when one removes their finger from the map
@@ -95,7 +95,7 @@ export default class ModeInterface extends ModeInterfaceAccessors {
 	 * @param state {Object} - a mutible state object created by onSetup
 	 * @param e {Object} - the captured event that is triggering this life cycle event
 	 */
-	onTouchEnd() {}
+	onTouchEnd(state: object, e: object) {}
 
 	/**
 	 * Triggered when one quicly taps the map
@@ -103,35 +103,35 @@ export default class ModeInterface extends ModeInterfaceAccessors {
 	 * @param state {Object} - a mutible state object created by onSetup
 	 * @param e {Object} - the captured event that is triggering this life cycle event
 	 */
-	onTap() {}
+	onTap(state: object, e: object) {}
 
 	/**
 	 * Triggered when the mode is being exited, to be used for cleaning up artifacts such as invalid features
 	 * @name MODE.onStop
 	 * @param state {Object} - a mutible state object created by onSetup
 	 */
-	onStop() {}
+	onStop(state: object) {}
 
 	/**
 	 * Triggered when [draw.trash()](https://github.com/mapbox/maplibre-gl-draw/blob/main/API.md#trash-draw) is called.
 	 * @name MODE.onTrash
 	 * @param state {Object} - a mutible state object created by onSetup
 	 */
-	onTrash() {}
+	onTrash(state: object) {}
 
 	/**
 	 * Triggered when [draw.combineFeatures()](https://github.com/mapbox/maplibre-gl-draw/blob/main/API.md#combinefeatures-draw) is called.
 	 * @name MODE.onCombineFeature
 	 * @param state {Object} - a mutible state object created by onSetup
 	 */
-	onCombineFeature() {}
+	onCombineFeature(state: object) {}
 
 	/**
 	 * Triggered when [draw.uncombineFeatures()](https://github.com/mapbox/maplibre-gl-draw/blob/main/API.md#uncombinefeatures-draw) is called.
 	 * @name MODE.onUncombineFeature
 	 * @param state {Object} - a mutible state object created by onSetup
 	 */
-	onUncombineFeature() {}
+	onUncombineFeature(state: object) {}
 
 	/**
 	 * Triggered per feature on render to convert raw features into set of features for display on the map
@@ -141,7 +141,7 @@ export default class ModeInterface extends ModeInterfaceAccessors {
 	 * @param geojson {Object} - a geojson being evaulated. To render, pass to `display`.
 	 * @param display {Function} - all geojson objects passed to this be rendered onto the map
 	 */
-	toDisplayFeatures() {
+	toDisplayFeatures(state: object, geojson: object, display: Function) {
 		throw new Error('You must overwrite toDisplayFeatures');
 	}
-}
+	}
