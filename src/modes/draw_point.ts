@@ -1,7 +1,7 @@
 import * as CommonSelectors from '../lib/common_selectors.ts';
 import * as Constants from '../constants.ts';
 
-const DrawPoint = {};
+export const DrawPoint = {};
 
 DrawPoint.onSetup = function () {
 	const point = this.newFeature({
@@ -66,4 +66,3 @@ DrawPoint.onKeyUp = function (state, e) {
 	}
 };
 
-export default DrawPoint;

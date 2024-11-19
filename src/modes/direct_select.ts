@@ -14,7 +14,7 @@ import moveFeatures from '../lib/move_features.ts';
 const isVertex = isOfMetaType(Constants.meta.VERTEX);
 const isMidpoint = isOfMetaType(Constants.meta.MIDPOINT);
 
-const DirectSelect = {};
+export const DirectSelect = {};
 
 // INTERNAL FUCNTIONS
 
@@ -269,5 +269,3 @@ DirectSelect.onTouchEnd = DirectSelect.onMouseUp = function (state) {
 	}
 	this.stopDragging(state);
 };
-
-export default DirectSelect;

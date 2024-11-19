@@ -6,13 +6,13 @@ import mouseClick from './utils/mouse_click.ts';
 import touchTap from './utils/touch_tap.ts';
 import makeMouseEvent from './utils/make_mouse_event.ts';
 import makeTouchEvent from './utils/make_touch_event.ts';
-import drawPolygonModeObject from '../src/modes/draw_polygon.ts';
+import {DrawPolygon} from '../src/modes/draw_polygon.ts';
 import Polygon from '../src/feature_types/polygon.ts';
 import createMockDrawModeContext from './utils/create_mock_draw_mode_context.ts';
 import createMockLifecycleContext from './utils/create_mock_lifecycle_context.ts';
 import { setupAfterNextRender } from './utils/after_next_render.ts';
 import objectToMode from '../src/modes/object_to_mode.ts';
-const drawPolygonMode = objectToMode(drawPolygonModeObject);
+const drawPolygonMode = objectToMode(DrawPolygon);
 
 import {
 	enterEvent,

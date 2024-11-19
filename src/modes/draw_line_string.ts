@@ -4,7 +4,7 @@ import doubleClickZoom from '../lib/double_click_zoom.ts';
 import * as Constants from '../constants.ts';
 import createVertex from '../lib/create_vertex.ts';
 
-const DrawLineString = {};
+export const DrawLineString = {};
 
 DrawLineString.onSetup = function (opts) {
 	opts = opts || {};
@@ -205,4 +205,3 @@ DrawLineString.toDisplayFeatures = function (state, geojson, display) {
 	display(geojson);
 };
 
-export default DrawLineString;

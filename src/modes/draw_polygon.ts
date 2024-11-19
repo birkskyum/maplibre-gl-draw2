@@ -4,7 +4,7 @@ import * as Constants from '../constants.ts';
 import isEventAtCoordinates from '../lib/is_event_at_coordinates.ts';
 import createVertex from '../lib/create_vertex.ts';
 
-const DrawPolygon = {};
+export const DrawPolygon = {};
 
 DrawPolygon.onSetup = function () {
 	const polygon = this.newFeature({
@@ -185,4 +185,3 @@ DrawPolygon.onTrash = function (state) {
 	this.changeMode(Constants.modes.SIMPLE_SELECT);
 };
 
-export default DrawPolygon;

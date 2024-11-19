@@ -6,7 +6,7 @@ import doubleClickZoom from '../lib/double_click_zoom.ts';
 import moveFeatures from '../lib/move_features.ts';
 import * as Constants from '../constants.ts';
 
-const SimpleSelect = {};
+export const SimpleSelect = {};
 
 SimpleSelect.onSetup = function (opts) {
 	// turn the opts into state.
@@ -415,4 +415,3 @@ SimpleSelect.onUncombineFeatures = function () {
 	this.fireActionable();
 };
 
-export default SimpleSelect;
