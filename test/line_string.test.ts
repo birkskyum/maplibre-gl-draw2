@@ -1,14 +1,14 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { spy } from 'sinon';
-import {DrawFeature} from '../src/feature_types/feature.ts';
-import {LineStringFeat} from '../src/feature_types/line_string.ts';
-import {MapLibreDraw} from '../index.ts';
-import {createFeature} from './utils/create_feature.ts';
-import {getPublicMemberKeys} from './utils/get_public_member_keys.ts';
-import {createMockFeatureContext} from './utils/create_mock_feature_context.ts';
+import { DrawFeature } from '../src/feature_types/feature.ts';
+import { LineStringFeat } from '../src/feature_types/line_string.ts';
+import { MapLibreDraw } from '../index.ts';
+import { createFeature } from './utils/create_feature.ts';
+import { getPublicMemberKeys } from './utils/get_public_member_keys.ts';
+import { createMockFeatureContext } from './utils/create_mock_feature_context.ts';
 import { drawGeometry } from './utils/draw_geometry.ts';
-import {createMap} from './utils/create_map.ts';
+import { createMap } from './utils/create_map.ts';
 
 test('LineString constructor and API', () => {
 	const rawLine = createFeature('line');
@@ -67,17 +67,26 @@ test('LineString constructor and API', () => {
 		'no unexpected prototype members',
 	);
 
-	assert.ok(LineStringFeat.prototype instanceof DrawFeature, 'inherits from Feature');
+	assert.ok(
+		LineStringFeat.prototype instanceof DrawFeature,
+		'inherits from Feature',
+	);
 });
 
 test('LineString#isValid', () => {
 	const validRawLine = createFeature('line');
-	const validLineString = new LineStringFeat(createMockFeatureContext(), validRawLine);
+	const validLineString = new LineStringFeat(
+		createMockFeatureContext(),
+		validRawLine,
+	);
 	assert.equal(validLineString.isValid(), true, 'returns true when valid');
 
 	const invalidRawLineA = createFeature('line');
 	invalidRawLineA.geometry.coordinates = [3];
-	const invalidLineStringA = new LineStringFeat(createMockFeatureContext(), invalidRawLineA);
+	const invalidLineStringA = new LineStringFeat(
+		createMockFeatureContext(),
+		invalidRawLineA,
+	);
 	assert.equal(
 		invalidLineStringA.isValid(),
 		false,
@@ -86,7 +95,10 @@ test('LineString#isValid', () => {
 
 	const invalidRawLineB = createFeature('line');
 	invalidRawLineB.geometry.coordinates = [];
-	const invalidLineStringB = new LineStringFeat(createMockFeatureContext(), invalidRawLineB);
+	const invalidLineStringB = new LineStringFeat(
+		createMockFeatureContext(),
+		invalidRawLineB,
+	);
 	assert.equal(
 		invalidLineStringB.isValid(),
 		false,

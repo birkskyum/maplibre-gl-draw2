@@ -4,11 +4,11 @@ import assert from 'node:assert/strict';
 import { spy } from 'sinon';
 
 import * as Constants from '../src/constants.ts';
-import {MapLibreDraw} from '../index.ts';
-import {createMap} from './utils/create_map.ts';
-import {getGeoJSON} from './utils/get_geojson.ts';
+import { MapLibreDraw } from '../index.ts';
+import { createMap } from './utils/create_map.ts';
+import { getGeoJSON } from './utils/get_geojson.ts';
 import { setupAfterNextRender } from './utils/after_next_render.ts';
-import {getPublicMemberKeys} from './utils/get_public_member_keys.ts';
+import { getPublicMemberKeys } from './utils/get_public_member_keys.ts';
 
 let map;
 let afterNextRender;
@@ -519,11 +519,7 @@ test('Draw.modes', () => {
 		'draw_polygon',
 	);
 
-	assert.equal(
-		Draw.modes.STATIC,
-		Constants.modes.STATIC,
-		'static',
-	);
+	assert.equal(Draw.modes.STATIC, Constants.modes.STATIC, 'static');
 
 	assert.equal(
 		getPublicMemberKeys(Draw.modes).length,

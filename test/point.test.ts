@@ -1,14 +1,14 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { spy } from 'sinon';
-import {DrawFeature} from '../src/feature_types/feature.ts';
-import {PointFeat} from '../src/feature_types/point.ts';
-import {MapLibreDraw} from '../index.ts';
-import {createFeature} from './utils/create_feature.ts';
-import {getPublicMemberKeys} from './utils/get_public_member_keys.ts';
-import {createMockFeatureContext} from './utils/create_mock_feature_context.ts';
+import { DrawFeature } from '../src/feature_types/feature.ts';
+import { PointFeat } from '../src/feature_types/point.ts';
+import { MapLibreDraw } from '../index.ts';
+import { createFeature } from './utils/create_feature.ts';
+import { getPublicMemberKeys } from './utils/get_public_member_keys.ts';
+import { createMockFeatureContext } from './utils/create_mock_feature_context.ts';
 import { drawGeometry } from './utils/draw_geometry.ts';
-import {createMap} from './utils/create_map.ts';
+import { createMap } from './utils/create_map.ts';
 
 test('Point constructor and API', () => {
 	const rawPoint = createFeature('point');
@@ -49,7 +49,10 @@ test('Point constructor and API', () => {
 		'no unexpected prototype members',
 	);
 
-	assert.ok(PointFeat.prototype instanceof DrawFeature, 'inherits from Feature');
+	assert.ok(
+		PointFeat.prototype instanceof DrawFeature,
+		'inherits from Feature',
+	);
 });
 
 test('Point#isValid', () => {
@@ -59,7 +62,10 @@ test('Point#isValid', () => {
 
 	const invalidRawPointA = createFeature('point');
 	invalidRawPointA.geometry.coordinates = [0, '1'];
-	const invalidPointA = new PointFeat(createMockFeatureContext(), invalidRawPointA);
+	const invalidPointA = new PointFeat(
+		createMockFeatureContext(),
+		invalidRawPointA,
+	);
 	assert.equal(
 		invalidPointA.isValid(),
 		false,
@@ -68,7 +74,10 @@ test('Point#isValid', () => {
 
 	const invalidRawPointB = createFeature('point');
 	invalidRawPointB.geometry.coordinates = ['1', 0];
-	const invalidPointB = new PointFeat(createMockFeatureContext(), invalidRawPointA);
+	const invalidPointB = new PointFeat(
+		createMockFeatureContext(),
+		invalidRawPointA,
+	);
 	assert.equal(
 		invalidPointB.isValid(),
 		false,

@@ -2,7 +2,7 @@
 	"$schema": "https://biomejs.dev/schemas/1.9.4/schema.json",
 	"vcs": { "clientKind": "git", "enabled": false, "useIgnoreFile": false },
 	"files": {
-		"include": ["src", "index.js", "dist/maplibre-gl-draw*"],
+		"include": ["src", "test", "index.js", "dist/maplibre-gl-draw*"],
 		"ignoreUnknown": false
 	},
 

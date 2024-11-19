@@ -1,4 +1,4 @@
-import {DrawFeature} from './feature.ts';
+import { DrawFeature } from './feature.ts';
 
 export class LineStringFeat extends DrawFeature {
 	coordinates: GeoJSON.Position[];

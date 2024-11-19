@@ -186,4 +186,3 @@ DrawPolygon.onTrash = function (state) {
 	this.deleteFeature([state.polygon.id], { silent: true });
 	this.changeMode(Constants.modes.SIMPLE_SELECT);
 };
-

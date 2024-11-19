@@ -2,10 +2,10 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 
 import { spy } from 'sinon';
-import {DrawFeature} from '../src/feature_types/feature.ts';
-import {createFeature} from './utils/create_feature.ts';
-import {getPublicMemberKeys} from './utils/get_public_member_keys.ts';
-import {createMockFeatureContext} from './utils/create_mock_feature_context.ts';
+import { DrawFeature } from '../src/feature_types/feature.ts';
+import { createFeature } from './utils/create_feature.ts';
+import { getPublicMemberKeys } from './utils/get_public_member_keys.ts';
+import { createMockFeatureContext } from './utils/create_mock_feature_context.ts';
 
 test('Feature contrusctor and API', () => {
 	const featureGeoJson = createFeature('line');
@@ -33,7 +33,11 @@ test('Feature contrusctor and API', () => {
 	);
 
 	// Prototype members
-	assert.equal(typeof DrawFeature.prototype.changed, 'function', 'feature.changed');
+	assert.equal(
+		typeof DrawFeature.prototype.changed,
+		'function',
+		'feature.changed',
+	);
 	assert.equal(
 		typeof DrawFeature.prototype.incomingCoords,
 		'function',

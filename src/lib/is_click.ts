@@ -4,15 +4,15 @@ const FINE_TOLERANCE = 4;
 const GROSS_TOLERANCE = 12;
 const INTERVAL = 500;
 
-export default function isClick(start: { point?: { x: number; y: number }; time?: number },
+export default function isClick(
+	start: { point?: { x: number; y: number }; time?: number },
 	end: { point: { x: number; y: number }; time: number },
 	options?: {
 		fineTolerance?: number;
 		grossTolerance?: number;
 		interval?: number;
 	},
-): boolean{
-
+): boolean {
 	const fineTolerance =
 		options?.fineTolerance != null ? options?.fineTolerance : FINE_TOLERANCE;
 	const grossTolerance =

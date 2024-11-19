@@ -204,4 +204,3 @@ DrawLineString.toDisplayFeatures = function (state, geojson, display) {
 
 	display(geojson);
 };
-

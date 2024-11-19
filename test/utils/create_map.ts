@@ -1,6 +1,6 @@
 import { bboxClip } from '@turf/bbox-clip';
 
-import {Evented} from '../../bench/lib/evented.ts';
+import { Evented } from '../../bench/lib/evented.ts';
 import { interactions } from '../../src/constants.ts';
 
 class MockMap extends Evented {
@@ -111,6 +111,6 @@ class MockMap extends Evented {
 	}
 }
 
-export  function createMap(mapOptions) {
+export function createMap(mapOptions) {
 	return new MockMap(mapOptions);
 }

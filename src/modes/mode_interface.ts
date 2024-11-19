@@ -144,4 +144,4 @@ export default class ModeInterface extends ModeInterfaceAccessors {
 	toDisplayFeatures(state: object, geojson: object, display: Function) {
 		throw new Error('You must overwrite toDisplayFeatures');
 	}
-	}
+}

@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import featuresAt from '../src/lib/features_at.ts';
-import {theme} from '../src/lib/theme.ts';
+import { theme } from '../src/lib/theme.ts';
 import * as Constants from '../src/constants.ts';
 import setupOptions from '../src/options.ts';
 

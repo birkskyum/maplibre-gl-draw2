@@ -1,8 +1,7 @@
 import * as Constants from './constants.ts';
 
-import {theme} from './lib/theme.ts';
-import {ALL_MODES} from './modes/index.ts';
-
+import { theme } from './lib/theme.ts';
+import { ALL_MODES } from './modes/index.ts';
 
 export type MapLibreDrawControls = {
 	point?: boolean | undefined;
@@ -11,7 +10,7 @@ export type MapLibreDrawControls = {
 	trash?: boolean | undefined;
 	combine_features?: boolean | undefined;
 	uncombine_features?: boolean | undefined;
-}
+};
 
 export type MapLibreDrawOptions = {
 	displayControlsDefault?: boolean | undefined;
@@ -25,8 +24,7 @@ export type MapLibreDrawOptions = {
 	modes?: { [modeKey: string]: any } | undefined;
 	defaultMode?: string | undefined;
 	userProperties?: boolean | undefined;
-}
-
+};
 
 const defaultOptions: MapLibreDrawOptions = {
 	defaultMode: Constants.modes.SIMPLE_SELECT,
@@ -93,4 +91,3 @@ export default function (options: MapLibreDrawOptions = {}) {
 
 	return withDefaults;
 }
-

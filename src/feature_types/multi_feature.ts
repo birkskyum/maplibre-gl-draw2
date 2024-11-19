@@ -1,10 +1,10 @@
 import hat from 'hat';
-import {DrawFeature} from './feature.ts';
+import { DrawFeature } from './feature.ts';
 import * as Constants from '../constants.ts';
 
-import {PointFeat} from './point.ts';
-import {LineStringFeat} from './line_string.ts';
-import {PolygonFeat} from './polygon.ts';
+import { PointFeat } from './point.ts';
+import { LineStringFeat } from './line_string.ts';
+import { PolygonFeat } from './polygon.ts';
 
 const models = {
 	MultiPoint: PointFeat,

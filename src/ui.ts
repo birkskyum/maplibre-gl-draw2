@@ -4,8 +4,6 @@ import * as Constants from './constants.ts';
 type CLASS_TYPE = 'mode' | 'feature' | 'mouse';
 const classTypes: CLASS_TYPE[] = ['mode', 'feature', 'mouse'];
 
-
-
 export class DrawUI {
 	private buttonElements: Record<string, HTMLButtonElement> = {};
 	private activeButton: HTMLButtonElement | null = null;

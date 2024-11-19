@@ -1,6 +1,6 @@
 import featuresAt from './features_at.ts';
 import * as Constants from '../constants.ts';
-import {DrawFeature} from '../feature_types/feature.ts';
+import { DrawFeature } from '../feature_types/feature.ts';
 
 export default function getFeatureAtAndSetCursors(event, ctx) {
 	const features: DrawFeature[] = featuresAt.click(event, null, ctx);

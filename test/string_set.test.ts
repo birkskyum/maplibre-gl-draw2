@@ -29,7 +29,8 @@ test('StringSet constructor and API', () => {
 		'exposes set.clear',
 	);
 	assert.equal(
-		Object.getOwnPropertyNames(StringSet.prototype).filter((k) => k[0] !== '_').length,
+		Object.getOwnPropertyNames(StringSet.prototype).filter((k) => k[0] !== '_')
+			.length,
 		6,
 		'no unexpected methods',
 	);

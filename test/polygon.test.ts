@@ -1,14 +1,14 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { spy } from 'sinon';
-import {DrawFeature} from '../src/feature_types/feature.ts';
-import {PolygonFeat} from '../src/feature_types/polygon.ts';
-import {MapLibreDraw} from '../index.ts';
-import {createFeature} from './utils/create_feature.ts';
-import {getPublicMemberKeys} from './utils/get_public_member_keys.ts';
-import {createMockFeatureContext} from './utils/create_mock_feature_context.ts';
+import { DrawFeature } from '../src/feature_types/feature.ts';
+import { PolygonFeat } from '../src/feature_types/polygon.ts';
+import { MapLibreDraw } from '../index.ts';
+import { createFeature } from './utils/create_feature.ts';
+import { getPublicMemberKeys } from './utils/get_public_member_keys.ts';
+import { createMockFeatureContext } from './utils/create_mock_feature_context.ts';
 import { drawGeometry } from './utils/draw_geometry.ts';
-import {createMap} from './utils/create_map.ts';
+import { createMap } from './utils/create_map.ts';
 
 test('Polygon constructor and API', () => {
 	const rawPolygon = createFeature('polygon');
@@ -48,7 +48,11 @@ test('Polygon constructor and API', () => {
 	);
 
 	// Prototype members
-	assert.equal(typeof PolygonFeat.prototype.isValid, 'function', 'polygon.isValid');
+	assert.equal(
+		typeof PolygonFeat.prototype.isValid,
+		'function',
+		'polygon.isValid',
+	);
 	assert.equal(
 		typeof PolygonFeat.prototype.incomingCoords,
 		'function',
@@ -90,12 +94,18 @@ test('Polygon constructor and API', () => {
 		'no unexpected prototype members',
 	);
 
-	assert.ok(PolygonFeat.prototype instanceof DrawFeature, 'inherits from Feature');
+	assert.ok(
+		PolygonFeat.prototype instanceof DrawFeature,
+		'inherits from Feature',
+	);
 });
 
 test('Polygon#isValid', () => {
 	const validRawPolygon = createFeature('polygon');
-	const validPolygon = new PolygonFeat(createMockFeatureContext(), validRawPolygon);
+	const validPolygon = new PolygonFeat(
+		createMockFeatureContext(),
+		validRawPolygon,
+	);
 	assert.equal(validPolygon.isValid(), true, 'returns true for valid polygons');
 
 	const invalidRawPolygonA = createFeature('polygon');
@@ -110,7 +120,10 @@ test('Polygon#isValid', () => {
 			[9, 10],
 		],
 	];
-	const invalidPolygonA = new PolygonFeat(createMockFeatureContext(), invalidRawPolygonA);
+	const invalidPolygonA = new PolygonFeat(
+		createMockFeatureContext(),
+		invalidRawPolygonA,
+	);
 	assert.equal(
 		invalidPolygonA.isValid(),
 		false,

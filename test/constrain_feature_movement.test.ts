@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {getGeoJSON} from './utils/get_geojson.ts';
+import { getGeoJSON } from './utils/get_geojson.ts';
 import constrainFeatureMovement from '../src/lib/constrain_feature_movement.ts';
 
 test('constrainFeatureMovement point, no constraint', () => {

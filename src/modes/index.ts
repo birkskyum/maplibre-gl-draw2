@@ -1,13 +1,13 @@
-import {SimpleSelect} from './simple_select.ts';
-import {DirectSelect} from './direct_select.ts';
-import {DrawPointMode} from './draw_point.ts';
-import {DrawPolygon} from './draw_polygon.ts';
-import {DrawLineString} from './draw_line_string.ts';
+import { SimpleSelect } from './simple_select.ts';
+import { DirectSelect } from './direct_select.ts';
+import { DrawPointMode } from './draw_point.ts';
+import { DrawPolygon } from './draw_polygon.ts';
+import { DrawLineString } from './draw_line_string.ts';
 
 export const ALL_MODES = {
-	'simple_select': SimpleSelect,
-	'direct_select': DirectSelect,
-	'draw_point': DrawPointMode,
-	'draw_polygon': DrawPolygon,
-	'draw_line_string': DrawLineString,
+	simple_select: SimpleSelect,
+	direct_select: DirectSelect,
+	draw_point: DrawPointMode,
+	draw_polygon: DrawPolygon,
+	draw_line_string: DrawLineString,
 };

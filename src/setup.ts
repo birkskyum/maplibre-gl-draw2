@@ -1,6 +1,6 @@
 import { DrawEvents } from './events.ts';
-import {DrawStore} from './store.ts';
-import {DrawUI} from './ui.ts';
+import { DrawStore } from './store.ts';
+import { DrawUI } from './ui.ts';
 import * as Constants from './constants.ts';
 
 export default function (ctx) {

@@ -34,8 +34,6 @@ declare namespace MapLibreDraw {
 	}
 	type DrawEventType = keyof DrawEvents;
 
-
-
 	interface DrawActionableState {
 		trash: boolean;
 		combineFeatures: boolean;
@@ -172,7 +170,6 @@ declare namespace MapLibreDraw {
 		type: 'draw.actionable';
 	}
 
-	
 	interface DrawCustomMode<CustomModeState = any, CustomModeOptions = any> {
 		onSetup?(
 			this: DrawCustomModeThis & this,
@@ -273,7 +270,6 @@ declare namespace MapLibreDraw {
 		): void;
 	}
 
-
 	interface Lib {
 		CommonSelectors: {
 			isOfMetaType: (
@@ -357,7 +353,6 @@ declare namespace MapLibreDraw {
 			b: { x: number; y: number },
 		): number;
 
-
 		isEventAtCoordinates(
 			event: MapMouseEvent,
 			coordinates: Position[],
@@ -415,9 +410,5 @@ declare namespace MapLibreDraw {
 		 * @param features
 		 */
 		sortFeatures(features: DrawFeature[]): DrawFeature[];
-
-	
 	}
-
 }
-

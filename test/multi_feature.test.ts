@@ -1,16 +1,19 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { spy } from 'sinon';
-import {DrawFeature} from '../src/feature_types/feature.ts';
-import {PointFeat} from '../src/feature_types/point.ts';
-import {PolygonFeat} from '../src/feature_types/polygon.ts';
-import {LineStringFeat} from '../src/feature_types/line_string.ts';
+import { DrawFeature } from '../src/feature_types/feature.ts';
+import { PointFeat } from '../src/feature_types/point.ts';
+import { PolygonFeat } from '../src/feature_types/polygon.ts';
+import { LineStringFeat } from '../src/feature_types/line_string.ts';
 import MultiFeature from '../src/feature_types/multi_feature.ts';
-import {createMockFeatureContext} from './utils/create_mock_feature_context.ts';
-import {getPublicMemberKeys} from './utils/get_public_member_keys.ts';
+import { createMockFeatureContext } from './utils/create_mock_feature_context.ts';
+import { getPublicMemberKeys } from './utils/get_public_member_keys.ts';
 
 test('MultiPoint via MultiFeature', () => {
-	assert.ok(MultiFeature.prototype instanceof DrawFeature, 'inherits from Feature');
+	assert.ok(
+		MultiFeature.prototype instanceof DrawFeature,
+		'inherits from Feature',
+	);
 
 	// Prototype members
 	assert.equal(

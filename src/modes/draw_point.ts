@@ -65,4 +65,3 @@ DrawPointMode.onKeyUp = function (state, e) {
 		return this.stopDrawingAndRemove(state, e);
 	}
 };
-

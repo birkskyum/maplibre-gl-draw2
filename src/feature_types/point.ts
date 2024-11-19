@@ -1,5 +1,5 @@
 import type { DrawContext } from '../../index.ts';
-import {DrawFeature} from './feature.ts';
+import { DrawFeature } from './feature.ts';
 
 export class PointFeat extends DrawFeature {
 	coordinates: GeoJSON.Position;

@@ -3,7 +3,7 @@ class StringSet {
 	private _nums: Record<number, number>;
 	private _length: number;
 
-	constructor(items?:  Array<string | number>) {
+	constructor(items?: Array<string | number>) {
 		this._items = {};
 		this._nums = {};
 		this._length = items ? items.length : 0;

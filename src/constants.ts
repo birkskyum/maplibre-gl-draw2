@@ -15,14 +15,12 @@ export const classes = {
 	BOX_SELECT: 'maplibre-gl-draw_boxselect',
 };
 
-
 export const controls = {
 	line_string: true,
 	point: true,
 	polygon: true,
 	trash: true,
 };
-
 
 export const sources = {
 	HOT: 'maplibre-gl-draw-hot',
@@ -61,7 +59,7 @@ export const modes = {
 	DRAW_POINT: 'draw_point',
 	SIMPLE_SELECT: 'simple_select',
 	DIRECT_SELECT: 'direct_select',
-	STATIC: 'static'
+	STATIC: 'static',
 };
 
 export const events = {

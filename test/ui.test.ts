@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { spy } from 'sinon';
 
-import {DrawUI} from '../src/ui.ts';
+import { DrawUI } from '../src/ui.ts';
 
 function createMockContext({ position, controls } = {}) {
 	const container = document.createElement('div');

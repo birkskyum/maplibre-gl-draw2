@@ -1,29 +1,33 @@
 /* eslint comma-dangle: ["error", "always-multiline"] */
 
-import type { CircleLayerSpecification, FillLayerSpecification, LineLayerSpecification } from "maplibre-gl";
+import type {
+	CircleLayerSpecification,
+	FillLayerSpecification,
+	LineLayerSpecification,
+} from 'maplibre-gl';
 
 const blue = '#3bb2d0';
 const orange = '#fbb03b';
 const white = '#fff';
 
 type ThemeLayerId =
-		| 'gl-draw-polygon-fill-static'
-		| 'gl-draw-polygon-fill-active'
-		| 'gl-draw-polygon-fill-inactive'
-		| 'gl-draw-polygon-stroke-static'
-		| 'gl-draw-polygon-stroke-active'
-		| 'gl-draw-polygon-stroke-inactive'
-		| 'gl-draw-polygon-midpoint'
-		| 'gl-draw-polygon-and-line-vertex-inactive'
-		| 'gl-draw-polygon-and-line-vertex-stroke-inactive'
-		| 'gl-draw-line-static'
-		| 'gl-draw-line-active'
-		| 'gl-draw-line-inactive'
-		| 'gl-draw-point-static'
-		| 'gl-draw-point-active'
-		| 'gl-draw-point-inactive'
-		| 'gl-draw-point-stroke-active'
-		| 'gl-draw-point-point-stroke-inactive';
+	| 'gl-draw-polygon-fill-static'
+	| 'gl-draw-polygon-fill-active'
+	| 'gl-draw-polygon-fill-inactive'
+	| 'gl-draw-polygon-stroke-static'
+	| 'gl-draw-polygon-stroke-active'
+	| 'gl-draw-polygon-stroke-inactive'
+	| 'gl-draw-polygon-midpoint'
+	| 'gl-draw-polygon-and-line-vertex-inactive'
+	| 'gl-draw-polygon-and-line-vertex-stroke-inactive'
+	| 'gl-draw-line-static'
+	| 'gl-draw-line-active'
+	| 'gl-draw-line-inactive'
+	| 'gl-draw-point-static'
+	| 'gl-draw-point-active'
+	| 'gl-draw-point-inactive'
+	| 'gl-draw-point-stroke-active'
+	| 'gl-draw-point-point-stroke-inactive';
 
 type Theme = Array<
 	(
@@ -32,7 +36,6 @@ type Theme = Array<
 		| CircleLayerSpecification
 	) & { id: ThemeLayerId }
 >;
-
 
 export const theme: Theme = [
 	// Polygons

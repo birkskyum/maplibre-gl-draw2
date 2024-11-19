@@ -1,7 +1,7 @@
 import featuresAt from '../lib/features_at.ts';
-import {PointFeat} from '../feature_types/point.ts';
-import {LineStringFeat} from '../feature_types/line_string.ts';
-import {PolygonFeat} from '../feature_types/polygon.ts';
+import { PointFeat } from '../feature_types/point.ts';
+import { LineStringFeat } from '../feature_types/line_string.ts';
+import { PolygonFeat } from '../feature_types/polygon.ts';
 import MultiFeature from '../feature_types/multi_feature.ts';
 import type { DrawContext } from '../../index.ts';
 import type { Map as MapLibre } from 'maplibre-gl';
@@ -9,14 +9,13 @@ import * as Constants from '../constants.ts';
 import type { BBox, GeoJSON } from 'geojson';
 import { DrawStore } from '../store.ts';
 import type { MapLibreDrawOptions } from '../options.ts';
-import {DrawFeature} from '../feature_types/feature.ts';
-
+import { DrawFeature } from '../feature_types/feature.ts';
 
 type DrawActionableState = {
 	trash?: boolean;
 	combineFeatures?: boolean;
 	uncombineFeatures?: boolean;
-}
+};
 
 export class ModeInterfaceAccessors {
 	protected map: MapLibre;
@@ -33,7 +32,9 @@ export class ModeInterfaceAccessors {
 		return this._ctx.store?.setSelected(features);
 	}
 
-	setSelectedCoordinates(coords: Array<{ coord_path: string; feature_id: string }>): void {
+	setSelectedCoordinates(
+		coords: Array<{ coord_path: string; feature_id: string }>,
+	): void {
 		this._ctx.store?.setSelectedCoordinates(coords);
 		coords.reduce((m: Record<string, boolean>, c) => {
 			if (m[c.feature_id] === undefined) {
@@ -68,7 +69,10 @@ export class ModeInterfaceAccessors {
 		return this._ctx.store?.deselect(id);
 	}
 
-	deleteFeature(id: string, opts: Record<string, any> = {}): DrawStore | undefined {
+	deleteFeature(
+		id: string,
+		opts: Record<string, any> = {},
+	): DrawStore | undefined {
 		return this._ctx.store?.delete(id, opts);
 	}
 
@@ -109,15 +113,17 @@ export class ModeInterfaceAccessors {
 		return this._ctx.ui?.setActiveButton(name);
 	}
 
-	featuresAt(event: Event, bbox: BBox, bufferType: 'click' | 'touch' = 'click'): DrawFeature[] {
+	featuresAt(
+		event: Event,
+		bbox: BBox,
+		bufferType: 'click' | 'touch' = 'click',
+	): DrawFeature[] {
 		if (bufferType !== 'click' && bufferType !== 'touch')
 			throw new Error('invalid buffer type');
 		return featuresAt[bufferType](event, bbox, this._ctx);
 	}
 
 	newFeature(geojson: GeoJSON): DrawFeature {
-		
-
 		const type = geojson.geometry.type;
 		if (type === Constants.geojsonTypes.POINT)
 			return new PointFeat(this._ctx, geojson);
@@ -129,7 +135,8 @@ export class ModeInterfaceAccessors {
 	}
 
 	isInstanceOf(type: string, feature: object): boolean {
-		if (type === Constants.geojsonTypes.POINT) return feature instanceof PointFeat;
+		if (type === Constants.geojsonTypes.POINT)
+			return feature instanceof PointFeat;
 		if (type === Constants.geojsonTypes.LINE_STRING)
 			return feature instanceof LineStringFeat;
 		if (type === Constants.geojsonTypes.POLYGON)

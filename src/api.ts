@@ -2,13 +2,13 @@ import isEqual from 'fast-deep-equal';
 import normalize from '@mapbox/geojson-normalize';
 import hat from 'hat';
 import featuresAt from './lib/features_at.ts';
-import {stringSetsAreEqual} from './lib/string_sets_are_equal.ts';
+import { stringSetsAreEqual } from './lib/string_sets_are_equal.ts';
 import * as Constants from './constants.ts';
 import StringSet from './lib/string_set.ts';
 
-import {PolygonFeat} from './feature_types/polygon.ts';
-import {LineStringFeat} from './feature_types/line_string.ts';
-import {PointFeat} from './feature_types/point.ts';
+import { PolygonFeat } from './feature_types/polygon.ts';
+import { LineStringFeat } from './feature_types/line_string.ts';
+import { PointFeat } from './feature_types/point.ts';
 import MultiFeature from './feature_types/multi_feature.ts';
 import type { DrawContext } from '../index.ts';
 import type { Feature, FeatureCollection, Geometry } from 'geojson';
@@ -175,7 +175,6 @@ export class DrawApi {
 		return this;
 	}
 
-
 	// TYPINGS
 	//
 	// changeMode(mode: 'simple_select', options?: { featureIds: string[] }): this;
@@ -194,7 +193,6 @@ export class DrawApi {
 	// 	mode: T & (T extends MapLibreDraw.DrawMode ? never : T),
 	// 	options?: object,
 	// ): this;
-
 
 	public changeMode(mode: string, modeOptions: any = {}): this {
 		if (

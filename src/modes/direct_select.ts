@@ -9,7 +9,7 @@ import createSupplementaryPoints from '../lib/create_supplementary_points.ts';
 import constrainFeatureMovement from '../lib/constrain_feature_movement.ts';
 import doubleClickZoom from '../lib/double_click_zoom.ts';
 import * as Constants from '../constants.ts';
-import {moveFeatures} from '../lib/move_features.ts';
+import { moveFeatures } from '../lib/move_features.ts';
 
 const isVertex = isOfMetaType(Constants.meta.VERTEX);
 const isMidpoint = isOfMetaType(Constants.meta.MIDPOINT);

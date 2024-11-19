@@ -1,6 +1,6 @@
-import type { Feature } from "geojson";
+import type { Feature } from 'geojson';
 
-export function stringSetsAreEqual (
+export function stringSetsAreEqual(
 	a: Array<Pick<Feature, 'id'>>,
 	b: Array<Pick<Feature, 'id'>>,
 ): boolean {
