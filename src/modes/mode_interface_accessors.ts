@@ -1,29 +1,35 @@
-import * as Constants from '../constants.ts';
 import featuresAt from '../lib/features_at.ts';
 import Point from '../feature_types/point.ts';
 import LineString from '../feature_types/line_string.ts';
 import Polygon from '../feature_types/polygon.ts';
 import MultiFeature from '../feature_types/multi_feature.ts';
 import type { DrawContext } from '../../index.ts';
+import type { Map as MapLibre } from 'maplibre-gl';
+import * as Constants from '../constants.ts';
+import type { BBox, GeoJSON } from 'geojson';
+import { DrawStore } from '../store.ts';
+import type { MapLibreDrawOptions } from '../options.ts';
+import Feature from '../feature_types/feature.ts';
+
 
 export class ModeInterfaceAccessors {
-	protected map: any;
-	protected drawConfig: any;
+	protected map: MapLibre;
+	protected drawConfig: MapLibreDrawOptions;
 	protected _ctx: DrawContext;
 
 	constructor(ctx: DrawContext) {
-		this.map = ctx.map;
+		this.map = ctx.map!;
 		this.drawConfig = JSON.parse(JSON.stringify(ctx.options || {}));
 		this._ctx = ctx;
 	}
 
-	setSelected(features: any) {
+	setSelected(features?: string | string[]): DrawStore | undefined {
 		return this._ctx.store?.setSelected(features);
 	}
 
-	setSelectedCoordinates(coords: any) {
+	setSelectedCoordinates(coords: Array<{ coord_path: string; feature_id: string }>): void {
 		this._ctx.store?.setSelectedCoordinates(coords);
-		coords.reduce((m: any, c: any) => {
+		coords.reduce((m: Record<string, boolean>, c) => {
 			if (m[c.feature_id] === undefined) {
 				m[c.feature_id] = true;
 				this._ctx.store?.get(c.feature_id).changed();
@@ -32,47 +38,47 @@ export class ModeInterfaceAccessors {
 		}, {});
 	}
 
-	getSelected() {
-		return this._ctx.store?.getSelected();
+	getSelected(): Feature[] {
+		return this._ctx.store?.getSelected() ?? [];
 	}
 
-	getSelectedIds() {
-		return this._ctx.store?.getSelectedIds();
+	getSelectedIds(): string[] {
+		return this._ctx.store?.getSelectedIds() ?? [];
 	}
 
-	isSelected(id: string) {
-		return this._ctx.store?.isSelected(id);
+	isSelected(id: string): boolean {
+		return this._ctx.store?.isSelected(id) ?? false;
 	}
 
-	getFeature(id: string) {
+	getFeature(id: string): Feature {
 		return this._ctx.store?.get(id);
 	}
 
-	select(id: string) {
+	select(id: string): DrawStore | undefined {
 		return this._ctx.store?.select(id);
 	}
 
-	deselect(id: string) {
+	deselect(id: string): DrawStore | undefined {
 		return this._ctx.store?.deselect(id);
 	}
 
-	deleteFeature(id: string, opts: any = {}) {
+	deleteFeature(id: string, opts: Record<string, any> = {}): DrawStore | undefined {
 		return this._ctx.store?.delete(id, opts);
 	}
 
-	addFeature(feature: any) {
+	addFeature(feature: DrawFeature): DrawStore | undefined {
 		return this._ctx.store?.add(feature);
 	}
 
-	clearSelectedFeatures() {
+	clearSelectedFeatures(): DrawStore | undefined {
 		return this._ctx.store?.clearSelected();
 	}
 
-	clearSelectedCoordinates() {
+	clearSelectedCoordinates(): DrawStore | undefined {
 		return this._ctx.store?.clearSelectedCoordinates();
 	}
 
-	setActionableState(actions: any = {}) {
+	setActionableState(actions: DrawActionableState = {}): void {
 		const newSet = {
 			trash: actions.trash || false,
 			combineFeatures: actions.combineFeatures || false,
@@ -81,29 +87,31 @@ export class ModeInterfaceAccessors {
 		return this._ctx.events?.actionable(newSet);
 	}
 
-	changeMode(mode: string, opts: any = {}, eventOpts: any = {}) {
+	changeMode(mode: string, opts: object = {}, eventOpts: object = {}): void {
 		return this._ctx.events?.changeMode(mode, opts, eventOpts);
 	}
 
-	fire(eventName: string, eventData: any) {
+	fire(eventName: string, eventData: any): void {
 		return this._ctx.events?.fire(eventName, eventData);
 	}
 
-	updateUIClasses(opts: any) {
+	updateUIClasses(opts: object): void {
 		return this._ctx.ui?.queueMapClasses(opts);
 	}
 
-	activateUIButton(name: string) {
+	activateUIButton(name: string): void {
 		return this._ctx.ui?.setActiveButton(name);
 	}
 
-	featuresAt(event: any, bbox: any, bufferType: string = 'click') {
+	featuresAt(event: Event, bbox: BBox, bufferType: 'click' | 'touch' = 'click'): DrawFeature[] {
 		if (bufferType !== 'click' && bufferType !== 'touch')
 			throw new Error('invalid buffer type');
 		return featuresAt[bufferType](event, bbox, this._ctx);
 	}
 
-	newFeature(geojson: any) {
+	newFeature(geojson: GeoJSON): Feature {
+		
+
 		const type = geojson.geometry.type;
 		if (type === Constants.geojsonTypes.POINT)
 			return new Point(this._ctx, geojson);
@@ -114,7 +122,7 @@ export class ModeInterfaceAccessors {
 		return new MultiFeature(this._ctx, geojson);
 	}
 
-	isInstanceOf(type: string, feature: any) {
+	isInstanceOf(type: string, feature: object): boolean {
 		if (type === Constants.geojsonTypes.POINT) return feature instanceof Point;
 		if (type === Constants.geojsonTypes.LINE_STRING)
 			return feature instanceof LineString;
@@ -124,7 +132,7 @@ export class ModeInterfaceAccessors {
 		throw new Error(`Unknown feature class: ${type}`);
 	}
 
-	doRender(id: string) {
+	doRender(id: string): DrawStore | undefined {
 		return this._ctx.store?.featureChanged(id);
 	}
 }

@@ -172,58 +172,7 @@ declare namespace MapLibreDraw {
 		type: 'draw.actionable';
 	}
 
-	interface DrawCustomModeThis {
-		map: Map;
-
-		drawConfig: MapLibreDrawOptions;
-
-		setSelected(features?: string | string[]): void;
-
-		setSelectedCoordinates(
-			coords: Array<{ coord_path: string; feature_id: string }>,
-		): void;
-
-		getSelected(): DrawFeature[];
-
-		getSelectedIds(): string[];
-
-		isSelected(id: string): boolean;
-
-		getFeature(id: string): DrawFeature;
-
-		select(id: string): void;
-
-		delete(id: string): void;
-
-		deleteFeature(id: string, opts?: any): void;
-
-		addFeature(feature: DrawFeature): void;
-
-		clearSelectedFeatures(): void;
-
-		clearSelectedCoordinates(): void;
-
-		setActionableState(actionableState: DrawActionableState): void;
-
-		changeMode(mode: DrawMode, opts?: object, eventOpts?: object): void;
-
-		updateUIClasses(opts: object): void;
-
-		activateUIButton(name?: string): void;
-
-		featuresAt(
-			event: Event,
-			bbox: BBox,
-			bufferType: 'click' | 'tap',
-		): DrawFeature[];
-
-		newFeature(geojson: GeoJSON): DrawFeature;
-
-		isInstanceOf(type: string, feature: object): boolean;
-
-		doRender(id: string): void;
-	}
-
+	
 	interface DrawCustomMode<CustomModeState = any, CustomModeOptions = any> {
 		onSetup?(
 			this: DrawCustomModeThis & this,
@@ -408,15 +357,6 @@ declare namespace MapLibreDraw {
 			b: { x: number; y: number },
 		): number;
 
-		isClick(
-			start: { point?: { x: number; y: number }; time?: number },
-			end: { point: { x: number; y: number }; time: number },
-			options?: {
-				fineTolerance?: number;
-				grossTolerance?: number;
-				interval?: number;
-			},
-		): boolean;
 
 		isEventAtCoordinates(
 			event: MapMouseEvent,
