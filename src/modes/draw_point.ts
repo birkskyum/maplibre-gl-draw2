@@ -1,9 +1,9 @@
 import * as CommonSelectors from '../lib/common_selectors.ts';
 import * as Constants from '../constants.ts';
 
-export const DrawPoint = {};
+export const DrawPointMode = {};
 
-DrawPoint.onSetup = function () {
+DrawPointMode.onSetup = function () {
 	const point = this.newFeature({
 		type: Constants.geojsonTypes.FEATURE,
 		properties: {},
@@ -26,12 +26,12 @@ DrawPoint.onSetup = function () {
 	return { point };
 };
 
-DrawPoint.stopDrawingAndRemove = function (state) {
+DrawPointMode.stopDrawingAndRemove = function (state) {
 	this.deleteFeature([state.point.id], { silent: true });
 	this.changeMode(Constants.modes.SIMPLE_SELECT);
 };
 
-DrawPoint.onTap = DrawPoint.onClick = function (state, e) {
+DrawPointMode.onTap = DrawPointMode.onClick = function (state, e) {
 	this.updateUIClasses({ mouse: Constants.cursors.MOVE });
 	state.point.updateCoordinate('', e.lngLat.lng, e.lngLat.lat);
 	this.fire(Constants.events.CREATE, {
@@ -42,14 +42,14 @@ DrawPoint.onTap = DrawPoint.onClick = function (state, e) {
 	});
 };
 
-DrawPoint.onStop = function (state) {
+DrawPointMode.onStop = function (state) {
 	this.activateUIButton();
 	if (!state.point.getCoordinate().length) {
 		this.deleteFeature([state.point.id], { silent: true });
 	}
 };
 
-DrawPoint.toDisplayFeatures = function (state, geojson, display) {
+DrawPointMode.toDisplayFeatures = function (state, geojson, display) {
 	// Never render the point we're drawing
 	const isActivePoint = geojson.properties.id === state.point.id;
 	geojson.properties.active = isActivePoint
@@ -58,9 +58,9 @@ DrawPoint.toDisplayFeatures = function (state, geojson, display) {
 	if (!isActivePoint) return display(geojson);
 };
 
-DrawPoint.onTrash = DrawPoint.stopDrawingAndRemove;
+DrawPointMode.onTrash = DrawPointMode.stopDrawingAndRemove;
 
-DrawPoint.onKeyUp = function (state, e) {
+DrawPointMode.onKeyUp = function (state, e) {
 	if (CommonSelectors.isEscapeKey(e) || CommonSelectors.isEnterKey(e)) {
 		return this.stopDrawingAndRemove(state, e);
 	}

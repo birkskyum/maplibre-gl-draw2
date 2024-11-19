@@ -1,5 +1,5 @@
 import featuresAt from '../lib/features_at.ts';
-import Point from '../feature_types/point.ts';
+import {DrawPoint} from '../feature_types/point.ts';
 import LineString from '../feature_types/line_string.ts';
 import Polygon from '../feature_types/polygon.ts';
 import MultiFeature from '../feature_types/multi_feature.ts';
@@ -120,7 +120,7 @@ export class ModeInterfaceAccessors {
 
 		const type = geojson.geometry.type;
 		if (type === Constants.geojsonTypes.POINT)
-			return new Point(this._ctx, geojson);
+			return new DrawPoint(this._ctx, geojson);
 		if (type === Constants.geojsonTypes.LINE_STRING)
 			return new LineString(this._ctx, geojson);
 		if (type === Constants.geojsonTypes.POLYGON)
@@ -129,7 +129,7 @@ export class ModeInterfaceAccessors {
 	}
 
 	isInstanceOf(type: string, feature: object): boolean {
-		if (type === Constants.geojsonTypes.POINT) return feature instanceof Point;
+		if (type === Constants.geojsonTypes.POINT) return feature instanceof DrawPoint;
 		if (type === Constants.geojsonTypes.LINE_STRING)
 			return feature instanceof LineString;
 		if (type === Constants.geojsonTypes.POLYGON)

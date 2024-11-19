@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { spy } from 'sinon';
 import {DrawFeature} from '../src/feature_types/feature.ts';
-import Point from '../src/feature_types/point.ts';
+import {DrawPoint} from '../src/feature_types/point.ts';
 import MapLibreDraw from '../index.ts';
 import createFeature from './utils/create_feature.ts';
 import getPublicMemberKeys from './utils/get_public_member_keys.ts';
@@ -13,7 +13,7 @@ import createMap from './utils/create_map.ts';
 test('Point constructor and API', () => {
 	const rawPoint = createFeature('point');
 	const ctx = createMockCtx();
-	const point = new Point(ctx, rawPoint);
+	const point = new DrawPoint(ctx, rawPoint);
 
 	// Instance members
 	assert.equal(point.ctx, ctx, 'point.ctx');
@@ -32,34 +32,34 @@ test('Point constructor and API', () => {
 	);
 
 	// Prototype members
-	assert.equal(typeof Point.prototype.isValid, 'function', 'point.isValid');
+	assert.equal(typeof DrawPoint.prototype.isValid, 'function', 'point.isValid');
 	assert.equal(
-		typeof Point.prototype.getCoordinate,
+		typeof DrawPoint.prototype.getCoordinate,
 		'function',
 		'point.getCoordinate',
 	);
 	assert.equal(
-		typeof Point.prototype.updateCoordinate,
+		typeof DrawPoint.prototype.updateCoordinate,
 		'function',
 		'point.updateCoordinate',
 	);
 	assert.equal(
-		Object.getOwnPropertyNames(Point.prototype).length,
+		Object.getOwnPropertyNames(DrawPoint.prototype).length,
 		4,
 		'no unexpected prototype members',
 	);
 
-	assert.ok(Point.prototype instanceof DrawFeature, 'inherits from Feature');
+	assert.ok(DrawPoint.prototype instanceof DrawFeature, 'inherits from Feature');
 });
 
 test('Point#isValid', () => {
 	const validRawPoint = createFeature('point');
-	const validPoint = new Point(createMockCtx(), validRawPoint);
+	const validPoint = new DrawPoint(createMockCtx(), validRawPoint);
 	assert.equal(validPoint.isValid(), true, 'returns true for valid point');
 
 	const invalidRawPointA = createFeature('point');
 	invalidRawPointA.geometry.coordinates = [0, '1'];
-	const invalidPointA = new Point(createMockCtx(), invalidRawPointA);
+	const invalidPointA = new DrawPoint(createMockCtx(), invalidRawPointA);
 	assert.equal(
 		invalidPointA.isValid(),
 		false,
@@ -68,7 +68,7 @@ test('Point#isValid', () => {
 
 	const invalidRawPointB = createFeature('point');
 	invalidRawPointB.geometry.coordinates = ['1', 0];
-	const invalidPointB = new Point(createMockCtx(), invalidRawPointA);
+	const invalidPointB = new DrawPoint(createMockCtx(), invalidRawPointA);
 	assert.equal(
 		invalidPointB.isValid(),
 		false,
@@ -79,7 +79,7 @@ test('Point#isValid', () => {
 test('Point#updateCoordinate, Point#getCoordinate', () => {
 	const rawPoint = createFeature('point');
 	rawPoint.geometry.coordinates = [1, 2];
-	const point = new Point(createMockCtx(), rawPoint);
+	const point = new DrawPoint(createMockCtx(), rawPoint);
 	const changedSpy = spy(point, 'changed');
 
 	assert.deepEqual(point.getCoordinate(), [1, 2]);

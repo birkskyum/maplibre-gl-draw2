@@ -2,12 +2,12 @@ import hat from 'hat';
 import {DrawFeature} from './feature.ts';
 import * as Constants from '../constants.ts';
 
-import MultiPoint from './point.ts';
+import {DrawPoint} from './point.ts';
 import MultiLineString from './line_string.ts';
 import MultiPolygon from './polygon.ts';
 
 const models = {
-	MultiPoint,
+	MultiPoint: DrawPoint,
 	MultiLineString,
 	MultiPolygon,
 };
