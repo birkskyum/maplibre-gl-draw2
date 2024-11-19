@@ -416,11 +416,7 @@ declare namespace MapLibreDraw {
 		 */
 		sortFeatures(features: DrawFeature[]): DrawFeature[];
 
-		stringSetsAreEqual(
-			a: Array<Pick<Feature, 'id'>>,
-			b: Array<Pick<Feature, 'id'>>,
-		): boolean;
-
+	
 		StringSet(items?: Array<string | number>): StringSet;
 
 		/**
