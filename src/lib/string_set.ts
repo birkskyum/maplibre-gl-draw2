@@ -39,7 +39,7 @@ class StringSet {
 	}
 
 	values(): (string | number)[] {
-		const values = [];
+		const values: {k:string, v:number}[] = [];
 		Object.keys(this._items).forEach((k) => {
 			values.push({ k, v: this._items[k] });
 		});
