@@ -1,4 +1,4 @@
-import euclideanDistance from './euclidean_distance.ts';
+import {euclideanDistance} from './euclidean_distance.ts';
 
 export const TAP_TOLERANCE = 25;
 export const TAP_INTERVAL = 250;

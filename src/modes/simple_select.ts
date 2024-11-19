@@ -1,8 +1,8 @@
 import * as CommonSelectors from '../lib/common_selectors.ts';
 import {mouseEventPoint} from '../lib/mouse_event_point.ts';
-import createSupplementaryPoints from '../lib/create_supplementary_points.ts';
+import {createSupplementaryPoints} from '../lib/create_supplementary_points.ts';
 import {StringSet} from '../lib/string_set.ts';
-import doubleClickZoom from '../lib/double_click_zoom.ts';
+import {doubleClickZoom} from '../lib/double_click_zoom.ts';
 import { moveFeatures } from '../lib/move_features.ts';
 import * as Constants from '../constants.ts';
 

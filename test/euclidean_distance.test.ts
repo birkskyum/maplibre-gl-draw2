@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import euclideanDistance from '../src/lib/euclidean_distance.ts';
+import {euclideanDistance} from '../src/lib/euclidean_distance.ts';
 
 test('euclideanDistance', () => {
 	assert.equal(

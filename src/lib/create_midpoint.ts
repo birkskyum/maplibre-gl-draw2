@@ -1,6 +1,6 @@
 import * as Constants from '../constants.ts';
 
-export default function (parent, startVertex, endVertex) {
+export function createMidPoint (parent, startVertex, endVertex) {
 	const startCoord = startVertex.geometry.coordinates;
 	const endCoord = endVertex.geometry.coordinates;
 

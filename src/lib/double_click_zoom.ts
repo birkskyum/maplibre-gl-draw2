@@ -1,4 +1,4 @@
-export default {
+export const doubleClickZoom = {
 	enable(ctx) {
 		setTimeout(() => {
 			// First check we've got a map and some context.
