@@ -9,7 +9,7 @@ import * as Constants from '../constants.ts';
 import type { BBox, GeoJSON } from 'geojson';
 import { DrawStore } from '../store.ts';
 import type { MapLibreDrawOptions } from '../options.ts';
-import { DrawFeature } from '../feature_types/feature.ts';
+import { Feat } from '../feature_types/feature.ts';
 
 type DrawActionableState = {
 	trash?: boolean;
@@ -45,7 +45,7 @@ export class ModeInterfaceAccessors {
 		}, {});
 	}
 
-	getSelected(): DrawFeature[] {
+	getSelected(): Feat[] {
 		return this._ctx.store?.getSelected() ?? [];
 	}
 
@@ -57,7 +57,7 @@ export class ModeInterfaceAccessors {
 		return this._ctx.store?.isSelected(id) ?? false;
 	}
 
-	getFeature(id: string): DrawFeature {
+	getFeature(id: string): Feat {
 		return this._ctx.store?.get(id);
 	}
 
@@ -76,7 +76,7 @@ export class ModeInterfaceAccessors {
 		return this._ctx.store?.delete(id, opts);
 	}
 
-	addFeature(feature: DrawFeature): DrawStore | undefined {
+	addFeature(feature: Feat): DrawStore | undefined {
 		return this._ctx.store?.add(feature);
 	}
 
@@ -117,13 +117,13 @@ export class ModeInterfaceAccessors {
 		event: Event,
 		bbox: BBox,
 		bufferType: 'click' | 'touch' = 'click',
-	): DrawFeature[] {
+	): Feat[] {
 		if (bufferType !== 'click' && bufferType !== 'touch')
 			throw new Error('invalid buffer type');
 		return featuresAt[bufferType](event, bbox, this._ctx);
 	}
 
-	newFeature(geojson: GeoJSON): DrawFeature {
+	newFeature(geojson: GeoJSON): Feat {
 		const type = geojson.geometry.type;
 		if (type === Constants.geojsonTypes.POINT)
 			return new PointFeat(this._ctx, geojson);

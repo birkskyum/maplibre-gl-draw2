@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { spy } from 'sinon';
-import { DrawFeature } from '../src/feature_types/feature.ts';
+import { Feat } from '../src/feature_types/feature.ts';
 import { PolygonFeat } from '../src/feature_types/polygon.ts';
 import { MapLibreDraw } from '../index.ts';
 import { createFeature } from './utils/create_feature.ts';
@@ -95,7 +95,7 @@ test('Polygon constructor and API', () => {
 	);
 
 	assert.ok(
-		PolygonFeat.prototype instanceof DrawFeature,
+		PolygonFeat.prototype instanceof Feat,
 		'inherits from Feature',
 	);
 });
