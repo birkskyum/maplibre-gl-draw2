@@ -4,7 +4,7 @@ import styles from './lib/theme.ts';
 import {ALL_MODES} from './modes/index.ts';
 
 
-interface MapLibreDrawControls {
+export type MapLibreDrawControls = {
 	point?: boolean | undefined;
 	line_string?: boolean | undefined;
 	polygon?: boolean | undefined;
@@ -13,8 +13,7 @@ interface MapLibreDrawControls {
 	uncombine_features?: boolean | undefined;
 }
 
-
-interface MapLibreDrawOptions {
+export type MapLibreDrawOptions = {
 	displayControlsDefault?: boolean | undefined;
 	keybindings?: boolean | undefined;
 	touchEnabled?: boolean | undefined;
@@ -27,7 +26,6 @@ interface MapLibreDrawOptions {
 	defaultMode?: string | undefined;
 	userProperties?: boolean | undefined;
 }
-
 
 
 const defaultOptions: MapLibreDrawOptions = {

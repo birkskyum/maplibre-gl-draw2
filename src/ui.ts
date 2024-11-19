@@ -59,11 +59,11 @@ export class DrawUI {
 		});
 
 		if (classesToRemove.length > 0) {
-			this.ctx.container.classList.remove(...classesToRemove);
+			this.ctx.container?.classList.remove(...classesToRemove);
 		}
 
 		if (classesToAdd.length > 0) {
-			this.ctx.container.classList.add(...classesToAdd);
+			this.ctx.container?.classList.add(...classesToAdd);
 		}
 
 		this.currentMapClasses = Object.assign(
@@ -144,8 +144,8 @@ export class DrawUI {
 					className: Constants.classes.CONTROL_BUTTON_LINE,
 					title: `LineString tool ${this.ctx.options.keybindings ? '(l)' : ''}`,
 					onActivate: () =>
-						this.ctx.events.changeMode(Constants.modes.DRAW_LINE_STRING),
-					onDeactivate: () => this.ctx.events.trash(),
+						this.ctx.events?.changeMode(Constants.modes.DRAW_LINE_STRING),
+					onDeactivate: () => this.ctx.events?.trash(),
 				},
 			);
 		}
@@ -158,8 +158,8 @@ export class DrawUI {
 					className: Constants.classes.CONTROL_BUTTON_POLYGON,
 					title: `Polygon tool ${this.ctx.options.keybindings ? '(p)' : ''}`,
 					onActivate: () =>
-						this.ctx.events.changeMode(Constants.modes.DRAW_POLYGON),
-					onDeactivate: () => this.ctx.events.trash(),
+						this.ctx.events?.changeMode(Constants.modes.DRAW_POLYGON),
+					onDeactivate: () => this.ctx.events?.trash(),
 				},
 			);
 		}
@@ -172,8 +172,8 @@ export class DrawUI {
 					className: Constants.classes.CONTROL_BUTTON_POINT,
 					title: `Marker tool ${this.ctx.options.keybindings ? '(m)' : ''}`,
 					onActivate: () =>
-						this.ctx.events.changeMode(Constants.modes.DRAW_POINT),
-					onDeactivate: () => this.ctx.events.trash(),
+						this.ctx.events?.changeMode(Constants.modes.DRAW_POINT),
+					onDeactivate: () => this.ctx.events?.trash(),
 				},
 			);
 		}
@@ -184,7 +184,7 @@ export class DrawUI {
 				className: Constants.classes.CONTROL_BUTTON_TRASH,
 				title: 'Delete',
 				onActivate: () => {
-					this.ctx.events.trash();
+					this.ctx.events?.trash();
 				},
 			});
 		}
@@ -197,7 +197,7 @@ export class DrawUI {
 					className: Constants.classes.CONTROL_BUTTON_COMBINE_FEATURES,
 					title: 'Combine',
 					onActivate: () => {
-						this.ctx.events.combineFeatures();
+						this.ctx.events?.combineFeatures();
 					},
 				},
 			);
@@ -211,7 +211,7 @@ export class DrawUI {
 					className: Constants.classes.CONTROL_BUTTON_UNCOMBINE_FEATURES,
 					title: 'Uncombine',
 					onActivate: () => {
-						this.ctx.events.uncombineFeatures();
+						this.ctx.events?.uncombineFeatures();
 					},
 				},
 			);

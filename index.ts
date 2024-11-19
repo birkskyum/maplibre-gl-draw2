@@ -1,4 +1,4 @@
-import setupOptions from './src/options.ts';
+import setupOptions, {type  MapLibreDrawOptions } from './src/options.ts';
 import { ALL_MODES } from './src/modes/index.ts';
 import * as Constants from './src/constants.ts';
 import * as lib from './src/lib/index.ts';
@@ -8,8 +8,10 @@ import {DrawUI} from './src/ui.ts';
 import {DrawApi} from './src/api.ts';
 import type {IControl, Map as MapLibreMap} from 'maplibre-gl';
 
+
+
 export class DrawContext {
-	options: any;
+	options: MapLibreDrawOptions;
 	api?: DrawApi;
 	map?: MapLibreMap;
 	events?: DrawEvents;
@@ -55,7 +57,7 @@ class MapLibreDraw implements IControl {
 		this.ctx.container = map.getContainer();
 		this.ctx.store = new DrawStore(this.ctx);
 
-		this.controlContainer = this.ctx.ui.addButtons();
+		this.controlContainer = this.ctx.ui?.addButtons();
 
 		if (this.ctx.options.boxSelect) {
 			this.boxZoomInitial = map.boxZoom.isEnabled();
@@ -77,23 +79,23 @@ class MapLibreDraw implements IControl {
 			}, 16);
 		}
 
-		this.ctx.events.start();
+		this.ctx.events?.start();
 		return this.controlContainer;
 	}
 
 	public onRemove() {
-		this.ctx.map.off('load', this.connect.bind(this));
+		this.ctx.map?.off('load', this.connect.bind(this));
 		clearInterval(this.mapLoadedInterval);
 
 		this.removeLayers();
-		this.ctx.store.restoreMapConfig();
-		this.ctx.ui.removeButtons();
-		this.ctx.events.removeEventListeners();
-		this.ctx.ui.clearMapClasses();
-		if (this.boxZoomInitial) this.ctx.map.boxZoom.enable();
-		this.ctx.map = null;
-		this.ctx.container = null;
-		this.ctx.store = null;
+		this.ctx.store?.restoreMapConfig();
+		this.ctx.ui?.removeButtons();
+		this.ctx.events?.removeEventListeners();
+		this.ctx.ui?.clearMapClasses();
+		if (this.boxZoomInitial) this.ctx.map?.boxZoom.enable();
+		this.ctx.map = undefined;
+		this.ctx.container = undefined;
+		this.ctx.store = undefined;
 
 		if (this.controlContainer && this.controlContainer.parentNode)
 			this.controlContainer.parentNode.removeChild(this.controlContainer);
@@ -103,51 +105,51 @@ class MapLibreDraw implements IControl {
 	}
 
 	private connect() {
-		this.ctx.map.off('load', this.connect.bind(this));
+		this.ctx.map?.off('load', this.connect.bind(this));
 		clearInterval(this.mapLoadedInterval);
 		this.addLayers();
-		this.ctx.store.storeMapConfig();
-		this.ctx.events.addEventListeners();
+		this.ctx.store?.storeMapConfig();
+		this.ctx.events?.addEventListeners();
 	}
 
 	private addLayers() {
-		this.ctx.map.addSource(Constants.sources.COLD, {
+		this.ctx.map?.addSource(Constants.sources.COLD, {
 			data: {
-				type: Constants.geojsonTypes.FEATURE_COLLECTION,
+				type: "FeatureCollection",
 				features: [],
 			},
 			type: 'geojson',
 		});
 
-		this.ctx.map.addSource(Constants.sources.HOT, {
+		this.ctx.map?.addSource(Constants.sources.HOT, {
 			data: {
-				type: Constants.geojsonTypes.FEATURE_COLLECTION,
+				type: "FeatureCollection",
 				features: [],
 			},
 			type: 'geojson',
 		});
 
-		this.ctx.options.styles.forEach((style: any) => {
-			this.ctx.map.addLayer(style);
+		this.ctx.options.styles?.forEach((style: any) => {
+			this.ctx.map?.addLayer(style);
 		});
 
-		this.ctx.store.setDirty(true);
-		this.ctx.store.render();
+		this.ctx.store?.setDirty();
+		this.ctx.store?.render();
 	}
 
 	private removeLayers() {
-		this.ctx.options.styles.forEach((style: any) => {
-			if (this.ctx.map.getLayer(style.id)) {
-				this.ctx.map.removeLayer(style.id);
+		this.ctx.options.styles?.forEach((style: any) => {
+			if (this.ctx.map?.getLayer(style.id)) {
+				this.ctx.map?.removeLayer(style.id);
 			}
 		});
 
-		if (this.ctx.map.getSource(Constants.sources.COLD)) {
-			this.ctx.map.removeSource(Constants.sources.COLD);
+		if (this.ctx.map?.getSource(Constants.sources.COLD)) {
+			this.ctx.map?.removeSource(Constants.sources.COLD);
 		}
 
-		if (this.ctx.map.getSource(Constants.sources.HOT)) {
-			this.ctx.map.removeSource(Constants.sources.HOT);
+		if (this.ctx.map?.getSource(Constants.sources.HOT)) {
+			this.ctx.map?.removeSource(Constants.sources.HOT);
 		}
 	}
 

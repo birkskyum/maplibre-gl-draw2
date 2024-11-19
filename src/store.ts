@@ -42,7 +42,7 @@ export class DrawStore {
 
 					// Fire deduplicated selection change event
 					if (this._emitSelectionChange) {
-						this.ctx.events.fire(Constants.events.SELECTION_CHANGE, {
+						this.ctx.events?.fire(Constants.events.SELECTION_CHANGE, {
 							features: this.getSelected().map((feature) =>
 								feature.toGeoJSON(),
 							),
@@ -60,7 +60,7 @@ export class DrawStore {
 					}
 
 					// Fire render event
-					this.ctx.events.fire(Constants.events.RENDER, {});
+					this.ctx.events?.fire(Constants.events.RENDER, {});
 				});
 			}
 		};
@@ -127,7 +127,7 @@ export class DrawStore {
 		});
 
 		if (deletedFeaturesToEmit.length) {
-			this.ctx.events.fire(Constants.events.DELETE, {
+			this.ctx.events?.fire(Constants.events.DELETE, {
 				features: deletedFeaturesToEmit,
 			});
 		}

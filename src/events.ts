@@ -65,7 +65,7 @@ export class DrawEvents {
 				time: new Date().getTime(),
 			})
 		) {
-			this.ctx.ui.queueMapClasses({ mouse: Constants.cursors.DRAG });
+			this.ctx.ui?.queueMapClasses({ mouse: Constants.cursors.DRAG });
 			this.currentMode.drag(event);
 		} else {
 			event.originalEvent.stopPropagation();
@@ -195,7 +195,7 @@ export class DrawEvents {
 	}
 
 	public handleZoomEnd(): void {
-		this.ctx.store.changeZoom();
+		this.ctx.store?.changeZoom();
 	}
 
 	public handleData(event: any): void {
@@ -231,11 +231,11 @@ export class DrawEvents {
 		this.currentMode = setupModeHandler(mode, this.ctx);
 
 		if (!eventOptions.silent) {
-			this.ctx.map.fire(Constants.events.MODE_CHANGE, { mode: modename });
+			this.ctx.map?.fire(Constants.events.MODE_CHANGE, { mode: modename });
 		}
 
-		this.ctx.store.setDirty();
-		this.ctx.store.render();
+		this.ctx.store?.setDirty();
+		this.ctx.store?.render();
 	}
 
 	public actionable(actions: Partial<ActionState>): void {
@@ -254,7 +254,7 @@ export class DrawEvents {
 				actions[action as keyof ActionState]!;
 		});
 		if (changed) {
-			this.ctx.map.fire(Constants.events.ACTIONABLE, {
+			this.ctx.map?.fire(Constants.events.ACTIONABLE, {
 				actions: this.actionState,
 			});
 		}
@@ -278,42 +278,42 @@ export class DrawEvents {
 
 	public fire(eventName: string, eventData: any): void {
 		if (!this.ctx.map) return;
-		this.ctx.map.fire(eventName, eventData);
+		this.ctx.map?.fire(eventName, eventData);
 	}
 
 	public addEventListeners(): void {
-		this.ctx.map.on('mousemove', this.events.mousemove);
-		this.ctx.map.on('mousedown', this.events.mousedown);
-		this.ctx.map.on('mouseup', this.events.mouseup);
-		this.ctx.map.on('data', this.events.data);
+		this.ctx.map?.on('mousemove', this.events.mousemove);
+		this.ctx.map?.on('mousedown', this.events.mousedown);
+		this.ctx.map?.on('mouseup', this.events.mouseup);
+		this.ctx.map?.on('data', this.events.data);
 
-		this.ctx.map.on('touchmove', this.events.touchmove);
-		this.ctx.map.on('touchstart', this.events.touchstart);
-		this.ctx.map.on('touchend', this.events.touchend);
+		this.ctx.map?.on('touchmove', this.events.touchmove);
+		this.ctx.map?.on('touchstart', this.events.touchstart);
+		this.ctx.map?.on('touchend', this.events.touchend);
 
-		this.ctx.container.addEventListener('mouseout', this.events.mouseout);
+		this.ctx.container?.addEventListener('mouseout', this.events.mouseout);
 
 		if (this.ctx.options.keybindings) {
-			this.ctx.container.addEventListener('keydown', this.events.keydown);
-			this.ctx.container.addEventListener('keyup', this.events.keyup);
+			this.ctx.container?.addEventListener('keydown', this.events.keydown);
+			this.ctx.container?.addEventListener('keyup', this.events.keyup);
 		}
 	}
 
 	public removeEventListeners(): void {
-		this.ctx.map.off('mousemove', this.events.mousemove);
-		this.ctx.map.off('mousedown', this.events.mousedown);
-		this.ctx.map.off('mouseup', this.events.mouseup);
-		this.ctx.map.off('data', this.events.data);
+		this.ctx.map?.off('mousemove', this.events.mousemove);
+		this.ctx.map?.off('mousedown', this.events.mousedown);
+		this.ctx.map?.off('mouseup', this.events.mouseup);
+		this.ctx.map?.off('data', this.events.data);
 
-		this.ctx.map.off('touchmove', this.events.touchmove);
-		this.ctx.map.off('touchstart', this.events.touchstart);
-		this.ctx.map.off('touchend', this.events.touchend);
+		this.ctx.map?.off('touchmove', this.events.touchmove);
+		this.ctx.map?.off('touchstart', this.events.touchstart);
+		this.ctx.map?.off('touchend', this.events.touchend);
 
-		this.ctx.container.removeEventListener('mouseout', this.events.mouseout);
+		this.ctx.container?.removeEventListener('mouseout', this.events.mouseout);
 
 		if (this.ctx.options.keybindings) {
-			this.ctx.container.removeEventListener('keydown', this.events.keydown);
-			this.ctx.container.removeEventListener('keyup', this.events.keyup);
+			this.ctx.container?.removeEventListener('keydown', this.events.keydown);
+			this.ctx.container?.removeEventListener('keyup', this.events.keyup);
 		}
 	}
 

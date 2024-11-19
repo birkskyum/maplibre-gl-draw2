@@ -76,7 +76,7 @@
 				"noDuplicateClassMembers": "error",
 				"noDuplicateObjectKeys": "error",
 				"noDuplicateParameters": "error",
-				"noEmptyBlockStatements": "error",
+				"noEmptyBlockStatements": "off",
 				"noExplicitAny": "warn",
 				"noExtraNonNullAssertion": "error",
 				"noFallthroughSwitchClause": "error",

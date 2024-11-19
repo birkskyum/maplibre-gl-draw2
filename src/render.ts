@@ -12,7 +12,7 @@ export default function render() {
 
 	store.ctx.ui.queueMapClasses({ mode });
 
-	let newHotIds = [];
+	let newHotIds: any[] = [];
 	let newColdIds = [];
 
 	if (store.isDirty) {
