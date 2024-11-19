@@ -163,8 +163,8 @@ test('Store constructor and public API', () => {
 	);
 
 	assert.equal(
-		getPublicMemberKeys(Store.prototype).length,
-		24,
+		Object.getOwnPropertyNames(Store.prototype).length,
+		26,
 		'no untested prototype members',
 	);
 });
