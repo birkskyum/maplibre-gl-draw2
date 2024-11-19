@@ -20,7 +20,7 @@ function comparator(a, b) {
 }
 
 // Sort in the order above, then sort polygons by area ascending.
-function sortFeatures(features) {
+export function sortFeatures(features) {
 	return features
 		.map((feature) => {
 			if (feature.geometry.type === Constants.geojsonTypes.POLYGON) {
@@ -37,5 +37,3 @@ function sortFeatures(features) {
 			return feature;
 		});
 }
-
-export default sortFeatures;

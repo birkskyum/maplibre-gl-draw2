@@ -4,7 +4,7 @@ const FINE_TOLERANCE = 4;
 const GROSS_TOLERANCE = 12;
 const INTERVAL = 500;
 
-export default function isClick(
+export function isClick(
 	start: { point?: { x: number; y: number }; time?: number },
 	end: { point: { x: number; y: number }; time: number },
 	options?: {

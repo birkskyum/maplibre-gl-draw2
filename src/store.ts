@@ -1,5 +1,5 @@
 import { toDenseArray } from './lib/to_dense_array.ts';
-import StringSet from './lib/string_set.ts';
+import {StringSet} from './lib/string_set.ts';
 import render from './render.ts';
 import * as Constants from './constants.ts';
 import type { DrawContext } from '../index.ts';

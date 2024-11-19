@@ -3,7 +3,7 @@ import euclideanDistance from './euclidean_distance.ts';
 export const TAP_TOLERANCE = 25;
 export const TAP_INTERVAL = 250;
 
-export default function isTap(start, end, options = {}) {
+export function isTap(start, end, options = {}) {
 	const tolerance =
 		options.tolerance != null ? options.tolerance : TAP_TOLERANCE;
 	const interval = options.interval != null ? options.interval : TAP_INTERVAL;

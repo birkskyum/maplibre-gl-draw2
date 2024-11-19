@@ -6,7 +6,7 @@ import { ModeInterfaceAccessors } from './mode_interface_accessors.ts';
  * @name MODE.onSetup
  * @returns {Object} - this object will be passed to all other life cycle functions
  */
-export default class ModeInterface extends ModeInterfaceAccessors {
+export class ModeInterface extends ModeInterfaceAccessors {
 	onSetup() {}
 
 	/**

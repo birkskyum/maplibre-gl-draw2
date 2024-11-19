@@ -1,12 +1,12 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { spy } from 'sinon';
-import modeHandler from '../src/lib/mode_handler.ts';
+import {ModeHandler} from '../src/lib/mode_handler.ts';
 import {createMockModeHandlerContext} from './utils/create_mock_mode_handler_context.ts';
 import {createMockMode} from './utils/create_mock_mode.ts';
 
 test('returned API', () => {
-	const mh = modeHandler(createMockMode(), createMockModeHandlerContext());
+	const mh = ModeHandler(createMockMode(), createMockModeHandlerContext());
 	assert.equal(typeof mh.render, 'function', 'exposes render');
 	assert.equal(typeof mh.stop, 'function', 'exposes stop');
 	assert.equal(typeof mh.trash, 'function', 'exposes trash');
@@ -47,7 +47,7 @@ test('ModeHandler calling mode.start with context, and delegation functionality'
 	});
 	const drawContext = createMockModeHandlerContext();
 
-	const mh = modeHandler(mode, drawContext);
+	const mh = ModeHandler(mode, drawContext);
 	assert.equal(
 		handleStartSpy.callCount,
 		1,
@@ -258,7 +258,7 @@ test('ModeHandler calling mode.start with context, and delegation functionality'
 
 test('ModeHandler#stop calling mode.stop', () => {
 	const mode = createMockMode();
-	const mh = modeHandler(mode, createMockModeHandlerContext());
+	const mh = ModeHandler(mode, createMockModeHandlerContext());
 
 	mh.stop();
 	assert.equal(mode.stop.callCount, 1, 'mode.stop called');
@@ -267,7 +267,7 @@ test('ModeHandler#stop calling mode.stop', () => {
 test('ModeHandler#stop not calling nonexistent mode.stop', () => {
 	const mode = createMockMode();
 	delete mode.stop;
-	const mh = modeHandler(mode, createMockModeHandlerContext());
+	const mh = ModeHandler(mode, createMockModeHandlerContext());
 
 	assert.doesNotThrow(() => {
 		mh.stop();
@@ -277,7 +277,7 @@ test('ModeHandler#stop not calling nonexistent mode.stop', () => {
 test('Modehandler#trash', () => {
 	const mode = createMockMode();
 	const drawContext = createMockModeHandlerContext();
-	const mh = modeHandler(mode, drawContext);
+	const mh = ModeHandler(mode, drawContext);
 
 	mh.trash();
 	assert.equal(mode.trash.callCount, 1, 'mode.trash called');
@@ -288,7 +288,7 @@ test('Modehandler#trash without a mode.trash', () => {
 	const mode = createMockMode();
 	delete mode.trash;
 	const drawContext = createMockModeHandlerContext();
-	const mh = modeHandler(mode, drawContext);
+	const mh = ModeHandler(mode, drawContext);
 
 	assert.doesNotThrow(() => {
 		mh.trash();

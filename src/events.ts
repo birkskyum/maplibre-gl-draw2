@@ -1,8 +1,8 @@
-import setupModeHandler from './lib/mode_handler.ts';
+import {ModeHandler} from './lib/mode_handler.ts';
 import getFeaturesAndSetCursor from './lib/get_features_and_set_cursor.ts';
 import featuresAt from './lib/features_at.ts';
-import isClick from './lib/is_click.ts';
-import isTap from './lib/is_tap.ts';
+import {isClick} from './lib/is_click.ts';
+import {isTap} from './lib/is_tap.ts';
 import * as Constants from './constants.ts';
 import {objectToMode} from './modes/object_to_mode.ts';
 import type { DrawContext } from '../index.ts';
@@ -228,7 +228,7 @@ export class DrawEvents {
 		}
 		this.currentModeName = modename;
 		const mode = modebuilder(this.ctx, nextModeOptions);
-		this.currentMode = setupModeHandler(mode, this.ctx);
+		this.currentMode = ModeHandler(mode, this.ctx);
 
 		if (!eventOptions.silent) {
 			this.ctx.map?.fire(Constants.events.MODE_CHANGE, { mode: modename });
@@ -262,7 +262,7 @@ export class DrawEvents {
 
 	public start(): void {
 		this.currentModeName = this.ctx.options.defaultMode;
-		this.currentMode = setupModeHandler(
+		this.currentMode = ModeHandler(
 			this.modes[this.currentModeName](this.ctx),
 			this.ctx,
 		);

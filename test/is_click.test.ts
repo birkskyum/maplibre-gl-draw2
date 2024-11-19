@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import isClick from '../src/lib/is_click.ts';
+import {isClick} from '../src/lib/is_click.ts';
 
 // By adding these values as options and stating them in the test,
 // we can know the calculation works from the tests, but tweak

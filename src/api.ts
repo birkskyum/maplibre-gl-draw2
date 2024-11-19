@@ -4,7 +4,7 @@ import { nanoid } from 'nanoid';
 import featuresAt from './lib/features_at.ts';
 import { stringSetsAreEqual } from './lib/string_sets_are_equal.ts';
 import * as Constants from './constants.ts';
-import StringSet from './lib/string_set.ts';
+import {StringSet} from './lib/string_set.ts';
 
 import { PolygonFeat } from './feature_types/polygon.ts';
 import { LineStringFeat } from './feature_types/line_string.ts';

@@ -1,4 +1,4 @@
-class StringSet {
+export class StringSet {
 	private _items: Record<string, number>;
 	private _nums: Record<number, number>;
 	private _length: number;
@@ -58,4 +58,3 @@ class StringSet {
 	}
 }
 
-export default StringSet;

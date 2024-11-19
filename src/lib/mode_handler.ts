@@ -1,4 +1,4 @@
-const ModeHandler = function (mode, DrawContext) {
+export const ModeHandler = function (mode, DrawContext) {
 	const handlers = {
 		drag: [],
 		click: [],
@@ -111,4 +111,3 @@ const ModeHandler = function (mode, DrawContext) {
 	};
 };
 
-export default ModeHandler;

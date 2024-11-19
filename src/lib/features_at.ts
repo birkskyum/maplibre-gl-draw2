@@ -1,7 +1,7 @@
-import sortFeatures from './sort_features.ts';
-import mapEventToBoundingBox from './map_event_to_bounding_box.ts';
+import {sortFeatures} from './sort_features.ts';
+import {mapEventToBoundingBox} from './map_event_to_bounding_box.ts';
 import * as Constants from '../constants.ts';
-import StringSet from './string_set.ts';
+import {StringSet} from './string_set.ts';
 
 const META_TYPES = [
 	Constants.meta.FEATURE,
