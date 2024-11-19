@@ -8,7 +8,7 @@ import {DragMouse} from '../lib/mouse_drag.ts';
 
 const START = { x: 189, y: 293 };
 
-export default class Benchmark extends Evented {
+export class Benchmark extends Evented {
 	constructor(options) {
 		super();
 

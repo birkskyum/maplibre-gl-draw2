@@ -11,7 +11,7 @@ const START = {
 	y: 300,
 };
 
-export default class SimpleSelectSmallBenchmark extends Evented {
+export class Benchmark extends Evented {
 	constructor(options) {
 		super();
 		const out = options.createMap();

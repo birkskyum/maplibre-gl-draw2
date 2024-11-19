@@ -9,33 +9,33 @@ try {
 
 function main() {
 	const benchmarks = {
-		simple_select_small: require('./tests/simple_select_small'),
-		simple_select_large: require('./tests/simple_select_large'),
-		simple_select_large_two_maps: require('./tests/simple_select_large_two_maps'),
-		simple_select_large_zoomed: require('./tests/simple_select_large_zoomed'),
+		simple_select_small: require('./tests/simple_select_small').Benchmark,
+		simple_select_large: require('./tests/simple_select_large').Benchmark,
+		simple_select_large_two_maps: require('./tests/simple_select_large_two_maps').Benchmark,
+		simple_select_large_zoomed: require('./tests/simple_select_large_zoomed').Benchmark,
 
-		direct_select_small: require('./tests/direct_select_small'),
-		direct_select_small_zoomed: require('./tests/direct_select_small_zoomed'),
-		direct_select_large: require('./tests/direct_select_large'),
-		direct_select_large_zoomed: require('./tests/direct_select_large_zoomed'),
+		direct_select_small: require('./tests/direct_select_small').Benchmark,
+		direct_select_small_zoomed: require('./tests/direct_select_small_zoomed').Benchmark,
+		direct_select_large: require('./tests/direct_select_large').Benchmark,
+		direct_select_large_zoomed: require('./tests/direct_select_large_zoomed').Benchmark,
 
-		draw_line_string_small: require('./tests/draw_line_string_small'),
-		draw_line_string_large: require('./tests/draw_line_string_large'),
-		draw_line_string_large_zoomed: require('./tests/draw_line_string_large_zoomed'),
+		draw_line_string_small: require('./tests/draw_line_string_small').Benchmark,
+		draw_line_string_large: require('./tests/draw_line_string_large').Benchmark,
+		draw_line_string_large_zoomed: require('./tests/draw_line_string_large_zoomed').Benchmark,
 
-		draw_polygon_small: require('./tests/draw_polygon_small'),
-		draw_polygon_large: require('./tests/draw_polygon_large'),
-		draw_polygon_large_zoomed: require('./tests/draw_polygon_large_zoomed'),
+		draw_polygon_small: require('./tests/draw_polygon_small').Benchmark,
+		draw_polygon_large: require('./tests/draw_polygon_large').Benchmark,
+		draw_polygon_large_zoomed: require('./tests/draw_polygon_large_zoomed').Benchmark,
 
-		draw_land_polygon_small: require('./tests/draw_land_polygon_small'),
-		draw_land_polygon_large: require('./tests/draw_land_polygon_large'),
+		draw_land_polygon_small: require('./tests/draw_land_polygon_small').Benchmark,
+		draw_land_polygon_large: require('./tests/draw_land_polygon_large').Benchmark,
 
-		draw_urban_areas_polygon_small: require('./tests/draw_urban_areas_polygon_small'),
-		draw_urban_areas_polygon_large: require('./tests/draw_urban_areas_polygon_large'),
+		draw_urban_areas_polygon_small: require('./tests/draw_urban_areas_polygon_small').Benchmark,
+		draw_urban_areas_polygon_large: require('./tests/draw_urban_areas_polygon_large').Benchmark,
 
-		draw_point_small: require('./tests/draw_point_small'),
-		draw_point_large: require('./tests/draw_point_large'),
-		draw_point_large_zoomed: require('./tests/draw_point_large_zoomed'),
+		draw_point_small: require('./tests/draw_point_small').Benchmark,
+		draw_point_large: require('./tests/draw_point_large').Benchmark,
+		draw_point_large_zoomed: require('./tests/draw_point_large_zoomed').Benchmark,
 	};
 
 	const benchmarkName = location.hash.substr(1);
@@ -117,8 +117,6 @@ function createMap(options) {
 	mapElement.style.display = 'block';
 	mapElement.style.width = `${options.width}px`;
 	mapElement.style.height = `${options.height}px`;
-
-	maplibregl.accessToken = getAccessToken();
 
 	const map = new maplibregl.Map(
 		Object.assign(

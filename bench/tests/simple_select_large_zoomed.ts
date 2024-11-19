@@ -11,7 +11,7 @@ const START = {
 	y: 278,
 };
 
-export default class SimpleSelectLargeZoomedBenchmark extends Evented {
+export class Benchmark extends Evented {
 	constructor(options) {
 		super();
 

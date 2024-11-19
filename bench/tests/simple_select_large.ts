@@ -11,7 +11,7 @@ const START = {
 	y: 278,
 };
 
-export default class SimpleSelectLargeBenchmark extends Evented {
+export class Benchmark extends Evented {
 	constructor(options) {
 		super();
 		const out = options.createMap({ width: 1024 });

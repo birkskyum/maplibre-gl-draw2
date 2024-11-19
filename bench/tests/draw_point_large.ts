@@ -7,7 +7,7 @@ import {DrawMouse} from '../lib/mouse_draw';
 
 const START = { x: 189, y: 293 };
 
-export default class Benchmark extends Evented {
+export class Benchmark extends Evented {
 	constructor(options) {
 		super();
 

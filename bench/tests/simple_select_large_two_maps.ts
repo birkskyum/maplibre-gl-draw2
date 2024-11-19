@@ -22,7 +22,7 @@ const emptyStyle = {
 	layers: [],
 };
 
-export default class SimpleSelectLargeTwoMapsBenchmark extends Evented {
+export class Benchmark extends Evented {
 	constructor(options) {
 		super();
 		// eslint-disable-next-line no-unused-vars
