@@ -215,7 +215,7 @@ export class DrawEvents {
 	public isKeyModeValid(code: number): boolean {
 		return !(code === 8 || code === 46 || (code >= 48 && code <= 57));
 	}
-	private changeMode(
+	public changeMode(
 		modename: string,
 		nextModeOptions?: any,
 		eventOptions: any = {},

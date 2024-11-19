@@ -18,58 +18,58 @@ export class ModeInterfaceAccessors {
 	}
 
 	setSelected(features: any) {
-		return this._ctx.store.setSelected(features);
+		return this._ctx.store?.setSelected(features);
 	}
 
 	setSelectedCoordinates(coords: any) {
-		this._ctx.store.setSelectedCoordinates(coords);
+		this._ctx.store?.setSelectedCoordinates(coords);
 		coords.reduce((m: any, c: any) => {
 			if (m[c.feature_id] === undefined) {
 				m[c.feature_id] = true;
-				this._ctx.store.get(c.feature_id).changed();
+				this._ctx.store?.get(c.feature_id).changed();
 			}
 			return m;
 		}, {});
 	}
 
 	getSelected() {
-		return this._ctx.store.getSelected();
+		return this._ctx.store?.getSelected();
 	}
 
 	getSelectedIds() {
-		return this._ctx.store.getSelectedIds();
+		return this._ctx.store?.getSelectedIds();
 	}
 
 	isSelected(id: string) {
-		return this._ctx.store.isSelected(id);
+		return this._ctx.store?.isSelected(id);
 	}
 
 	getFeature(id: string) {
-		return this._ctx.store.get(id);
+		return this._ctx.store?.get(id);
 	}
 
 	select(id: string) {
-		return this._ctx.store.select(id);
+		return this._ctx.store?.select(id);
 	}
 
 	deselect(id: string) {
-		return this._ctx.store.deselect(id);
+		return this._ctx.store?.deselect(id);
 	}
 
 	deleteFeature(id: string, opts: any = {}) {
-		return this._ctx.store.delete(id, opts);
+		return this._ctx.store?.delete(id, opts);
 	}
 
 	addFeature(feature: any) {
-		return this._ctx.store.add(feature);
+		return this._ctx.store?.add(feature);
 	}
 
 	clearSelectedFeatures() {
-		return this._ctx.store.clearSelected();
+		return this._ctx.store?.clearSelected();
 	}
 
 	clearSelectedCoordinates() {
-		return this._ctx.store.clearSelectedCoordinates();
+		return this._ctx.store?.clearSelectedCoordinates();
 	}
 
 	setActionableState(actions: any = {}) {
@@ -78,23 +78,23 @@ export class ModeInterfaceAccessors {
 			combineFeatures: actions.combineFeatures || false,
 			uncombineFeatures: actions.uncombineFeatures || false,
 		};
-		return this._ctx.events.actionable(newSet);
+		return this._ctx.events?.actionable(newSet);
 	}
 
 	changeMode(mode: string, opts: any = {}, eventOpts: any = {}) {
-		return this._ctx.events.changeMode(mode, opts, eventOpts);
+		return this._ctx.events?.changeMode(mode, opts, eventOpts);
 	}
 
 	fire(eventName: string, eventData: any) {
-		return this._ctx.events.fire(eventName, eventData);
+		return this._ctx.events?.fire(eventName, eventData);
 	}
 
 	updateUIClasses(opts: any) {
-		return this._ctx.ui.queueMapClasses(opts);
+		return this._ctx.ui?.queueMapClasses(opts);
 	}
 
-	activateUIButton(name?: string) {
-		return this._ctx.ui.setActiveButton(name);
+	activateUIButton(name: string) {
+		return this._ctx.ui?.setActiveButton(name);
 	}
 
 	featuresAt(event: any, bbox: any, bufferType: string = 'click') {
@@ -125,6 +125,6 @@ export class ModeInterfaceAccessors {
 	}
 
 	doRender(id: string) {
-		return this._ctx.store.featureChanged(id);
+		return this._ctx.store?.featureChanged(id);
 	}
 }
