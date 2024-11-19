@@ -1,6 +1,6 @@
 export default function () {
 	let frameCount = 0;
-	let start = null;
+	let start = 0;
 	let running = false;
 
 	const frameCounter = function () {
