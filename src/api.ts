@@ -19,33 +19,39 @@ const featureTypes = {
 	MultiLineString: MultiFeature,
 	MultiPoint: MultiFeature,
 };
+ 
+export default class Api {
+	public ctx: any;
+	public modes: typeof Constants.modes;
 
-export default function (ctx, api) {
-	api.modes = Constants.modes;
+	constructor(ctx: any) {
+		this.ctx = ctx;
+		this.modes = Constants.modes;
+	}
 
-	api.getFeatureIdsAt = function (point) {
-		const features = featuresAt.click({ point }, null, ctx);
+	public getFeatureIdsAt(point: any): string[] {
+		const features = featuresAt.click({ point }, null, this.ctx);
 		return features.map((feature) => feature.properties.id);
-	};
+	}
 
-	api.getSelectedIds = function () {
-		return ctx.store.getSelectedIds();
-	};
+	public getSelectedIds(): string[] {
+		return this.ctx.store.getSelectedIds();
+	}
 
-	api.getSelected = function () {
+	public getSelected() {
 		return {
 			type: Constants.geojsonTypes.FEATURE_COLLECTION,
-			features: ctx.store
+			features: this.ctx.store
 				.getSelectedIds()
-				.map((id) => ctx.store.get(id))
-				.map((feature) => feature.toGeoJSON()),
+				.map((id: string) => this.ctx.store.get(id))
+				.map((feature: any) => feature.toGeoJSON()),
 		};
-	};
+	}
 
-	api.getSelectedPoints = function () {
+	public getSelectedPoints() {
 		return {
 			type: Constants.geojsonTypes.FEATURE_COLLECTION,
-			features: ctx.store.getSelectedCoordinates().map((coordinate) => ({
+			features: this.ctx.store.getSelectedCoordinates().map((coordinate: any) => ({
 				type: Constants.geojsonTypes.FEATURE,
 				properties: {},
 				geometry: {
@@ -54,9 +60,9 @@ export default function (ctx, api) {
 				},
 			})),
 		};
-	};
+	}
 
-	api.set = function (featureCollection) {
+	public set(featureCollection: any): string[] {
 		if (
 			featureCollection.type === undefined ||
 			featureCollection.type !== Constants.geojsonTypes.FEATURE_COLLECTION ||
@@ -64,24 +70,24 @@ export default function (ctx, api) {
 		) {
 			throw new Error('Invalid FeatureCollection');
 		}
-		const renderBatch = ctx.store.createRenderBatch();
-		let toDelete = ctx.store.getAllIds().slice();
-		const newIds = api.add(featureCollection);
+		const renderBatch = this.ctx.store.createRenderBatch();
+		let toDelete = this.ctx.store.getAllIds().slice();
+		const newIds = this.add(featureCollection);
 		const newIdsLookup = new StringSet(newIds);
 
 		toDelete = toDelete.filter((id) => !newIdsLookup.has(id));
 		if (toDelete.length) {
-			api.delete(toDelete);
+			this.delete(toDelete);
 		}
 
 		renderBatch();
 		return newIds;
-	};
+	}
 
-	api.add = function (geojson) {
+	public add(geojson: any): string[] {
 		const featureCollection = JSON.parse(JSON.stringify(normalize(geojson)));
 
-		const ids = featureCollection.features.map((feature) => {
+		const ids = featureCollection.features.map((feature: any) => {
 			feature.id = feature.id || hat();
 
 			if (feature.geometry === null) {
@@ -89,142 +95,119 @@ export default function (ctx, api) {
 			}
 
 			if (
-				ctx.store.get(feature.id) === undefined ||
-				ctx.store.get(feature.id).type !== feature.geometry.type
+				this.ctx.store.get(feature.id) === undefined ||
+				this.ctx.store.get(feature.id).type !== feature.geometry.type
 			) {
-				// If the feature has not yet been created ...
-				const Model = featureTypes[feature.geometry.type];
+				const Model = featureTypes[feature.geometry.type as keyof typeof featureTypes];
 				if (Model === undefined) {
 					throw new Error(`Invalid geometry type: ${feature.geometry.type}.`);
 				}
-				const internalFeature = new Model(ctx, feature);
-				ctx.store.add(internalFeature);
+				const internalFeature = new Model(this.ctx, feature);
+				this.ctx.store.add(internalFeature);
 			} else {
-				// If a feature of that id has already been created, and we are swapping it out ...
-				const internalFeature = ctx.store.get(feature.id);
+				const internalFeature = this.ctx.store.get(feature.id);
 				const originalProperties = internalFeature.properties;
 				internalFeature.properties = feature.properties;
 				if (!isEqual(originalProperties, feature.properties)) {
-					ctx.store.featureChanged(internalFeature.id);
+					this.ctx.store.featureChanged(internalFeature.id);
 				}
-				if (
-					!isEqual(
-						internalFeature.getCoordinates(),
-						feature.geometry.coordinates,
-					)
-				) {
+				if (!isEqual(internalFeature.getCoordinates(), feature.geometry.coordinates)) {
 					internalFeature.incomingCoords(feature.geometry.coordinates);
 				}
 			}
 			return feature.id;
 		});
 
-		ctx.store.render();
+		this.ctx.store.render();
 		return ids;
-	};
+	}
 
-	api.get = function (id) {
-		const feature = ctx.store.get(id);
+	public get(id: string) {
+		const feature = this.ctx.store.get(id);
 		if (feature) {
 			return feature.toGeoJSON();
 		}
-	};
+	}
 
-	api.getAll = function () {
+	public getAll() {
 		return {
 			type: Constants.geojsonTypes.FEATURE_COLLECTION,
-			features: ctx.store.getAll().map((feature) => feature.toGeoJSON()),
+			features: this.ctx.store.getAll().map((feature: any) => feature.toGeoJSON()),
 		};
-	};
+	}
 
-	api.delete = function (featureIds) {
-		ctx.store.delete(featureIds, { silent: true });
-		// If we were in direct select mode and our selected feature no longer exists
-		// (because it was deleted), we need to get out of that mode.
+	public delete(featureIds: string | string[]): this {
+		this.ctx.store.delete(featureIds, { silent: true });
 		if (
-			api.getMode() === Constants.modes.DIRECT_SELECT &&
-			!ctx.store.getSelectedIds().length
+			this.getMode() === Constants.modes.DIRECT_SELECT &&
+			!this.ctx.store.getSelectedIds().length
 		) {
-			ctx.events.changeMode(Constants.modes.SIMPLE_SELECT, undefined, {
+			this.ctx.events.changeMode(Constants.modes.SIMPLE_SELECT, undefined, {
 				silent: true,
 			});
 		} else {
-			ctx.store.render();
+			this.ctx.store.render();
 		}
+		return this;
+	}
 
-		return api;
-	};
-
-	api.deleteAll = function () {
-		ctx.store.delete(ctx.store.getAllIds(), { silent: true });
-		// If we were in direct select mode, now our selected feature no longer exists,
-		// so escape that mode.
-		if (api.getMode() === Constants.modes.DIRECT_SELECT) {
-			ctx.events.changeMode(Constants.modes.SIMPLE_SELECT, undefined, {
+	public deleteAll(): this {
+		this.ctx.store.delete(this.ctx.store.getAllIds(), { silent: true });
+		if (this.getMode() === Constants.modes.DIRECT_SELECT) {
+			this.ctx.events.changeMode(Constants.modes.SIMPLE_SELECT, undefined, {
 				silent: true,
 			});
 		} else {
-			ctx.store.render();
+			this.ctx.store.render();
 		}
+		return this;
+	}
 
-		return api;
-	};
-
-	api.changeMode = function (mode, modeOptions = {}) {
-		// Avoid changing modes just to re-select what's already selected
+	public changeMode(mode: string, modeOptions: any = {}): this {
 		if (
 			mode === Constants.modes.SIMPLE_SELECT &&
-			api.getMode() === Constants.modes.SIMPLE_SELECT
+			this.getMode() === Constants.modes.SIMPLE_SELECT
 		) {
-			if (
-				stringSetsAreEqual(
-					modeOptions.featureIds || [],
-					ctx.store.getSelectedIds(),
-				)
-			)
-				return api;
-			// And if we are changing the selection within simple_select mode, just change the selection,
-			// instead of stopping and re-starting the mode
-			ctx.store.setSelected(modeOptions.featureIds, { silent: true });
-			ctx.store.render();
-			return api;
+			if (stringSetsAreEqual(modeOptions.featureIds || [], this.ctx.store.getSelectedIds()))
+				return this;
+			this.ctx.store.setSelected(modeOptions.featureIds, { silent: true });
+			this.ctx.store.render();
+			return this;
 		}
 
 		if (
 			mode === Constants.modes.DIRECT_SELECT &&
-			api.getMode() === Constants.modes.DIRECT_SELECT &&
-			modeOptions.featureId === ctx.store.getSelectedIds()[0]
+			this.getMode() === Constants.modes.DIRECT_SELECT &&
+			modeOptions.featureId === this.ctx.store.getSelectedIds()[0]
 		) {
-			return api;
+			return this;
 		}
 
-		ctx.events.changeMode(mode, modeOptions, { silent: true });
-		return api;
-	};
+		this.ctx.events.changeMode(mode, modeOptions, { silent: true });
+		return this;
+	}
 
-	api.getMode = function () {
-		return ctx.events.getMode();
-	};
+	public getMode(): string {
+		return this.ctx.events.getMode();
+	}
 
-	api.trash = function () {
-		ctx.events.trash({ silent: true });
-		return api;
-	};
+	public trash(): this {
+		this.ctx.events.trash({ silent: true });
+		return this;
+	}
 
-	api.combineFeatures = function () {
-		ctx.events.combineFeatures({ silent: true });
-		return api;
-	};
+	public combineFeatures(): this {
+		this.ctx.events.combineFeatures({ silent: true });
+		return this;
+	}
 
-	api.uncombineFeatures = function () {
-		ctx.events.uncombineFeatures({ silent: true });
-		return api;
-	};
+	public uncombineFeatures(): this {
+		this.ctx.events.uncombineFeatures({ silent: true });
+		return this;
+	}
 
-	api.setFeatureProperty = function (featureId, property, value) {
-		ctx.store.setFeatureProperty(featureId, property, value);
-		return api;
-	};
-
-	return api;
+	public setFeatureProperty(featureId: string, property: string, value: any): this {
+		this.ctx.store.setFeatureProperty(featureId, property, value);
+		return this;
+	}
 }
