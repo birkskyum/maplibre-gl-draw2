@@ -15,6 +15,15 @@ export const classes = {
 	BOX_SELECT: 'maplibre-gl-draw_boxselect',
 };
 
+
+export const controls = {
+	line_string: true,
+	point: true,
+	polygon: true,
+	trash: true,
+};
+
+
 export const sources = {
 	HOT: 'maplibre-gl-draw-hot',
 	COLD: 'maplibre-gl-draw-cold',

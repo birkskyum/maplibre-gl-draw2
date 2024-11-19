@@ -4,12 +4,8 @@ import * as Constants from './constants.ts';
 type CLASS_TYPE = 'mode' | 'feature' | 'mouse';
 const classTypes: CLASS_TYPE[] = ['mode', 'feature', 'mouse'];
 
-const controls: Record<string, boolean> = {
-	line_string: true,
-	point: true,
-	polygon: true,
-	trash: true,
-};
+
+
 export class DrawUI {
 	private buttonElements: Record<string, HTMLButtonElement> = {};
 	private activeButton: HTMLButtonElement | null = null;
