@@ -1,7 +1,7 @@
 'use strict';
 
 import {Evented} from '../lib/evented.ts';
-import formatNumber from '../lib/format_number';
+import {formatNumber} from '../lib/format_number';
 import land from '../fixtures/urban_areas.json';
 import fpsRunner from '../lib/fps.ts';
 import TraceMouse from '../lib/mouse_trace.ts';
