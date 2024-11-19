@@ -1,4 +1,4 @@
-export default function () {
+export function fpsRunner () {
 	let frameCount = 0;
 	let start = 0;
 	let running = false;

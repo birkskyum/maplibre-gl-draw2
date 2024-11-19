@@ -3,8 +3,8 @@
 import {Evented} from '../lib/evented';
 import SouthAmerica from '../fixtures/south-america.json';
 import {formatNumber} from '../lib/format_number';
-import fpsRunner from '../lib/fps';
-import DragMouse from '../lib/mouse_drag';
+import {fpsRunner} from '../lib/fps';
+import {DragMouse} from '../lib/mouse_drag';
 
 const START = { x: 339, y: 282 };
 

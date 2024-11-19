@@ -2,7 +2,7 @@
 
 import {Evented} from '../lib/evented.ts';
 import {formatNumber} from '../lib/format_number';
-import fpsRunner from '../lib/fps.ts';
+import {fpsRunner} from '../lib/fps.ts';
 import DrawMouse from '../lib/mouse_draw.ts';
 
 const START = { x: 189, y: 293 };
