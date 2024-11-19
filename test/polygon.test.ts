@@ -4,7 +4,7 @@ import { spy } from 'sinon';
 import {DrawFeature} from '../src/feature_types/feature.ts';
 import {PolygonFeat} from '../src/feature_types/polygon.ts';
 import MapLibreDraw from '../index.ts';
-import createFeature from './utils/create_feature.ts';
+import {createFeature} from './utils/create_feature.ts';
 import getPublicMemberKeys from './utils/get_public_member_keys.ts';
 import {createMockFeatureContext} from './utils/create_mock_feature_context.ts';
 import { drawGeometry } from './utils/draw_geometry.ts';

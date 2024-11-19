@@ -3,7 +3,7 @@ import {getGeoJSON} from './get_geojson.ts';
 
 const hatRack = hat.rack();
 
-export default function createFeature(featureType) {
+export function createFeature(featureType) {
 	const feature = Object.assign(
 		{
 			id: hatRack(),
