@@ -5,6 +5,7 @@ import isClick from './lib/is_click.ts';
 import isTap from './lib/is_tap.ts';
 import * as Constants from './constants.ts';
 import objectToMode from './modes/object_to_mode.ts';
+import type { DrawContext } from '../index.ts';
 
 interface EventInfo {
 	time: number;
@@ -24,14 +25,14 @@ export class DrawEvents {
 	public events: any = {};
 	public currentModeName: string | null = null;
 	public currentMode: any = null;
-	public ctx: any;
+	public ctx: DrawContext;
 	public actionState: ActionState = {
 		trash: false,
 		combineFeatures: false,
 		uncombineFeatures: false,
 	};
 
-	constructor(ctx: any) {
+	constructor(ctx: DrawContext) {
 		this.ctx = ctx;
 		this.modes = Object.keys(ctx.options.modes).reduce((m: any, k: string) => {
 			m[k] = objectToMode(ctx.options.modes[k]);

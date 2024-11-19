@@ -4,13 +4,14 @@ import Point from '../feature_types/point.ts';
 import LineString from '../feature_types/line_string.ts';
 import Polygon from '../feature_types/polygon.ts';
 import MultiFeature from '../feature_types/multi_feature.ts';
+import type { DrawContext } from '../../index.ts';
 
 export class ModeInterfaceAccessors {
 	protected map: any;
 	protected drawConfig: any;
-	protected _ctx: any;
+	protected _ctx: DrawContext;
 
-	constructor(ctx: any) {
+	constructor(ctx: DrawContext) {
 		this.map = ctx.map;
 		this.drawConfig = JSON.parse(JSON.stringify(ctx.options || {}));
 		this._ctx = ctx;

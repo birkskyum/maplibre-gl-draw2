@@ -1,14 +1,15 @@
 import hat from 'hat';
 import * as Constants from '../constants.ts';
+import type { DrawContext } from '../../index.ts';
 
 class Feature {
-	ctx: any;
+	ctx: DrawContext;
 	properties: Record<string, any>;
 	coordinates?: any[];
 	id: string;
 	type: string;
 
-	constructor(ctx: any, geojson: any) {
+	constructor(ctx: DrawContext, geojson: any) {
 		this.ctx = ctx;
 		this.properties = geojson.properties || {};
 		this.coordinates = geojson.geometry.coordinates;

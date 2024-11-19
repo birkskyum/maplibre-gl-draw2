@@ -2,6 +2,7 @@ import toDenseArray from './lib/to_dense_array.ts';
 import StringSet from './lib/string_set.ts';
 import render from './render.ts';
 import * as Constants from './constants.ts';
+import type { DrawContext } from '../index.ts';
 
 export default class Store {
 	private _features: { [key: string]: any };
@@ -11,12 +12,12 @@ export default class Store {
 	private _changedFeatureIds: StringSet;
 	private _emitSelectionChange: boolean;
 	private _mapInitialConfig: { [key: string]: any };
-	private ctx: any;
+	private ctx: DrawContext;
 	public isDirty: boolean;
 	public sources: { hot: any[]; cold: any[] };
 	public render: () => void;
 
-	constructor(ctx: any) {
+	constructor(ctx: DrawContext) {
 		this._features = {};
 		this._featureIds = new StringSet();
 		this._selectedFeatureIds = new StringSet();

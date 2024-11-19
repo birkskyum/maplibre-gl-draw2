@@ -1,3 +1,4 @@
+import type { DrawContext } from '../index.ts';
 import * as Constants from './constants.ts';
 
 type CLASS_TYPE = 'mode' | 'feature' | 'mouse';
@@ -23,9 +24,9 @@ export default class UI {
 		mouse: null,
 	};
 
-	private ctx: any;
+	private ctx: DrawContext;
 
-	constructor(ctx: any) {
+	constructor(ctx: DrawContext) {
 		this.ctx = ctx;
 	}
 

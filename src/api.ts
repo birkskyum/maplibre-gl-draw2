@@ -10,6 +10,7 @@ import Polygon from './feature_types/polygon.ts';
 import LineString from './feature_types/line_string.ts';
 import Point from './feature_types/point.ts';
 import MultiFeature from './feature_types/multi_feature.ts';
+import type { DrawContext } from '../index.ts';
 
 const featureTypes = {
 	Polygon,
@@ -21,10 +22,10 @@ const featureTypes = {
 };
 
 export default class Api {
-	public ctx: any;
+	public ctx: DrawContext;
 	public modes: typeof Constants.modes;
 
-	constructor(ctx: any) {
+	constructor(ctx: DrawContext) {
 		this.ctx = ctx;
 		this.modes = Constants.modes;
 	}
