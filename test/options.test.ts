@@ -6,7 +6,7 @@ import assert from 'node:assert/strict';
 import { fileURLToPath } from 'url';
 
 import MapLibreDraw from '../index.ts';
-import modes from '../src/modes/index.ts';
+import {ALL_MODES} from '../src/modes/index.ts';
 
 const __dirname = fileURLToPath(new URL('.', import.meta.url));
 const styleWithSourcesFixture = JSON.parse(
@@ -18,7 +18,7 @@ test('Options test', async (t) => {
 		const Draw = new MapLibreDraw();
 		const defaultOptions = {
 			defaultMode: 'simple_select',
-			modes,
+			modes: ALL_MODES,
 			touchEnabled: true,
 			keybindings: true,
 			clickBuffer: 2,
@@ -44,7 +44,7 @@ test('Options test', async (t) => {
 		const Draw = new MapLibreDraw({ clickBuffer: 10 });
 		const defaultOptions = {
 			defaultMode: 'simple_select',
-			modes,
+			modes: ALL_MODES,
 			keybindings: true,
 			touchEnabled: true,
 			clickBuffer: 10,
@@ -70,7 +70,7 @@ test('Options test', async (t) => {
 		const Draw = new MapLibreDraw({ displayControlsDefault: false });
 		const defaultOptions = {
 			defaultMode: 'simple_select',
-			modes,
+			modes: ALL_MODES,
 			keybindings: true,
 			touchEnabled: true,
 			clickBuffer: 2,
@@ -98,7 +98,7 @@ test('Options test', async (t) => {
 		});
 		const defaultOptions = {
 			defaultMode: 'simple_select',
-			modes,
+			modes: ALL_MODES,
 			keybindings: true,
 			touchEnabled: true,
 			displayControlsDefault: false,
@@ -124,7 +124,7 @@ test('Options test', async (t) => {
 		const Draw = new MapLibreDraw({ controls: { point: false } });
 		const defaultOptions = {
 			defaultMode: 'simple_select',
-			modes,
+			modes: ALL_MODES,
 			keybindings: true,
 			touchEnabled: true,
 			displayControlsDefault: true,
@@ -150,7 +150,7 @@ test('Options test', async (t) => {
 		const Draw = new MapLibreDraw({ touchEnabled: false });
 		const defaultOptions = {
 			defaultMode: 'simple_select',
-			modes,
+			modes: ALL_MODES,
 			touchEnabled: false,
 			keybindings: true,
 			clickBuffer: 2,

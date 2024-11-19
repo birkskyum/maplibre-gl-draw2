@@ -4,7 +4,7 @@ import {DrawPoint} from './draw_point.ts';
 import {DrawPolygon} from './draw_polygon.ts';
 import {DrawLineString} from './draw_line_string.ts';
 
-export default {
+export const ALL_MODES = {
 	'simple_select': SimpleSelect,
 	'direct_select': DirectSelect,
 	'draw_point': DrawPoint,

@@ -1,7 +1,7 @@
 import * as Constants from './constants.ts';
 
 import styles from './lib/theme.ts';
-import modes from './modes/index.ts';
+import {ALL_MODES} from './modes/index.ts';
 
 const defaultOptions = {
 	defaultMode: Constants.modes.SIMPLE_SELECT,
@@ -12,7 +12,7 @@ const defaultOptions = {
 	boxSelect: true,
 	displayControlsDefault: true,
 	styles,
-	modes,
+	modes: ALL_MODES,
 	controls: {},
 	userProperties: false,
 };

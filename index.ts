@@ -1,7 +1,7 @@
 import runSetup from './src/setup.ts';
 import setupOptions from './src/options.ts';
 import setupAPI from './src/api.ts';
-import modes from './src/modes/index.ts';
+import {ALL_MODES} from './src/modes/index.ts';
 import * as Constants from './src/constants.ts';
 import * as lib from './src/lib/index.ts';
 class DrawContext {
@@ -44,7 +44,7 @@ const setupDraw = (options: any, api: any): any => {
 };
 
 export default class MapLibreDraw {
-	static readonly modes = modes;
+	static readonly modes = ALL_MODES;
 	static readonly constants = Constants;
 	static readonly lib = lib;
 
