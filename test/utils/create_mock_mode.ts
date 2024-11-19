@@ -1,6 +1,6 @@
 import { spy } from 'sinon';
 
-export default function createMockModeHandlerContext() {
+export function createMockMode() {
 	return {
 		start: spy(),
 		stop: spy(),

@@ -1,6 +1,6 @@
 import { spy } from 'sinon';
 
-export default function createMockModeHandlerContext() {
+export function createMockModeHandlerContext() {
 	return {
 		store: {
 			featureChanged: spy(),
