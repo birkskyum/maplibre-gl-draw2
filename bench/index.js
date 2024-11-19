@@ -1,5 +1,4 @@
 /* global maplibregl, MapLibreDraw */
-
 try {
 	main();
 } catch (err) {
@@ -71,7 +70,6 @@ function main() {
 	}
 
 	const bench = new Benchmark({
-		accessToken: getAccessToken(),
 		createMap,
 	});
 
@@ -93,22 +91,6 @@ function log(color, message) {
 		`<div class="log dark fill-${color}"><p>${message}</p></div>`;
 }
 
-function getAccessToken() {
-	const accessToken =
-		process.env.MapboxAccessToken ||
-		process.env.MAPBOX_ACCESS_TOKEN ||
-		getURLParameter('access_token') ||
-		localStorage.getItem('accessToken');
-	localStorage.setItem('accessToken', accessToken);
-	return accessToken;
-}
-
-function getURLParameter(name) {
-	const regexp = new RegExp(`[?&]${name}=([^&#]*)`, 'i');
-	const output = regexp.exec(window.location.href);
-	return output && output[1];
-}
-
 function createMap(options) {
 	const mapElement = document.getElementById('map');
 
@@ -118,15 +100,17 @@ function createMap(options) {
 	mapElement.style.width = `${options.width}px`;
 	mapElement.style.height = `${options.height}px`;
 
-	const map = new maplibregl.Map(
-		Object.assign(
-			{
-				container: 'map',
-				style: 'mapbox://styles/mapbox/streets-v12',
-			},
-			options,
-		),
-	);
+  const map = new maplibregl.Map(
+    Object.assign(
+      {
+        container: 'map',
+        style: 'https://basemaps.cartocdn.com/gl/positron-gl-style/style.json',
+      },
+      options,
+    ),
+  );
+
+
 
 	const draw = new MapLibreDraw(options);
 
