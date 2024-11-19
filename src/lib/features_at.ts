@@ -10,20 +10,20 @@ const META_TYPES = [
 ];
 
 // Requires either event or bbox
-export default {
+export const featuresAt = {
 	click: featuresAtClick,
 	touch: featuresAtTouch,
 };
 
 function featuresAtClick(event, bbox, ctx) {
-	return featuresAt(event, bbox, ctx, ctx.options.clickBuffer);
+	return featuresAtHandler(event, bbox, ctx, ctx.options.clickBuffer);
 }
 
 function featuresAtTouch(event, bbox, ctx) {
-	return featuresAt(event, bbox, ctx, ctx.options.touchBuffer);
+	return featuresAtHandler(event, bbox, ctx, ctx.options.touchBuffer);
 }
 
-function featuresAt(event, bbox, ctx, buffer) {
+function featuresAtHandler(event, bbox, ctx, buffer) {
 	if (ctx.map === null) return [];
 
 	const box = event ? mapEventToBoundingBox(event, buffer) : bbox;

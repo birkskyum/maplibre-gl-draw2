@@ -1,7 +1,7 @@
 import isEqual from 'fast-deep-equal';
 import normalize from '@mapbox/geojson-normalize';
 import { nanoid } from 'nanoid';
-import featuresAt from './lib/features_at.ts';
+import {featuresAt} from './lib/features_at.ts';
 import { stringSetsAreEqual } from './lib/string_sets_are_equal.ts';
 import * as Constants from './constants.ts';
 import {StringSet} from './lib/string_set.ts';

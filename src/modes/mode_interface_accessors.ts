@@ -1,4 +1,4 @@
-import featuresAt from '../lib/features_at.ts';
+import {featuresAt} from '../lib/features_at.ts';
 import { PointFeat } from '../feature_types/point.ts';
 import { LineStringFeat } from '../feature_types/line_string.ts';
 import { PolygonFeat } from '../feature_types/polygon.ts';

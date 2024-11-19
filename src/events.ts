@@ -1,6 +1,6 @@
 import {ModeHandler} from './lib/mode_handler.ts';
-import getFeaturesAndSetCursor from './lib/get_features_and_set_cursor.ts';
-import featuresAt from './lib/features_at.ts';
+import {getFeatureAtAndSetCursors} from './lib/get_features_and_set_cursor.ts';
+import {featuresAt} from './lib/features_at.ts';
 import {isClick} from './lib/is_click.ts';
 import {isTap} from './lib/is_tap.ts';
 import * as Constants from './constants.ts';
@@ -94,7 +94,7 @@ export class DrawEvents {
 		if (button === 1) {
 			return this.events.mousedrag(event);
 		}
-		const target = getFeaturesAndSetCursor(event, this.ctx);
+		const target = getFeatureAtAndSetCursors(event, this.ctx);
 		event.featureTarget = target;
 		this.currentMode.mousemove(event);
 	}
@@ -104,13 +104,13 @@ export class DrawEvents {
 			time: new Date().getTime(),
 			point: event.point,
 		};
-		const target = getFeaturesAndSetCursor(event, this.ctx);
+		const target = getFeatureAtAndSetCursors(event, this.ctx);
 		event.featureTarget = target;
 		this.currentMode.mousedown(event);
 	}
 
 	public handleMouseUp(event: any): void {
-		const target = getFeaturesAndSetCursor(event, this.ctx);
+		const target = getFeatureAtAndSetCursors(event, this.ctx);
 		event.featureTarget = target;
 
 		if (
