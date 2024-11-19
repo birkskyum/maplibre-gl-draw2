@@ -1,9 +1,9 @@
 /* eslint no-shadow:[0] */
-import fs from 'fs';
-import path from 'path';
+import fs from 'node:fs';
+import path from 'node:path';
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { fileURLToPath } from 'url';
+import { fileURLToPath } from 'node:url';
 
 import { MapLibreDraw } from '../index.ts';
 import { ALL_MODES } from '../src/modes/index.ts';
