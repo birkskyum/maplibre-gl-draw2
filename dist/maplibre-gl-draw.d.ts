@@ -417,7 +417,6 @@ declare namespace MapLibreDraw {
 		sortFeatures(features: DrawFeature[]): DrawFeature[];
 
 	
-		StringSet(items?: Array<string | number>): StringSet;
 	}
 
 }
