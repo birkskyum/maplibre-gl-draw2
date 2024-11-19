@@ -6,7 +6,7 @@ import {PointFeat} from '../src/feature_types/point.ts';
 import {PolygonFeat} from '../src/feature_types/polygon.ts';
 import {LineStringFeat} from '../src/feature_types/line_string.ts';
 import MultiFeature from '../src/feature_types/multi_feature.ts';
-import createMockCtx from './utils/create_mock_feature_context.ts';
+import {createMockFeatureContext} from './utils/create_mock_feature_context.ts';
 import getPublicMemberKeys from './utils/get_public_member_keys.ts';
 
 test('MultiPoint via MultiFeature', () => {
@@ -75,7 +75,7 @@ test('MultiPoint', () => {
 			],
 		},
 	};
-	const ctx = createMockCtx();
+	const ctx = createMockFeatureContext();
 	let multiPoint;
 	assert.doesNotThrow(() => {
 		multiPoint = new MultiFeature(ctx, rawMultiPoint);
@@ -245,7 +245,7 @@ test('MultiPolygon via MultiFeature', () => {
 			],
 		},
 	};
-	const ctx = createMockCtx();
+	const ctx = createMockFeatureContext();
 	let multiPolygon;
 	assert.doesNotThrow(() => {
 		multiPolygon = new MultiFeature(ctx, rawMultiPolygon);
@@ -323,7 +323,7 @@ test('MultiLineString via MultiFeature', () => {
 			],
 		},
 	};
-	const ctx = createMockCtx();
+	const ctx = createMockFeatureContext();
 	let multiLineString;
 	assert.doesNotThrow(() => {
 		multiLineString = new MultiFeature(ctx, rawMultiLineString);
@@ -389,7 +389,7 @@ test('Invalid MultiFeature type', () => {
 	};
 	let thing;
 	assert.throws(() => {
-		thing = new MultiFeature(createMockCtx(), rawThing);
+		thing = new MultiFeature(createMockFeatureContext(), rawThing);
 	}, 'invalid type throws');
 	assert.equal(thing, undefined);
 });

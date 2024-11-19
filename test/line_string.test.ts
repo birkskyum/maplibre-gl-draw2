@@ -6,13 +6,13 @@ import {LineStringFeat} from '../src/feature_types/line_string.ts';
 import MapLibreDraw from '../index.ts';
 import createFeature from './utils/create_feature.ts';
 import getPublicMemberKeys from './utils/get_public_member_keys.ts';
-import createMockCtx from './utils/create_mock_feature_context.ts';
+import {createMockFeatureContext} from './utils/create_mock_feature_context.ts';
 import { drawGeometry } from './utils/draw_geometry.ts';
 import createMap from './utils/create_map.ts';
 
 test('LineString constructor and API', () => {
 	const rawLine = createFeature('line');
-	const ctx = createMockCtx();
+	const ctx = createMockFeatureContext();
 	const lineString = new LineStringFeat(ctx, rawLine);
 
 	// Instance members
@@ -72,12 +72,12 @@ test('LineString constructor and API', () => {
 
 test('LineString#isValid', () => {
 	const validRawLine = createFeature('line');
-	const validLineString = new LineStringFeat(createMockCtx(), validRawLine);
+	const validLineString = new LineStringFeat(createMockFeatureContext(), validRawLine);
 	assert.equal(validLineString.isValid(), true, 'returns true when valid');
 
 	const invalidRawLineA = createFeature('line');
 	invalidRawLineA.geometry.coordinates = [3];
-	const invalidLineStringA = new LineStringFeat(createMockCtx(), invalidRawLineA);
+	const invalidLineStringA = new LineStringFeat(createMockFeatureContext(), invalidRawLineA);
 	assert.equal(
 		invalidLineStringA.isValid(),
 		false,
@@ -86,7 +86,7 @@ test('LineString#isValid', () => {
 
 	const invalidRawLineB = createFeature('line');
 	invalidRawLineB.geometry.coordinates = [];
-	const invalidLineStringB = new LineStringFeat(createMockCtx(), invalidRawLineB);
+	const invalidLineStringB = new LineStringFeat(createMockFeatureContext(), invalidRawLineB);
 	assert.equal(
 		invalidLineStringB.isValid(),
 		false,
@@ -100,7 +100,7 @@ test('LineString#addCoordinate', () => {
 		[1, 2],
 		[3, 4],
 	];
-	const lineString = new LineStringFeat(createMockCtx(), rawLine);
+	const lineString = new LineStringFeat(createMockFeatureContext(), rawLine);
 	const changedSpy = spy(lineString, 'changed');
 
 	lineString.addCoordinate(1, 5, 6);
@@ -134,7 +134,7 @@ test('LineString#getCoordinate', () => {
 		[1, 2],
 		[3, 4],
 	];
-	const lineString = new LineStringFeat(createMockCtx(), rawLine);
+	const lineString = new LineStringFeat(createMockFeatureContext(), rawLine);
 
 	assert.deepEqual(lineString.getCoordinate(0), [1, 2], 'number path works');
 	assert.deepEqual(lineString.getCoordinate('1'), [3, 4], 'string path works');
@@ -146,7 +146,7 @@ test('LineString#removeCoordinate', () => {
 		[1, 2],
 		[3, 4],
 	];
-	const lineString = new LineStringFeat(createMockCtx(), rawLine);
+	const lineString = new LineStringFeat(createMockFeatureContext(), rawLine);
 	const changedSpy = spy(lineString, 'changed');
 
 	lineString.removeCoordinate(1);
@@ -165,7 +165,7 @@ test('LineString#updateCoordinate', () => {
 		[3, 4],
 		[5, 6],
 	];
-	const lineString = new LineStringFeat(createMockCtx(), rawLine);
+	const lineString = new LineStringFeat(createMockFeatureContext(), rawLine);
 	const changedSpy = spy(lineString, 'changed');
 
 	lineString.updateCoordinate(1, 7, 8);

@@ -5,11 +5,11 @@ import { spy } from 'sinon';
 import {DrawFeature} from '../src/feature_types/feature.ts';
 import createFeature from './utils/create_feature.ts';
 import getPublicMemberKeys from './utils/get_public_member_keys.ts';
-import createMockCtx from './utils/create_mock_feature_context.ts';
+import {createMockFeatureContext} from './utils/create_mock_feature_context.ts';
 
 test('Feature contrusctor and API', () => {
 	const featureGeoJson = createFeature('line');
-	const ctx = createMockCtx();
+	const ctx = createMockFeatureContext();
 	const feature = new DrawFeature(ctx, featureGeoJson);
 
 	// Instance members
@@ -87,7 +87,7 @@ test('Feature contrusctor and API', () => {
 });
 
 test('Feature#changed', () => {
-	const ctx = createMockCtx();
+	const ctx = createMockFeatureContext();
 	const featureGeoJson = createFeature('point');
 	const feature = new DrawFeature(ctx, featureGeoJson);
 
@@ -106,7 +106,7 @@ test('Feature#changed', () => {
 });
 
 test('Feature#incomingCoords', () => {
-	const ctx = createMockCtx();
+	const ctx = createMockFeatureContext();
 	const featureGeoJson = createFeature('point');
 	featureGeoJson.geometry.coordinates = [9, 10];
 	const feature = new DrawFeature(ctx, featureGeoJson);
@@ -118,7 +118,7 @@ test('Feature#incomingCoords', () => {
 });
 
 test('Feature#setCoordinates, Feature#setCoordinates', () => {
-	const ctx = createMockCtx();
+	const ctx = createMockFeatureContext();
 	const featureGeoJson = createFeature('point');
 	featureGeoJson.geometry.coordinates = [9, 10];
 	const feature = new DrawFeature(ctx, featureGeoJson);
@@ -133,7 +133,7 @@ test('Feature#setCoordinates, Feature#setCoordinates', () => {
 });
 
 test('Feature#toGeoJSON', () => {
-	const ctx = createMockCtx();
+	const ctx = createMockFeatureContext();
 	const polygon = createFeature('polygon');
 	const feature = new DrawFeature(ctx, polygon);
 	assert.deepEqual(feature.toGeoJSON(), {
@@ -148,7 +148,7 @@ test('Feature#toGeoJSON', () => {
 });
 
 test('Feature#internal - when userProperties is true', () => {
-	const ctx = createMockCtx({ userProperties: true });
+	const ctx = createMockFeatureContext({ userProperties: true });
 	const polygon = createFeature('polygon');
 	const feature = new DrawFeature(ctx, polygon);
 	assert.deepEqual(feature.internal('foo'), {
@@ -169,7 +169,7 @@ test('Feature#internal - when userProperties is true', () => {
 	});
 });
 test('Feature#internal - when userProperties is false', () => {
-	const ctx = createMockCtx({ userProperties: false });
+	const ctx = createMockFeatureContext({ userProperties: false });
 	const polygon = createFeature('polygon');
 	const feature = new DrawFeature(ctx, polygon);
 	assert.deepEqual(feature.internal('foo'), {
@@ -189,7 +189,7 @@ test('Feature#internal - when userProperties is false', () => {
 });
 
 test('Feature#setProperty', () => {
-	const ctx = createMockCtx();
+	const ctx = createMockFeatureContext();
 	const polygon = createFeature('polygon');
 	const feature = new DrawFeature(ctx, polygon);
 	feature.setProperty('size', 200);

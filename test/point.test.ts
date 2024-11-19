@@ -6,13 +6,13 @@ import {PointFeat} from '../src/feature_types/point.ts';
 import MapLibreDraw from '../index.ts';
 import createFeature from './utils/create_feature.ts';
 import getPublicMemberKeys from './utils/get_public_member_keys.ts';
-import createMockCtx from './utils/create_mock_feature_context.ts';
+import {createMockFeatureContext} from './utils/create_mock_feature_context.ts';
 import { drawGeometry } from './utils/draw_geometry.ts';
 import createMap from './utils/create_map.ts';
 
 test('Point constructor and API', () => {
 	const rawPoint = createFeature('point');
-	const ctx = createMockCtx();
+	const ctx = createMockFeatureContext();
 	const point = new PointFeat(ctx, rawPoint);
 
 	// Instance members
@@ -54,12 +54,12 @@ test('Point constructor and API', () => {
 
 test('Point#isValid', () => {
 	const validRawPoint = createFeature('point');
-	const validPoint = new PointFeat(createMockCtx(), validRawPoint);
+	const validPoint = new PointFeat(createMockFeatureContext(), validRawPoint);
 	assert.equal(validPoint.isValid(), true, 'returns true for valid point');
 
 	const invalidRawPointA = createFeature('point');
 	invalidRawPointA.geometry.coordinates = [0, '1'];
-	const invalidPointA = new PointFeat(createMockCtx(), invalidRawPointA);
+	const invalidPointA = new PointFeat(createMockFeatureContext(), invalidRawPointA);
 	assert.equal(
 		invalidPointA.isValid(),
 		false,
@@ -68,7 +68,7 @@ test('Point#isValid', () => {
 
 	const invalidRawPointB = createFeature('point');
 	invalidRawPointB.geometry.coordinates = ['1', 0];
-	const invalidPointB = new PointFeat(createMockCtx(), invalidRawPointA);
+	const invalidPointB = new PointFeat(createMockFeatureContext(), invalidRawPointA);
 	assert.equal(
 		invalidPointB.isValid(),
 		false,
@@ -79,7 +79,7 @@ test('Point#isValid', () => {
 test('Point#updateCoordinate, Point#getCoordinate', () => {
 	const rawPoint = createFeature('point');
 	rawPoint.geometry.coordinates = [1, 2];
-	const point = new PointFeat(createMockCtx(), rawPoint);
+	const point = new PointFeat(createMockFeatureContext(), rawPoint);
 	const changedSpy = spy(point, 'changed');
 
 	assert.deepEqual(point.getCoordinate(), [1, 2]);
