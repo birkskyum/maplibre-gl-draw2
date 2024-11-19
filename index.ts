@@ -6,7 +6,7 @@ import { DrawEvents } from './src/events.ts';
 import {DrawStore} from './src/store.ts';
 import {DrawUI} from './src/ui.ts';
 import {DrawApi} from './src/api.ts';
-import type {Map as MapLibreMap} from 'maplibre-gl';
+import type {IControl, Map as MapLibreMap} from 'maplibre-gl';
 
 export class DrawContext {
 	options: any;
@@ -22,7 +22,7 @@ export class DrawContext {
 	}
 }
 
-class MapLibreDraw {
+class MapLibreDraw implements IControl {
 	static readonly modes = ALL_MODES;
 	static readonly constants = Constants;
 	static readonly lib = lib;
@@ -48,7 +48,7 @@ class MapLibreDraw {
 		this.setupApi.options = this.ctx.options;
 	}
 
-	private onAdd(map: any) {
+	public onAdd(map: any) {
 		this.ctx.map = map;
 		this.ctx.events = new DrawEvents(this.ctx);
 		this.ctx.ui = new DrawUI(this.ctx);
@@ -81,7 +81,7 @@ class MapLibreDraw {
 		return this.controlContainer;
 	}
 
-	private onRemove() {
+	public onRemove() {
 		this.ctx.map.off('load', this.connect.bind(this));
 		clearInterval(this.mapLoadedInterval);
 

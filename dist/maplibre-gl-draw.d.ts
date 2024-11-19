@@ -9,15 +9,10 @@ import {
 	Position,
 } from 'geojson';
 import {
-	CircleLayerSpecification,
-	ControlPosition,
-	FillLayerSpecification,
-	IControl,
-	LineLayerSpecification,
 	Map,
 	MapEvent,
-	MapMouseEvent as MapboxMapMouseEvent,
-	MapTouchEvent as MapboxMapTouchEvent,
+	MapMouseEvent as MapLibreMapMouseEvent,
+	MapTouchEvent as MapLibreMapTouchEvent,
 } from 'maplibre-gl';
 
 export = MapLibreDraw;
@@ -130,11 +125,11 @@ declare namespace MapLibreDraw {
 		| DrawMultiFeature<'MultiLineString'>
 		| DrawMultiFeature<'MultiPolygon'>;
 
-	interface MapMouseEvent extends MapboxMapMouseEvent {
+	interface MapMouseEvent extends MapLibreMapMouseEvent {
 		featureTarget: DrawFeature;
 	}
 
-	interface MapTouchEvent extends MapboxMapTouchEvent {
+	interface MapTouchEvent extends MapLibreMapTouchEvent {
 		featureTarget: DrawFeature;
 	}
 
@@ -456,13 +451,7 @@ declare namespace MapLibreDraw {
 		readonly LNG_MAX: 270;
 	}
 
-	interface StringSet {
-		add(x: string | number): StringSet;
-		delete(x: string | number): StringSet;
-		has(x: string | number): boolean;
-		values(): string | number[];
-		clear(): StringSet;
-	}
+
 	interface Lib {
 		CommonSelectors: {
 			isOfMetaType: (
@@ -621,92 +610,11 @@ declare namespace MapLibreDraw {
 
 		StringSet(items?: Array<string | number>): StringSet;
 
-		theme: Array<
-			(
-				| FillLayerSpecification
-				| LineLayerSpecification
-				| CircleLayerSpecification
-			) & { id: ThemeLayerId }
-		>;
-
 		/**
 		 * Derive a dense array (no `undefined`s) from a single value or array.
 		 */
 		toDenseArray(x: any): Array<NonNullable<any>>;
 	}
 
-	type ThemeLayerId =
-		| 'gl-draw-polygon-fill-static'
-		| 'gl-draw-polygon-fill-active'
-		| 'gl-draw-polygon-fill-inactive'
-		| 'gl-draw-polygon-stroke-static'
-		| 'gl-draw-polygon-stroke-active'
-		| 'gl-draw-polygon-stroke-inactive'
-		| 'gl-draw-polygon-midpoint'
-		| 'gl-draw-polygon-and-line-vertex-inactive'
-		| 'gl-draw-polygon-and-line-vertex-stroke-inactive'
-		| 'gl-draw-line-static'
-		| 'gl-draw-line-active'
-		| 'gl-draw-line-inactive'
-		| 'gl-draw-point-static'
-		| 'gl-draw-point-active'
-		| 'gl-draw-point-inactive'
-		| 'gl-draw-point-stroke-active'
-		| 'gl-draw-point-point-stroke-inactive';
-
-	interface MapLibreDrawOptions {
-		displayControlsDefault?: boolean | undefined;
-		keybindings?: boolean | undefined;
-		touchEnabled?: boolean | undefined;
-		boxSelect?: boolean | undefined;
-		clickBuffer?: number | undefined;
-		touchBuffer?: number | undefined;
-		controls?: MapLibreDrawControls | undefined;
-		styles?: object[] | undefined;
-		modes?: { [modeKey: string]: DrawCustomMode } | undefined;
-		defaultMode?: string | undefined;
-		userProperties?: boolean | undefined;
-	}
 }
 
-declare class MapLibreDraw implements IControl {
-	static modes: MapLibreDraw.Modes;
-	static constants: MapLibreDraw.Constants;
-	static lib: MapLibreDraw.Lib;
-	modes: MapLibreDraw.DrawModes;
-	getDefaultPosition: () => ControlPosition;
-	constructor(options?: MapLibreDraw.MapLibreDrawOptions);
-	add(geojson: Feature | FeatureCollection | Geometry): string[];
-	get(featureId: string): Feature | undefined;
-	getFeatureIdsAt(point: { x: number; y: number }): string[];
-	getSelectedIds(): string[];
-	getSelected(): FeatureCollection;
-	getSelectedPoints(): FeatureCollection;
-	getAll(): FeatureCollection;
-	delete(ids: string | string[]): this;
-	deleteAll(): this;
-	set(featureCollection: FeatureCollection): string[];
-	trash(): this;
-	combineFeatures(): this;
-	uncombineFeatures(): this;
-	getMode(): (MapLibreDraw.DrawMode & {}) | string;
-	changeMode(mode: 'simple_select', options?: { featureIds: string[] }): this;
-	changeMode(mode: 'direct_select', options: { featureId: string }): this;
-	changeMode(
-		mode: 'draw_line_string',
-		options?: { featureId: string; from: Feature<Point> | Point | number[] },
-	): this;
-	changeMode(
-		mode: Exclude<
-			MapLibreDraw.DrawMode,
-			'direct_select' | 'simple_select' | 'draw_line_string'
-		>,
-	): this;
-	changeMode<T extends string>(
-		mode: T & (T extends MapLibreDraw.DrawMode ? never : T),
-		options?: object,
-	): this;
-	setFeatureProperty(featureId: string, property: string, value: any): this;
-	onAdd(map: Map): HTMLElement;
-	onRemove(map: Map): any;
-}

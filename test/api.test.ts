@@ -518,9 +518,16 @@ test('Draw.modes', () => {
 		Constants.modes.DRAW_POLYGON,
 		'draw_polygon',
 	);
+
+	assert.equal(
+		Draw.modes.STATIC,
+		Constants.modes.STATIC,
+		'static',
+	);
+
 	assert.equal(
 		getPublicMemberKeys(Draw.modes).length,
-		5,
+		6,
 		'no unexpected modes',
 	);
 });

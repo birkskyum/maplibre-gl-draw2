@@ -11,6 +11,7 @@ import LineString from './feature_types/line_string.ts';
 import Point from './feature_types/point.ts';
 import MultiFeature from './feature_types/multi_feature.ts';
 import type { DrawContext } from '../index.ts';
+import type { Feature, FeatureCollection, Geometry } from 'geojson';
 
 const featureTypes = {
 	Polygon,
@@ -30,7 +31,7 @@ export class DrawApi {
 		this.modes = Constants.modes;
 	}
 
-	public getFeatureIdsAt(point: any): string[] {
+	public getFeatureIdsAt(point: { x: number; y: number }): string[] {
 		const features = featuresAt.click({ point }, null, this.ctx);
 		return features.map((feature) => feature.properties.id);
 	}
@@ -39,7 +40,7 @@ export class DrawApi {
 		return this.ctx.store.getSelectedIds();
 	}
 
-	public getSelected() {
+	public getSelected(): FeatureCollection {
 		return {
 			type: Constants.geojsonTypes.FEATURE_COLLECTION,
 			features: this.ctx.store
@@ -49,7 +50,7 @@ export class DrawApi {
 		};
 	}
 
-	public getSelectedPoints() {
+	public getSelectedPoints(): FeatureCollection {
 		return {
 			type: Constants.geojsonTypes.FEATURE_COLLECTION,
 			features: this.ctx.store
@@ -65,7 +66,7 @@ export class DrawApi {
 		};
 	}
 
-	public set(featureCollection: any): string[] {
+	public set(featureCollection: FeatureCollection): string[] {
 		if (
 			featureCollection.type === undefined ||
 			featureCollection.type !== Constants.geojsonTypes.FEATURE_COLLECTION ||
@@ -87,7 +88,7 @@ export class DrawApi {
 		return newIds;
 	}
 
-	public add(geojson: any): string[] {
+	public add(geojson: Feature | FeatureCollection | Geometry): string[] {
 		const featureCollection = JSON.parse(JSON.stringify(normalize(geojson)));
 
 		const ids = featureCollection.features.map((feature: any) => {
@@ -131,14 +132,14 @@ export class DrawApi {
 		return ids;
 	}
 
-	public get(id: string) {
+	public get(id: string): Feature | undefined {
 		const feature = this.ctx.store.get(id);
 		if (feature) {
 			return feature.toGeoJSON();
 		}
 	}
 
-	public getAll() {
+	public getAll(): FeatureCollection {
 		return {
 			type: Constants.geojsonTypes.FEATURE_COLLECTION,
 			features: this.ctx.store
@@ -173,6 +174,27 @@ export class DrawApi {
 		}
 		return this;
 	}
+
+
+	// TYPINGS
+	//
+	// changeMode(mode: 'simple_select', options?: { featureIds: string[] }): this;
+	// changeMode(mode: 'direct_select', options: { featureId: string }): this;
+	// changeMode(
+	// 	mode: 'draw_line_string',
+	// 	options?: { featureId: string; from: Feature<Point> | Point | number[] },
+	// ): this;
+	// changeMode(
+	// 	mode: Exclude<
+	// 		MapLibreDraw.DrawMode,
+	// 		'direct_select' | 'simple_select' | 'draw_line_string'
+	// 	>,
+	// ): this;
+	// changeMode<T extends string>(
+	// 	mode: T & (T extends MapLibreDraw.DrawMode ? never : T),
+	// 	options?: object,
+	// ): this;
+
 
 	public changeMode(mode: string, modeOptions: any = {}): this {
 		if (

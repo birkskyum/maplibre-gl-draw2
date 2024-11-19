@@ -3,7 +3,24 @@ import * as Constants from './constants.ts';
 import styles from './lib/theme.ts';
 import {ALL_MODES} from './modes/index.ts';
 
-const defaultOptions = {
+
+
+interface MapLibreDrawOptions {
+	displayControlsDefault?: boolean | undefined;
+	keybindings?: boolean | undefined;
+	touchEnabled?: boolean | undefined;
+	boxSelect?: boolean | undefined;
+	clickBuffer?: number | undefined;
+	touchBuffer?: number | undefined;
+	controls?: any | undefined;
+	styles?: object[] | undefined;
+	modes?: { [modeKey: string]: any } | undefined;
+	defaultMode?: string | undefined;
+	userProperties?: boolean | undefined;
+}
+
+
+const defaultOptions: MapLibreDrawOptions = {
 	defaultMode: Constants.modes.SIMPLE_SELECT,
 	keybindings: true,
 	touchEnabled: true,
@@ -68,3 +85,4 @@ export default function (options = {}) {
 
 	return withDefaults;
 }
+
