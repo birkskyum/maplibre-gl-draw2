@@ -1,6 +1,6 @@
 import * as Constants from './constants.ts';
 
-import styles from './lib/theme.ts';
+import {theme} from './lib/theme.ts';
 import {ALL_MODES} from './modes/index.ts';
 
 
@@ -36,7 +36,7 @@ const defaultOptions: MapLibreDrawOptions = {
 	touchBuffer: 25,
 	boxSelect: true,
 	displayControlsDefault: true,
-	styles,
+	styles: theme,
 	modes: ALL_MODES,
 	controls: {},
 	userProperties: false,
