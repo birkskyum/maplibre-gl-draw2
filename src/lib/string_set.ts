@@ -17,7 +17,7 @@ export class StringSet {
     }
   }
 
-  add(x: string | number): this {
+  add(x: string | number): StringSet {
     if (this.has(x)) return this;
     this._length++;
     if (typeof x === "string") this._items[x] = this._length;
@@ -25,7 +25,7 @@ export class StringSet {
     return this;
   }
 
-  delete(x: string | number): this {
+  delete(x: string | number): StringSet {
     if (this.has(x) === false) return this;
     this._length--;
     delete this._items[x];
@@ -50,7 +50,7 @@ export class StringSet {
     return values.sort((a, b) => a.v - b.v).map((a) => a.k);
   }
 
-  clear(): this {
+  clear(): StringSet {
     this._length = 0;
     this._items = {};
     this._nums = {};

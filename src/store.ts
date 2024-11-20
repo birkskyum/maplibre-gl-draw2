@@ -167,7 +167,7 @@ export class DrawStore {
   }
 
   deselect(
-    featureIds: string | string[],
+    featureIds: (string | number)[],
     options: { silent?: boolean } = {},
   ): DrawStore {
     toDenseArray(featureIds).forEach((id) => {
@@ -265,6 +265,8 @@ export class DrawStore {
 
   storeMapConfig() {
     Constants.interactions.forEach((interaction) => {
+		if (!this.ctx.map) return
+
       const interactionSet = this.ctx.map[interaction];
       if (interactionSet) {
         this._mapInitialConfig[interaction] = this.ctx.map[interaction]
@@ -276,8 +278,9 @@ export class DrawStore {
   restoreMapConfig() {
     Object.keys(this._mapInitialConfig).forEach((key) => {
       const value = this._mapInitialConfig[key];
-      if (value) {
-        this.ctx.map[key].enable();
+	  if (!this.ctx.map) return
+      if (value ) {
+		this.ctx.map[key].enable();
       } else {
         this.ctx.map[key].disable();
       }
