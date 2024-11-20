@@ -14,7 +14,7 @@ export class DrawContext {
 	map?: MapLibreMap;
 	events?: DrawEvents;
 	ui?: DrawUI;
-	container?: HTMLDivElement;
+	container?: HTMLElement;
 	store?: DrawStore;
 
 	constructor(options: MapLibreDrawOptions) {
