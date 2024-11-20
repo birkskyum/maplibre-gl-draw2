@@ -18,15 +18,21 @@ const eventMapper = {
 const eventKeys = Object.keys(eventMapper);
 
 export function objectToMode(modeObject) {
-	const modeObjectKeys = Object.keys(modeObject);
-
 	return function (ctx, startOpts = {}) {
 		let state = {};
 
-		const mode = modeObjectKeys.reduce((m, k) => {
-			m[k] = modeObject[k];
-			return m;
-		}, new ModeInterface(ctx));
+		let mode;
+		if (typeof modeObject === 'function') {
+			// modeObject is a class constructor
+			mode = new modeObject(ctx);
+		} else {
+			// modeObject is an object
+			const modeObjectKeys = Object.keys(modeObject);
+			mode = modeObjectKeys.reduce((m, k) => {
+				m[k] = modeObject[k];
+				return m;
+			}, new ModeInterface(ctx));
+		}
 
 		function wrapper(eh) {
 			return (e) => mode[eh](state, e);
@@ -34,36 +40,41 @@ export function objectToMode(modeObject) {
 
 		return {
 			start() {
-				state = mode.onSetup(startOpts); // this should set ui buttons
+				state = mode.onSetup(startOpts);
 
-				// Adds event handlers for all event options
-				// add sets the selector to false for all
-				// handlers that are not present in the mode
-				// to reduce on render calls for functions that
-				// have no logic
 				eventKeys.forEach((key) => {
 					const modeHandler = eventMapper[key];
 					let selector = () => false;
-					if (modeObject[modeHandler]) {
+					if (typeof mode[modeHandler] === 'function') {
 						selector = () => true;
 					}
 					this.on(key, selector, wrapper(modeHandler));
 				});
 			},
 			stop() {
-				mode.onStop(state);
+				if (typeof mode.onStop === 'function') {
+					mode.onStop(state);
+				}
 			},
 			trash() {
-				mode.onTrash(state);
+				if (typeof mode.onTrash === 'function') {
+					mode.onTrash(state);
+				}
 			},
 			combineFeatures() {
-				mode.onCombineFeatures(state);
+				if (typeof mode.onCombineFeatures === 'function') {
+					mode.onCombineFeatures(state);
+				}
 			},
 			uncombineFeatures() {
-				mode.onUncombineFeatures(state);
+				if (typeof mode.onUncombineFeatures === 'function') {
+					mode.onUncombineFeatures(state);
+				}
 			},
 			render(geojson, push) {
-				mode.toDisplayFeatures(state, geojson, push);
+				if (typeof mode.toDisplayFeatures === 'function') {
+					mode.toDisplayFeatures(state, geojson, push);
+				}
 			},
 		};
 	};

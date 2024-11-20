@@ -69,26 +69,30 @@ export function ModeHandler(mode: any, DrawContext: DrawContext): {
 		}
 	};
 
-	mode.start.call(ctx);
+	if (typeof mode.start === 'function') {
+		mode.start.call(ctx);
+	}
 
 	return {
 		render: mode.render,
 		stop() {
-			if (mode.stop) mode.stop();
+			if (typeof mode.stop === 'function') {
+				mode.stop();
+			}
 		},
 		trash() {
-			if (mode.trash) {
+			if (typeof mode.trash === 'function') {
 				mode.trash();
 				DrawContext.store.render();
 			}
 		},
 		combineFeatures() {
-			if (mode.combineFeatures) {
+			if (typeof mode.combineFeatures === 'function') {
 				mode.combineFeatures();
 			}
 		},
 		uncombineFeatures() {
-			if (mode.uncombineFeatures) {
+			if (typeof mode.uncombineFeatures === 'function') {
 				mode.uncombineFeatures();
 			}
 		},

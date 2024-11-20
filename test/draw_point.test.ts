@@ -17,8 +17,8 @@ const drawPointMode = objectToMode(DrawPointMode);
 test('draw_point mode initialization', () => {
 	const context = createMockDrawModeContext();
 	const lifecycleContext = createMockLifecycleContext();
-	const mode = drawPointMode(context);
-	mode.start.call(lifecycleContext);
+	const modeHandler = drawPointMode(context);
+	modeHandler.start.call(lifecycleContext);
 
 	assert.equal(context.store.add.callCount, 1, 'store.add called');
 
@@ -41,8 +41,8 @@ test('draw_point mode initialization', () => {
 test('draw_point start', () => {
 	const context = createMockDrawModeContext();
 	const lifecycleContext = createMockLifecycleContext();
-	const mode = drawPointMode(context);
-	mode.start.call(lifecycleContext);
+	const modeHandler = drawPointMode(context);
+	modeHandler.start.call(lifecycleContext);
 
 	assert.equal(
 		context.store.clearSelected.callCount,
@@ -75,16 +75,16 @@ test('draw_point start', () => {
 
 test('draw_point stop with point placed', () => {
 	const context = createMockDrawModeContext();
-	const mode = drawPointMode(context);
+	const modeHandler = drawPointMode(context);
 	const lifecycleContext = createMockLifecycleContext();
-	mode.start.call(lifecycleContext);
+	modeHandler.start.call(lifecycleContext);
 
 	// Fake a placed point
 	const id = context.store.getAllIds()[0];
 	const point = context.store.get(id);
 	point.updateCoordinate(10, 20);
 
-	mode.stop.call();
+	modeHandler.stop.call(lifecycleContext);
 	assert.equal(
 		context.ui.setActiveButton.callCount,
 		2,
@@ -100,14 +100,14 @@ test('draw_point stop with point placed', () => {
 
 test('draw_point stop with no point placed', () => {
 	const context = createMockDrawModeContext();
-	const mode = drawPointMode(context);
+	const modeHandler = drawPointMode(context);
 	const lifecycleContext = createMockLifecycleContext();
-	mode.start.call(lifecycleContext);
+	modeHandler.start.call(lifecycleContext);
 
 	const id = context.store.getAllIds()[0];
 	const point = context.store.get(id);
 
-	mode.stop.call();
+	modeHandler.stop.call(lifecycleContext);
 
 	assert.equal(
 		context.ui.setActiveButton.callCount,
@@ -129,9 +129,9 @@ test('draw_point stop with no point placed', () => {
 
 test('draw_point render the active point', () => {
 	const context = createMockDrawModeContext();
-	const mode = drawPointMode(context);
+	const modeHandler = drawPointMode(context);
 	const lifecycleContext = createMockLifecycleContext();
-	mode.start.call(lifecycleContext);
+	modeHandler.start.call(lifecycleContext);
 
 	const id = context.store.getAllIds()[0];
 	const point = context.store.get(id);
@@ -147,15 +147,15 @@ test('draw_point render the active point', () => {
 			coordinates: [10, 10],
 		},
 	};
-	mode.render(geojson, (x) => memo.push(x));
+	modeHandler.render(geojson, (x) => memo.push(x));
 	assert.equal(memo.length, 0, 'active point does not render');
 });
 
 test('draw_point render an inactive feature', () => {
 	const context = createMockDrawModeContext();
-	const mode = drawPointMode(context);
+	const modeHandler = drawPointMode(context);
 	const lifecycleContext = createMockLifecycleContext();
-	mode.start.call(lifecycleContext);
+	modeHandler.start.call(lifecycleContext);
 
 	const memo = [];
 	const geojson = {
@@ -171,7 +171,7 @@ test('draw_point render an inactive feature', () => {
 			],
 		},
 	};
-	mode.render(geojson, (x) => memo.push(x));
+	modeHandler.render(geojson, (x) => memo.push(x));
 	assert.equal(memo.length, 1, 'does render');
 	assert.deepEqual(
 		memo[0],
