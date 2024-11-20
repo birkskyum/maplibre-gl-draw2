@@ -7,6 +7,10 @@ import { ModeInterfaceAccessors } from "./mode_interface_accessors.ts";
  * @returns {Object} - this object will be passed to all other life cycle functions
  */
 export abstract class ModeInterface extends ModeInterfaceAccessors {
+
+  public state = {};
+
+
   abstract onSetup(opts?: object): object;
 
   /**

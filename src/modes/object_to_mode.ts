@@ -19,17 +19,17 @@ const eventKeys = Object.keys(eventMapper);
 
 export function objectToMode(modeObject) {
   return function (ctx, startOpts = {}) {
-    let state = {};
+  
 
     const mode = new modeObject(ctx);
 
     function wrapper(eh) {
-      return (e) => mode[eh](state, e);
+      return (e) => mode[eh](mode.state, e);
     }
 
     return {
       start() {
-        state = mode.onSetup(startOpts);
+        mode.state = mode.onSetup(startOpts);
 
         eventKeys.forEach((key) => {
           const modeHandler = eventMapper[key];
@@ -42,27 +42,27 @@ export function objectToMode(modeObject) {
       },
       stop() {
         if (typeof mode.onStop === "function") {
-          mode.onStop(state);
+          mode.onStop(mode.state);
         }
       },
       trash() {
         if (typeof mode.onTrash === "function") {
-          mode.onTrash(state);
+          mode.onTrash(mode.state);
         }
       },
       combineFeatures() {
         if (typeof mode.onCombineFeatures === "function") {
-          mode.onCombineFeatures(state);
+          mode.onCombineFeatures(mode.state);
         }
       },
       uncombineFeatures() {
         if (typeof mode.onUncombineFeatures === "function") {
-          mode.onUncombineFeatures(state);
+          mode.onUncombineFeatures(mode.state);
         }
       },
       render(geojson, push) {
         if (typeof mode.toDisplayFeatures === "function") {
-          mode.toDisplayFeatures(state, geojson, push);
+          mode.toDisplayFeatures(mode.state, geojson, push);
         }
       },
     };
