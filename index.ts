@@ -17,7 +17,7 @@ export class DrawContext {
 	container?: HTMLDivElement;
 	store?: DrawStore;
 
-	constructor(options) {
+	constructor(options: MapLibreDrawOptions) {
 		this.options = setupOptions(options);
 	}
 }
@@ -44,7 +44,7 @@ export class MapLibreDraw implements IControl {
 		return this.setupApi;
 	}
 
-	public onAdd(map: any) {
+	public onAdd(map: MapLibreMap): HTMLDivElement {
 		this.ctx.map = map;
 		this.ctx.events = new DrawEvents(this.ctx);
 		this.ctx.ui = new DrawUI(this.ctx);
@@ -77,7 +77,7 @@ export class MapLibreDraw implements IControl {
 		return this.controlContainer;
 	}
 
-	public onRemove() {
+	public onRemove(map: MapLibreMap): MapLibreDraw {
 		this.ctx.map?.off('load', this.connect.bind(this));
 		clearInterval(this.mapLoadedInterval);
 

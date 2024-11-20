@@ -1,7 +1,7 @@
 import type { MapMouseEvent, MapTouchEvent } from 'maplibre-gl';
 import * as Constants from '../constants.ts';
 
-export function isOfMetaType(type: string) {
+export function isOfMetaType(type: string): boolean {
 	return function (e: MapMouseEvent | MapTouchEvent): boolean {
 		const featureTarget = e.featureTarget;
 		if (!featureTarget) return false;
@@ -10,7 +10,7 @@ export function isOfMetaType(type: string) {
 	};
 }
 
-export function isShiftMousedown(e) {
+export function isShiftMousedown(e: any): boolean {
 	if (!e.originalEvent) return false;
 	if (!e.originalEvent.shiftKey) return false;
 	return e.originalEvent.button === 0;
@@ -64,6 +64,6 @@ export function isEnterKey(e: KeyboardEvent): boolean {
 	return e.keyCode === 13;
 }
 
-export function isTrue() {
+export function isTrue(): boolean {
 	return true;
 }

@@ -3,6 +3,10 @@ import {StringSet} from './lib/string_set.ts';
 import {render} from './render.ts';
 import * as Constants from './constants.ts';
 import type { DrawContext } from '../index.ts';
+import { Feat } from './feature_types/feature.ts';
+import type { FeatureCollection } from 'geojson';
+import type { Feature } from 'geojson';
+import type { Geometry } from 'geojson';
 
 export class DrawStore {
 	private _features: { [key: string]: any };
@@ -66,7 +70,7 @@ export class DrawStore {
 		};
 	}
 
-	createRenderBatch() {
+	createRenderBatch(): () => void {
 		const holdRender = this.render;
 		let numRenders = 0;
 		this.render = function () {
@@ -81,37 +85,37 @@ export class DrawStore {
 		};
 	}
 
-	setDirty() {
+	setDirty(): DrawStore {
 		this.isDirty = true;
 		return this;
 	}
 
-	featureChanged(featureId: string) {
+	featureChanged(featureId: string): DrawStore {
 		this._changedFeatureIds.add(featureId);
 		return this;
 	}
 
-	getChangedIds() {
+	getChangedIds(): (string|number)[] {
 		return this._changedFeatureIds.values();
 	}
 
-	clearChangedIds() {
+	clearChangedIds(): DrawStore {
 		this._changedFeatureIds.clear();
 		return this;
 	}
 
-	getAllIds() {
+	getAllIds(): (string|number)[] {
 		return this._featureIds.values();
 	}
 
-	add(feature: any) {
+	add(feature: Feature | FeatureCollection | Geometry): DrawStore {
 		this.featureChanged(feature.id);
 		this._features[feature.id] = feature;
 		this._featureIds.add(feature.id);
 		return this;
 	}
 
-	delete(featureIds: string | string[], options: { silent?: boolean } = {}) {
+	delete(featureIds: string | string[], options: { silent?: boolean } = {}): DrawStore {
 		const deletedFeaturesToEmit: any[] = [];
 		toDenseArray(featureIds).forEach((id) => {
 			if (!this._featureIds.has(id)) return;
@@ -136,15 +140,15 @@ export class DrawStore {
 		return this;
 	}
 
-	get(id: string) {
+	get(id: string): Feature | undefined {
 		return this._features[id];
 	}
 
-	getAll() {
+	getAll(): FeatureCollection {
 		return Object.keys(this._features).map((id) => this._features[id]);
 	}
 
-	select(featureIds: string | string[], options: { silent?: boolean } = {}) {
+	select(featureIds: string | string[], options: { silent?: boolean } = {}): DrawStore {
 		toDenseArray(featureIds).forEach((id) => {
 			if (this._selectedFeatureIds.has(id)) return;
 			this._selectedFeatureIds.add(id);
@@ -156,7 +160,7 @@ export class DrawStore {
 		return this;
 	}
 
-	deselect(featureIds: string | string[], options: { silent?: boolean } = {}) {
+	deselect(featureIds: string | string[], options: { silent?: boolean } = {}): DrawStore {
 		toDenseArray(featureIds).forEach((id) => {
 			if (!this._selectedFeatureIds.has(id)) return;
 			this._selectedFeatureIds.delete(id);
@@ -169,7 +173,7 @@ export class DrawStore {
 		return this;
 	}
 
-	clearSelected(options: { silent?: boolean } = {}) {
+	clearSelected(options: { silent?: boolean } = {}): DrawStore {
 		this.deselect(this._selectedFeatureIds.values(), {
 			silent: options.silent,
 		});
@@ -179,7 +183,7 @@ export class DrawStore {
 	setSelected(
 		featureIds: string | string[] | undefined,
 		options: { silent?: boolean } = {},
-	) {
+	): DrawStore {
 		featureIds = toDenseArray(featureIds);
 
 		this.deselect(
@@ -197,27 +201,27 @@ export class DrawStore {
 		return this;
 	}
 
-	setSelectedCoordinates(coordinates: any[]) {
+	setSelectedCoordinates(coordinates: Array<{ coord_path: string; feature_id: string }>): DrawStore {
 		this._selectedCoordinates = coordinates;
 		this._emitSelectionChange = true;
 		return this;
 	}
 
-	clearSelectedCoordinates() {
+	clearSelectedCoordinates(): DrawStore {
 		this._selectedCoordinates = [];
 		this._emitSelectionChange = true;
 		return this;
 	}
 
-	getSelectedIds() {
+	getSelectedIds(): (string|number)[] {
 		return this._selectedFeatureIds.values();
 	}
 
-	getSelected() {
+	getSelected(): Feat[] {
 		return this.getSelectedIds().map((id) => this.get(id));
 	}
 
-	getSelectedCoordinates() {
+	getSelectedCoordinates(): { coordinates: any[] }[] {
 		return this._selectedCoordinates.map((coordinate) => {
 			const feature = this.get(coordinate.feature_id);
 			return {
@@ -226,7 +230,7 @@ export class DrawStore {
 		});
 	}
 
-	isSelected(featureId: string) {
+	isSelected(featureId: string): boolean {
 		return this._selectedFeatureIds.has(featureId);
 	}
 
@@ -269,7 +273,7 @@ export class DrawStore {
 		});
 	}
 
-	getInitialConfigValue(interaction: string) {
+	getInitialConfigValue(interaction: string): boolean {
 		if (this._mapInitialConfig[interaction] !== undefined) {
 			return this._mapInitialConfig[interaction];
 		} else {
