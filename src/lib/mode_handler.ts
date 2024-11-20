@@ -1,4 +1,4 @@
-import { DrawContext } from "../../index.ts";
+import { DrawContext } from ".././index.ts";
 
 export function ModeHandler(mode: any, DrawContext: DrawContext): {
   render: any;

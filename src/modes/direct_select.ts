@@ -11,7 +11,7 @@ import { doubleClickZoom } from "../lib/double_click_zoom.ts";
 import * as Constants from "../constants.ts";
 import { moveFeatures } from "../lib/move_features.ts";
 import { ModeInterface } from "./mode_interface.ts";
-import { ModeStrings } from "../../index.ts";
+import { ModeStrings } from ".././index.ts";
 
 const isVertex = isOfMetaType(Constants.meta.VERTEX);
 const isMidpoint = isOfMetaType(Constants.meta.MIDPOINT);

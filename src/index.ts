@@ -1,30 +1,30 @@
-import * as Constants from "./src/constants.ts";
-import * as lib from "./src/lib/index.ts";
-import { DrawEvents } from "./src/events.ts";
-import { DrawStore } from "./src/store.ts";
-import { DrawUI } from "./src/ui.ts";
+import * as Constants from "./constants.ts";
+import * as lib from "./lib/index.ts";
+import { DrawEvents } from "./events.ts";
+import { DrawStore } from "./store.ts";
+import { DrawUI } from "./ui.ts";
 
 import type { IControl, Map as MapLibreMap } from "maplibre-gl";
 import isEqual from "fast-deep-equal";
 import { normalize } from "@birkskyum/geojson-normalize";
 import { nanoid } from "nanoid";
-import { featuresAt } from "./src/lib/features_at.ts";
-import { stringSetsAreEqual } from "./src/lib/string_sets_are_equal.ts";
-import { StringSet } from "./src/lib/string_set.ts";
+import { featuresAt } from "./lib/features_at.ts";
+import { stringSetsAreEqual } from "./lib/string_sets_are_equal.ts";
+import { StringSet } from "./lib/string_set.ts";
 
-import { PolygonFeat } from "./src/feature_types/polygon.ts";
-import { LineStringFeat } from "./src/feature_types/line_string.ts";
-import { PointFeat } from "./src/feature_types/point.ts";
-import { MultiFeature } from "./src/feature_types/multi_feature.ts";
+import { PolygonFeat } from "./feature_types/polygon.ts";
+import { LineStringFeat } from "./feature_types/line_string.ts";
+import { PointFeat } from "./feature_types/point.ts";
+import { MultiFeature } from "./feature_types/multi_feature.ts";
 import type { Feature, FeatureCollection, Geometry } from "geojson";
-import { theme } from "./src/lib/theme.ts";
+import { theme } from "./lib/theme.ts";
 
-import { SimpleSelect } from "./src/modes/simple_select.ts";
-import { DirectSelect } from "./src/modes/direct_select.ts";
-import { DrawPoint } from "./src/modes/draw_point.ts";
-import { DrawPolygon } from "./src/modes/draw_polygon.ts";
-import { DrawLineString } from "./src/modes/draw_line_string.ts";
-import { StaticMode } from "./src/modes/static_mode.ts";
+import { SimpleSelect } from "./modes/simple_select.ts";
+import { DirectSelect } from "./modes/direct_select.ts";
+import { DrawPoint } from "./modes/draw_point.ts";
+import { DrawPolygon } from "./modes/draw_polygon.ts";
+import { DrawLineString } from "./modes/draw_line_string.ts";
+import { StaticMode } from "./modes/static_mode.ts";
 
 export const ModeStrings = {
   DRAW_LINE_STRING: "draw_line_string",

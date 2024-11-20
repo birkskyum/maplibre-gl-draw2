@@ -1,4 +1,4 @@
-import { DrawContext } from "../../index.ts";
+import { DrawContext } from ".././index.ts";
 
 export const doubleClickZoom: {
   enable: (ctx: DrawContext) => void; // ?? ctx

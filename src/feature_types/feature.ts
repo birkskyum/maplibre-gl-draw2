@@ -1,6 +1,6 @@
 import { nanoid } from "nanoid";
 import * as Constants from "../constants.ts";
-import type { DrawContext } from "../../index.ts";
+import type { DrawContext } from ".././index.ts";
 
 export class Feat {
   ctx: DrawContext;

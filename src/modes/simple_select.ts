@@ -6,7 +6,7 @@ import { doubleClickZoom } from "../lib/double_click_zoom.ts";
 import { moveFeatures } from "../lib/move_features.ts";
 import * as Constants from "../constants.ts";
 import { ModeInterface } from "./mode_interface.ts";
-import { ModeStrings } from "../../index.ts";
+import { ModeStrings } from ".././index.ts";
 
 export class SimpleSelect extends ModeInterface {
   onSetup(opts) {

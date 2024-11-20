@@ -5,8 +5,8 @@ import { isClick } from "./lib/is_click.ts";
 import { isTap } from "./lib/is_tap.ts";
 import * as Constants from "./constants.ts";
 import { objectToMode } from "./modes/object_to_mode.ts";
-import type { DrawContext } from "../index.ts";
-import { ModeStrings } from "../index.ts";
+import type { DrawContext } from "./index.ts";
+import { ModeStrings } from "./index.ts";
 
 interface EventInfo {
   time: number;

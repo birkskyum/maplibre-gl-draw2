@@ -3,7 +3,7 @@ import assert from "node:assert/strict";
 import { spy } from "sinon";
 import { Feat } from "../src/feature_types/feature.ts";
 import { LineStringFeat } from "../src/feature_types/line_string.ts";
-import { MapLibreDraw } from "../index.ts";
+import { MapLibreDraw } from "../src/index.ts";
 import { createFeature } from "./utils/create_feature.ts";
 import { getPublicMemberKeys } from "./utils/get_public_member_keys.ts";
 import { createMockFeatureContext } from "./utils/create_mock_feature_context.ts";

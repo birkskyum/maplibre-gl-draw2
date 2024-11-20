@@ -1,6 +1,6 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { MapLibreDraw } from "../index.ts";
+import { MapLibreDraw } from "../src/index.ts";
 import { createMap } from "./utils/create_map.ts";
 import { mouseClick } from "./utils/mouse_click.ts";
 import { touchTap } from "./utils/touch_tap.ts";

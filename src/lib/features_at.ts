@@ -3,7 +3,7 @@ import { mapEventToBoundingBox } from "./map_event_to_bounding_box.ts";
 import * as Constants from "../constants.ts";
 import { StringSet } from "./string_set.ts";
 import type { Feature } from "geojson";
-import { DrawContext } from "../../index.ts";
+import { DrawContext } from ".././index.ts";
 import type { BBox } from "geojson";
 import type { MapMouseEvent, MapTouchEvent } from "maplibre-gl";
 

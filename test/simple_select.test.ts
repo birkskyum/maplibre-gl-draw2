@@ -4,7 +4,7 @@ import assert from "node:assert/strict";
 import createSyntheticEvent from "synthetic-dom-events";
 import { spy } from "sinon";
 
-import { MapLibreDraw } from "../index.ts";
+import { MapLibreDraw } from "../src/index.ts";
 import { setupAfterNextRender } from "./utils/after_next_render.ts";
 import { makeMouseEvent } from "./utils/make_mouse_event.ts";
 import { mouseClick } from "./utils/mouse_click.ts";

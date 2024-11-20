@@ -2,7 +2,7 @@ import { featuresAt } from "./features_at.ts";
 import * as Constants from "../constants.ts";
 import { Feat } from "../feature_types/feature.ts";
 import type { MapMouseEvent } from "maplibre-gl";
-import { DrawContext } from "../../index.ts";
+import { DrawContext } from ".././index.ts";
 import type { Feature } from "geojson";
 
 export function getFeatureAtAndSetCursors(

@@ -4,7 +4,7 @@ import { doubleClickZoom } from "../lib/double_click_zoom.ts";
 import * as Constants from "../constants.ts";
 import { createVertex } from "../lib/create_vertex.ts";
 import { ModeInterface } from "./mode_interface.ts";
-import { ModeStrings } from "../../index.ts";
+import { ModeStrings } from ".././index.ts";
 
 export class DrawLineString extends ModeInterface {
   onSetup(opts) {

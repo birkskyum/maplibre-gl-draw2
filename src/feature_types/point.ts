@@ -1,4 +1,4 @@
-import type { DrawContext } from "../../index.ts";
+import type { DrawContext } from ".././index.ts";
 import { Feat } from "./feature.ts";
 
 export class PointFeat extends Feat {
