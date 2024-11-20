@@ -3,10 +3,8 @@ import { StringSet } from "./lib/string_set.ts";
 import { render } from "./render.ts";
 import * as Constants from "./constants.ts";
 import type { DrawContext } from "./index.ts";
-import { Feat } from "./feature_types/feature.ts";
+import type { Feat } from "./feature_types/feature.ts";
 import type { FeatureCollection } from "geojson";
-import type { Feature } from "geojson";
-import type { Geometry } from "geojson";
 
 export class DrawStore {
   private _features: { [key: string]: Feat };
@@ -48,7 +46,7 @@ export class DrawStore {
           if (this._emitSelectionChange) {
             this.ctx.events?.fire(Constants.events.SELECTION_CHANGE, {
               features: this.getSelected().map((feature) =>
-                feature.toGeoJSON()
+                feature?.toGeoJSON()
               ),
               points: this.getSelectedCoordinates().map((coordinate) => ({
                 type: Constants.geojsonTypes.FEATURE,
@@ -147,7 +145,7 @@ export class DrawStore {
     return this._features[id];
   }
 
-  getAll(): FeatureCollection {
+  getAll(): Feat[] {
     return Object.keys(this._features).map((id) => this._features[id]);
   }
 
