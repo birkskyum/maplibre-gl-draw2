@@ -15,7 +15,12 @@
 	"bugs": {
 		"url": "https://github.com/birkskyum/maplibre-gl-draw/issues"
 	},
-	"keywords": ["webgl", "mapbox", "draw", "drawing"],
+	"keywords": [
+		"webgl",
+		"mapbox",
+		"draw",
+		"drawing"
+	],
 	"type": "module",
 	"scripts": {
 		"docs": "run-s docs-modes-life-cycle docs-modes-get-and-set",
@@ -47,9 +52,9 @@
 		"@turf/bbox-clip": "^7.1.0",
 		"@turf/centroid": "^7.1.0",
 		"@types/geojson": "^7946.0.14",
-		"@types/mapbox__geojson-area": "^0.2.6",
 		"@types/mapbox__point-geometry": "^0.1.4",
 		"@types/sinon": "^17.0.3",
+		"@types/wgs84": "^0.0.2",
 		"maplibre-gl": "^4.7.1",
 		"mock-browser": "^0.92.14",
 		"npm-run-all": "^4.1.5",
@@ -60,8 +65,8 @@
 		"vite": "^5.4.11"
 	},
 	"dependencies": {
-		"@mapbox/geojson-area": "^0.2.2",
-		"@mapbox/geojson-normalize": "^0.0.1",
+		"@birkskyum/geojson-area": "npm:@jsr/birkskyum__geojson-area@^1.0.0",
+		"@birkskyum/geojson-normalize": "npm:@jsr/birkskyum__geojson-normalize@^1.0.1",
 		"@mapbox/point-geometry": "^1.1.0",
 		"fast-deep-equal": "^3.1.3",
 		"geojson": "^0.5.0",

@@ -1,5 +1,5 @@
 import isEqual from 'fast-deep-equal';
-import normalize from '@mapbox/geojson-normalize';
+import {normalize} from '@birkskyum/geojson-normalize';
 import { nanoid } from 'nanoid';
 import {featuresAt} from './lib/features_at.ts';
 import { stringSetsAreEqual } from './lib/string_sets_are_equal.ts';

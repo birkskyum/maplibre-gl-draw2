@@ -1,4 +1,4 @@
-import area from '@mapbox/geojson-area';
+import * as area from '@birkskyum/geojson-area';
 import * as Constants from '../constants.ts';
 import { Feat } from '../feature_types/feature.ts';
 
