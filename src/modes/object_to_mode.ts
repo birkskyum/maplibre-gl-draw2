@@ -37,6 +37,7 @@ export function objectToMode(modeObject) {
           if (typeof mode[modeHandler] === "function") {
             selector = () => true;
           }
+          // @ts-ignore
           this.on(key, selector, wrapper(modeHandler));
         });
       },

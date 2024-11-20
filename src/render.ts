@@ -1,8 +1,6 @@
 import * as Constants from "./constants.ts";
 
-export function render() {
-  // eslint-disable-next-line no-invalid-this
-  const store = this;
+export function render(store) {
   const mapExists = store.ctx.map &&
     store.ctx.map.getSource(Constants.sources.HOT) !== undefined;
   if (!mapExists) return cleanup();

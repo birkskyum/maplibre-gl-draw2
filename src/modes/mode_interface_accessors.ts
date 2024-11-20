@@ -121,6 +121,7 @@ export class ModeInterfaceAccessors {
     if (bufferType !== "click" && bufferType !== "touch") {
       throw new Error("invalid buffer type");
     }
+    // @ts-ignore
     return featuresAt[bufferType](event, bbox, this._ctx);
   }
 

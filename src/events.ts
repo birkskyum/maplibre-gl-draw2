@@ -183,6 +183,7 @@ export class DrawEvents {
       this.ctx.ui?.queueMapClasses({ mouse: Constants.cursors.DRAG });
       this.currentMode.drag(event);
     } else {
+      // @ts-ignore
       event.originalEvent.stopPropagation();
     }
   }

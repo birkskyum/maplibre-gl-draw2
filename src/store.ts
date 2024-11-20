@@ -4,7 +4,6 @@ import { render } from "./render.ts";
 import * as Constants from "./constants.ts";
 import type { DrawContext } from "./index.ts";
 import type { Feat } from "./feature_types/feature.ts";
-import type { FeatureCollection } from "geojson";
 
 export class DrawStore {
   private _features: { [key: string]: Feat };
@@ -40,7 +39,7 @@ export class DrawStore {
       if (!renderRequest) {
         renderRequest = requestAnimationFrame(() => {
           renderRequest = null;
-          render.call(this);
+          render(this);
 
           // Fire deduplicated selection change event
           if (this._emitSelectionChange) {
