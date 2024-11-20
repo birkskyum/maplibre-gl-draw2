@@ -129,7 +129,7 @@ export class DrawEvents {
   public mouseDownInfo: any = {};
   public touchStartInfo: any = {};
   public events: any = {};
-  public currentModeName: string | undefined;
+  public currentModeName: string = "";
   public currentMode: any = null;
   public ctx: DrawContext;
   public actionState: ActionState = {
@@ -320,8 +320,8 @@ export class DrawEvents {
       );
       if (!hasLayers) {
         setup.addLayers();
-        store.setDirty();
-        store.render();
+        store?.setDirty();
+        store?.render();
       }
     }
   }
@@ -375,7 +375,7 @@ export class DrawEvents {
   }
 
   public start(): void {
-    this.currentModeName = this.ctx.options.defaultMode;
+    this.currentModeName = this.ctx.options.defaultMode ?? '';
 
     if (!this.currentModeName) return;
 
@@ -395,7 +395,7 @@ export class DrawEvents {
     }
   }
 
-  public getMode(): string | null {
+  public getMode(): string {
     return this.currentModeName;
   }
 
@@ -448,11 +448,11 @@ export class DrawEvents {
     this.currentMode.trash(options);
   }
 
-  public combineFeatures(): void {
+  public combineFeatures(_ops?: { silent: boolean }): void {
     this.currentMode.combineFeatures();
   }
 
-  public uncombineFeatures(): void {
+  public uncombineFeatures(_ops?: { silent: boolean }): void {
     this.currentMode.uncombineFeatures();
   }
 }

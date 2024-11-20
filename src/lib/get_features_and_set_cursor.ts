@@ -10,7 +10,7 @@ export function getFeatureAtAndSetCursors(
   ctx: DrawContext,
 ): Feature {
   const features: Feature[] = featuresAt.click(event, null, ctx);
-  const classes: { mouse: string; feature?: Feat } = {
+  const classes: { mode?: string | null | undefined; feature?: string | null | undefined; mouse?: string | null | undefined; } = {
     mouse: Constants.cursors.NONE,
   };
 

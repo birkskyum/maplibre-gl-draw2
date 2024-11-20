@@ -1,14 +1,14 @@
 import { createVertex } from "./create_vertex.ts";
 import { createMidPoint } from "./create_midpoint.ts";
 import * as Constants from "../constants.ts";
-import type { Feature, GeoJsonProperties, Geometry, Point } from "geojson";
+import type { Feature, GeoJsonProperties,Polygon, Geometry, Point } from "geojson";
 
 export function createSupplementaryPoints(
   geojson: Feature,
   options: { midpoints?: boolean; selectedPaths?: string[] } = {},
   basePath: string | null = null,
 ): Array<Feature<Point>> {
-  const { type, coordinates } = geojson.geometry;
+  const { type, coordinates } = geojson.geometry as any;
   const featureId = geojson.properties && geojson.properties.id;
 
   let supplementaryPoints: any[] = [];
@@ -40,12 +40,12 @@ export function createSupplementaryPoints(
 
   function processLine(line, lineBasePath) {
     let firstPointString = "";
-    let lastVertex;
+    let lastVertex: Feature<Point, GeoJsonProperties>;
     line.forEach((point, pointIndex) => {
       const pointPath = lineBasePath !== undefined && lineBasePath !== null
         ? `${lineBasePath}.${pointIndex}`
         : String(pointIndex);
-      const vertex = createVertex(
+      const vertex: Feature<Point, GeoJsonProperties> = createVertex(
         featureId,
         point,
         pointPath,

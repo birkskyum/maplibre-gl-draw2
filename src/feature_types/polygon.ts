@@ -1,26 +1,26 @@
 import { Feat } from "./feature.ts";
 
 export class PolygonFeat extends Feat {
-  coordinates: GeoJSON.Position[][] = super.getCoordinates();
+  override coordinates: GeoJSON.Position[][] = super.getCoordinates();
 
   constructor(ctx, geojson: GeoJSON.Feature<GeoJSON.Polygon>) {
     super(ctx, geojson);
     this.coordinates = this.coordinates.map((ring) => ring.slice(0, -1));
   }
 
-  isValid() {
+  override isValid() {
     if (this.coordinates.length === 0) return false;
     return this.coordinates.every((ring) => ring.length > 2);
   }
 
   // Expects valid geoJSON polygon geometry: first and last positions must be equivalent.
-  incomingCoords(coords) {
+  override incomingCoords(coords) {
     this.coordinates = coords.map((ring) => ring.slice(0, -1));
     this.changed();
   }
 
   // Does NOT expect valid geoJSON polygon geometry: first and last positions should not be equivalent.
-  setCoordinates(coords) {
+  override setCoordinates(coords) {
     this.coordinates = coords;
     this.changed();
   }
@@ -44,13 +44,13 @@ export class PolygonFeat extends Feat {
     }
   }
 
-  getCoordinate(path: string) {
+  override getCoordinate(path: string) {
     const ids = path.split(".").map((x) => parseInt(x, 10));
     const ring = this.coordinates[ids[0]];
     return JSON.parse(JSON.stringify(ring[ids[1]]));
   }
 
-  getCoordinates() {
+  override getCoordinates() {
     return this.coordinates.map((coords) => coords.concat([coords[0]]));
   }
 

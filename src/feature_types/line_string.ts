@@ -1,14 +1,14 @@
 import { Feat } from "./feature.ts";
 
 export class LineStringFeat extends Feat {
-  coordinates: GeoJSON.Position[];
+  override coordinates: GeoJSON.Position[];
 
   constructor(ctx, geojson: GeoJSON.Feature<GeoJSON.LineString>) {
     super(ctx, geojson);
     this.coordinates = geojson.geometry.coordinates;
   }
 
-  isValid() {
+  override isValid() {
     return this.coordinates.length > 1;
   }
 
@@ -18,7 +18,7 @@ export class LineStringFeat extends Feat {
     this.coordinates.splice(id, 0, [lng, lat]);
   }
 
-  getCoordinate(path: string) {
+  override getCoordinate(path: string) {
     const id = parseInt(path, 10);
     return JSON.parse(JSON.stringify(this.coordinates[id]));
   }

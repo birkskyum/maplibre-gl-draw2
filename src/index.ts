@@ -15,10 +15,9 @@ import { featureTypes } from "./features.ts";
 import type { MapLibreDrawOptions, IDrawContext } from "./types.ts";
 import { setupOptions } from "./setup.ts";
 import type  {IControl, Map as MapLibreMap} from "maplibre-gl";
-
+import type {MapMouseEvent} from './events.ts'
 export class DrawContext implements IDrawContext {
   options: MapLibreDrawOptions;
-
   map?: MapLibreMap;
   events?: DrawEvents;
   ui?: DrawUI;
@@ -156,8 +155,8 @@ export class MapLibreDraw implements IControl {
   }
 
   public getFeatureIdsAt(point: { x: number; y: number }): string[] {
-    const features = featuresAt.click({ point }, null, this.ctx);
-    return features.map((feature) => feature.properties.id);
+    const features = featuresAt.click({ point } as MapMouseEvent, null, this.ctx);
+    return features.map((feature) => feature.properties?.id);
   }
 
   public getSelectedIds(): string[] {
@@ -221,8 +220,7 @@ export class MapLibreDraw implements IControl {
       }
 
       if (
-        this.ctx.store?.get(feature.id) === undefined ||
-        this.ctx.store?.get(feature.id).type !== feature.geometry.type
+        this.ctx.store?.get(feature.id)?.type !== feature.geometry.type
       ) {
         const Model =
           featureTypes[feature.geometry.type as keyof typeof featureTypes];
@@ -233,6 +231,8 @@ export class MapLibreDraw implements IControl {
         this.ctx.store?.add(internalFeature);
       } else {
         const internalFeature = this.ctx.store?.get(feature.id);
+
+        if (!internalFeature) return;
         const originalProperties = internalFeature.properties;
         internalFeature.properties = feature.properties;
         if (!isEqual(originalProperties, feature.properties)) {
@@ -240,7 +240,7 @@ export class MapLibreDraw implements IControl {
         }
         if (
           !isEqual(
-            internalFeature.getCoordinates(),
+            internalFeature?.getCoordinates(),
             feature.geometry.coordinates,
           )
         ) {
@@ -257,15 +257,15 @@ export class MapLibreDraw implements IControl {
   public get(id: string): Feature | undefined {
     const feature = this.ctx.store?.get(id);
     if (feature) {
-      return feature.toGeoJSON();
+      return feature.toGeoJSON() as Feature<Geometry, GeoJsonProperties> | undefined;
     }
   }
 
   public getAll(): FeatureCollection {
     return {
-      type: Constants.geojsonTypes.FEATURE_COLLECTION,
+      type: Constants.geojsonTypes.FEATURE_COLLECTION as "FeatureCollection",
       features: this.ctx.store?.getAll()
-        .map((feature: any) => feature.toGeoJSON()),
+        .map((feature: any) => feature.toGeoJSON()) as Feature<Geometry, GeoJsonProperties>[],
     };
   }
 
@@ -323,7 +323,7 @@ export class MapLibreDraw implements IControl {
       if (
         stringSetsAreEqual(
           modeOptions.featureIds || [],
-          this.ctx.store?.getSelectedIds(),
+          this.ctx.store?.getSelectedIds() as any,
         )
       ) {
         return this;
@@ -346,7 +346,7 @@ export class MapLibreDraw implements IControl {
   }
 
   public getMode(): string {
-    return this.ctx.events?.getMode();
+    return this.ctx.events?.getMode() ?? "";
   }
 
   public trash(): this {

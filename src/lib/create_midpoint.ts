@@ -1,11 +1,11 @@
-import type { Feature } from "geojson";
+import type { Feature, GeoJsonProperties } from "geojson";
 import * as Constants from "../constants.ts";
 import type { Point } from "geojson";
 
 export function createMidPoint(
   parent: string,
-  startVertex: Feature,
-  endVertex: Feature,
+  startVertex: Feature<Point, GeoJsonProperties>,
+  endVertex: Feature<Point, GeoJsonProperties>,
 ): Feature<Point> | null {
   const startCoord = startVertex.geometry.coordinates;
   const endCoord = endVertex.geometry.coordinates;

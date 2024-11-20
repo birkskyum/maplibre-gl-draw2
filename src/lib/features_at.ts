@@ -61,7 +61,7 @@ function featuresAtHandler(
 
   const featureIds = new StringSet();
   const uniqueFeatures: any[] = [];
-  features.forEach((feature) => {
+  features?.forEach((feature) => {
     const featureId = feature.properties.id;
     if (featureIds.has(featureId)) return;
     featureIds.add(featureId);

@@ -2,14 +2,14 @@ import type { DrawContext } from ".././index.ts";
 import { Feat } from "./feature.ts";
 
 export class PointFeat extends Feat {
-  coordinates: GeoJSON.Position;
+  override coordinates: GeoJSON.Position;
 
   constructor(ctx: DrawContext, geojson: GeoJSON.Feature<GeoJSON.Point>) {
     super(ctx, geojson);
     this.coordinates = geojson.geometry.coordinates;
   }
 
-  isValid() {
+  override isValid() {
     return (
       typeof this.coordinates[0] === "number" &&
       typeof this.coordinates[1] === "number"
@@ -25,7 +25,7 @@ export class PointFeat extends Feat {
     this.changed();
   }
 
-  getCoordinate() {
+  override getCoordinate() {
     return this.getCoordinates();
   }
 }
