@@ -32,7 +32,7 @@ export class DrawPoint extends ModeInterface {
     this.changeMode(ModeStrings.SIMPLE_SELECT);
   }
 
-  onClick(state, e) {
+  override onClick(state, e) {
     this.updateUIClasses({ mouse: Constants.cursors.MOVE });
     state.point.updateCoordinate("", e.lngLat.lng, e.lngLat.lat);
     this.fire(Constants.events.CREATE, {
@@ -43,7 +43,7 @@ export class DrawPoint extends ModeInterface {
     });
   }
 
-  onTap(state, e) {
+  override onTap(state, e) {
     // Handle tap events the same way as click events
     this.updateUIClasses({ mouse: Constants.cursors.MOVE });
     state.point.updateCoordinate("", e.lngLat.lng, e.lngLat.lat);
@@ -55,14 +55,15 @@ export class DrawPoint extends ModeInterface {
     });
   }
 
-  onStop(state) {
+  override onStop(state) {
     this.activateUIButton();
+    
     if (!state.point.getCoordinate().length) {
       this.deleteFeature([state.point.id], { silent: true });
     }
   }
 
-  toDisplayFeatures(state, geojson, display) {
+  override toDisplayFeatures(state, geojson, display) {
     // Never render the point we're drawing
     const isActivePoint = geojson.properties.id === state.point.id;
     geojson.properties.active = isActivePoint
@@ -71,11 +72,11 @@ export class DrawPoint extends ModeInterface {
     if (!isActivePoint) return display(geojson);
   }
 
-  onTrash(state) {
+  override onTrash(state) {
     this.stopDrawingAndRemove(state);
   }
 
-  onKeyUp(state, e) {
+  override onKeyUp(state, e) {
     if (CommonSelectors.isEscapeKey(e) || CommonSelectors.isEnterKey(e)) {
       return this.stopDrawingAndRemove(state, e);
     }

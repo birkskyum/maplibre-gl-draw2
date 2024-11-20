@@ -118,7 +118,7 @@ export class DrawPolygon extends ModeInterface {
     }
   }
 
-  toDisplayFeatures(state, geojson, display) {
+  override toDisplayFeatures(state, geojson, display) {
     const isActivePolygon = geojson.properties.id === state.polygon.id;
     geojson.properties.active = isActivePolygon
       ? Constants.activeStates.ACTIVE

@@ -133,7 +133,7 @@ export class DrawLineString extends ModeInterface {
     });
   }
 
-  onMouseMove(state, e) {
+  override onMouseMove(state, e) {
     state.line.updateCoordinate(
       state.currentVertexPosition,
       e.lngLat.lng,
@@ -144,17 +144,17 @@ export class DrawLineString extends ModeInterface {
     }
   }
 
-  onClick(state, e) {
+  override onClick(state, e) {
     if (CommonSelectors.isVertex(e)) return this.clickOnVertex(state, e);
     this.clickAnywhere(state, e);
   }
 
-  onTap(state, e) {
+  override onTap(state, e) {
     // Handle tap same as click
     this.onClick(state, e);
   }
 
-  onKeyUp(state, e) {
+  override onKeyUp(state, e) {
     if (CommonSelectors.isEnterKey(e)) {
       this.changeMode(ModeStrings.SIMPLE_SELECT, {
         featureIds: [state.line.id],
@@ -165,7 +165,7 @@ export class DrawLineString extends ModeInterface {
     }
   }
 
-  onStop(state) {
+  override onStop(state) {
     doubleClickZoom.enable(this);
     this.activateUIButton();
 
@@ -184,12 +184,12 @@ export class DrawLineString extends ModeInterface {
     }
   }
 
-  onTrash(state) {
+  override onTrash(state) {
     this.deleteFeature([state.line.id], { silent: true });
     this.changeMode(ModeStrings.SIMPLE_SELECT);
   }
 
-  toDisplayFeatures(state, geojson, display) {
+  override toDisplayFeatures(state, geojson, display) {
     const isActiveLine = geojson.properties.id === state.line.id;
     geojson.properties.active = isActiveLine
       ? Constants.activeStates.ACTIVE

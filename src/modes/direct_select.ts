@@ -170,7 +170,7 @@ export class DirectSelect extends ModeInterface {
   }
 
   // Mouse/Touch event handlers
-  onMouseMove(state, e) {
+  override onMouseMove(state, e) {
     // On mousemove that is not a drag, stop vertex movement.
     const isFeature = isActiveFeature(e);
     const onVertex = isVertex(e);
@@ -191,7 +191,7 @@ export class DirectSelect extends ModeInterface {
     return true;
   }
 
-  onMouseOut(state) {
+  override onMouseOut(state) {
     // As soon as you mouse leaves the canvas, update the feature
     if (state.dragMoving) this.fireUpdate();
 
@@ -199,7 +199,7 @@ export class DirectSelect extends ModeInterface {
     return true;
   }
 
-  onDrag(state, e) {
+  override onDrag(state, e) {
     if (state.canDragMove !== true) return;
     state.dragMoving = true;
     e.originalEvent.stopPropagation();
@@ -214,51 +214,51 @@ export class DirectSelect extends ModeInterface {
     state.dragMoveLocation = e.lngLat;
   }
 
-  onClick(state, e) {
+  override onClick(state, e) {
     if (noTarget(e)) return this.clickNoTarget(state, e);
     if (isActiveFeature(e)) return this.clickActiveFeature(state, e);
     if (isInactiveFeature(e)) return this.clickInactive(state, e);
     this.stopDragging(state);
   }
 
-  onTap(state, e) {
+  override onTap(state, e) {
     if (noTarget(e)) return this.clickNoTarget(state, e);
     if (isActiveFeature(e)) return this.clickActiveFeature(state, e);
     if (isInactiveFeature(e)) return this.clickInactive(state, e);
   }
 
-  onTouchStart(state, e) {
+  override onTouchStart(state, e) {
     if (isVertex(e)) return this.onVertex(state, e);
     if (isActiveFeature(e)) return this.onFeature(state, e);
     if (isMidpoint(e)) return this.onMidpoint(state, e);
   }
 
-  onMouseDown(state, e) {
+  override onMouseDown(state, e) {
     if (isVertex(e)) return this.onVertex(state, e);
     if (isActiveFeature(e)) return this.onFeature(state, e);
     if (isMidpoint(e)) return this.onMidpoint(state, e);
   }
 
-  onTouchEnd(state) {
+  override onTouchEnd(state) {
     if (state.dragMoving) {
       this.fireUpdate();
     }
     this.stopDragging(state);
   }
 
-  onMouseUp(state) {
+  override onMouseUp(state) {
     if (state.dragMoving) {
       this.fireUpdate();
     }
     this.stopDragging(state);
   }
 
-  onStop() {
+  override onStop() {
     doubleClickZoom.enable(this);
     this.clearSelectedCoordinates();
   }
 
-  onTrash(state) {
+  override onTrash(state) {
     // Uses number-aware sorting to make sure '9' < '10'. Comparison is reversed because we want them
     // in reverse order so that we can remove by index safely.
     state.selectedCoordPaths
@@ -274,7 +274,7 @@ export class DirectSelect extends ModeInterface {
     }
   }
 
-  toDisplayFeatures(state, geojson, push) {
+  override toDisplayFeatures(state, geojson, push) {
     if (state.featureId === geojson.properties.id) {
       geojson.properties.active = Constants.activeStates.ACTIVE;
       push(geojson);

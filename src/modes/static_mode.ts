@@ -6,7 +6,7 @@ export class StaticMode extends ModeInterface {
     return {};
   }
 
-  toDisplayFeatures(state, geojson, display) {
+  override toDisplayFeatures(state, geojson, display) {
     display(geojson);
   }
 }
