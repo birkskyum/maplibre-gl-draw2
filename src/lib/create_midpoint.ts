@@ -27,16 +27,16 @@ export function createMidPoint(
   };
 
   return {
-    type: Constants.geojsonTypes.FEATURE,
+    type: Constants.geojsonTypes.FEATURE as "Feature",
     properties: {
       meta: Constants.meta.MIDPOINT,
       parent,
       lng: mid.lng,
       lat: mid.lat,
-      coord_path: endVertex.properties.coord_path,
+      coord_path: endVertex.properties?.coord_path,
     },
     geometry: {
-      type: Constants.geojsonTypes.POINT,
+      type: Constants.geojsonTypes.POINT as "Point",
       coordinates: [mid.lng, mid.lat],
     },
   };

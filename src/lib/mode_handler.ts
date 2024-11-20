@@ -45,7 +45,7 @@ export function ModeHandler(mode: any, DrawContext: DrawContext): {
       });
     },
     render(id) {
-      DrawContext.store.featureChanged(id);
+      DrawContext.store?.featureChanged(id);
     },
   };
 
@@ -57,9 +57,9 @@ export function ModeHandler(mode: any, DrawContext: DrawContext): {
       if (handle.selector(event)) {
         const skipRender = handle.fn.call(ctx, event);
         if (!skipRender) {
-          DrawContext.store.render();
+          DrawContext.store?.render();
         }
-        DrawContext.ui.updateMapClasses();
+        DrawContext.ui?.updateMapClasses();
 
         // ensure an event is only handled once
         // we do this to let modes have multiple overlapping selectors
@@ -83,7 +83,7 @@ export function ModeHandler(mode: any, DrawContext: DrawContext): {
     trash() {
       if (typeof mode.trash === "function") {
         mode.trash();
-        DrawContext.store.render();
+        DrawContext.store?.render();
       }
     },
     combineFeatures() {

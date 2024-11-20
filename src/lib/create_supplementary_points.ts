@@ -1,7 +1,7 @@
 import { createVertex } from "./create_vertex.ts";
 import { createMidPoint } from "./create_midpoint.ts";
 import * as Constants from "../constants.ts";
-import type { Feature, Point } from "geojson";
+import type { Feature, GeoJsonProperties, Geometry, Point } from "geojson";
 
 export function createSupplementaryPoints(
   geojson: Feature,
@@ -87,11 +87,11 @@ export function createSupplementaryPoints(
   function processMultiGeometry() {
     const subType = type.replace(Constants.geojsonTypes.MULTI_PREFIX, "");
     coordinates.forEach((subCoordinates, index) => {
-      const subFeature = {
-        type: Constants.geojsonTypes.FEATURE,
+      const subFeature: Feature<Geometry, GeoJsonProperties> = {
+        type: Constants.geojsonTypes.FEATURE as "Feature",
         properties: geojson.properties,
         geometry: {
-          type: subType,
+          type: subType as "Point" | "LineString" | "Polygon" | "MultiPoint" | "MultiLineString" | "MultiPolygon" ,
           coordinates: subCoordinates,
         },
       };

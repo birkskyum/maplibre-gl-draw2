@@ -34,7 +34,7 @@ export function sortFeatures(features: Feature[]): Feature[] {
     })
     .sort(comparator)
     .map((feature) => {
-      delete feature.area;
+      delete (feature as unknown as {area?: number}).area;
       return feature;
     });
 }

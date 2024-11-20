@@ -10,7 +10,7 @@ import type { MapMouseEvent, MapTouchEvent } from "../events.ts";
 export function mapEventToBoundingBox(
   mapEvent: { point: { x: number; y: number } } | MapMouseEvent | MapTouchEvent,
   buffer: number = 0,
-): Position[] {
+): [Position, Position] {
   return [
     [mapEvent.point.x - buffer, mapEvent.point.y - buffer],
     [mapEvent.point.x + buffer, mapEvent.point.y + buffer],

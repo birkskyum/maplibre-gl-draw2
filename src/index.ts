@@ -9,7 +9,7 @@ import { nanoid } from "nanoid";
 import { featuresAt } from "./lib/features_at.ts";
 import { stringSetsAreEqual } from "./lib/string_sets_are_equal.ts";
 import { StringSet } from "./lib/string_set.ts";
-import type { Feature, FeatureCollection, Geometry } from "geojson";
+import type { Feature, FeatureCollection, GeoJsonProperties, Geometry } from "geojson";
 import { ModeStrings } from "./constants/modes.ts";
 import { featureTypes } from "./features.ts";
 import type { MapLibreDrawOptions, IDrawContext } from "./types.ts";
@@ -80,7 +80,7 @@ export class MapLibreDraw implements IControl {
     return this.controlContainer;
   }
 
-  public onRemove(map: MapLibreMap): MapLibreDraw {
+  public onRemove(_map: MapLibreMap): MapLibreDraw {
     this.ctx.map?.off("load", this.connect.bind(this));
     clearInterval(this.mapLoadedInterval);
 
@@ -166,19 +166,17 @@ export class MapLibreDraw implements IControl {
 
   public getSelected(): FeatureCollection {
     return {
-      type: Constants.geojsonTypes.FEATURE_COLLECTION,
-      features: this.ctx.store
-        .getSelectedIds()
-        .map((id: string) => this.ctx.store?.get(id))
-        .map((feature: any) => feature.toGeoJSON()),
+      type: Constants.geojsonTypes.FEATURE_COLLECTION as "FeatureCollection",
+      features: this.ctx.store?.getSelectedIds()
+        .map((id: number|string) => this.ctx.store?.get(id)).filter((f) => !!f)
+        .map((feature) => feature.toGeoJSON()) as Feature<Geometry, GeoJsonProperties>[],
     };
   }
 
   public getSelectedPoints(): FeatureCollection {
     return {
-      type: Constants.geojsonTypes.FEATURE_COLLECTION,
-      features: this.ctx.store
-        .getSelectedCoordinates()
+      type: Constants.geojsonTypes.FEATURE_COLLECTION as "FeatureCollection",
+      features: this.ctx.store?.getSelectedCoordinates()
         .map((coordinate: any) => ({
           type: Constants.geojsonTypes.FEATURE,
           properties: {},
@@ -186,7 +184,7 @@ export class MapLibreDraw implements IControl {
             type: Constants.geojsonTypes.POINT,
             coordinates: coordinate.coordinates,
           },
-        })),
+        })) as Feature<Geometry, GeoJsonProperties>[],
     };
   }
 
@@ -203,8 +201,8 @@ export class MapLibreDraw implements IControl {
     const newIds = this.add(featureCollection);
     const newIdsLookup = new StringSet(newIds);
 
-    toDelete = toDelete.filter((id) => !newIdsLookup.has(id));
-    if (toDelete.length) {
+    toDelete = toDelete?.filter((id) => !newIdsLookup.has(id));
+    if (toDelete?.length) {
       this.delete(toDelete);
     }
 
@@ -271,7 +269,7 @@ export class MapLibreDraw implements IControl {
     };
   }
 
-  public delete(featureIds: string | string[]): this {
+  public delete(featureIds: number|string | (string|number)[]): this {
     this.ctx.store?.delete(featureIds, { silent: true });
     if (
       this.getMode() === ModeStrings.DIRECT_SELECT &&

@@ -2,6 +2,7 @@ import type { Map as MapLibreMap } from "maplibre-gl";
 import { DrawEvents } from "./events.ts";
 import { DrawUI } from "./ui.ts";
 import { DrawStore } from "./store.ts";
+import { Theme } from "./lib/theme.ts";
 
 export type MapLibreDrawControls = {
   point?: boolean;
@@ -20,7 +21,7 @@ export type MapLibreDrawOptions = {
   clickBuffer?: number;
   touchBuffer?: number;
   controls?: MapLibreDrawControls;
-  styles?: object[];
+  styles?: Theme;
   modes?: { [modeKey: string]: any };
   defaultMode?: string;
   userProperties?: boolean;

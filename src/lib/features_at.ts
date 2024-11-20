@@ -6,6 +6,8 @@ import type { Feature } from "geojson";
 import type { DrawContext } from ".././index.ts";
 import type { BBox } from "geojson";
 import type {MapMouseEvent, MapTouchEvent} from '../events.ts'
+import type { PointLike } from "maplibre-gl";
+import type { ThemeLayerId } from "./theme.ts";
 
 
 const META_TYPES = [
@@ -22,7 +24,7 @@ export const featuresAt = {
 
 function featuresAtClick(
   event: MapMouseEvent,
-  bbox: BBox,
+  bbox: BBox | null,
   ctx: DrawContext,
 ): Feature[] {
   return featuresAtHandler(event, bbox, ctx, ctx.options.clickBuffer);
@@ -38,7 +40,7 @@ function featuresAtTouch(
 
 function featuresAtHandler(
   event,
-  bbox: BBox,
+  bbox: BBox | [PointLike, PointLike] | null,
   ctx: DrawContext,
   buffer: number = 0,
 ) {
@@ -46,16 +48,15 @@ function featuresAtHandler(
 
   const box = event ? mapEventToBoundingBox(event, buffer) : bbox;
 
-  const queryParams = {};
+  const queryParams: {layers?: Array<ThemeLayerId>} = {};
 
   if (ctx.options.styles) {
     queryParams.layers = ctx.options.styles
       .map((s) => s.id)
-      .filter((id) => ctx.map.getLayer(id) != null);
+      .filter((id) => ctx.map?.getLayer(id) != null);
   }
 
-  const features = ctx.map
-    .queryRenderedFeatures(box, queryParams)
+  const features = ctx.map?.queryRenderedFeatures(box, queryParams)
     .filter((feature) => META_TYPES.indexOf(feature.properties.meta) !== -1);
 
   const featureIds = new StringSet();

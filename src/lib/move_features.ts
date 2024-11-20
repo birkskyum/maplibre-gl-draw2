@@ -1,13 +1,13 @@
 import { constrainFeatureMovement } from "./constrain_feature_movement.ts";
 import * as Constants from "../constants.ts";
-import { Feat } from "../feature_types/feature.ts";
-
+import type { Feat } from "../feature_types/feature.ts";
+import type {Feature,Geometry, GeoJsonProperties} from"geojson";
 export function moveFeatures(
   features: Feat[],
   delta: { lng: number; lat: number },
 ) {
   const constrainedDelta = constrainFeatureMovement(
-    features.map((feature) => feature.toGeoJSON()),
+    features.map((feature) => feature.toGeoJSON()) as Feature<Geometry, GeoJsonProperties>[],
     delta,
   );
 

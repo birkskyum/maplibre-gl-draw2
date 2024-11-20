@@ -141,7 +141,7 @@ export class DrawStore {
     return this;
   }
 
-  get(id: string): Feat | undefined {
+  get(id: string|number): Feat | undefined {
     return this._features[id];
   }
 

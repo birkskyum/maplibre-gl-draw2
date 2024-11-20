@@ -96,7 +96,7 @@ export class DirectSelect extends ModeInterface {
     state.dragMoveLocation = e.lngLat;
   }
 
-  dragVertex(state, e, delta) {
+  dragVertex(state, delta) {
     const selectedCoords = state.selectedCoordPaths.map((coord_path) =>
       state.feature.getCoordinate(coord_path)
     );
@@ -208,7 +208,7 @@ export class DirectSelect extends ModeInterface {
       lng: e.lngLat.lng - state.dragMoveLocation.lng,
       lat: e.lngLat.lat - state.dragMoveLocation.lat,
     };
-    if (state.selectedCoordPaths.length > 0) this.dragVertex(state, e, delta);
+    if (state.selectedCoordPaths.length > 0) this.dragVertex(state, delta);
     else this.dragFeature(state, e, delta);
 
     state.dragMoveLocation = e.lngLat;
@@ -279,7 +279,6 @@ export class DirectSelect extends ModeInterface {
       geojson.properties.active = Constants.activeStates.ACTIVE;
       push(geojson);
       createSupplementaryPoints(geojson, {
-        map: this.map,
         midpoints: true,
         selectedPaths: state.selectedCoordPaths,
       }).forEach(push);

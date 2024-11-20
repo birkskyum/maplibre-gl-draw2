@@ -1,5 +1,5 @@
-import { Feat } from "../feature_types/feature.ts";
 import * as Constants from "../constants.ts";
+import type {Feature} from "geojson";
 
 const {
   LAT_MIN,
@@ -32,7 +32,7 @@ function extent(feature) {
 // - any feature to be completely lost in the space between the projection's
 //   edge and the poles, such that it couldn't be re-selected and moved back
 export function constrainFeatureMovement(
-  geojsonFeatures: Feat[],
+  geojsonFeatures: Feature[],
   delta: { lng: number; lat: number },
 ): { lng: number; lat: number } {
   // "inner edge" = a feature's latitude closest to the equator

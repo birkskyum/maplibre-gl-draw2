@@ -66,10 +66,10 @@ export class DrawLineString extends ModeInterface {
       }
     } else {
       line = this.newFeature({
-        type: Constants.geojsonTypes.FEATURE,
+        type: Constants.geojsonTypes.FEATURE as "Feature",
         properties: {},
         geometry: {
-          type: Constants.geojsonTypes.LINE_STRING,
+          type: Constants.geojsonTypes.LINE_STRING as "LineString",
           coordinates: [],
         },
       });

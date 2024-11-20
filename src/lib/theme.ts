@@ -10,7 +10,7 @@ const blue = "#3bb2d0";
 const orange = "#fbb03b";
 const white = "#fff";
 
-type ThemeLayerId =
+export type ThemeLayerId =
   | "gl-draw-point-outer"
   | "gl-draw-vertex-outer"
   | "gl-draw-midpoint"
