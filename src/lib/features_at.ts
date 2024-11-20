@@ -32,7 +32,7 @@ function featuresAtClick(
 
 function featuresAtTouch(
   event: MapTouchEvent,
-  bbox: BBox,
+  bbox: BBox | null,
   ctx: DrawContext,
 ): Feature[] {
   return featuresAtHandler(event, bbox, ctx, ctx.options.touchBuffer);

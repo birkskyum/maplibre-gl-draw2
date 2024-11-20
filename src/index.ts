@@ -23,6 +23,7 @@ export class DrawContext implements IDrawContext {
   ui?: DrawUI;
   container?: HTMLElement;
   store?: DrawStore;
+  parent?: MapLibreDraw;
 
   constructor(options: MapLibreDrawOptions) {
     this.options = setupOptions(options);
@@ -43,6 +44,7 @@ export class MapLibreDraw implements IControl {
 
   constructor(options: MapLibreDrawOptions = {}) {
     this.ctx = new DrawContext(options);
+    this.ctx.parent = this;
     return this;
   }
 
@@ -109,7 +111,7 @@ export class MapLibreDraw implements IControl {
     this.ctx.events?.addEventListeners();
   }
 
-  private addLayers() {
+  public addLayers() {
     this.ctx.map?.addSource(Constants.sources.COLD, {
       data: {
         type: "FeatureCollection",
@@ -205,7 +207,7 @@ export class MapLibreDraw implements IControl {
       this.delete(toDelete);
     }
 
-    renderBatch();
+    if (renderBatch) renderBatch();
     return newIds;
   }
 

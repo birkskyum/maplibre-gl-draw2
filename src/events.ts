@@ -111,6 +111,7 @@ type EventType = keyof IDrawEvents;
 type DrawEvent = {
   target: maplibregl.Map;
   type: EventType;
+  point: any; // Add point property to DrawEvent
 }
 
 interface EventInfo {
@@ -172,8 +173,7 @@ export class DrawEvents {
     this.events.data = this.handleData.bind(this);
   }
 
-
-  public handleDrag(event: DrawEvent, isDrag: Function): void {
+  public handleDrag(event: DrawEvent, isDrag: (info: EventInfo) => boolean): void {
     if (
       isDrag({
         point: event.point,
@@ -287,17 +287,17 @@ export class DrawEvents {
 
     if (
       (event.keyCode === 8 || event.keyCode === 46) &&
-      this.ctx.options.controls.trash
+      this.ctx.options.controls?.trash
     ) {
       event.preventDefault();
       this.currentMode.trash();
     } else if (this.isKeyModeValid(event.keyCode)) {
       this.currentMode.keydown(event);
-    } else if (event.keyCode === 49 && this.ctx.options.controls.point) {
+    } else if (event.keyCode === 49 && this.ctx.options.controls?.point) {
       this.changeMode(ModeStrings.DRAW_POINT);
-    } else if (event.keyCode === 50 && this.ctx.options.controls.line_string) {
+    } else if (event.keyCode === 50 && this.ctx.options.controls?.line_string) {
       this.changeMode(ModeStrings.DRAW_LINE_STRING);
-    } else if (event.keyCode === 51 && this.ctx.options.controls.polygon) {
+    } else if (event.keyCode === 51 && this.ctx.options.controls?.polygon) {
       this.changeMode(ModeStrings.DRAW_POLYGON);
     }
   }
@@ -309,17 +309,17 @@ export class DrawEvents {
   }
 
   public handleZoomEnd(): void {
-    this.ctx.store?.changeZoom();
+    // this.ctx.store?.changeZoom();
   }
 
   public handleData(event: any): void {
     if (event.dataType === "style") {
-      const { setup, map, options, store } = this.ctx;
-      const hasLayers = options.styles.some((style: any) =>
-        map.getLayer(style.id)
+      const { parent, map, options, store } = this.ctx;
+      const hasLayers = options.styles?.some((style: any) =>
+        map?.getLayer(style.id)
       );
       if (!hasLayers) {
-        setup.addLayers();
+        parent?.addLayers();
         store?.setDirty();
         store?.render();
       }
