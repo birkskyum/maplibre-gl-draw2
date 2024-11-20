@@ -2,7 +2,7 @@ import { ModeInterface } from './mode_interface.ts';
 import * as CommonSelectors from '../lib/common_selectors.ts';
 import * as Constants from '../constants.ts';
 
-export class DrawPointMode extends ModeInterface {
+export class DrawPoint extends ModeInterface {
 	// Constructor to initialize the mode with context
 	constructor(ctx) {
 		super(ctx);
@@ -87,4 +87,4 @@ export class DrawPointMode extends ModeInterface {
 }
 
 // For backwards compatibility with the existing mode system
-export default DrawPointMode;
+export default DrawPoint;
