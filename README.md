@@ -1,10 +1,10 @@
 # @birkskyum/maplibre-gl-draw
 
-![Build Status](https://github.com/mapbox/maplibre-gl-draw/actions/workflows/main.yml/badge.svg)
+![Build Status](https://github.com/birkskyum/maplibre-gl-draw/actions/workflows/main.yml/badge.svg)
 
 Adds support for drawing and editing features on [maplibre-gl.js](https://maplibre.org/maplibre-gl-js/docs/) maps. 
 
-**Requires [maplibre-gl-js](https://github.com/mapbox/mapbox-gl-js).**
+**Requires [maplibre-gl-js](https://github.com/birkskyum/maplibre-gl-js).**
 
 **If you are developing with `maplibre-gl-draw`, see [API.md](https://github.com/mapbox/maplibre-gl-draw/blob/main/docs/API.md) for documentation.**
 
@@ -117,7 +117,7 @@ npm run prepublish
 aws s3 cp --recursive --acl public-read dist s3://mapbox-gl-js/plugins/maplibre-gl-draw/v{x.y.z}
 ```
 
-Update the version number in [the GL JS example](https://github.com/mapbox/mapbox-gl-js/blob/publisher-production/docs/pages/example/maplibre-gl-draw.html).
+Update the version number in [the GL JS example](https://github.com/birkskyum/maplibre-gl-js/blob/publisher-production/docs/pages/example/maplibre-gl-draw.html).
 
 ### Naming actions
 

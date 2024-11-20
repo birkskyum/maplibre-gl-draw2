@@ -175,7 +175,7 @@
 
 #### ⚠️ Breaking changes ⚠️
 
-- Requires [mapbox-gl@0.27.0](https://github.com/mapbox/mapbox-gl-js/blob/main/CHANGELOG.md#0270-november-11-2016).
+- Requires [mapbox-gl@0.27.0](https://github.com/birkskyum/maplibre-gl-js/blob/main/CHANGELOG.md#0270-november-11-2016).
 - Detects style changes and reapplies Draw if it has been removed.
 - Fixes UMD support.
 - Changes `mapboxgl.Draw` to `mapboxglDraw` when in global scope.
@@ -375,7 +375,7 @@ Fixes bug where `drawing: false` in the config would throw an error in the trash
 
 ## 0.3.1
 
-Expands support to [mapbox-gl@0.14.0](https://github.com/mapbox/mapbox-gl-js/releases/tag/v0.14.0)
+Expands support to [mapbox-gl@0.14.0](https://github.com/birkskyum/maplibre-gl-js/releases/tag/v0.14.0)
 
 ## 0.3.0
 
