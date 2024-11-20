@@ -4,7 +4,7 @@ import { doubleClickZoom } from "../lib/double_click_zoom.ts";
 import * as Constants from "../constants.ts";
 import { isEventAtCoordinates } from "../lib/is_event_at_coordinates.ts";
 import { createVertex } from "../lib/create_vertex.ts";
-import { ModeStrings } from ".././index.ts";
+import { ModeStrings } from "../constants/modes.ts";
 
 export class DrawPolygon extends ModeInterface {
   onSetup() {

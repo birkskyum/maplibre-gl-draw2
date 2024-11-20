@@ -3,7 +3,7 @@ import assert from "node:assert/strict";
 import { featuresAt } from "../src/lib/features_at.ts";
 import { theme } from "../src/lib/theme.ts";
 import * as Constants from "../src/constants.ts";
-import { setupOptions } from "../src/index.ts";
+import { setupOptions } from "../src/setup.ts";
 
 /**
  * Mock of the addLayers function in setup

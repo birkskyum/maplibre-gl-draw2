@@ -13,7 +13,7 @@ import { createMap } from "./utils/create_map.ts";
 import { setupAfterNextRender } from "./utils/after_next_render.ts";
 import { makeMouseEvent } from "./utils/make_mouse_event.ts";
 import { makeTouchEvent } from "./utils/make_touch_event.ts";
-import { ModeStrings } from "../src/index.ts";
+import { ModeStrings } from "../src/constants/modes.ts";
 
 test("direct_select", async (t) => {
   const mapContainer = document.createElement("div");

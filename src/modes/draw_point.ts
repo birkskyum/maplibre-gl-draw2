@@ -1,7 +1,7 @@
 import { ModeInterface } from "./mode_interface.ts";
 import * as CommonSelectors from "../lib/common_selectors.ts";
 import * as Constants from "../constants.ts";
-import { ModeStrings } from ".././index.ts";
+import { ModeStrings } from "../constants/modes.ts";
 
 export class DrawPoint extends ModeInterface {
   onSetup(opts) {

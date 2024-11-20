@@ -3,13 +3,12 @@ import { afterEach, beforeEach, test } from "node:test";
 import assert from "node:assert/strict";
 import { spy } from "sinon";
 
-import * as Constants from "../src/constants.ts";
 import { MapLibreDraw } from "../src/index.ts";
 import { createMap } from "./utils/create_map.ts";
 import { getGeoJSON } from "./utils/get_geojson.ts";
 import { setupAfterNextRender } from "./utils/after_next_render.ts";
 import { getPublicMemberKeys } from "./utils/get_public_member_keys.ts";
-import { ModeStrings } from "../src/index.ts";
+import { ModeStrings } from "../src/constants/modes.ts";
 
 let map;
 let afterNextRender;

@@ -1,6 +1,6 @@
 import type { DrawContext } from "./index.ts";
 import * as Constants from "./constants.ts";
-import { ModeStrings } from "./index.ts";
+import { ModeStrings } from "./constants/modes.ts";
 
 type CLASS_TYPE = "mode" | "feature" | "mouse";
 const classTypes: CLASS_TYPE[] = ["mode", "feature", "mouse"];

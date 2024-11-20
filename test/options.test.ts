@@ -5,8 +5,9 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import { fileURLToPath } from "node:url";
 
-import { MapLibreDraw, ModeStrings } from "../src/index.ts";
-import { ModeClasses } from "../src/index.ts";
+import { MapLibreDraw} from "../src/index.ts";
+import { ModeClasses } from "../src/modes.ts";
+import { ModeStrings } from "../src/constants/modes.ts";
 
 const __dirname = fileURLToPath(new URL(".", import.meta.url));
 const styleWithSourcesFixture = JSON.parse(

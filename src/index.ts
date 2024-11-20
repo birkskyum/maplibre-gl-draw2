@@ -1,140 +1,22 @@
+import isEqual from "fast-deep-equal";
 import * as Constants from "./constants.ts";
 import * as lib from "./lib/index.ts";
 import { DrawEvents } from "./events.ts";
 import { DrawStore } from "./store.ts";
 import { DrawUI } from "./ui.ts";
-
-import type { IControl, Map as MapLibreMap } from "maplibre-gl";
-import isEqual from "fast-deep-equal";
 import { normalize } from "@birkskyum/geojson-normalize";
 import { nanoid } from "nanoid";
 import { featuresAt } from "./lib/features_at.ts";
 import { stringSetsAreEqual } from "./lib/string_sets_are_equal.ts";
 import { StringSet } from "./lib/string_set.ts";
-
-import { PolygonFeat } from "./feature_types/polygon.ts";
-import { LineStringFeat } from "./feature_types/line_string.ts";
-import { PointFeat } from "./feature_types/point.ts";
-import { MultiFeature } from "./feature_types/multi_feature.ts";
 import type { Feature, FeatureCollection, Geometry } from "geojson";
-import { theme } from "./lib/theme.ts";
+import { ModeStrings } from "./constants/modes.ts";
+import { featureTypes } from "./features.ts";
+import type { MapLibreDrawOptions, IDrawContext } from "./types.ts";
+import { setupOptions } from "./setup.ts";
+import type  {IControl, Map as MapLibreMap} from "maplibre-gl";
 
-import { SimpleSelect } from "./modes/simple_select.ts";
-import { DirectSelect } from "./modes/direct_select.ts";
-import { DrawPoint } from "./modes/draw_point.ts";
-import { DrawPolygon } from "./modes/draw_polygon.ts";
-import { DrawLineString } from "./modes/draw_line_string.ts";
-import { StaticMode } from "./modes/static_mode.ts";
-
-export const ModeStrings = {
-  DRAW_LINE_STRING: "draw_line_string",
-  DRAW_POLYGON: "draw_polygon",
-  DRAW_POINT: "draw_point",
-  SIMPLE_SELECT: "simple_select",
-  DIRECT_SELECT: "direct_select",
-  STATIC: "static",
-};
-
-export const ModeClasses = {
-  simple_select: SimpleSelect,
-  direct_select: DirectSelect,
-  draw_point: DrawPoint,
-  draw_polygon: DrawPolygon,
-  draw_line_string: DrawLineString,
-  static: StaticMode,
-};
-
-export type MapLibreDrawControls = {
-  point?: boolean | undefined;
-  line_string?: boolean | undefined;
-  polygon?: boolean | undefined;
-  trash?: boolean | undefined;
-  combine_features?: boolean | undefined;
-  uncombine_features?: boolean | undefined;
-};
-
-export type MapLibreDrawOptions = {
-  displayControlsDefault?: boolean | undefined;
-  keybindings?: boolean | undefined;
-  touchEnabled?: boolean | undefined;
-  boxSelect?: boolean | undefined;
-  clickBuffer?: number | undefined;
-  touchBuffer?: number | undefined;
-  controls?: MapLibreDrawControls | undefined;
-  styles?: object[] | undefined;
-  modes?: { [modeKey: string]: any } | undefined;
-  defaultMode?: string | undefined;
-  userProperties?: boolean | undefined;
-};
-
-const defaultOptions: MapLibreDrawOptions = {
-  defaultMode: ModeStrings.SIMPLE_SELECT,
-  keybindings: true,
-  touchEnabled: true,
-  clickBuffer: 2,
-  touchBuffer: 25,
-  boxSelect: true,
-  displayControlsDefault: true,
-  styles: theme,
-  modes: ModeClasses,
-  controls: {},
-  userProperties: false,
-};
-
-const showControls = {
-  point: true,
-  line_string: true,
-  polygon: true,
-  trash: true,
-  combine_features: true,
-  uncombine_features: true,
-};
-
-const hideControls = {
-  point: false,
-  line_string: false,
-  polygon: false,
-  trash: false,
-  combine_features: false,
-  uncombine_features: false,
-};
-
-function addSources(styles, sourceBucket) {
-  return styles.map((style) => {
-    if (style.source) return style;
-    return Object.assign({}, style, {
-      id: `${style.id}.${sourceBucket}`,
-      source: sourceBucket === "hot"
-        ? Constants.sources.HOT
-        : Constants.sources.COLD,
-    });
-  });
-}
-
-export function setupOptions(options: MapLibreDrawOptions = {}) {
-  let withDefaults = Object.assign({}, options);
-
-  if (!options.controls) {
-    withDefaults.controls = {};
-  }
-
-  if (options.displayControlsDefault === false) {
-    withDefaults.controls = Object.assign({}, hideControls, options.controls);
-  } else {
-    withDefaults.controls = Object.assign({}, showControls, options.controls);
-  }
-
-  withDefaults = Object.assign({}, defaultOptions, withDefaults);
-
-  // Layers with a shared source should be adjacent for performance reasons
-  withDefaults.styles = addSources(withDefaults.styles, "cold").concat(
-    addSources(withDefaults.styles, "hot"),
-  );
-
-  return withDefaults;
-}
-
-export class DrawContext {
+export class DrawContext implements IDrawContext {
   options: MapLibreDrawOptions;
 
   map?: MapLibreMap;
@@ -494,11 +376,4 @@ export class MapLibreDraw implements IControl {
   }
 }
 
-const featureTypes = {
-  Polygon: PolygonFeat,
-  LineString: LineStringFeat,
-  Point: PointFeat,
-  MultiPolygon: MultiFeature,
-  MultiLineString: MultiFeature,
-  MultiPoint: MultiFeature,
-};
+export { ModeStrings, type MapLibreDrawOptions };
