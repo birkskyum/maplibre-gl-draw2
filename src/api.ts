@@ -37,7 +37,7 @@ export class DrawApi {
 	}
 
 	public getSelectedIds(): string[] {
-		return this.ctx.store?.getSelectedIds();
+		return this.ctx.store?.getSelectedIds().map((id) => id.toString()) ?? [];
 	}
 
 	public getSelected(): FeatureCollection {
