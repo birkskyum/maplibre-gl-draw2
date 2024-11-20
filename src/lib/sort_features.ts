@@ -1,6 +1,5 @@
 import area from '@mapbox/geojson-area';
 import * as Constants from '../constants.ts';
-import type { Feature } from 'geojson';
 import { Feat } from '../feature_types/feature.ts';
 
 const FEATURE_SORT_RANKS = {

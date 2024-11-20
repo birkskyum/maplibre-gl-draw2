@@ -47,6 +47,8 @@
 		"@turf/bbox-clip": "^7.1.0",
 		"@turf/centroid": "^7.1.0",
 		"@types/geojson": "^7946.0.14",
+		"@types/mapbox__geojson-area": "^0.2.6",
+		"@types/mapbox__point-geometry": "^0.1.4",
 		"@types/sinon": "^17.0.3",
 		"maplibre-gl": "^4.7.1",
 		"mock-browser": "^0.92.14",
