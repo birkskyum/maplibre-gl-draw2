@@ -108,7 +108,7 @@ export class DrawStore {
     return this._featureIds.values();
   }
 
-  add(feature: Feature | FeatureCollection | Geometry): DrawStore {
+  add(feature: Feat): DrawStore {
     this.featureChanged(feature.id);
     this._features[feature.id] = feature;
     this._featureIds.add(feature.id);
