@@ -5,7 +5,7 @@ import { StringSet } from "./string_set.ts";
 import type { Feature } from "geojson";
 import { DrawContext } from ".././index.ts";
 import type { BBox } from "geojson";
-import type { MapMouseEvent, MapTouchEvent } from "maplibre-gl";
+
 
 const META_TYPES = [
   Constants.meta.FEATURE,

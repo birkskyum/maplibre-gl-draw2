@@ -1,4 +1,4 @@
-import type { MapMouseEvent, MapTouchEvent } from "maplibre-gl";
+import type { MapMouseEvent, MapTouchEvent } from "../events.ts";
 import * as Constants from "../constants.ts";
 
 export function isOfMetaType(type: string): boolean {

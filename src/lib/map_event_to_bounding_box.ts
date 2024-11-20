@@ -1,5 +1,5 @@
 import type { Position } from "geojson";
-import type { MapMouseEvent, MapTouchEvent } from "maplibre-gl";
+import type { MapMouseEvent, MapTouchEvent } from "../feature_types/feature.ts";
 
 /**
  * Returns a bounding box representing the event's location.

@@ -7,18 +7,18 @@ import * as Constants from "./constants.ts";
 import { objectToMode } from "./modes/object_to_mode.ts";
 import type { DrawContext } from "./index.ts";
 import { ModeStrings } from "./constants/modes.ts";
-import {Point, Feature} from "geojson";
+import type {Point, Feature} from "geojson";
 import { ModeClasses } from "./modes.ts";
+import type { MapMouseEvent as MapLibreMapMouseEvent, MapTouchEvent as  MapLibreMapTouchEvent} from "maplibre-gl";
+import type { Feat } from "./feature_types/feature.ts";
 
-interface MapMouseEvent extends MapLibreMapMouseEvent {
-  featureTarget: DrawFeature;
+export interface MapMouseEvent extends MapLibreMapMouseEvent {
+  featureTarget: Feat;
 }
 
-interface MapTouchEvent extends MapLibreMapTouchEvent {
-  featureTarget: DrawFeature;
+export interface MapTouchEvent extends MapLibreMapTouchEvent {
+  featureTarget: Feat;
 }
-
-
 
 interface DrawCreateEvent extends DrawEvent {
   // Array of GeoJSON objects representing the features that were created
