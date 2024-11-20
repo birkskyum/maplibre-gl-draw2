@@ -198,7 +198,7 @@ export class DrawStore {
     this.deselect(
       this._selectedFeatureIds
         .values()
-        .filter((id) => featureIds.indexOf(id) === -1),
+        .filter((id) => featureIds.indexOf(id.toString()) === -1),
       { silent: options.silent },
     );
 
@@ -228,8 +228,8 @@ export class DrawStore {
     return this._selectedFeatureIds.values();
   }
 
-  getSelected(): Feat[] {
-    return this.getSelectedIds().map((id) => this.get(id));
+  getSelected(): (Feat | undefined)[] {
+    return this.getSelectedIds().map((id) => this.get(id.toString()));
   }
 
   getSelectedCoordinates(): { coordinates: any[] }[] {
@@ -246,7 +246,7 @@ export class DrawStore {
   }
 
   setFeatureProperty(featureId: string, property: string, value: any) {
-    this.get(featureId).setProperty(property, value);
+    this.get(featureId)?.setProperty(property, value);
     this.featureChanged(featureId);
   }
 
