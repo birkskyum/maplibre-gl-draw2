@@ -153,7 +153,7 @@ export class SimpleSelect extends ModeInterface {
     this.stopExtendedInteractions(state);
   }
 
-  clickOnVertex(state, e) {
+  clickOnVertex(_state, e) {
     this.changeMode(ModeStrings.DIRECT_SELECT, {
       featureId: e.featureTarget.properties.parent,
       coordPath: e.featureTarget.properties.coord_path,
@@ -371,7 +371,7 @@ export class SimpleSelect extends ModeInterface {
 
     if (featuresCombined.length > 1) {
       const multiFeature = this.newFeature({
-        type: Constants.geojsonTypes.FEATURE,
+        type: Constants.geojsonTypes.FEATURE as typeof Constants.geojsonTypes.FEATURE,
         properties: featuresCombined[0].properties,
         geometry: {
           type: `Multi${featureType}`,

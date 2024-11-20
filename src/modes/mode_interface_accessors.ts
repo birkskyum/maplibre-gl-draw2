@@ -18,9 +18,9 @@ type DrawActionableState = {
 };
 
 export class ModeInterfaceAccessors {
-  protected map: MapLibre;
-  protected drawConfig: MapLibreDrawOptions;
-  protected _ctx: DrawContext;
+  public map: MapLibre;
+  public drawConfig: MapLibreDrawOptions;
+  public _ctx: DrawContext;
 
   constructor(ctx: DrawContext) {
     this.map = ctx.map!;
