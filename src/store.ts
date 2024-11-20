@@ -236,7 +236,7 @@ export class DrawStore {
     return this._selectedCoordinates.map((coordinate) => {
       const feature = this.get(coordinate.feature_id);
       return {
-        coordinates: feature.getCoordinate(coordinate.coord_path),
+        coordinates: feature!.getCoordinate!(coordinate.coord_path),
       };
     });
   }

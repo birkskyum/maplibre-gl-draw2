@@ -1,7 +1,7 @@
 import { nanoid } from "nanoid";
 import * as Constants from "../constants.ts";
 import type { DrawContext } from ".././index.ts";
-import type {GeoJSON} from "geojson";
+import type {GeoJSON, Position} from "geojson";
 export class Feat {
   ctx: DrawContext;
   properties: Record<string, any>;
@@ -33,6 +33,13 @@ export class Feat {
     this.coordinates = coords;
     this.changed();
   }
+
+  getCoordinate?(path: string): Position;
+
+
+
+  
+
 
   getCoordinates(): any[] {
     return JSON.parse(JSON.stringify(this.coordinates));

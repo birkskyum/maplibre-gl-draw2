@@ -50,20 +50,20 @@ export class MultiFeature extends Feat {
     );
   }
 
-  isValid() {
+  override isValid() {
     return this.features.every((f) => f.isValid());
   }
 
-  setCoordinates(coords) {
+  override setCoordinates(coords) {
     this.features = this._coordinatesToFeatures(coords);
     this.changed();
   }
 
-  getCoordinate(path: string) {
+  override getCoordinate(path: string) {
     return takeAction(this.features, "getCoordinate", path);
   }
 
-  getCoordinates() {
+  override getCoordinates() {
     return JSON.parse(
       JSON.stringify(
         this.features.map((f) => {
