@@ -6,4 +6,4 @@ export const ModeStrings = {
   SIMPLE_SELECT: "simple_select",
   DIRECT_SELECT: "direct_select",
   STATIC: "static",
-} as const;
+};
