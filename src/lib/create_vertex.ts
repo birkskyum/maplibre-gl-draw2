@@ -1,7 +1,7 @@
-import type { Feature } from 'geojson';
-import * as Constants from '../constants.ts';
-import type { Point } from 'geojson';
-import type { Position } from 'geojson';
+import type { Feature } from "geojson";
+import * as Constants from "../constants.ts";
+import type { Point } from "geojson";
+import type { Position } from "geojson";
 
 /**
  * Returns GeoJSON for a Point representing the
@@ -15,26 +15,25 @@ import type { Position } from 'geojson';
  * @return {GeoJSON} Point
  */
 
-export function createVertex (
-	parentId: string,
-	coordinates: Position,
-	path: string,
-	selected: boolean,
-): Feature<Point>
-{
-	return {
-		type: Constants.geojsonTypes.FEATURE,
-		properties: {
-			meta: Constants.meta.VERTEX,
-			parent: parentId,
-			coord_path: path,
-			active: selected
-				? Constants.activeStates.ACTIVE
-				: Constants.activeStates.INACTIVE,
-		},
-		geometry: {
-			type: Constants.geojsonTypes.POINT,
-			coordinates,
-		},
-	};
+export function createVertex(
+  parentId: string,
+  coordinates: Position,
+  path: string,
+  selected: boolean,
+): Feature<Point> {
+  return {
+    type: Constants.geojsonTypes.FEATURE,
+    properties: {
+      meta: Constants.meta.VERTEX,
+      parent: parentId,
+      coord_path: path,
+      active: selected
+        ? Constants.activeStates.ACTIVE
+        : Constants.activeStates.INACTIVE,
+    },
+    geometry: {
+      type: Constants.geojsonTypes.POINT,
+      coordinates,
+    },
+  };
 }

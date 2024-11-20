@@ -1,21 +1,27 @@
 {
-	"compilerOptions": {
-		"target": "ES2020",
-		"module": "ESNext",
-		"moduleResolution": "bundler",
-		"strict": true,
-		"noImplicitAny": false,
-		"allowImportingTsExtensions": true,
-		"esModuleInterop": true,
-		"skipLibCheck": true,
-		"forceConsistentCasingInFileNames": true,
-		"sourceMap": true,
-		"outDir": "./dist",
-		"baseUrl": "./",
-		"paths": {
-			"*": ["node_modules/*"]
-		}
-	},
-	"include": ["src/**/*.ts", "test/**/*.ts", "bench/**/*.ts", "index.ts", "index.d.ts"],
-	"exclude": ["node_modules", "dist"]
+  "compilerOptions": {
+    "target": "ES2020",
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "strict": true,
+    "noImplicitAny": false,
+    "allowImportingTsExtensions": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "sourceMap": true,
+    "outDir": "./dist",
+    "baseUrl": "./",
+    "paths": {
+      "*": ["node_modules/*"]
+    }
+  },
+  "include": [
+    "src/**/*.ts",
+    "test/**/*.ts",
+    "bench/**/*.ts",
+    "index.ts",
+    "index.d.ts"
+  ],
+  "exclude": ["node_modules", "dist"]
 }

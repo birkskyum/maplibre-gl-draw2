@@ -2,7 +2,9 @@
 
 ## Styling
 
-See [API.md#styling-draw](https://github.com/mapbox/maplibre-gl-draw/blob/main/docs/API.md#styling-draw) for a complete styling reference.
+See
+[API.md#styling-draw](https://github.com/mapbox/maplibre-gl-draw/blob/main/docs/API.md#styling-draw)
+for a complete styling reference.
 
 ### points
 
@@ -15,36 +17,41 @@ var draw = new MapLibreDraw({
   // ...
   styles: [
     {
-      'id': 'highlight-active-points',
-      'type': 'circle',
-      'filter': ['all',
-        ['==', '$type', 'Point'],
-        ['==', 'meta', 'feature'],
-        ['==', 'active', 'true']],
-      'paint': {
-        'circle-radius': 7,
-        'circle-color': '#000000'
-      }
+      "id": "highlight-active-points",
+      "type": "circle",
+      "filter": ["all", ["==", "$type", "Point"], ["==", "meta", "feature"], [
+        "==",
+        "active",
+        "true",
+      ]],
+      "paint": {
+        "circle-radius": 7,
+        "circle-color": "#000000",
+      },
     },
     {
-      'id': 'points-are-blue',
-      'type': 'circle',
-      'filter': ['all',
-        ['==', '$type', 'Point'],
-        ['==', 'meta', 'feature'],
-        ['==', 'active', 'false']],
-      'paint': {
-        'circle-radius': 5,
-        'circle-color': '#000088'
-      }
-    }
-  ]
+      "id": "points-are-blue",
+      "type": "circle",
+      "filter": ["all", ["==", "$type", "Point"], ["==", "meta", "feature"], [
+        "==",
+        "active",
+        "false",
+      ]],
+      "paint": {
+        "circle-radius": 5,
+        "circle-color": "#000088",
+      },
+    },
+  ],
 });
 ```
 
 ### lines and polygons
 
-With this style, all line and polygon features are have dashed red outline and transparent fill while being drawn, including the point vertices. Point vertices use the same point filter, and render these points twice: once as a larger-radius halo, and again as the vertex inset point.
+With this style, all line and polygon features are have dashed red outline and
+transparent fill while being drawn, including the point vertices. Point vertices
+use the same point filter, and render these points twice: once as a
+larger-radius halo, and again as the vertex inset point.
 
 ```js
 var draw = new MapLibreDraw({
@@ -54,18 +61,18 @@ var draw = new MapLibreDraw({
     // ACTIVE (being drawn)
     // line stroke
     {
-        "id": "gl-draw-line",
-        "type": "line",
-        "filter": ["all", ["==", "$type", "LineString"]],
-        "layout": {
-          "line-cap": "round",
-          "line-join": "round"
-        },
-        "paint": {
-          "line-color": "#D20C0C",
-          "line-dasharray": [0.2, 2],
-          "line-width": 2
-        }
+      "id": "gl-draw-line",
+      "type": "line",
+      "filter": ["all", ["==", "$type", "LineString"]],
+      "layout": {
+        "line-cap": "round",
+        "line-join": "round",
+      },
+      "paint": {
+        "line-color": "#D20C0C",
+        "line-dasharray": [0.2, 2],
+        "line-width": 2,
+      },
     },
     // polygon fill
     {
@@ -75,20 +82,18 @@ var draw = new MapLibreDraw({
       "paint": {
         "fill-color": "#D20C0C",
         "fill-outline-color": "#D20C0C",
-        "fill-opacity": 0.1
-      }
+        "fill-opacity": 0.1,
+      },
     },
     // polygon mid points
     {
-      'id': 'gl-draw-polygon-midpoint',
-      'type': 'circle',
-      'filter': ['all',
-        ['==', '$type', 'Point'],
-        ['==', 'meta', 'midpoint']],
-      'paint': {
-        'circle-radius': 3,
-        'circle-color': '#fbb03b'
-      }
+      "id": "gl-draw-polygon-midpoint",
+      "type": "circle",
+      "filter": ["all", ["==", "$type", "Point"], ["==", "meta", "midpoint"]],
+      "paint": {
+        "circle-radius": 3,
+        "circle-color": "#fbb03b",
+      },
     },
     // polygon outline stroke
     // This doesn't style the first edge of the polygon, which uses the line stroke styling instead
@@ -98,13 +103,13 @@ var draw = new MapLibreDraw({
       "filter": ["all", ["==", "$type", "Polygon"]],
       "layout": {
         "line-cap": "round",
-        "line-join": "round"
+        "line-join": "round",
       },
       "paint": {
         "line-color": "#D20C0C",
         "line-dasharray": [0.2, 2],
-        "line-width": 2
-      }
+        "line-width": 2,
+      },
     },
     // vertex point halos
     {
@@ -113,8 +118,8 @@ var draw = new MapLibreDraw({
       "filter": ["all", ["==", "meta", "vertex"], ["==", "$type", "Point"]],
       "paint": {
         "circle-radius": 5,
-        "circle-color": "#FFF"
-      }
+        "circle-color": "#FFF",
+      },
     },
     // vertex points
     {
@@ -124,8 +129,8 @@ var draw = new MapLibreDraw({
       "paint": {
         "circle-radius": 3,
         "circle-color": "#D20C0C",
-      }
-    }
-  ]
+      },
+    },
+  ],
 });
 ```

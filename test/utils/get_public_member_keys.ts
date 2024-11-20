@@ -6,5 +6,5 @@
  * @return {Array<string>} Public members
  */
 export function getPublicMemberKeys(instance) {
-	return Object.keys(instance).filter((k) => k[0] !== '_');
+  return Object.keys(instance).filter((k) => k[0] !== "_");
 }

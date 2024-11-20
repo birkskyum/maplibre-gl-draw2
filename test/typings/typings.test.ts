@@ -69,7 +69,7 @@
 // draw.modes.DIRECT_SELECT;
 
 // // $ExpectType "simple_select"
-// constants.modes.SIMPLE_SELECT;
+// ModeStrings.SIMPLE_SELECT;
 
 // // $ExpectType DrawCustomMode<any, any>
 // MapLibreDraw.modes.direct_select;
@@ -117,7 +117,7 @@
 // 		this.updateUIClasses({ mouse: constants.cursors.ADD });
 
 // 		// $ExpectType void
-// 		this.changeMode(constants.modes.SIMPLE_SELECT);
+// 		this.changeMode(ModeStrings.SIMPLE_SELECT);
 
 // 		// $ExpectType (e: MapMouseEvent | MapTouchEvent) => boolean
 // 		lib.CommonSelectors.isOfMetaType('feature');
