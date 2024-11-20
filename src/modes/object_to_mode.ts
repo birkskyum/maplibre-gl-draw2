@@ -21,11 +21,8 @@ export function objectToMode(modeObject) {
 	return function (ctx, startOpts = {}) {
 		let state = {};
 
-		let mode;
-		if (typeof modeObject === 'function') {
-			// modeObject is a class constructor
-			mode = new modeObject(ctx);
-		}
+		const mode = new modeObject(ctx);
+		
 
 		function wrapper(eh) {
 			return (e) => mode[eh](state, e);
