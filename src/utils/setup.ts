@@ -1,8 +1,8 @@
-import type { MapLibreDrawOptions } from "../types";
-import { ModeClasses } from "../modes";
-import { ModeStrings } from "../constants/modes";
-import { theme } from "../lib/theme";
-import * as Constants from "../constants";
+import type { MapLibreDrawOptions } from "../types.ts";
+import { ModeClasses } from "../modes.ts";
+import { ModeStrings } from "../constants/modes.ts";
+import { theme } from "../lib/theme.ts";
+import * as Constants from "../constants.ts";
 
 const defaultOptions: MapLibreDrawOptions = {
   defaultMode: ModeStrings.SIMPLE_SELECT,

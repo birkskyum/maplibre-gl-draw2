@@ -1,9 +1,7 @@
-
-import type { Feature, FeatureCollection } from "geojson";
-import type { IControl, Map as MapLibreMap } from "maplibre-gl";
-import { DrawEvents } from "./events";
-import { DrawUI } from "./ui";
-import { DrawStore } from "./store";
+import type { Map as MapLibreMap } from "maplibre-gl";
+import { DrawEvents } from "./events.ts";
+import { DrawUI } from "./ui.ts";
+import { DrawStore } from "./store.ts";
 
 export type MapLibreDrawControls = {
   point?: boolean;
