@@ -1,4 +1,9 @@
-export const doubleClickZoom = {
+import { DrawContext } from "../../index.ts";
+
+export const doubleClickZoom: {
+	enable: (ctx: DrawContext) => void; // ?? ctx
+	disable: (ctx: DrawContext) => void; // ?? ctx
+} = {
 	enable(ctx) {
 		setTimeout(() => {
 			// First check we've got a map and some context.

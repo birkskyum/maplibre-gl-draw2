@@ -1,7 +1,8 @@
+import type { MapMouseEvent, MapTouchEvent } from 'maplibre-gl';
 import * as Constants from '../constants.ts';
 
-export function isOfMetaType(type) {
-	return function (e) {
+export function isOfMetaType(type: string) {
+	return function (e: MapMouseEvent | MapTouchEvent): boolean {
 		const featureTarget = e.featureTarget;
 		if (!featureTarget) return false;
 		if (!featureTarget.properties) return false;
@@ -15,7 +16,7 @@ export function isShiftMousedown(e) {
 	return e.originalEvent.button === 0;
 }
 
-export function isActiveFeature(e) {
+export function isActiveFeature(e: MapMouseEvent | MapTouchEvent): boolean {
 	if (!e.featureTarget) return false;
 	if (!e.featureTarget.properties) return false;
 	return (
@@ -24,7 +25,7 @@ export function isActiveFeature(e) {
 	);
 }
 
-export function isInactiveFeature(e) {
+export function isInactiveFeature(e: MapMouseEvent | MapTouchEvent): boolean {
 	if (!e.featureTarget) return false;
 	if (!e.featureTarget.properties) return false;
 	return (
@@ -33,33 +34,33 @@ export function isInactiveFeature(e) {
 	);
 }
 
-export function noTarget(e) {
+export function noTarget(e: MapMouseEvent | MapTouchEvent): boolean {
 	return e.featureTarget === undefined;
 }
 
-export function isFeature(e) {
+export function isFeature(e: MapMouseEvent | MapTouchEvent): boolean {
 	if (!e.featureTarget) return false;
 	if (!e.featureTarget.properties) return false;
 	return e.featureTarget.properties.meta === Constants.meta.FEATURE;
 }
 
-export function isVertex(e) {
+export function isVertex(e: MapMouseEvent | MapTouchEvent): boolean {
 	const featureTarget = e.featureTarget;
 	if (!featureTarget) return false;
 	if (!featureTarget.properties) return false;
 	return featureTarget.properties.meta === Constants.meta.VERTEX;
 }
 
-export function isShiftDown(e) {
+export function isShiftDown(e: any): boolean {
 	if (!e.originalEvent) return false;
 	return e.originalEvent.shiftKey === true;
 }
 
-export function isEscapeKey(e) {
+export function isEscapeKey(e: KeyboardEvent): boolean {
 	return e.keyCode === 27;
 }
 
-export function isEnterKey(e) {
+export function isEnterKey(e: KeyboardEvent): boolean {
 	return e.keyCode === 13;
 }
 
