@@ -188,7 +188,7 @@ export class SimpleSelect extends ModeInterface {
     if (
       !isShiftClick &&
       isFeatureSelected &&
-      this.getFeature(featureId).type !== Constants.geojsonTypes.POINT
+      this.getFeature(featureId)?.type !== Constants.geojsonTypes.POINT
     ) {
       return this.changeMode(ModeStrings.DIRECT_SELECT, {
         featureId,

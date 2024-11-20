@@ -88,7 +88,7 @@ export class DrawStore {
     return this;
   }
 
-  featureChanged(featureId: string): DrawStore {
+  featureChanged(featureId: string|number): DrawStore {
     this._changedFeatureIds.add(featureId);
     return this;
   }
@@ -114,7 +114,7 @@ export class DrawStore {
   }
 
   delete(
-    featureIds: string | string[],
+  featureIds: string|number | (string|number)[],
     options: { silent?: boolean } = {},
   ): DrawStore {
     const deletedFeaturesToEmit: any[] = [];
@@ -150,7 +150,7 @@ export class DrawStore {
   }
 
   select(
-    featureIds: string | string[],
+    featureIds: string | number| (number | string)[],
     options: { silent?: boolean } = {},
   ): DrawStore {
     toDenseArray(featureIds).forEach((id) => {
@@ -188,7 +188,7 @@ export class DrawStore {
   }
 
   setSelected(
-    featureIds: string | string[] | undefined,
+    featureIds: string| number | (string|number)[] | undefined,
     options: { silent?: boolean } = {},
   ): DrawStore {
     featureIds = toDenseArray(featureIds);
@@ -226,8 +226,8 @@ export class DrawStore {
     return this._selectedFeatureIds.values();
   }
 
-  getSelected(): (Feat | undefined)[] {
-    return this.getSelectedIds().map((id) => this.get(id.toString()));
+  getSelected(): Feat[] {
+    return this.getSelectedIds().map((id) => this.get(id.toString())).filter(feat=>!!feat);
   }
 
   getSelectedCoordinates(): { coordinates: any[] }[] {

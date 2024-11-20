@@ -215,16 +215,16 @@ export class DirectSelect extends ModeInterface {
   }
 
   override onClick(state, e) {
-    if (noTarget(e)) return this.clickNoTarget(state, e);
-    if (isActiveFeature(e)) return this.clickActiveFeature(state, e);
-    if (isInactiveFeature(e)) return this.clickInactive(state, e);
+    if (noTarget(e)) return this.clickNoTarget();
+    if (isActiveFeature(e)) return this.clickActiveFeature(state);
+    if (isInactiveFeature(e)) return this.clickInactive();
     this.stopDragging(state);
   }
 
   override onTap(state, e) {
-    if (noTarget(e)) return this.clickNoTarget(state, e);
-    if (isActiveFeature(e)) return this.clickActiveFeature(state, e);
-    if (isInactiveFeature(e)) return this.clickInactive(state, e);
+    if (noTarget(e)) return this.clickNoTarget();
+    if (isActiveFeature(e)) return this.clickActiveFeature(state, );
+    if (isInactiveFeature(e)) return this.clickInactive();
   }
 
   override onTouchStart(state, e) {

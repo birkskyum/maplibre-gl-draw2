@@ -9,10 +9,10 @@ import { ModeStrings } from "../constants/modes.ts";
 export class DrawPolygon extends ModeInterface {
   onSetup() {
     const polygon = this.newFeature({
-      type: Constants.geojsonTypes.FEATURE,
+      type: Constants.geojsonTypes.FEATURE as "Feature",
       properties: {},
       geometry: {
-        type: Constants.geojsonTypes.POLYGON,
+        type: Constants.geojsonTypes.POLYGON as "Polygon",
         coordinates: [[]],
       },
     });
@@ -76,7 +76,7 @@ export class DrawPolygon extends ModeInterface {
   }
 
   override onClick(state, e) {
-    if (CommonSelectors.isVertex(e)) return this.clickOnVertex(state, e);
+    if (CommonSelectors.isVertex(e)) return this.clickOnVertex(state);
     return this.clickAnywhere(state, e);
   }
 

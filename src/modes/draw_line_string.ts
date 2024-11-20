@@ -145,7 +145,7 @@ export class DrawLineString extends ModeInterface {
   }
 
   override onClick(state, e) {
-    if (CommonSelectors.isVertex(e)) return this.clickOnVertex(state, e);
+    if (CommonSelectors.isVertex(e)) return this.clickOnVertex(state);
     this.clickAnywhere(state, e);
   }
 

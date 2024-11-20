@@ -6,10 +6,10 @@ import { ModeStrings } from "../constants/modes.ts";
 export class DrawPoint extends ModeInterface {
   onSetup(opts) {
     const point = this.newFeature({
-      type: Constants.geojsonTypes.FEATURE,
+      type: Constants.geojsonTypes.FEATURE as "Feature",
       properties: {},
       geometry: {
-        type: Constants.geojsonTypes.POINT,
+        type: Constants.geojsonTypes.POINT as "Point",
         coordinates: [],
       },
     });
@@ -78,7 +78,7 @@ export class DrawPoint extends ModeInterface {
 
   override onKeyUp(state, e) {
     if (CommonSelectors.isEscapeKey(e) || CommonSelectors.isEnterKey(e)) {
-      return this.stopDrawingAndRemove(state, e);
+      return this.stopDrawingAndRemove(state);
     }
   }
 }

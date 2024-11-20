@@ -39,7 +39,7 @@ export class ModeInterfaceAccessors {
     coords.reduce((m: Record<string, boolean>, c) => {
       if (m[c.feature_id] === undefined) {
         m[c.feature_id] = true;
-        this._ctx.store?.get(c.feature_id).changed();
+        this._ctx.store?.get(c.feature_id)?.changed();
       }
       return m;
     }, {});
@@ -49,7 +49,7 @@ export class ModeInterfaceAccessors {
     return this._ctx.store?.getSelected() ?? [];
   }
 
-  getSelectedIds(): string[] {
+  getSelectedIds(): (string|number)[] {
     return this._ctx.store?.getSelectedIds() ?? [];
   }
 
@@ -57,7 +57,7 @@ export class ModeInterfaceAccessors {
     return this._ctx.store?.isSelected(id) ?? false;
   }
 
-  getFeature(id: string): Feat {
+  getFeature(id: string): Feat | undefined {
     return this._ctx.store?.get(id);
   }
 
@@ -70,7 +70,7 @@ export class ModeInterfaceAccessors {
   }
 
   deleteFeature(
-    id: string | string[],
+    id: string|number|(string | number)[],
     opts: Record<string, any> = {},
   ): DrawStore | undefined {
     return this._ctx.store?.delete(id, opts);
@@ -153,7 +153,7 @@ export class ModeInterfaceAccessors {
     throw new Error(`Unknown feature class: ${type}`);
   }
 
-  doRender(id: string): DrawStore | undefined {
+  doRender(id: string|number): DrawStore | undefined {
     return this._ctx.store?.featureChanged(id);
   }
 }
