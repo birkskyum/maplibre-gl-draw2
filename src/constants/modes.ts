@@ -1,9 +1,9 @@
 
-export enum ModeStrings {
-  DRAW_LINE_STRING="DRAW_LINE_STRING",
-  DRAW_POLYGON="DRAW_POLYGON",
-  DRAW_POINT="DRAW_POINT",
-  SIMPLE_SELECT="SIMPLE_SELECT",
-  DIRECT_SELECT="DIRECT_SELECT",
-  STATIC="STATIC",
+export const ModeStrings = {
+  DRAW_LINE_STRING: "draw_line_string",
+  DRAW_POLYGON: "draw_polygon",
+  DRAW_POINT: "draw_point",
+  SIMPLE_SELECT: "simple_select",
+  DIRECT_SELECT: "direct_select",
+  STATIC: "static",
 };

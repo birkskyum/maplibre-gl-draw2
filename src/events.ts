@@ -25,7 +25,7 @@ export class DrawEvents {
   public mouseDownInfo: any = {};
   public touchStartInfo: any = {};
   public events: any = {};
-  public currentModeName: string | null = null;
+  public currentModeName: string | undefined;
   public currentMode: any = null;
   public ctx: DrawContext;
   public actionState: ActionState = {
@@ -36,18 +36,18 @@ export class DrawEvents {
 
   constructor(ctx: DrawContext) {
     this.ctx = ctx;
+    
+    const modes: any = {};
 
-    console.log(ctx.options.modes)
-    this.modes = Object.keys(ctx.options.modes).reduce((m: any, k: string) => {
+    for (const mode in ModeStrings) {
+      const modeString = ModeStrings[mode];
+      const modeClass = ModeClasses[modeString];
+      const populatedMode = objectToMode(modeClass)
+      modes[modeString] = populatedMode;
+    }
 
-      console.log(k)
-      console.log("test", ctx.options.modes[k])
+    this.modes = modes;
 
-      m[k] = objectToMode(ModeClasses[ctx.options.modes[k]]);
-
-      console.log(m)
-      return m;
-    }, {});
     this.bindEvents();
   }
 
@@ -271,10 +271,28 @@ export class DrawEvents {
 
   public start(): void {
     this.currentModeName = this.ctx.options.defaultMode;
-    this.currentMode = ModeHandler(
-      this.modes[this.currentModeName](this.ctx),
-      this.ctx,
-    );
+
+    if (!this.currentModeName) return;
+
+    const modeFuntion = this.modes[this.currentModeName];
+
+    if (typeof modeFuntion !== "function") {
+      console.log("BREAK - this.currentModeName", this.currentModeName)
+      return
+    };
+
+    console.log("this.current", this.currentModeName);
+    console.log("type modeFuntion", typeof modeFuntion);
+    console.log("this.modes[this.currentModeName]", this.modes[this.currentModeName]);
+
+    if (this.currentModeName) {
+      this.currentMode = ModeHandler(
+        modeFuntion(this.ctx),
+        this.ctx,
+      );
+    } else {
+      throw new Error("currentModeName is null");
+    }
   }
 
   public getMode(): string | null {
