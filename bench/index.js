@@ -49,7 +49,6 @@ function main() {
   };
 
   const benchmarkName = location.hash.substr(1);
-  console.warn(benchmarkName);
 
   const testDiv = document.getElementById("tests");
   const tests = Object.keys(benchmarks);

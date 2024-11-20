@@ -277,13 +277,8 @@ export class DrawEvents {
     const modeFuntion = this.modes[this.currentModeName];
 
     if (typeof modeFuntion !== "function") {
-      console.log("BREAK - this.currentModeName", this.currentModeName)
       return
     };
-
-    console.log("this.current", this.currentModeName);
-    console.log("type modeFuntion", typeof modeFuntion);
-    console.log("this.modes[this.currentModeName]", this.modes[this.currentModeName]);
 
     if (this.currentModeName) {
       this.currentMode = ModeHandler(
