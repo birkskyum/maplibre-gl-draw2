@@ -7,6 +7,9 @@ import { moveFeatures } from "../lib/move_features.ts";
 import * as Constants from "../constants.ts";
 import { ModeInterface } from "./mode_interface.ts";
 import { ModeStrings } from "../constants/modes.ts";
+import type { MultiFeature } from "../feature_types/multi_feature.ts";
+import type Point from "@mapbox/point-geometry";
+import type { PointLike } from "maplibre-gl";
 
 export class SimpleSelect extends ModeInterface {
   onSetup(opts) {
@@ -143,7 +146,7 @@ export class SimpleSelect extends ModeInterface {
     if (CommonSelectors.isFeature(e)) return this.clickOnFeature(state, e);
   }
 
-  clickAnywhere(state) {
+  clickAnywhere(state, _e) {
     const wasSelected = this.getSelectedIds();
     if (wasSelected.length) {
       this.clearSelectedFeatures();
@@ -279,15 +282,30 @@ export class SimpleSelect extends ModeInterface {
     state.dragMoveLocation = e.lngLat;
   }
 
-  override onTouchEnd(state, e) {
+
+  // displayControlsDefault?: boolean | undefined;
+  // keybindings?: boolean | undefined;
+  // touchEnabled?: boolean | undefined;
+  // boxSelect?: boolean | undefined;
+  // clickBuffer?: number | undefined;
+  // touchBuffer?: number | undefined;
+  // controls?: MapboxDrawControls | undefined;
+  // styles?: object[] | undefined;
+  // modes?: { [modeKey: string]: DrawCustomMode } | undefined;
+  // defaultMode?: string | undefined;
+  // userProperties?: boolean | undefined;
+
+
+  override onTouchEnd(state: {dragMoving: boolean, boxSelecting: boolean, boxSelectStartLocation: Point}, e) {
     if (state.dragMoving) {
       this.fireUpdate();
     } else if (state.boxSelecting) {
-      const bbox = [
+      const bbox: [PointLike,
+        PointLike] = [
         state.boxSelectStartLocation,
         mouseEventPoint(e.originalEvent, this.map.getContainer()),
       ];
-      const featuresInBox = this.featuresAt(null, bbox, "click");
+      const featuresInBox = this.featuresAt(undefined, bbox, "click");
       const idsToSelect = this.getUniqueIds(featuresInBox).filter(
         (id) => !this.isSelected(id),
       );
@@ -305,11 +323,11 @@ export class SimpleSelect extends ModeInterface {
     if (state.dragMoving) {
       this.fireUpdate();
     } else if (state.boxSelecting) {
-      const bbox = [
+      const bbox: [PointLike, PointLike] = [
         state.boxSelectStartLocation,
         mouseEventPoint(e.originalEvent, this.map.getContainer()),
       ];
-      const featuresInBox = this.featuresAt(null, bbox, "click");
+      const featuresInBox = this.featuresAt(undefined, bbox, "click");
       const idsToSelect = this.getUniqueIds(featuresInBox).filter(
         (id) => !this.isSelected(id),
       );
@@ -323,7 +341,7 @@ export class SimpleSelect extends ModeInterface {
     this.stopExtendedInteractions(state);
   }
 
-  override toDisplayFeatures(state, geojson, display) {
+  override toDisplayFeatures(_state, geojson, display) {
     geojson.properties.active = this.isSelected(geojson.properties.id)
       ? Constants.activeStates.ACTIVE
       : Constants.activeStates.INACTIVE;
@@ -371,10 +389,10 @@ export class SimpleSelect extends ModeInterface {
 
     if (featuresCombined.length > 1) {
       const multiFeature = this.newFeature({
-        type: Constants.geojsonTypes.FEATURE as typeof Constants.geojsonTypes.FEATURE,
+        type: Constants.geojsonTypes.FEATURE as "Feature",
         properties: featuresCombined[0].properties,
         geometry: {
-          type: `Multi${featureType}`,
+          type: `Multi${featureType}` as "MultiPolygon"| "MultiLineString" | "MultiPoint",
           coordinates,
         },
       });
@@ -402,7 +420,10 @@ export class SimpleSelect extends ModeInterface {
       const feature = selectedFeatures[i];
 
       if (this.isInstanceOf("MultiFeature", feature)) {
-        feature.getFeatures().forEach((subFeature) => {
+
+        
+
+        (feature as MultiFeature ).getFeatures().forEach((subFeature) => {
           this.addFeature(subFeature);
           subFeature.properties = feature.properties;
           createdFeatures.push(subFeature.toGeoJSON());

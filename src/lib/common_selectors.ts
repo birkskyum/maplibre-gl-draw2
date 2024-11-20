@@ -1,7 +1,7 @@
 import type { MapMouseEvent, MapTouchEvent } from "../events.ts";
 import * as Constants from "../constants.ts";
 
-export function isOfMetaType(type: string): boolean {
+export function isOfMetaType(type: string): (e: MapMouseEvent | MapTouchEvent) => boolean {
   return function (e: MapMouseEvent | MapTouchEvent): boolean {
     const featureTarget = e.featureTarget;
     if (!featureTarget) return false;

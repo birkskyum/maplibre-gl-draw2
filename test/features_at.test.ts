@@ -108,7 +108,7 @@ function createMockContext() {
     removeSource: (id) => {
       delete _layers[id];
     },
-    queryRenderedFeatures: (bbox, params) => {
+    queryRenderedFeatures: (_bbox, params) => {
       const features: any[] = [];
       const includedSources = {};
       if (params && params.layers) {
@@ -117,9 +117,9 @@ function createMockContext() {
           if (!layer) {
             // this layer is not in the style.layers array
             throw new ErrorEvent(
-              new Error(
+              
                 `The layer '${layerId}' does not exist in the map's style and cannot be queried for features.`,
-              ),
+              
             );
           }
           includedSources[layer.source] = true;

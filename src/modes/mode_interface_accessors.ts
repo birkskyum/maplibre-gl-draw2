@@ -4,9 +4,9 @@ import { LineStringFeat } from "../feature_types/line_string.ts";
 import { PolygonFeat } from "../feature_types/polygon.ts";
 import { MultiFeature } from "../feature_types/multi_feature.ts";
 import type { DrawContext } from ".././index.ts";
-import type { Map as MapLibre } from "maplibre-gl";
+import type { Map as MapLibre, PointLike } from "maplibre-gl";
 import * as Constants from "../constants.ts";
-import type { BBox, GeoJSON } from "geojson";
+import type { BBox, Feature, GeoJSON, GeoJsonProperties, LineString, Point, Polygon } from "geojson";
 import { DrawStore } from "../store.ts";
 import type { MapLibreDrawOptions } from ".././index.ts";
 import { Feat } from "../feature_types/feature.ts";
@@ -61,7 +61,7 @@ export class ModeInterfaceAccessors {
     return this._ctx.store?.get(id);
   }
 
-  select(id: string): DrawStore | undefined {
+  select(id: string| string[]): DrawStore | undefined {
     return this._ctx.store?.select(id);
   }
 
@@ -70,7 +70,7 @@ export class ModeInterfaceAccessors {
   }
 
   deleteFeature(
-    id: string,
+    id: string | string[],
     opts: Record<string, any> = {},
   ): DrawStore | undefined {
     return this._ctx.store?.delete(id, opts);
@@ -114,8 +114,8 @@ export class ModeInterfaceAccessors {
   }
 
   featuresAt(
-    event: Event,
-    bbox: BBox,
+    event: Event| undefined,
+    bbox: [PointLike, PointLike],
     bufferType: "click" | "touch" = "click",
   ): Feat[] {
     if (bufferType !== "click" && bufferType !== "touch") {
@@ -124,16 +124,17 @@ export class ModeInterfaceAccessors {
     return featuresAt[bufferType](event, bbox, this._ctx);
   }
 
-  newFeature(geojson: GeoJSON): Feat {
+  newFeature(geojson: Feature): Feat {
     const type = geojson.geometry.type;
+    
     if (type === Constants.geojsonTypes.POINT) {
-      return new PointFeat(this._ctx, geojson);
+      return new PointFeat(this._ctx, geojson as Feature<Point, GeoJsonProperties>);
     }
     if (type === Constants.geojsonTypes.LINE_STRING) {
-      return new LineStringFeat(this._ctx, geojson);
+      return new LineStringFeat(this._ctx, geojson as Feature<LineString, GeoJsonProperties>);
     }
     if (type === Constants.geojsonTypes.POLYGON) {
-      return new PolygonFeat(this._ctx, geojson);
+      return new PolygonFeat(this._ctx, geojson as Feature<Polygon, GeoJsonProperties>);
     }
     return new MultiFeature(this._ctx, geojson);
   }
