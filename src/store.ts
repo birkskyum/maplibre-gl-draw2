@@ -165,7 +165,7 @@ export class DrawStore {
   }
 
   deselect(
-    featureIds: (string | number)[],
+    featureIds: string |  (string | number)[],
     options: { silent?: boolean } = {},
   ): DrawStore {
     toDenseArray(featureIds).forEach((id) => {

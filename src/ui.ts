@@ -107,14 +107,16 @@ export class DrawUI {
     return button;
   }
 
-  private deactivateButtons() {
+  public deactivateButtons() {
     if (!this.activeButton) return;
     this.activeButton.classList.remove(Constants.classes.ACTIVE_BUTTON);
     this.activeButton = null;
   }
 
-  setActiveButton(id: string) {
+  setActiveButton(id?: string) {
     this.deactivateButtons();
+
+    if (!id) return;
 
     const button = this.buttonElements[id];
     if (!button) return;

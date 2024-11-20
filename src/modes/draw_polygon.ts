@@ -100,7 +100,6 @@ export class DrawPolygon extends ModeInterface {
     this.updateUIClasses({ mouse: Constants.cursors.NONE });
     doubleClickZoom.enable(this);
 
-    // TODO: HOW CAN IT NOT TAKE A STRING?
     this.activateUIButton();
 
     // check to see if we've deleted this feature

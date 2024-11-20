@@ -6,10 +6,10 @@ import { MultiFeat } from "../feature_types/multi_feature.ts";
 import type { DrawContext } from ".././index.ts";
 import type { Map as MapLibre, PointLike } from "maplibre-gl";
 import * as Constants from "../constants.ts";
-import type { BBox, Feature, GeoJSON, GeoJsonProperties, LineString, Point, Polygon } from "geojson";
-import { DrawStore } from "../store.ts";
+import type { Feature, GeoJsonProperties, LineString, Point, Polygon } from "geojson";
+import type { DrawStore } from "../store.ts";
 import type { MapLibreDrawOptions } from ".././index.ts";
-import { Feat } from "../feature_types/feature.ts";
+import type{ Feat } from "../feature_types/feature.ts";
 
 type DrawActionableState = {
   trash?: boolean;
@@ -109,7 +109,7 @@ export class ModeInterfaceAccessors {
     return this._ctx.ui?.queueMapClasses(opts);
   }
 
-  activateUIButton(name: string): void {
+  activateUIButton(name?: string): void {
     return this._ctx.ui?.setActiveButton(name);
   }
 
