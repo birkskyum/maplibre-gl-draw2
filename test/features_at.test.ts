@@ -109,7 +109,7 @@ function createMockContext() {
       delete _layers[id];
     },
     queryRenderedFeatures: (bbox, params) => {
-      const features = [];
+      const features: any[] = [];
       const includedSources = {};
       if (params && params.layers) {
         for (const layerId of params.layers) {

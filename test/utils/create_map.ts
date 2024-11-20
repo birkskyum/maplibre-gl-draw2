@@ -86,7 +86,7 @@ class MockMap extends Evented {
     const maxX = Math.max(p0[0], p1[0]);
     const maxY = Math.max(p0[1], p1[1]);
     const bbox = [minX, minY, maxX, maxY];
-    const features = [];
+    const features: any[] = [];
 
     for (const source of Object.values(this.sources)) {
       for (const feature of source.data.features) {

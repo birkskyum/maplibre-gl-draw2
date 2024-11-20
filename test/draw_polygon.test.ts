@@ -142,7 +142,7 @@ test("draw_polygon render active polygon with no coordinates", () => {
   mode.start.call(lifecycleContext);
   const testPolygon = context.store.get(context.store.getAllIds()[0]);
 
-  const memo = [];
+  const memo: any[] = [];
   const geojson = {
     type: "Feature",
     properties: {
@@ -164,7 +164,7 @@ test("draw_polygon render active polygon with 1 coordinate (and closer)", () => 
   mode.start.call(lifecycleContext);
   const testPolygon = context.store.get(context.store.getAllIds()[0]);
 
-  const memo = [];
+  const memo: any[] = [];
   const geojson = {
     type: "Feature",
     properties: {
@@ -191,7 +191,7 @@ test("draw_polygon render active polygon with 2 coordinates (and closer)", () =>
   mode.start.call(lifecycleContext);
   const testPolygon = context.store.get(context.store.getAllIds()[0]);
 
-  const memo = [];
+  const memo: any[] = [];
   const geojson = {
     type: "Feature",
     properties: {
@@ -238,7 +238,7 @@ test("draw_polygon render active polygon with 3 coordinates (and closer)", () =>
   mode.start.call(lifecycleContext);
   const testPolygon = context.store.get(context.store.getAllIds()[0]);
 
-  const memo = [];
+  const memo: any[] = [];
   const geojson = {
     type: "Feature",
     properties: {
@@ -325,7 +325,7 @@ test("draw_polygon render inactive feature", () => {
   const lifecycleContext = createMockLifecycleContext();
   mode.start.call(lifecycleContext);
 
-  const memo = [];
+  const memo: any[] = [];
   const geojson = {
     type: "Feature",
     properties: {

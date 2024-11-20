@@ -58,7 +58,7 @@ function featuresAtHandler(
     .filter((feature) => META_TYPES.indexOf(feature.properties.meta) !== -1);
 
   const featureIds = new StringSet();
-  const uniqueFeatures = [];
+  const uniqueFeatures: any[] = [];
   features.forEach((feature) => {
     const featureId = feature.properties.id;
     if (featureIds.has(featureId)) return;

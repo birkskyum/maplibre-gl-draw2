@@ -136,7 +136,7 @@ test("draw_point render the active point", () => {
   const id = context.store.getAllIds()[0];
   const point = context.store.get(id);
 
-  const memo = [];
+  const memo: any[] = [];
   const geojson = {
     type: "Feature",
     properties: {
@@ -157,7 +157,7 @@ test("draw_point render an inactive feature", () => {
   const lifecycleContext = createMockLifecycleContext();
   modeHandler.start.call(lifecycleContext);
 
-  const memo = [];
+  const memo: any[] = [];
   const geojson = {
     type: "Feature",
     properties: {

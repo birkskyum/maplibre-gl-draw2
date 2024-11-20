@@ -147,7 +147,7 @@ test("draw_line_string render active line with 0 coordinates", () => {
 
   const line = context.store.get(context.store.getAllIds()[0]);
 
-  const memo = [];
+  const memo: any[] = [];
   const geojson = {
     type: "Feature",
     properties: {
@@ -170,7 +170,7 @@ test("draw_line_string render active line with 1 coordinate", () => {
 
   const line = context.store.get(context.store.getAllIds()[0]);
 
-  const memo = [];
+  const memo: any[] = [];
   const geojson = {
     type: "Feature",
     properties: {
@@ -193,7 +193,7 @@ test("draw_line_string render active line with 2 coordinates", () => {
 
   const line = context.store.get(context.store.getAllIds()[0]);
 
-  const memo = [];
+  const memo: any[] = [];
   const geojson = {
     type: "Feature",
     properties: {
@@ -236,7 +236,7 @@ test("draw_line_string render inactive feature", () => {
   const lifecycleContext = createMockLifecycleContext();
   mode.start.call(lifecycleContext);
 
-  const memo = [];
+  const memo: any[] = [];
   const geojson = {
     type: "Feature",
     properties: {

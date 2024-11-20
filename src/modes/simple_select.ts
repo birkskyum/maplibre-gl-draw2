@@ -348,8 +348,8 @@ export class SimpleSelect extends ModeInterface {
 
     if (selectedFeatures.length === 0 || selectedFeatures.length < 2) return;
 
-    const coordinates = [],
-      featuresCombined = [];
+    const coordinates: any[] = [],
+      featuresCombined: any[] = [];
     const featureType = selectedFeatures[0].type.replace("Multi", "");
 
     for (let i = 0; i < selectedFeatures.length; i++) {
@@ -395,8 +395,8 @@ export class SimpleSelect extends ModeInterface {
     const selectedFeatures = this.getSelected();
     if (selectedFeatures.length === 0) return;
 
-    const createdFeatures = [];
-    const featuresUncombined = [];
+    const createdFeatures: any[] = [];
+    const featuresUncombined: any[] = [];
 
     for (let i = 0; i < selectedFeatures.length; i++) {
       const feature = selectedFeatures[i];

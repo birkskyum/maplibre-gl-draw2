@@ -33,7 +33,7 @@ test("ensure user interactions fire right events", async (t) => {
   document.body.removeChild(container);
 
   function flushDrawEvents() {
-    const drawEvents = [];
+    const drawEvents: any[] = [];
     for (let i = 0; i < fireSpy.callCount; i++) {
       const eventName = fireSpy.getCall(i).args[0];
       if (typeof eventName !== "string" || eventName.indexOf("draw.") !== 0) {

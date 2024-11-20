@@ -37,7 +37,7 @@ test("simple_select", async (t) => {
   };
 
   const getFireArgs = function () {
-    const args = [];
+    const args: any[] = [];
     for (let i = 0; i < map.fire.callCount; i++) {
       args.push(map.fire.getCall(i).args);
     }
@@ -137,7 +137,7 @@ test("simple_select", async (t) => {
   });
 
   await t.test("simple_select - box select many features", async () => {
-    const features = [];
+    const features: any[] = [];
     for (let i = 0; i < 5; i++) {
       features.push(getGeoJSON("point"));
     }

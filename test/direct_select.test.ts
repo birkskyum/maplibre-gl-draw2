@@ -34,7 +34,7 @@ test("direct_select", async (t) => {
   };
 
   const getFireArgs = function () {
-    const args = [];
+    const args: any[] = [];
     for (let i = 0; i < map.fire.callCount; i++) {
       args.push(map.fire.getCall(i).args);
     }
