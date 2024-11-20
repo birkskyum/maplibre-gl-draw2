@@ -229,7 +229,13 @@ DirectSelect.onMouseOut = function (state) {
 	return true;
 };
 
-DirectSelect.onTouchStart = DirectSelect.onMouseDown = function (state, e) {
+DirectSelect.onTouchStart = function (state, e) {
+	if (isVertex(e)) return this.onVertex(state, e);
+	if (isActiveFeature(e)) return this.onFeature(state, e);
+	if (isMidpoint(e)) return this.onMidpoint(state, e);
+};
+
+DirectSelect.onMouseDown = function (state, e) {
 	if (isVertex(e)) return this.onVertex(state, e);
 	if (isActiveFeature(e)) return this.onFeature(state, e);
 	if (isMidpoint(e)) return this.onMidpoint(state, e);
@@ -263,7 +269,15 @@ DirectSelect.onTap = function (state, e) {
 	if (isInactiveFeature(e)) return this.clickInactive(state, e);
 };
 
-DirectSelect.onTouchEnd = DirectSelect.onMouseUp = function (state) {
+DirectSelect.onTouchEnd = function (state) {
+	if (state.dragMoving) {
+		this.fireUpdate();
+	}
+	this.stopDragging(state);
+};
+
+
+DirectSelect.onMouseUp = function (state) {
 	if (state.dragMoving) {
 		this.fireUpdate();
 	}
