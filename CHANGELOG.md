@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.0.0
+
+* Port to TypeScript, and use MapLibre GL JS
+
 ## 1.4.3
 
 * Fix for layer not found error in `featuresAt` function by @caldwellc in https://github.com/mapbox/mapbox-gl-draw/pull/1194
