@@ -64,7 +64,7 @@ export class DrawPolygon extends ModeInterface {
     });
   }
 
-  onMouseMove(state, e) {
+  override onMouseMove(state, e) {
     state.polygon.updateCoordinate(
       `0.${state.currentVertexPosition}`,
       e.lngLat.lng,
@@ -75,17 +75,17 @@ export class DrawPolygon extends ModeInterface {
     }
   }
 
-  onClick(state, e) {
+  override onClick(state, e) {
     if (CommonSelectors.isVertex(e)) return this.clickOnVertex(state, e);
     return this.clickAnywhere(state, e);
   }
 
-  onTap(state, e) {
+  override onTap(state, e) {
     // Handle tap same as click
     this.onClick(state, e);
   }
 
-  onKeyUp(state, e) {
+  override onKeyUp(state, e) {
     if (CommonSelectors.isEscapeKey(e)) {
       this.deleteFeature([state.polygon.id], { silent: true });
       this.changeMode(ModeStrings.SIMPLE_SELECT);
@@ -96,7 +96,7 @@ export class DrawPolygon extends ModeInterface {
     }
   }
 
-  onStop(state) {
+  override onStop(state) {
     this.updateUIClasses({ mouse: Constants.cursors.NONE });
     doubleClickZoom.enable(this);
 
@@ -187,7 +187,7 @@ export class DrawPolygon extends ModeInterface {
     return display(geojson);
   }
 
-  onTrash(state) {
+  override onTrash(state) {
     this.deleteFeature([state.polygon.id], { silent: true });
     this.changeMode(ModeStrings.SIMPLE_SELECT);
   }
