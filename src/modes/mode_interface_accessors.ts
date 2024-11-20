@@ -2,7 +2,7 @@ import { featuresAt } from "../lib/features_at.ts";
 import { PointFeat } from "../feature_types/point.ts";
 import { LineStringFeat } from "../feature_types/line_string.ts";
 import { PolygonFeat } from "../feature_types/polygon.ts";
-import { MultiFeature } from "../feature_types/multi_feature.ts";
+import { MultiFeat } from "../feature_types/multi_feature.ts";
 import type { DrawContext } from ".././index.ts";
 import type { Map as MapLibre, PointLike } from "maplibre-gl";
 import * as Constants from "../constants.ts";
@@ -117,7 +117,7 @@ export class ModeInterfaceAccessors {
     event: Event| undefined,
     bbox: [PointLike, PointLike],
     bufferType: "click" | "touch" = "click",
-  ): Feat[] {
+  ): Feature[] {
     if (bufferType !== "click" && bufferType !== "touch") {
       throw new Error("invalid buffer type");
     }
@@ -136,7 +136,7 @@ export class ModeInterfaceAccessors {
     if (type === Constants.geojsonTypes.POLYGON) {
       return new PolygonFeat(this._ctx, geojson as Feature<Polygon, GeoJsonProperties>);
     }
-    return new MultiFeature(this._ctx, geojson);
+    return new MultiFeat(this._ctx, geojson);
   }
 
   isInstanceOf(type: string, feature: object): boolean {
@@ -149,7 +149,7 @@ export class ModeInterfaceAccessors {
     if (type === Constants.geojsonTypes.POLYGON) {
       return feature instanceof PolygonFeat;
     }
-    if (type === "MultiFeature") return feature instanceof MultiFeature;
+    if (type === "MultiFeature") return feature instanceof MultiFeat;
     throw new Error(`Unknown feature class: ${type}`);
   }
 

@@ -5,60 +5,60 @@ import { Feat } from "../src/feature_types/feature.ts";
 import { PointFeat } from "../src/feature_types/point.ts";
 import { PolygonFeat } from "../src/feature_types/polygon.ts";
 import { LineStringFeat } from "../src/feature_types/line_string.ts";
-import { MultiFeature } from "../src/feature_types/multi_feature.ts";
+import { MultiFeat } from "../src/feature_types/multi_feature.ts";
 import { createMockFeatureContext } from "./utils/create_mock_feature_context.ts";
 import { getPublicMemberKeys } from "./utils/get_public_member_keys.ts";
 
 test("MultiPoint via MultiFeature", () => {
   assert.ok(
-    MultiFeature.prototype instanceof Feat,
+    MultiFeat.prototype instanceof Feat,
     "inherits from Feature",
   );
 
   // Prototype members
   assert.equal(
-    typeof MultiFeature.prototype.isValid,
+    typeof MultiFeat.prototype.isValid,
     "function",
     "polygon.isValid",
   );
   assert.equal(
-    typeof MultiFeature.prototype.setCoordinates,
+    typeof MultiFeat.prototype.setCoordinates,
     "function",
     "polygon.setCoordinates",
   );
   assert.equal(
-    typeof MultiFeature.prototype.getCoordinate,
+    typeof MultiFeat.prototype.getCoordinate,
     "function",
     "polygon.getCoordinate",
   );
   assert.equal(
-    typeof MultiFeature.prototype.getCoordinates,
+    typeof MultiFeat.prototype.getCoordinates,
     "function",
     "polygon.getCoordinates",
   );
   assert.equal(
-    typeof MultiFeature.prototype.updateCoordinate,
+    typeof MultiFeat.prototype.updateCoordinate,
     "function",
     "polygon.updateCoordinate",
   );
   assert.equal(
-    typeof MultiFeature.prototype.addCoordinate,
+    typeof MultiFeat.prototype.addCoordinate,
     "function",
     "polygon.addCoordinate",
   );
   assert.equal(
-    typeof MultiFeature.prototype.removeCoordinate,
+    typeof MultiFeat.prototype.removeCoordinate,
     "function",
     "polygon.removeCoordinate",
   );
   assert.equal(
-    typeof MultiFeature.prototype.getFeatures,
+    typeof MultiFeat.prototype.getFeatures,
     "function",
     "polygon.getFeatures",
   );
 
   assert.equal(
-    Object.getOwnPropertyNames(MultiFeature.prototype).length,
+    Object.getOwnPropertyNames(MultiFeat.prototype).length,
     10,
     "no unexpected prototype members",
   );
@@ -81,7 +81,7 @@ test("MultiPoint", () => {
   const ctx = createMockFeatureContext();
   let multiPoint;
   assert.doesNotThrow(() => {
-    multiPoint = new MultiFeature(ctx, rawMultiPoint);
+    multiPoint = new MultiFeat(ctx, rawMultiPoint);
   }, "MultiPoint type does not throw");
   const changedSpy = spy(multiPoint, "changed");
 
@@ -251,7 +251,7 @@ test("MultiPolygon via MultiFeature", () => {
   const ctx = createMockFeatureContext();
   let multiPolygon;
   assert.doesNotThrow(() => {
-    multiPolygon = new MultiFeature(ctx, rawMultiPolygon);
+    multiPolygon = new MultiFeat(ctx, rawMultiPolygon);
   }, "MultiPolygon type does not throw");
 
   const polygonA = multiPolygon.features[0];
@@ -329,7 +329,7 @@ test("MultiLineString via MultiFeature", () => {
   const ctx = createMockFeatureContext();
   let multiLineString;
   assert.doesNotThrow(() => {
-    multiLineString = new MultiFeature(ctx, rawMultiLineString);
+    multiLineString = new MultiFeat(ctx, rawMultiLineString);
   }, "MultiLineString type does not throw");
 
   const lineStringA = multiLineString.features[0];
@@ -392,7 +392,7 @@ test("Invalid MultiFeature type", () => {
   };
   let thing;
   assert.throws(() => {
-    thing = new MultiFeature(createMockFeatureContext(), rawThing);
+    thing = new MultiFeat(createMockFeatureContext(), rawThing);
   }, "invalid type throws");
   assert.equal(thing, undefined);
 });

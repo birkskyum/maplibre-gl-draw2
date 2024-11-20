@@ -7,7 +7,7 @@ import { moveFeatures } from "../lib/move_features.ts";
 import * as Constants from "../constants.ts";
 import { ModeInterface } from "./mode_interface.ts";
 import { ModeStrings } from "../constants/modes.ts";
-import type { MultiFeature } from "../feature_types/multi_feature.ts";
+import type { MultiFeat } from "../feature_types/multi_feature.ts";
 import type Point from "@mapbox/point-geometry";
 import type { PointLike } from "maplibre-gl";
 
@@ -423,7 +423,7 @@ export class SimpleSelect extends ModeInterface {
 
         
 
-        (feature as MultiFeature ).getFeatures().forEach((subFeature) => {
+        (feature as MultiFeat ).getFeatures().forEach((subFeature) => {
           this.addFeature(subFeature);
           subFeature.properties = feature.properties;
           createdFeatures.push(subFeature.toGeoJSON());

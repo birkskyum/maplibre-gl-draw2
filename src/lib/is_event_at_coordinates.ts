@@ -3,7 +3,7 @@ import type { MapMouseEvent } from "maplibre-gl";
 
 export function isEventAtCoordinates(
   event: MapMouseEvent,
-  coordinates: Position[],
+  coordinates: Position,
 ): boolean {
   if (!event.lngLat) return false;
   return (
