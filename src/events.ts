@@ -7,6 +7,7 @@ import * as Constants from "./constants.ts";
 import { objectToMode } from "./modes/object_to_mode.ts";
 import type { DrawContext } from "./index.ts";
 import { ModeStrings } from "./constants/modes.ts";
+import { ModeClasses } from "./modes.ts";
 
 interface EventInfo {
   time: number;
@@ -35,8 +36,16 @@ export class DrawEvents {
 
   constructor(ctx: DrawContext) {
     this.ctx = ctx;
+
+    console.log(ctx.options.modes)
     this.modes = Object.keys(ctx.options.modes).reduce((m: any, k: string) => {
-      m[k] = objectToMode(ctx.options.modes[k]);
+
+      console.log(k)
+      console.log("test", ctx.options.modes[k])
+
+      m[k] = objectToMode(ModeClasses[ctx.options.modes[k]]);
+
+      console.log(m)
       return m;
     }, {});
     this.bindEvents();
