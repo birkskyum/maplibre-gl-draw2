@@ -19,26 +19,8 @@ export = MapLibreDraw;
 export as namespace MapLibreDraw;
 
 declare namespace MapLibreDraw {
-  type DrawMode = DrawModes[keyof DrawModes];
+  
 
-  interface DrawEvents {
-    "draw.create": MapLibreDraw.DrawCreateEvent;
-    "draw.delete": MapLibreDraw.DrawDeleteEvent;
-    "draw.update": MapLibreDraw.DrawUpdateEvent;
-    "draw.selectionchange": MapLibreDraw.DrawSelectionChangeEvent;
-    "draw.render": MapLibreDraw.DrawRenderEvent;
-    "draw.combine": MapLibreDraw.DrawCombineEvent;
-    "draw.uncombine": MapLibreDraw.DrawUncombineEvent;
-    "draw.modechange": MapLibreDraw.DrawModeChangeEvent;
-    "draw.actionable": MapLibreDraw.DrawActionableEvent;
-  }
-  type DrawEventType = keyof DrawEvents;
-
-  interface DrawActionableState {
-    trash: boolean;
-    combineFeatures: boolean;
-    uncombineFeatures: boolean;
-  }
 
   interface DrawFeatureBase<Coordinates> {
     readonly properties: Readonly<Feature["properties"]>;

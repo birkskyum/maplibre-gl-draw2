@@ -7,7 +7,111 @@ import * as Constants from "./constants.ts";
 import { objectToMode } from "./modes/object_to_mode.ts";
 import type { DrawContext } from "./index.ts";
 import { ModeStrings } from "./constants/modes.ts";
+import {Point, Feature} from "geojson";
 import { ModeClasses } from "./modes.ts";
+
+interface MapMouseEvent extends MapLibreMapMouseEvent {
+  featureTarget: DrawFeature;
+}
+
+interface MapTouchEvent extends MapLibreMapTouchEvent {
+  featureTarget: DrawFeature;
+}
+
+
+
+interface DrawCreateEvent extends DrawEvent {
+  // Array of GeoJSON objects representing the features that were created
+  features: Feature[];
+  type: "draw.create";
+}
+
+interface DrawDeleteEvent extends DrawEvent {
+  // Array of GeoJSON objects representing the features that were deleted
+  features: Feature[];
+  type: "draw.delete";
+}
+
+interface DrawCombineEvent extends DrawEvent {
+  deletedFeatures: Feature[]; // Array of deleted features (those incorporated into new multifeatures)
+  createdFeatures: Feature[]; // Array of created multifeatures
+  type: "draw.combine";
+}
+
+interface DrawUncombineEvent extends DrawEvent {
+  deletedFeatures: Feature[]; // Array of deleted multifeatures (split into features)
+  createdFeatures: Feature[]; // Array of created features
+  type: "draw.uncombine";
+}
+
+interface DrawUpdateEvent extends DrawEvent {
+  features: Feature[]; // Array of features that were updated
+  action: string; // Name of the action that triggered the update
+  type: "draw.update";
+}
+
+interface DrawSelectionChangeEvent extends DrawEvent {
+  features: Feature[]; // Array of features that are selected after the change
+  points: Array<Feature<Point>>;
+  type: "draw.selectionchange";
+}
+
+
+interface DrawModes {
+  DRAW_LINE_STRING: "draw_line_string";
+  DRAW_POLYGON: "draw_polygon";
+  DRAW_POINT: "draw_point";
+  SIMPLE_SELECT: "simple_select";
+  DIRECT_SELECT: "direct_select";
+  STATIC: "static";
+}
+
+type DrawMode = DrawModes[keyof DrawModes];
+
+
+interface DrawModeChangeEvent extends DrawEvent {
+  mode: DrawMode; // The next mode, i.e. the mode that Draw is changing to
+  type: "draw.modechange";
+}
+
+interface DrawRenderEvent extends DrawEvent {
+  type: "draw.render";
+}
+
+interface DrawActionableState {
+  trash: boolean;
+  combineFeatures: boolean;
+  uncombineFeatures: boolean;
+}
+
+
+interface DrawActionableEvent extends DrawEvent {
+  actions: DrawActionableState;
+  type: "draw.actionable";
+}
+
+
+interface IDrawEvents {
+  "draw.create": DrawCreateEvent;
+  "draw.delete": DrawDeleteEvent;
+  "draw.update": DrawUpdateEvent;
+  "draw.selectionchange": DrawSelectionChangeEvent;
+  "draw.render": DrawRenderEvent;
+  "draw.combine": DrawCombineEvent;
+  "draw.uncombine": DrawUncombineEvent;
+  "draw.modechange": DrawModeChangeEvent;
+  "draw.actionable": DrawActionableEvent;
+}
+
+
+
+type EventType = keyof IDrawEvents;
+
+
+type DrawEvent = {
+  target: maplibregl.Map;
+  type: EventType;
+}
 
 interface EventInfo {
   time: number;
@@ -68,7 +172,8 @@ export class DrawEvents {
     this.events.data = this.handleData.bind(this);
   }
 
-  public handleDrag(event: any, isDrag: Function): void {
+
+  public handleDrag(event: DrawEvent, isDrag: Function): void {
     if (
       isDrag({
         point: event.point,

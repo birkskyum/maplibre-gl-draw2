@@ -1,7 +1,7 @@
 import { nanoid } from "nanoid";
 import * as Constants from "../constants.ts";
 import type { DrawContext } from ".././index.ts";
-
+import type {GeoJSON} from "geojson";
 export class Feat {
   ctx: DrawContext;
   properties: Record<string, any>;
@@ -42,7 +42,7 @@ export class Feat {
     this.properties[property] = value;
   }
 
-  toGeoJSON(): any {
+  toGeoJSON(): GeoJSON {
     return JSON.parse(
       JSON.stringify({
         id: this.id,

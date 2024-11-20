@@ -2,14 +2,14 @@ import { toDenseArray } from "./lib/to_dense_array.ts";
 import { StringSet } from "./lib/string_set.ts";
 import { render } from "./render.ts";
 import * as Constants from "./constants.ts";
-import type { DrawContext, MapLibreDraw } from "./index.ts";
+import type { DrawContext } from "./index.ts";
 import { Feat } from "./feature_types/feature.ts";
 import type { FeatureCollection } from "geojson";
 import type { Feature } from "geojson";
 import type { Geometry } from "geojson";
 
 export class DrawStore {
-  private _features: { [key: string]: any };
+  private _features: { [key: string]: Feat };
   private _featureIds: StringSet;
   private _selectedFeatureIds: StringSet;
   private _selectedCoordinates: any[];
@@ -143,7 +143,7 @@ export class DrawStore {
     return this;
   }
 
-  get(id: string): Feature | undefined {
+  get(id: string): Feat | undefined {
     return this._features[id];
   }
 
