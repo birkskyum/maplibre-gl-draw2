@@ -22,7 +22,7 @@ export function createVertex(
   selected: boolean,
 ): Feature<Point> {
   return {
-    type: Constants.geojsonTypes.FEATURE,
+    type: Constants.geojsonTypes.FEATURE as "Feature",
     properties: {
       meta: Constants.meta.VERTEX,
       parent: parentId,
@@ -32,7 +32,7 @@ export function createVertex(
         : Constants.activeStates.INACTIVE,
     },
     geometry: {
-      type: Constants.geojsonTypes.POINT,
+      type: Constants.geojsonTypes.POINT as "Point",
       coordinates,
     },
   };

@@ -11,6 +11,12 @@ const orange = "#fbb03b";
 const white = "#fff";
 
 type ThemeLayerId =
+  | "gl-draw-point-outer"
+  | "gl-draw-vertex-outer"
+  | "gl-draw-midpoint"
+  | "gl-draw-vertex-inner"
+  | "gl-draw-point-inner"
+  | "gl-draw-polygon-fill"
   | "gl-draw-polygon-fill-static"
   | "gl-draw-polygon-fill-active"
   | "gl-draw-polygon-fill-inactive"
@@ -20,6 +26,7 @@ type ThemeLayerId =
   | "gl-draw-polygon-midpoint"
   | "gl-draw-polygon-and-line-vertex-inactive"
   | "gl-draw-polygon-and-line-vertex-stroke-inactive"
+  | "gl-draw-lines"
   | "gl-draw-line-static"
   | "gl-draw-line-active"
   | "gl-draw-line-inactive"
@@ -29,11 +36,11 @@ type ThemeLayerId =
   | "gl-draw-point-stroke-active"
   | "gl-draw-point-point-stroke-inactive";
 
-type Theme = Array<
+export type Theme = Array<
   (
-    | FillLayerSpecification
-    | LineLayerSpecification
-    | CircleLayerSpecification
+    | Partial<FillLayerSpecification>
+    | Partial<LineLayerSpecification>
+    | Partial<CircleLayerSpecification>
   ) & { id: ThemeLayerId }
 >;
 

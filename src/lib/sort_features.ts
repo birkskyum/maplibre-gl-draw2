@@ -1,6 +1,6 @@
 import * as area from "@birkskyum/geojson-area";
 import * as Constants from "../constants.ts";
-import type { Feature } from "geojson";
+import type { Feature, Polygon, GeoJsonProperties } from "geojson";
 
 const FEATURE_SORT_RANKS = {
   Point: 0,
@@ -25,9 +25,9 @@ export function sortFeatures(features: Feature[]): Feature[] {
   return features
     .map((feature) => {
       if (feature.geometry.type === Constants.geojsonTypes.POLYGON) {
-        feature.area = area.geometry({
+        (feature as unknown as {area : number}).area = area.geometry({
           type: Constants.geojsonTypes.POLYGON as "Polygon",
-          coordinates: feature.geometry.coordinates,
+          coordinates: (feature as Feature<Polygon, GeoJsonProperties>).geometry.coordinates,
         });
       }
       return feature;
