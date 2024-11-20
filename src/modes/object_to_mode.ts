@@ -25,13 +25,6 @@ export function objectToMode(modeObject) {
 		if (typeof modeObject === 'function') {
 			// modeObject is a class constructor
 			mode = new modeObject(ctx);
-		} else {
-			// modeObject is an object
-			const modeObjectKeys = Object.keys(modeObject);
-			mode = modeObjectKeys.reduce((m, k) => {
-				m[k] = modeObject[k];
-				return m;
-			}, new ModeInterface(ctx));
 		}
 
 		function wrapper(eh) {

@@ -6,8 +6,8 @@ import { ModeInterfaceAccessors } from './mode_interface_accessors.ts';
  * @name MODE.onSetup
  * @returns {Object} - this object will be passed to all other life cycle functions
  */
-export class ModeInterface extends ModeInterfaceAccessors {
-	onSetup?(opts?: object): object;
+export abstract class ModeInterface extends ModeInterfaceAccessors {
+	abstract onSetup(opts?: object): object;
 
 	/**
 	 * Triggered when a drag event is detected on the map
