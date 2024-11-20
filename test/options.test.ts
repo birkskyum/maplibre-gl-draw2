@@ -26,7 +26,7 @@ test('Options test', async (t) => {
 			displayControlsDefault: true,
 			boxSelect: true,
 			userProperties: false,
-			styles: Draw.options.styles,
+			styles: Draw.ctx.options.styles,
 			controls: {
 				point: true,
 				line_string: true,
@@ -36,8 +36,8 @@ test('Options test', async (t) => {
 				uncombine_features: true,
 			},
 		};
-		assert.deepEqual(defaultOptions, Draw.options);
-		assert.deepEqual(styleWithSourcesFixture, Draw.options.styles);
+		assert.deepEqual(defaultOptions, Draw.ctx.options);
+		assert.deepEqual(styleWithSourcesFixture, Draw.ctx.options.styles);
 	});
 
 	await t.test('use custom clickBuffer', () => {
@@ -51,7 +51,7 @@ test('Options test', async (t) => {
 			touchBuffer: 25,
 			boxSelect: true,
 			displayControlsDefault: true,
-			styles: Draw.options.styles,
+			styles: Draw.ctx.options.styles,
 			userProperties: false,
 			controls: {
 				point: true,
@@ -63,7 +63,7 @@ test('Options test', async (t) => {
 			},
 		};
 
-		assert.deepEqual(defaultOptions, Draw.options);
+		assert.deepEqual(defaultOptions, Draw.ctx.options);
 	});
 
 	t.test('hide all controls', () => {
@@ -78,7 +78,7 @@ test('Options test', async (t) => {
 			boxSelect: true,
 			displayControlsDefault: false,
 			userProperties: false,
-			styles: Draw.options.styles,
+			styles: Draw.ctx.options.styles,
 			controls: {
 				point: false,
 				line_string: false,
@@ -88,7 +88,7 @@ test('Options test', async (t) => {
 				uncombine_features: false,
 			},
 		};
-		assert.deepEqual(defaultOptions, Draw.options);
+		assert.deepEqual(defaultOptions, Draw.ctx.options);
 	});
 
 	await t.test('hide controls but show point', () => {
@@ -106,7 +106,7 @@ test('Options test', async (t) => {
 			touchBuffer: 25,
 			boxSelect: true,
 			userProperties: false,
-			styles: Draw.options.styles,
+			styles: Draw.ctx.options.styles,
 			controls: {
 				point: true,
 				line_string: false,
@@ -117,7 +117,7 @@ test('Options test', async (t) => {
 			},
 		};
 
-		assert.deepEqual(defaultOptions, Draw.options);
+		assert.deepEqual(defaultOptions, Draw.ctx.options);
 	});
 
 	t.test('hide only point control', () => {
@@ -132,7 +132,7 @@ test('Options test', async (t) => {
 			clickBuffer: 2,
 			userProperties: false,
 			boxSelect: true,
-			styles: Draw.options.styles,
+			styles: Draw.ctx.options.styles,
 			controls: {
 				point: false,
 				line_string: true,
@@ -143,7 +143,7 @@ test('Options test', async (t) => {
 			},
 		};
 
-		assert.deepEqual(defaultOptions, Draw.options);
+		assert.deepEqual(defaultOptions, Draw.ctx.options);
 	});
 
 	await t.test('disable touch interaction', () => {
@@ -158,7 +158,7 @@ test('Options test', async (t) => {
 			displayControlsDefault: true,
 			userProperties: false,
 			boxSelect: true,
-			styles: Draw.options.styles,
+			styles: Draw.ctx.options.styles,
 			controls: {
 				point: true,
 				line_string: true,
@@ -168,8 +168,8 @@ test('Options test', async (t) => {
 				uncombine_features: true,
 			},
 		};
-		assert.deepEqual(defaultOptions, Draw.options);
-		assert.deepEqual(styleWithSourcesFixture, Draw.options.styles);
+		assert.deepEqual(defaultOptions, Draw.ctx.options);
+		assert.deepEqual(styleWithSourcesFixture, Draw.ctx.options.styles);
 	});
 
 	await t.test('custom styles', () => {
@@ -233,6 +233,6 @@ test('Options test', async (t) => {
 			},
 		];
 
-		assert.deepEqual(styles, Draw.options.styles);
+		assert.deepEqual(styles, Draw.ctx.options.styles);
 	});
 });
