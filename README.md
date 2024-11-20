@@ -1,6 +1,6 @@
 # @birkskyum/maplibre-gl-draw
 
-![Build Status](https://github.com/birkskyum/maplibre-gl-draw/actions/workflows/main.yml/badge.svg)
+[![JSR](https://jsr.io/badges/@birkskyum/maplibre-gl-draw)](https://jsr.io/@birkskyum/maplibre-gl-draw)
 
 Adds support for drawing and editing features on [maplibre-gl.js](https://maplibre.org/maplibre-gl-js/docs/) maps. 
 
