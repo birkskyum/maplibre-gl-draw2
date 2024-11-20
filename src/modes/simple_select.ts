@@ -8,9 +8,6 @@ import * as Constants from '../constants.ts';
 import { ModeInterface } from './mode_interface.ts';
 
 export class SimpleSelect extends ModeInterface {
-    constructor(ctx) {
-        super(ctx);
-    }
 
     onSetup(opts) {
         const state = {

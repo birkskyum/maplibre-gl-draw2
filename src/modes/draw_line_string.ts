@@ -6,9 +6,6 @@ import {createVertex} from '../lib/create_vertex.ts';
 import { ModeInterface } from './mode_interface.ts';
 
 export class DrawLineString extends ModeInterface {
-    constructor(ctx) {
-        super(ctx);
-    }
 
     onSetup(opts) {
         opts = opts || {};

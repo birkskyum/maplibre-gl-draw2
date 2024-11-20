@@ -16,9 +16,6 @@ const isVertex = isOfMetaType(Constants.meta.VERTEX);
 const isMidpoint = isOfMetaType(Constants.meta.MIDPOINT);
 
 export class DirectSelect extends ModeInterface {
-	constructor(ctx) {
-		super(ctx);
-	}
 
 	// Internal methods
 	fireUpdate() {

@@ -6,10 +6,7 @@ import { isEventAtCoordinates } from '../lib/is_event_at_coordinates.ts';
 import { createVertex } from '../lib/create_vertex.ts';
 
 export class DrawPolygon extends ModeInterface {
-    constructor(ctx) {
-        super(ctx);
-    }
-
+ 
     onSetup() {
         const polygon = this.newFeature({
             type: Constants.geojsonTypes.FEATURE,

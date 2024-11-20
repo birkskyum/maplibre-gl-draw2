@@ -3,10 +3,7 @@ import * as CommonSelectors from '../lib/common_selectors.ts';
 import * as Constants from '../constants.ts';
 
 export class DrawPoint extends ModeInterface {
-	// Constructor to initialize the mode with context
-	constructor(ctx) {
-		super(ctx);
-	}
+	
 
 	onSetup(opts) {
 		const point = this.newFeature({

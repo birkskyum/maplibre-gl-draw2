@@ -1,12 +1,15 @@
-export let StaticMode = {};
+import { ModeInterface } from './mode_interface.ts';
 
-StaticMode.onSetup = function () {
-	this.setActionableState(); // default actionable state is false for all actions
-	return {};
-};
+export class StaticMode extends ModeInterface {
+	onSetup() {
+		this.setActionableState(); // default actionable state is false for all actions
+		return {};
+	}
 
-StaticMode.toDisplayFeatures = function (state, geojson, display) {
-	display(geojson);
-};
+	toDisplayFeatures(state, geojson, display) {
+		display(geojson);
+	}
+}
 
-
+// For backwards compatibility with the existing mode system
+export default StaticMode;
