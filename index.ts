@@ -28,12 +28,12 @@ export class MapLibreDraw implements IControl {
 	static readonly lib = lib;
 
 	private ctx: DrawContext;
-	private setupApi: any;
+	private setupApi: DrawApi;
 	private controlContainer: any = null;
 	private mapLoadedInterval: any = null;
 	private boxZoomInitial: boolean = false;
 
-	constructor(options: any = {}) {
+	constructor(options: MapLibreDrawOptions = {}) {
 		this.ctx = new DrawContext(options);
 		this.setupApi = new DrawApi(this.ctx);
 		this.ctx.api = this.setupApi;
