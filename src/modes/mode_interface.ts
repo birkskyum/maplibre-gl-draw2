@@ -6,8 +6,8 @@ import { ModeInterfaceAccessors } from './mode_interface_accessors.ts';
  * @name MODE.onSetup
  * @returns {Object} - this object will be passed to all other life cycle functions
  */
-export abstract class ModeInterface extends ModeInterfaceAccessors {
-	abstract onSetup(opts?: object): object;
+export class ModeInterface extends ModeInterfaceAccessors {
+	onSetup?(opts?: object): object;
 
 	/**
 	 * Triggered when a drag event is detected on the map
@@ -141,5 +141,5 @@ export abstract class ModeInterface extends ModeInterfaceAccessors {
 	 * @param geojson {Object} - a geojson being evaluated. To render, pass to `display`.
 	 * @param display {Function} - all geojson objects passed to this be rendered onto the map
 	 */
-	abstract toDisplayFeatures(state: object, geojson: object, display: Function): void;
+	toDisplayFeatures?(state: object, geojson: object, display: Function): void;
 }
