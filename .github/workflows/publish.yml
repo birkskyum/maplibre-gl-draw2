@@ -23,5 +23,5 @@ jobs:
       - name: Install Deps
         run: deno i
 
-      - uses: Publish
-      - run: deno publish
+      - name: Publish
+        run: deno publish
