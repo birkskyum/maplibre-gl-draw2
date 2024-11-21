@@ -16,6 +16,13 @@ import type { MapLibreDrawOptions, IDrawContext } from "./types.ts";
 import { setupOptions } from "./setup.ts";
 import type  {IControl, Map as MapLibreMap} from "maplibre-gl";
 import type {MapMouseEvent} from './events.ts'
+
+
+/**
+ * Represents the drawing context for MapLibre GL Draw.
+ * This class is responsible for managing the options and state
+ * required for drawing on a MapLibre map.
+ */
 export class DrawContext implements IDrawContext {
   options: MapLibreDrawOptions;
   map?: MapLibreMap;
@@ -30,6 +37,21 @@ export class DrawContext implements IDrawContext {
   }
 }
 
+
+
+/**
+ * The MapLibreDraw class implements the IControl interface and provides drawing functionalities on a MapLibre map.
+ * It allows adding, removing, and manipulating features on the map, as well as handling various drawing modes.
+ * 
+ * @example
+ * const draw = new MapLibreDraw({ boxSelect: true });
+ * map.addControl(draw);
+ * 
+ * @remarks
+ * This class depends on several internal components such as DrawContext, DrawEvents, DrawUI, and DrawStore.
+ * 
+ * @public
+ */
 export class MapLibreDraw implements IControl {
   static readonly modes = ModeStrings;
   static readonly constants = Constants;
