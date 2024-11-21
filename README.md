@@ -13,15 +13,19 @@ documentation.**
 
 ### Installing
 
-```
-npm install @birkskyum/maplibre-gl-draw
+```sh
+npx jsr add @birkskyum/maplibre-gl-draw
+bunx jsr add @birkskyum/maplibre-gl-draw
+deno add jsr:@birkskyum/maplibre-gl-draw
+pnpm dlx jsr add @birkskyum/maplibre-gl-draw
+yarn dlx jsr add @birkskyum/maplibre-gl-draw
 ```
 
-Draw ships with CSS, make sure you include it in your build.
+MapLibre GL Draw ships with CSS, make sure you include it in your build.
 
 ### Usage in your application
 
-#### JavaScript
+#### TypeScript
 
 **When using modules**
 
