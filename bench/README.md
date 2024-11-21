@@ -23,7 +23,6 @@ Benchmarks are implemented as a function that returns an instance of `Evented`.
 
 ```js
 createBenchmark(options: {
-    accessToken: string;
     createMap: (options: {
         width: number;
         height: number;
