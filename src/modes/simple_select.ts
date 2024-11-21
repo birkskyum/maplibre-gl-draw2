@@ -8,7 +8,7 @@ import * as Constants from "../constants.ts";
 import { ModeInterface } from "./mode_interface.ts";
 import { ModeStrings } from "../constants/modes.ts";
 import type { MultiFeat } from "../feature_types/multi_feature.ts";
-import type Point from "@mapbox/point-geometry";
+import type Point from "@birkskyum/point-geometry";
 import type { PointLike } from "maplibre-gl";
 
 export class SimpleSelect extends ModeInterface {

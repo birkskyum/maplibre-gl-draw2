@@ -1,6 +1,6 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import Point from "@mapbox/point-geometry";
+import Point from "@birkskyum/point-geometry";
 import { mouseEventPoint } from "../src/lib/mouse_event_point.ts";
 
 test("mouseEventPoint", () => {

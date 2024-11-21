@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.0.13
+
+- Use typescript refactored point-geometry https://jsr.io/@birkskyum/point-geometry
+
 ## 2.0.3
 
 - Port to TypeScript, and use MapLibre GL JS
