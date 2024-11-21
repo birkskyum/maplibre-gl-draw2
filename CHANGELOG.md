@@ -1,6 +1,6 @@
 # Changelog
 
-## 2.0.0
+## 2.0.3
 
 - Port to TypeScript, and use MapLibre GL JS
 
