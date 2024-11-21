@@ -44,13 +44,7 @@ import "@birkskyum/maplibre-gl-draw/dist/maplibre-gl-draw.css";
 
 ### Typescript
 
-Typescript definition files are available as part of the
-[DefinitelyTyped](https://github.com/DefinitelyTyped/DefinitelyTyped/tree/master/types/mapbox__maplibre-gl-draw)
-package.
-
-```
-npm install @types/mapbox__maplibre-gl-draw
-```
+The entire library is written in typescript
 
 ### Example usage
 
