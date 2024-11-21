@@ -1,6 +1,11 @@
 
 
-
+ /**
+   * By default MapLibreDraw ships with a few modes. These modes aim to cover the
+   * basic needed functionally for MapLibreDraw to create the core GeoJSON feature
+   * types. Along with these, MapLibreDraw also support scustom modes.
+   * [Click here for more details](https://github.com/birkskyum/maplibre-gl-draw/blob/main/docs/MODES.md).
+   */
 export const ModeStrings = {
 
   /**
@@ -13,12 +18,7 @@ export const ModeStrings = {
    * or exits `direct_select` mode.
    */
   SIMPLE_SELECT: "simple_select",
-  /**
-   * By default MapLibreDraw ships with a few modes. These modes aim to cover the
-   * basic needed functionally for MapLibreDraw to create the core GeoJSON feature
-   * types. Along with these, MapLibreDraw also support scustom modes.
-   * [Click here for more details](https://github.com/birkskyum/maplibre-gl-draw/blob/main/docs/MODES.md).
-   */
+  
   /**
    * Lets you draw a LineString feature.
    */
