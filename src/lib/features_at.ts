@@ -24,7 +24,7 @@ export const featuresAt = {
 
 function featuresAtClick(
   event: MapMouseEvent,
-  bbox: BBox | null,
+  bbox: [PointLike, PointLike] | undefined,
   ctx: DrawContext,
 ): Feature[] {
   return featuresAtHandler(event, bbox, ctx, ctx.options.clickBuffer);
@@ -32,7 +32,7 @@ function featuresAtClick(
 
 function featuresAtTouch(
   event: MapTouchEvent,
-  bbox: BBox | null,
+  bbox: [PointLike, PointLike] | undefined,
   ctx: DrawContext,
 ): Feature[] {
   return featuresAtHandler(event, bbox, ctx, ctx.options.touchBuffer);
@@ -40,7 +40,7 @@ function featuresAtTouch(
 
 function featuresAtHandler(
   event,
-  bbox: BBox | [PointLike, PointLike] | null,
+  bbox: [PointLike, PointLike] | undefined,
   ctx: DrawContext,
   buffer: number = 0,
 ) {

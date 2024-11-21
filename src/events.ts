@@ -251,7 +251,7 @@ export class DrawEvents {
       time: new Date().getTime(),
       point: event.point,
     };
-    const target = featuresAt.touch(event, null, this.ctx)[0];
+    const target = featuresAt.touch(event, undefined, this.ctx)[0];
     event.featureTarget = target;
     this.currentMode.touchstart(event);
   }
@@ -266,7 +266,7 @@ export class DrawEvents {
     event.originalEvent.preventDefault();
     if (!this.ctx.options.touchEnabled) return;
 
-    const target = featuresAt.touch(event, null, this.ctx)[0];
+    const target = featuresAt.touch(event, undefined, this.ctx)[0];
     event.featureTarget = target;
     if (
       isTap(this.touchStartInfo, {

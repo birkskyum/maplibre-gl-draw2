@@ -157,7 +157,7 @@ export class MapLibreDraw implements IControl {
   }
 
   public getFeatureIdsAt(point: { x: number; y: number }): string[] {
-    const features = featuresAt.click({ point } as MapMouseEvent, null, this.ctx);
+    const features = featuresAt.click({ point } as MapMouseEvent, undefined, this.ctx);
     return features.map((feature) => feature.properties?.id);
   }
 

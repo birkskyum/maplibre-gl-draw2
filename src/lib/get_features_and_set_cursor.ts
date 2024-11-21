@@ -9,7 +9,7 @@ export function getFeatureAtAndSetCursors(
   event: MapMouseEvent,
   ctx: DrawContext,
 ): Feature {
-  const features: Feature[] = featuresAt.click(event, null, ctx);
+  const features: Feature[] = featuresAt.click(event, undefined, ctx);
   const classes: { mode?: string | null | undefined; feature?: string | null | undefined; mouse?: string | null | undefined; } = {
     mouse: Constants.cursors.NONE,
   };
