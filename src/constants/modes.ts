@@ -16,8 +16,8 @@ export const ModeStrings = {
   /**
    * By default MapLibreDraw ships with a few modes. These modes aim to cover the
    * basic needed functionally for MapLibreDraw to create the core GeoJSON feature
-   * types. Along with these, MapLibreDraw also supports
-   * [custom modes. Click here for more details](https://github.com/maplibre/maplibre-gl-draw/blob/main/docs/MODES.md).
+   * types. Along with these, MapLibreDraw also support scustom modes.
+   * [Click here for more details](https://github.com/birkskyum/maplibre-gl-draw/blob/main/docs/MODES.md).
    */
   /**
    * Lets you draw a LineString feature.
