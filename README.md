@@ -8,7 +8,7 @@ Adds support for drawing and editing features on
 **Requires [maplibre-gl-js](https://github.com/birkskyum/maplibre-gl-js).**
 
 **If you are developing with `maplibre-gl-draw`, see
-[API.md](https://github.com/mapbox/maplibre-gl-draw/blob/main/docs/API.md) for
+[API.md](https://github.com/birkskyum/maplibre-gl-draw/blob/main/docs/API.md) for
 documentation.**
 
 ### Installing
@@ -74,24 +74,24 @@ map.on("load", function () {
 ### Enhancements and New Interactions
 
 For additional functionality
-[check out our list of custom modes](https://github.com/mapbox/maplibre-gl-draw/blob/main/docs/MODES.md#available-custom-modes).
+[check out our list of custom modes](https://github.com/birkskyum/maplibre-gl-draw/blob/main/docs/MODES.md#available-custom-modes).
 
 MapLibre Draw accepts functionality changes after the functionality has been
 proven out via a
-[custom mode](https://github.com/maplibre/maplibre-gl-draw/blob/main/docs/MODES.md#creating-modes-for-maplibre-draw).
+[custom mode](https://github.com/birkskyum/maplibre-gl-draw/blob/main/docs/MODES.md#creating-modes-for-maplibre-draw).
 This lets users experiment and validate their mode before entering a review
 process, hopefully promoting innovation. When you write a custom mode, please
 open a PR adding it to our
-[list of custom modes](https://github.com/maplibre/maplibre-gl-draw/blob/main/docs/MODES.md#available-custom-modes).
+[list of custom modes](https://github.com/birkskyum/maplibre-gl-draw/blob/main/docs/MODES.md#available-custom-modes).
 
 ### Developing and testing
 
 Install dependencies, build the source files and crank up a server via:
 
 ```
-git clone git@github.com:mapbox/maplibre-gl-draw.git
+git clone git@github.com:birkskyum/maplibre-gl-draw.git
 npm ci
-npm start & open "http://localhost:9967/debug/?access_token=<token>"
+npm start & open "http://localhost:9967/debug/"
 ```
 
 ### Testing
@@ -102,27 +102,12 @@ npm run test
 
 ### Publishing
 
-To GitHub and NPM:
+Published to JSR automatically, when the version in deno.json is bumped on main thread
 
-```
-npm version (major|minor|patch)
-git push --tags
-git push
-npm publish
-```
 
-To CDN:
+### Examples
 
-```
-# make sure you are authenticated for AWS
-git checkout v{x.y.z}
-npm ci
-npm run prepublish
-aws s3 cp --recursive --acl public-read dist s3://mapbox-gl-js/plugins/maplibre-gl-draw/v{x.y.z}
-```
-
-Update the version number in
-[the GL JS example](https://github.com/birkskyum/maplibre-gl-js/blob/publisher-production/docs/pages/example/maplibre-gl-draw.html).
+[the GL JS example (WIP)](https://github.com/birkskyum/maplibre-gl-js/blob/publisher-production/docs/pages/example/maplibre-gl-draw.html).
 
 ### Naming actions
 

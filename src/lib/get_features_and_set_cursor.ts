@@ -1,6 +1,5 @@
 import { featuresAt } from "./features_at.ts";
 import * as Constants from "../constants.ts";
-import type { Feat } from "../feature_types/feature.ts";
 import type { MapMouseEvent } from "../events.ts";
 import type { DrawContext } from ".././index.ts";
 import type { Feature } from "geojson";
