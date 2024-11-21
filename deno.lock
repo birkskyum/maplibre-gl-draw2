@@ -4,9 +4,9 @@
     "npm:@biomejs/biome@1.9.4": "1.9.4",
     "npm:@jsr/birkskyum__geojson-area@^1.0.2": "1.0.2",
     "npm:@jsr/birkskyum__geojson-normalize@^1.0.3": "1.0.3",
-    "npm:@jsr/birkskyum__point-geometry@^1.1.1": "1.1.1",
     "npm:@mapbox/cloudfriend@^8.2.0": "8.2.0",
     "npm:@mapbox/mapbox-gl-geocoder@^5.0.3": "5.0.3",
+    "npm:@mapbox/point-geometry@^1.1.0": "1.1.0",
     "npm:@rollup/plugin-commonjs@^28.0.1": "28.0.1_rollup@4.27.3_picomatch@4.0.2",
     "npm:@rollup/plugin-json@^6.1.0": "6.1.0_rollup@4.27.3",
     "npm:@rollup/plugin-node-resolve@^15.3.0": "15.3.0_rollup@4.27.3",
@@ -192,9 +192,6 @@
         "@types/geojson"
       ]
     },
-    "@jsr/birkskyum__point-geometry@1.1.1": {
-      "integrity": "sha512-84Qe40LYGgmQu9jEmp+ma0dybSa3C9nEIIi2lKBWMHzMipHkhZhBzVlO0dj496TIzZEEbBRJceW8ymvofRgkjQ=="
-    },
     "@mapbox/cloudfriend@8.2.0": {
       "integrity": "sha512-9hw8OjddquY7aj+nA4F4jmNVs4LQ/WuW0YqSVhTrHQN9VW12Czs47RzHMaN4px9f3T1T3q1CszXObuBrb5xXvw==",
       "dependencies": [
@@ -254,6 +251,9 @@
     "@mapbox/point-geometry@0.1.0": {
       "integrity": "sha512-6j56HdLTwWGO0fJPlrZtdU/B13q8Uwmo18Ck2GnGgN9PCFyKTZ3UbXeEdRFh18i9XQ92eH2VdtpJHpBD3aripQ=="
     },
+    "@mapbox/point-geometry@1.1.0": {
+      "integrity": "sha512-YGcBz1cg4ATXDCM/71L9xveh4dynfGmcLDqufR+nQQy3fKwsAZsWd/x4621/6uJaeB9mwOHE6hPeDgXz9uViUQ=="
+    },
     "@mapbox/polyline@1.2.1": {
       "integrity": "sha512-sn0V18O3OzW4RCcPoUIVDWvEGQaBNH9a0y5lgqrf5hUycyw1CzrhEoxV5irzrMNXKCkw1xRsZXcaVbsVZggHXA==",
       "dependencies": [
@@ -269,7 +269,7 @@
     "@mapbox/vector-tile@1.3.1": {
       "integrity": "sha512-MCEddb8u44/xfQ3oD+Srl/tNcQoqTw3goGk2oLsrFxOTc3dUp+kAnby3PvAeeBYSMSjSPD1nd1AJA6W49WnoUw==",
       "dependencies": [
-        "@mapbox/point-geometry"
+        "@mapbox/point-geometry@0.1.0"
       ]
     },
     "@mapbox/whoots-js@3.1.0": {
@@ -1570,7 +1570,7 @@
       "dependencies": [
         "@mapbox/geojson-rewind",
         "@mapbox/jsonlint-lines-primitives",
-        "@mapbox/point-geometry",
+        "@mapbox/point-geometry@0.1.0",
         "@mapbox/tiny-sdf",
         "@mapbox/unitbezier",
         "@mapbox/vector-tile",
@@ -2409,7 +2409,7 @@
     "vt-pbf@3.1.3": {
       "integrity": "sha512-2LzDFzt0mZKZ9IpVF2r69G9bXaP2Q2sArJCmcCgvfTdCCZzSyz4aCLoQyUilu37Ll56tCblIZrXFIjNUpGIlmA==",
       "dependencies": [
-        "@mapbox/point-geometry",
+        "@mapbox/point-geometry@0.1.0",
         "@mapbox/vector-tile",
         "pbf"
       ]
@@ -2503,9 +2503,9 @@
         "npm:@biomejs/biome@1.9.4",
         "npm:@jsr/birkskyum__geojson-area@^1.0.2",
         "npm:@jsr/birkskyum__geojson-normalize@^1.0.3",
-        "npm:@jsr/birkskyum__point-geometry@^1.1.1",
         "npm:@mapbox/cloudfriend@^8.2.0",
         "npm:@mapbox/mapbox-gl-geocoder@^5.0.3",
+        "npm:@mapbox/point-geometry@^1.1.0",
         "npm:@rollup/plugin-commonjs@^28.0.1",
         "npm:@rollup/plugin-json@^6.1.0",
         "npm:@rollup/plugin-node-resolve@^15.3.0",
