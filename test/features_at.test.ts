@@ -90,7 +90,7 @@ function addLayers(ctx) {
 }
 
 /**
- * Mock context with a simplified mapbox-gl-js map (including some source/style/layer interactions)
+ * Mock context with a simplified maplibre-gl map (including some source/style/layer interactions)
  */
 function createMockContext() {
   const _layers = {};

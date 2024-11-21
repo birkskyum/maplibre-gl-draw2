@@ -117,21 +117,21 @@ export abstract class ModeInterface extends ModeInterfaceAccessors {
   onStop?(state: object): void;
 
   /**
-   * Triggered when [draw.trash()](https://github.com/mapbox/maplibre-gl-draw/blob/main/API.md#trash-draw) is called.
+   * Triggered when [draw.trash()](https://github.com/birkskyum/maplibre-gl-draw/blob/main/API.md#trash-draw) is called.
    * @name MODE.onTrash
    * @param state {Object} - a mutable state object created by onSetup
    */
   onTrash?(state: object): void;
 
   /**
-   * Triggered when [draw.combineFeatures()](https://github.com/mapbox/maplibre-gl-draw/blob/main/API.md#combinefeatures-draw) is called.
+   * Triggered when [draw.combineFeatures()](https://github.com/birkskyum/maplibre-gl-draw/blob/main/API.md#combinefeatures-draw) is called.
    * @name MODE.onCombineFeature
    * @param state {Object} - a mutable state object created by onSetup
    */
   onCombineFeature?(state: object): void;
 
   /**
-   * Triggered when [draw.uncombineFeatures()](https://github.com/mapbox/maplibre-gl-draw/blob/main/API.md#uncombinefeatures-draw) is called.
+   * Triggered when [draw.uncombineFeatures()](https://github.com/birkskyum/maplibre-gl-draw/blob/main/API.md#uncombinefeatures-draw) is called.
    * @name MODE.onUncombineFeature
    * @param state {Object} - a mutable state object created by onSetup
    */
@@ -139,7 +139,7 @@ export abstract class ModeInterface extends ModeInterfaceAccessors {
 
   /**
    * Triggered per feature on render to convert raw features into set of features for display on the map
-   * See [styling draw](https://github.com/mapbox/maplibre-gl-draw/blob/main/API.md#styling-draw) for information about what geojson properties Draw uses as part of rendering.
+   * See [styling draw](https://github.com/birkskyum/maplibre-gl-draw/blob/main/API.md#styling-draw) for information about what geojson properties Draw uses as part of rendering.
    * @name MODE.toDisplayFeatures
    * @param state {Object} - a mutable state object created by onSetup
    * @param geojson {Object} - a geojson being evaluated. To render, pass to `display`.

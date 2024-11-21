@@ -6,10 +6,6 @@ Benchmarks help us catch performance regressions and improve performance.
 
 Start the benchmark server
 
-```bash
-MAPBOX_ACCESS_TOKEN={YOUR MAPBOX ACCESS TOKEN} npm run start-bench
-```
-
 Open a benchmark runner page
 
 - http://localhost:9967/bench/
@@ -46,7 +42,7 @@ Fire the `log` event to report benchmark progress to the user.
 ```js
 {
   message: string;
-  color: string = "blue"; // name of a Mapbox base color https://mapbox.com/base/styling/color
+  color: string = "blue"; 
 }
 ```
 

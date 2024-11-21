@@ -283,19 +283,6 @@ export class SimpleSelect extends ModeInterface {
   }
 
 
-  // displayControlsDefault?: boolean | undefined;
-  // keybindings?: boolean | undefined;
-  // touchEnabled?: boolean | undefined;
-  // boxSelect?: boolean | undefined;
-  // clickBuffer?: number | undefined;
-  // touchBuffer?: number | undefined;
-  // controls?: MapboxDrawControls | undefined;
-  // styles?: object[] | undefined;
-  // modes?: { [modeKey: string]: DrawCustomMode } | undefined;
-  // defaultMode?: string | undefined;
-  // userProperties?: boolean | undefined;
-
-
   override onTouchEnd(state: {dragMoving: boolean, boxSelecting: boolean, boxSelectStartLocation: Point}, e) {
     if (state.dragMoving) {
       this.fireUpdate();
