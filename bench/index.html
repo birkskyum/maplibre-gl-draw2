@@ -10,11 +10,9 @@
       href="https://api.mapbox.com/mapbox-assembly/v1.5.1/assembly.min.css"
       rel="stylesheet"
     >
-    <link
-      href="https://unpkg.com/maplibre-gl@^4.7.1/dist/maplibre-gl.css"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="/dist/maplibre-gl-draw.css" />
+    <script src="https://unpkg.com/maplibre-gl@^4.7.1/dist/maplibre-gl.js"></script>
+    <link href="https://unpkg.com/maplibre-gl@^4.7.1/dist/maplibre-gl.css" rel="stylesheet" />
+    
 
     <style>
       #meter {
@@ -54,10 +52,16 @@
     <div id="tests"></div>
     <div id="logs"></div>
 
-    <script
-      src="https://unpkg.com/maplibre-gl@^4.7.1/dist/maplibre-gl.js"
-    ></script>
-    <script src="/dist/maplibre-gl-draw-unminified.js"></script>
-    <script src="/dist/bench.js"></script>
+    
+
+    <script type="module">
+
+      import * as MapLibreDraw  from "/dist/maplibre-gl-draw.js";
+      console.log(MapLibreDraw.MapLibreDraw)
+      import "/dist/maplibre-gl-draw.css";
+    </script>
+    
+    <script type="module" src="./index.ts"></script>
+    
   </body>
 </html>

@@ -1,51 +1,44 @@
 /* global maplibregl, MapLibreDraw */
+
+
+
+
 try {
-  main();
+  await main();
 } catch (err) {
   log("red", err.toString());
   throw err;
 }
 
-function main() {
+async function main() {
   const benchmarks = {
-    simple_select_small: require("./tests/simple_select_small").Benchmark,
-    simple_select_large: require("./tests/simple_select_large").Benchmark,
-    simple_select_large_two_maps:
-      require("./tests/simple_select_large_two_maps").Benchmark,
-    simple_select_large_zoomed:
-      require("./tests/simple_select_large_zoomed").Benchmark,
+    simple_select_small: (await import("./tests/simple_select_small")).Benchmark,
+    simple_select_large: (await import("./tests/simple_select_large")).Benchmark,
+    simple_select_large_two_maps: (await import("./tests/simple_select_large_two_maps")).Benchmark,
+    simple_select_large_zoomed: (await import("./tests/simple_select_large_zoomed")).Benchmark,
 
-    direct_select_small: require("./tests/direct_select_small").Benchmark,
-    direct_select_small_zoomed:
-      require("./tests/direct_select_small_zoomed").Benchmark,
-    direct_select_large: require("./tests/direct_select_large").Benchmark,
-    direct_select_large_zoomed:
-      require("./tests/direct_select_large_zoomed").Benchmark,
+    direct_select_small: (await import("./tests/direct_select_small")).Benchmark,
+    direct_select_small_zoomed: (await import("./tests/direct_select_small_zoomed")).Benchmark,
+    direct_select_large: (await import("./tests/direct_select_large")).Benchmark,
+    direct_select_large_zoomed: (await import("./tests/direct_select_large_zoomed")).Benchmark,
 
-    draw_line_string_small: require("./tests/draw_line_string_small").Benchmark,
-    draw_line_string_large: require("./tests/draw_line_string_large").Benchmark,
-    draw_line_string_large_zoomed:
-      require("./tests/draw_line_string_large_zoomed").Benchmark,
+    draw_line_string_small: (await import("./tests/draw_line_string_small")).Benchmark,
+    draw_line_string_large: (await import("./tests/draw_line_string_large")).Benchmark,
+    draw_line_string_large_zoomed: (await import("./tests/draw_line_string_large_zoomed")).Benchmark,
 
-    draw_polygon_small: require("./tests/draw_polygon_small").Benchmark,
-    draw_polygon_large: require("./tests/draw_polygon_large").Benchmark,
-    draw_polygon_large_zoomed:
-      require("./tests/draw_polygon_large_zoomed").Benchmark,
+    draw_polygon_small: (await import("./tests/draw_polygon_small")).Benchmark,
+    draw_polygon_large: (await import("./tests/draw_polygon_large")).Benchmark,
+    draw_polygon_large_zoomed: (await import("./tests/draw_polygon_large_zoomed")).Benchmark,
 
-    draw_land_polygon_small:
-      require("./tests/draw_land_polygon_small").Benchmark,
-    draw_land_polygon_large:
-      require("./tests/draw_land_polygon_large").Benchmark,
+    draw_land_polygon_small: (await import("./tests/draw_land_polygon_small")).Benchmark,
+    draw_land_polygon_large: (await import("./tests/draw_land_polygon_large")).Benchmark,
 
-    draw_urban_areas_polygon_small:
-      require("./tests/draw_urban_areas_polygon_small").Benchmark,
-    draw_urban_areas_polygon_large:
-      require("./tests/draw_urban_areas_polygon_large").Benchmark,
+    draw_urban_areas_polygon_small: (await import("./tests/draw_urban_areas_polygon_small")).Benchmark,
+    draw_urban_areas_polygon_large: (await import("./tests/draw_urban_areas_polygon_large")).Benchmark,
 
-    draw_point_small: require("./tests/draw_point_small").Benchmark,
-    draw_point_large: require("./tests/draw_point_large").Benchmark,
-    draw_point_large_zoomed:
-      require("./tests/draw_point_large_zoomed").Benchmark,
+    draw_point_small: (await import("./tests/draw_point_small")).Benchmark,
+    draw_point_large: (await import("./tests/draw_point_large")).Benchmark,
+    draw_point_large_zoomed: (await import("./tests/draw_point_large_zoomed")).Benchmark,
   };
 
   const benchmarkName = location.hash.substr(1);

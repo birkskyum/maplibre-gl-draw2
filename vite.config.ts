@@ -1,8 +1,8 @@
 export default {
-  root: "debug/",
-  base: "/debug/",
+  root: ".",
+  base: ".",
   server: {
-    host: "0.0.0.0",
+    host: "localhost",
     port: 9967,
     strictPort: true,
   },

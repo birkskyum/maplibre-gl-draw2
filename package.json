@@ -34,9 +34,7 @@
     "build-min": "rollup -c --environment MINIFY:true",
     "prepublishOnly": "run-s build build-min",
     "watch": "rollup -c --watch",
-    "watch-bench": "rollup -c bench/rollup.config.js --watch",
     "start-server": "vite --config vite.config.js",
-    "start-bench": "run-p watch watch-bench \"start-server --base . .\"",
     "start": "run-p start-server"
   },
   "devDependencies": {
