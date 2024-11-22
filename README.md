@@ -5,11 +5,12 @@
 Adds support for drawing and editing features on
 [maplibre-gl.js](https://maplibre.org/maplibre-gl-js/docs/) maps.
 
-**Requires [maplibre-gl-js](https://github.com/maplibre/maplibre-gl-js).**
+<img width="887" alt="Screenshot 2024-11-23 at 00 16 59" src="https://github.com/user-attachments/assets/12496caa-c8f3-451d-8062-2a3a1a1ea44f">
 
-**If you are developing with `maplibre-gl-draw`, see
+
+See
 [API.md](https://github.com/birkskyum/maplibre-gl-draw/blob/main/docs/API.md) for
-documentation.**
+documentation.
 
 ### Installing
 
