@@ -8,7 +8,7 @@ import type { Map as MapLibre, PointLike } from "maplibre-gl";
 import * as Constants from "../constants.ts";
 import type { Feature, GeoJsonProperties, LineString, Point, Polygon } from "geojson";
 import type { DrawStore } from "../store.ts";
-import type { MapLibreDrawOptions } from ".././index.ts";
+import type { MapLibreDrawOptions } from "../types.ts";
 import type{ Feat } from "../feature_types/feature.ts";
 
 type DrawActionableState = {

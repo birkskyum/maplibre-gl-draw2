@@ -397,5 +397,3 @@ export class MapLibreDraw implements IControl {
     return this;
   }
 }
-
-export { ModeStrings, type MapLibreDrawOptions };
