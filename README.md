@@ -111,7 +111,7 @@ Published to JSR automatically, when the version in deno.json is bumped on main 
 
 ### Examples
 
-[the GL JS example (WIP)](https://github.com/birkskyum/maplibre-gl-js/blob/publisher-production/docs/pages/example/maplibre-gl-draw.html).
+[the GL JS example](https://codepen.io/birkskyum-1471370946/pen/QWeebqa).
 
 ### Naming actions
 
