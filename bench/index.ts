@@ -1,6 +1,7 @@
 /* global maplibregl, MapLibreDraw */
 
-
+import {MapLibreDraw} from "../src/index.ts";
+import "/dist/maplibre-gl-draw.css";
 
 
 try {
