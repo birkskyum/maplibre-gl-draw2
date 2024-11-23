@@ -76,46 +76,46 @@ with Draw's internal state see [Setters & Getters](#setters-and-getters).
 
 _please feel free to add your own modes to this list via a PR_
 
-- [Static Mode](https://github.com/mapbox/maplibre-gl-draw-static-mode): Turn
-  off interactions
-- [Cut/Split Line Mode](https://github.com/BrunoSalerno/maplibre-gl-draw-cut-line-mode):
+- [Cut/Split Line Mode](https://github.com/BrunoSalerno/mapbox-gl-draw-cut-line-mode):
   Cut/split lineStrings functionality
-- [Freehand Mode](https://github.com/bemky/maplibre-gl-draw-freehand-mode): Add
+- [Freehand Mode](https://github.com/bemky/mapbox-gl-draw-freehand-mode): Add
   Freehand functionality to draw polygon mode
-- [Rotate Mode](https://github.com/mapstertech/maplibre-gl-draw-rotate-mode):
+- [Rotate Mode](https://github.com/mapstertech/mapbox-gl-draw-rotate-mode):
   Add ability to Rotate GL Draw features
 - [Radius Mode](https://gist.github.com/chriswhong/694779bc1f1e5d926e47bab7205fa559):
   Draws a polygon circle based on a center vertex and radius line
-- [Rectangle Mode](https://github.com/edgespatial/maplibre-gl-draw-rectangle-mode)
-- [Circle Mode](https://github.com/iamanvesh/maplibre-gl-draw-circle)
-- [Assisted Rectangle Mode](https://github.com/geostarters/maplibre-gl-draw-assisted-rectangle-mode)
-- [Rotate/Scale Rectangle Mode](https://github.com/drykovanov/maplibre-gl-draw-rotate-scale-rect-mode)
-- [Rectangle Restrict Area Mode](https://github.com/dqunbp/maplibre-gl-draw-rectangle-restrict-area):
+- [Rectangle Mode](https://github.com/edgespatial/mapbox-gl-draw-rectangle-mode)
+- [Circle Mode](https://github.com/iamanvesh/mapbox-gl-draw-circle)
+- [Assisted Rectangle Mode](https://github.com/geostarters/mapbox-gl-draw-assisted-rectangle-mode)
+- [Rotate/Scale Rectangle Mode](https://github.com/drykovanov/mapbox-gl-draw-rotate-scale-rect-mode)
+- [Rectangle Restrict Area Mode](https://github.com/dqunbp/mapbox-gl-draw-rectangle-restrict-area):
   Drawing a rectangle with a limited area
-- [Geodesic Modes](https://github.com/zakjan/maplibre-gl-draw-geodesic): Draw
+- [Geodesic Modes](https://github.com/zakjan/mapbox-gl-draw-geodesic): Draw
   geodesic lines, polygons and circles
-- [Cut/Split Line Mode](https://github.com/ReyhaneMasumi/maplibre-gl-draw-split-line-mode):
+- [Cut/Split Line Mode](https://github.com/ReyhaneMasumi/mapbox-gl-draw-split-line-mode):
   Cut/Split linestrings/Multilinestrings with linestring, point or polygon
-- [Cut Polygon Mode](https://github.com/ReyhaneMasumi/maplibre-gl-draw-cut-polygon-mode):
+- [Cut Polygon Mode](https://github.com/ReyhaneMasumi/mapbox-gl-draw-cut-polygon-mode):
   Cut polygons/Multipolygons with a polygon
-- [Split Polygon Mode](https://github.com/ReyhaneMasumi/maplibre-gl-draw-split-polygon-mode):
+- [Split Polygon Mode](https://github.com/ReyhaneMasumi/mapbox-gl-draw-split-polygon-mode):
   Split polygons/Multipolygons with a linestring
-- [Scale/Rotate Mode](https://github.com/ReyhaneMasumi/maplibre-gl-draw-scale-rotate-mode):
+- [Scale/Rotate Mode](https://github.com/ReyhaneMasumi/mapbox-gl-draw-scale-rotate-mode):
   Scale and Rotate polygons and lines
-- [Waypoint Mode](https://github.com/zakjan/maplibre-gl-draw-waypoint): Allow
+- [Waypoint Mode](https://github.com/zakjan/mapbox-gl-draw-waypoint): Allow
   user to drag vertices only, prevent dragging features
-- [Bezier Curve Mode](https://github.com/Jeff-Numix/maplibre-gl-draw-bezier-curve-mode):
+- [Bezier Curve Mode](https://github.com/Jeff-Numix/mapbox-gl-draw-bezier-curve-mode):
   Draw and edit bezier curves
-- [Snapping Mode](https://github.com/mhsattarian/maplibre-gl-draw-snap-mode):
+- [Snapping Mode](https://github.com/mhsattarian/mapbox-gl-draw-snap-mode):
   Add snapping ability while drawing features
-- [Pinning Mode](https://github.com/mhsattarian/maplibre-gl-draw-pinning-mode):
+- [Pinning Mode](https://github.com/mhsattarian/mapbox-gl-draw-pinning-mode):
   Pin shared coordinates together during edit
-- [Passing Mode](https://github.com/mhsattarian/maplibre-gl-draw-passing-mode):
+- [Passing Mode](https://github.com/mhsattarian/mapbox-gl-draw-passing-mode):
   Add ability to draw features but don't add them
-- [Select Feature Mode](https://github.com/mhsattarian/maplibre-gl-draw-select-mode):
+- [Select Feature Mode](https://github.com/mhsattarian/mapbox-gl-draw-select-mode):
   Select features by click and highlight on hover
-- [Paint Mode](https://github.com/piraveenankirupakaran/maplibre-gl-draw-paint-mode):
+- [Paint Mode](https://github.com/piraveenankirupakaran/mapbox-gl-draw-paint-mode):
   Allows users to paint freestyle on the map
+- [Static Mode](https://github.com/mapbox/mapbox-gl-draw-static-mode): Turn
+  off interactions
 
 ## Life Cycle Functions
 
@@ -254,7 +254,7 @@ such as invalid features
 ### MODE.onTrash
 
 Triggered when
-[draw.trash()](https://github.com/mapbox/maplibre-gl-draw/blob/main/docs/API.md#trash-draw)
+[draw.trash()](https://github.com/birkskyum/maplibre-gl-draw/blob/main/docs/API.md#trash-draw)
 is called.
 
 **Parameters**
@@ -264,7 +264,7 @@ is called.
 ### MODE.onCombineFeature
 
 Triggered when
-[draw.combineFeatures()](https://github.com/mapbox/maplibre-gl-draw/blob/main/docs/API.md#combinefeatures-draw)
+[draw.combineFeatures()](https://github.com/birkskyum/maplibre-gl-draw/blob/main/docs/API.md#combinefeatures-draw)
 is called.
 
 **Parameters**
@@ -274,7 +274,7 @@ is called.
 ### MODE.onUncombineFeature
 
 Triggered when
-[draw.uncombineFeatures()](https://github.com/mapbox/maplibre-gl-draw/blob/main/docs/API.md#uncombinefeatures-draw)
+[draw.uncombineFeatures()](https://github.com/birkskyum/maplibre-gl-draw/blob/main/docs/API.md#uncombinefeatures-draw)
 is called.
 
 **Parameters**
@@ -285,7 +285,7 @@ is called.
 
 Triggered per feature on render to convert raw features into set of features for
 display on the map See
-[styling draw](https://github.com/mapbox/maplibre-gl-draw/blob/main/docs/API.md#styling-draw)
+[styling draw](https://github.com/birkskyum/maplibre-gl-draw/blob/main/docs/API.md#styling-draw)
 for information about what geojson properties Draw uses as part of rendering.
 
 **Parameters**
@@ -309,7 +309,7 @@ Sets Draw's internal selected state
 - `null-null`
   **[Array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array)&lt;DrawFeature>**
   whats selected as a
-  [DrawFeature](https://github.com/mapbox/maplibre-gl-draw/blob/main/src/feature_types/feature.js)
+  [DrawFeature](https://github.com/birkskyum/maplibre-gl-draw/blob/main/src/feature_types/feature.ts)
 
 ### this.setSelectedCoordinates
 
@@ -324,7 +324,7 @@ Sets Draw's internal selected coordinate state
 ### this.getSelected
 
 Get all selected features as a
-[DrawFeature](https://github.com/mapbox/maplibre-gl-draw/blob/main/src/feature_types/feature.js)
+[DrawFeature](https://github.com/birkskyum/maplibre-gl-draw/blob/main/src/feature_types/feature.ts)
 
 Returns
 **[Array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array)&lt;DrawFeature>**
@@ -352,7 +352,7 @@ Returns
 ### this.getFeature
 
 Get a
-[DrawFeature](https://github.com/mapbox/maplibre-gl-draw/blob/main/src/feature_types/feature.js)
+[DrawFeature](https://github.com/birkskyum/maplibre-gl-draw/blob/main/src/feature_types/feature.ts)
 by its id
 
 **Parameters**
@@ -395,7 +395,7 @@ Delete a feature from draw
 ### this.addFeature
 
 Add a
-[DrawFeature](https://github.com/mapbox/maplibre-gl-draw/blob/main/src/feature_types/feature.js)
+[DrawFeature](https://github.com/birkskyum/maplibre-gl-draw/blob/main/src/feature_types/feature.ts)
 to draw. See `this.newFeature` for converting geojson into a DrawFeature
 
 **Parameters**
@@ -413,7 +413,7 @@ Clear all selected coordinates
 ### this.setActionableState
 
 Indicate if the different actions are currently possible with your mode See
-[draw.actionalbe](https://github.com/mapbox/maplibre-gl-draw/blob/main/docs/API.md#drawactionable)
+[draw.actionalbe](https://github.com/birkskyum/maplibre-gl-draw/blob/main/docs/API.md#drawactionable)
 for a list of possible actions. All undefined actions are set to **false** by
 default
 
@@ -476,7 +476,7 @@ Get the features at the location of an event object or in a bbox
 ### this.newFeature
 
 Create a new
-[DrawFeature](https://github.com/mapbox/maplibre-gl-draw/blob/main/src/feature_types/feature.js)
+[DrawFeature](https://github.com/birkskyum/maplibre-gl-draw/blob/main/src/feature_types/feature.ts)
 from geojson
 
 **Parameters**
@@ -488,7 +488,7 @@ Returns **DrawFeature**
 ### this.isInstanceOf
 
 Check is an object is an instance of a
-[DrawFeature](https://github.com/mapbox/maplibre-gl-draw/blob/main/src/feature_types/feature.js)
+[DrawFeature](https://github.com/birkskyum/maplibre-gl-draw/blob/main/src/feature_types/feature.ts)
 
 **Parameters**
 
