@@ -12,30 +12,11 @@ import { StringSet } from "./lib/string_set.ts";
 import type { Feature, FeatureCollection, GeoJsonProperties, Geometry } from "geojson";
 import { ModeStrings } from "./constants/modes.ts";
 import { featureTypes } from "./features.ts";
-import type { MapLibreDrawOptions, IDrawContext } from "./types.ts";
-import { setupOptions } from "./setup.ts";
+import type { MapLibreDrawOptions } from "./types.ts";
+
 import type  {IControl, Map as MapLibreMap} from "maplibre-gl";
 import type {MapMouseEvent} from './events.ts'
-
-
-/**
- * Represents the drawing context for MapLibre GL Draw.
- * This class is responsible for managing the options and state
- * required for drawing on a MapLibre map.
- */
-export class DrawContext implements IDrawContext {
-  options: MapLibreDrawOptions;
-  map?: MapLibreMap;
-  events?: DrawEvents;
-  ui?: DrawUI;
-  container?: HTMLElement;
-  store?: DrawStore;
-  parent?: MapLibreDraw;
-
-  constructor(options: MapLibreDrawOptions) {
-    this.options = setupOptions(options);
-  }
-}
+import { DrawContext } from "./context.ts";
 
 
 

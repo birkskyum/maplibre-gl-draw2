@@ -5,7 +5,7 @@ import { isClick } from "./lib/is_click.ts";
 import { isTap } from "./lib/is_tap.ts";
 import * as Constants from "./constants.ts";
 import { objectToMode } from "./modes/object_to_mode.ts";
-import type { DrawContext } from "./index.ts";
+import type { DrawContext } from "./context.ts";
 import { ModeStrings } from "./constants/modes.ts";
 import type {Point, Feature} from "geojson";
 import { ModeClasses } from "./modes.ts";

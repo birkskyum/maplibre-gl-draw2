@@ -1,4 +1,4 @@
-import type { DrawContext } from "./index.ts";
+import type { DrawContext } from "./context.ts";
 import * as Constants from "./constants.ts";
 import { ModeStrings } from "./constants/modes.ts";
 
