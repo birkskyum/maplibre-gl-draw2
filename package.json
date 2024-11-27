@@ -24,7 +24,6 @@
   ],
   "type": "module",
   "scripts": {
-    "generate-typings": "dts-bundle-generator --export-referenced-types --umd-module-name=MapLibreDraw -o ./dist/maplibre-gl-draw.d.ts ./src/index.ts",
     "lint": "biome lint .",
     "format": "biome format --write",
     "test": "vitest --run",
@@ -54,7 +53,7 @@
     "@types/node": "^22.10.0",
     "@types/sinon": "^17.0.3",
     "@types/wgs84": "^0.0.2",
-    "dts-bundle-generator": "^9.5.1",
+    
     "jsdom": "^25.0.1",
     "maplibre-gl": "^4.7.1",
     "mock-browser": "^0.92.14",
