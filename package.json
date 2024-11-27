@@ -15,6 +15,17 @@
   "bugs": {
     "url": "https://github.com/birkskyum/maplibre-gl-draw/issues"
   },
+  "main": "dist/maplibre-gl-draw.js",
+  "exports": {
+    ".": {
+      "import": "./dist/maplibre-gl-draw.js"
+    }
+  },
+
+  "files": [
+    "dist/*",
+    "src/"
+  ],
   "keywords": [
     "webgl",
     "maplibre",
