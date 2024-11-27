@@ -25,8 +25,7 @@
   "scripts": {
     "lint": "biome lint .",
     "format": "biome format --write",
-    "vitest": "vitest",
-    "test": "node --experimental-strip-types --test --import ./test/mock-browser.ts",
+    "test": "vitest --run",
     "coverage": "node --test --import ./test/mock-browser.js --experimental-test-coverage",
     "build": "rollup -c",
     "build-min": "rollup -c --environment MINIFY:true",
