@@ -17,6 +17,7 @@ import type { MapLibreDrawOptions } from "./types.ts";
 import type  {IControl, Map as MapLibreMap} from "maplibre-gl";
 import type {MapMouseEvent} from './events.ts'
 import { DrawContext } from "./context.ts";
+import { ModeClasses } from "./modes.ts";
 
 
 
@@ -34,7 +35,7 @@ import { DrawContext } from "./context.ts";
  * @public
  */
 export class MapLibreDraw implements IControl {
-  static readonly modes = ModeStrings;
+  static readonly modes = ModeClasses;
   static readonly constants = Constants;
   static readonly lib = lib;
 

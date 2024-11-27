@@ -48,6 +48,12 @@
    * A static mode where no interactions are allowed.
    */
   STATIC: string,
+
+
+  /**
+   * Lets you draw a Rectangle feature.
+   */
+  DRAW_RECTANGLE: string,
 };
 
 
@@ -55,6 +61,7 @@ export const ModeStrings:ModeStringsI = {
   SIMPLE_SELECT: "simple_select",
   DRAW_LINE_STRING: "draw_line_string",
   DRAW_POLYGON: "draw_polygon",
+  DRAW_RECTANGLE: "draw_rectangle",
   DRAW_POINT: "draw_point",
   DIRECT_SELECT: "direct_select",
   STATIC: "static",

@@ -1,6 +1,6 @@
 import { bboxClip } from "@turf/bbox-clip";
 
-import { Evented } from "../../bench/lib/evented.ts";
+import { Evented } from './evented.ts';
 import { interactions } from "../../src/constants.ts";
 
 class MockMap extends Evented {

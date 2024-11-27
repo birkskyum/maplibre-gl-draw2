@@ -26,7 +26,7 @@ export default function ReinitControl() {
     map.on("load", () => {
       // Add Draw to the map if it is inactive
       const addButton = document.getElementById("addBtn");
-      addButton.onclick = function () {
+      addButton!.onclick = function () {
         if (drawIsActive) return;
         drawIsActive = true;
         map.addControl(Draw, "top-right");
@@ -34,7 +34,7 @@ export default function ReinitControl() {
 
       // Remove draw from the map if it is active
       const removeButton = document.getElementById("removeBtn");
-      removeButton.onclick = function () {
+      removeButton!.onclick = function () {
         if (!drawIsActive) return;
         drawIsActive = false;
         map.removeControl(Draw);
@@ -43,7 +43,7 @@ export default function ReinitControl() {
       // Toggle the style between dark and streets
       const flipStyleButton = document.getElementById("flipStyleBtn");
       let currentStyle = "positron-gl-style";
-      flipStyleButton.onclick = function () {
+      flipStyleButton!.onclick = function () {
         const style = currentStyle === "positron-gl-style"
           ? "dark-matter-gl-style"
           : "positron-gl-style";

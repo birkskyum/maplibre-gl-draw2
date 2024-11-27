@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.1.0
+
+- Add draw_rectangle
+
 ## 2.0.13
 
 - Use typescript refactored point-geometry https://jsr.io/@birkskyum/point-geometry

@@ -14,6 +14,9 @@ importers:
       autoprefixer:
         specifier: ^10.4.20
         version: 10.4.20(postcss@8.4.49)
+      mapbox-gl-draw-rectangle-mode:
+        specifier: ^1.0.4
+        version: 1.0.4
       maplibre-gl:
         specifier: ^4.7.1
         version: 4.7.1
@@ -756,6 +759,9 @@ packages:
 
   lru-cache@5.1.1:
     resolution: {integrity: sha512-KpNARQA3Iwv+jTA0utUVVbrh+Jlrr1Fv0e56GGzAFOXN7dk/FviaDW8LHmK52DlcH4WP2n6gI8vN1aesBFgo9w==}
+
+  mapbox-gl-draw-rectangle-mode@1.0.4:
+    resolution: {integrity: sha512-BdF6nwEK2p8n9LQoMPzBO8LhddW1fe+d5vK8HQIei+4VcRnUbKNsEj7Z15FsJxCHzsc2BQKXbESx5GaE8x0imQ==}
 
   maplibre-gl@4.7.1:
     resolution: {integrity: sha512-lgL7XpIwsgICiL82ITplfS7IGwrB1OJIw/pCvprDp2dhmSSEBgmPzYRvwYYYvJGJD7fxUv1Tvpih4nZ6VrLuaA==}
@@ -1765,6 +1771,8 @@ snapshots:
   lru-cache@5.1.1:
     dependencies:
       yallist: 3.1.1
+
+  mapbox-gl-draw-rectangle-mode@1.0.4: {}
 
   maplibre-gl@4.7.1:
     dependencies:

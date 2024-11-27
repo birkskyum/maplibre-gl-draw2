@@ -6,7 +6,7 @@ import { DrawLineString } from "./modes/draw_line_string.ts";
 import { StaticMode } from "./modes/static_mode.ts";
 import { ModeStrings } from "./constants/modes.ts";
 
-export const ModeClasses = {
+export const ModeClasses: Record<string, any> = {
   [ModeStrings.SIMPLE_SELECT]: SimpleSelect,
   [ModeStrings.DIRECT_SELECT]: DirectSelect,
   [ModeStrings.DRAW_POINT]: DrawPoint,

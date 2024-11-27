@@ -5,6 +5,7 @@ import "../../../../dist/maplibre-gl-draw.css";
 import {MapLibreDraw } from "../../../../src/index.ts";
 import { createEffect } from "solid-js";
 import { Button } from "../components/button.tsx";
+import {DrawRectangle} from "../../../../src/modes/draw_rectangle.ts"
 
 
 export default function ReinitControl() {
@@ -19,25 +20,29 @@ export default function ReinitControl() {
     });
     
     const modes = MapLibreDraw.modes;
-    const Draw = new MapLibreDraw({ modes });
+    modes.draw_rectangle = DrawRectangle;
+
+    const Draw = new MapLibreDraw({ 
+      modes
+     });
     map.addControl(Draw, "top-right");
 
     map.on("load", () => {
       // Jump into draw point mode via a custom UI element
-      const startPoint = document.getElementById("start-point");
-      startPoint.onclick = function () {
-        Draw.changeMode("draw_point");
+      const startRectangle = document.getElementById("start-rectangle");
+      startRectangle!.onclick = function () {
+        Draw.changeMode("draw_rectangle");
       };
 
       // Jump into draw line mode via a custom UI element
       const startLine = document.getElementById("start-line");
-      startLine.onclick = function () {
+      startLine!.onclick = function () {
         Draw.changeMode("draw_line_string");
       };
 
       // Jump into draw polygon mode via a custom UI element
       const startPolygon = document.getElementById("start-polygon");
-      startPolygon.onclick = function () {
+      startPolygon!.onclick = function () {
         Draw.changeMode("draw_polygon");
       };
     });
@@ -48,7 +53,7 @@ export default function ReinitControl() {
     <>
       <div id="map" class="h-full"></div>
       <div class="left-2 bottom-2 flex gap-1 absolute">
-        <Button id="start-point">Point</Button>
+        <Button id="start-rectangle">Rectangle</Button>
         <Button id="start-line">Line</Button>
         <Button id="start-polygon">Polygon</Button>
       </div> 

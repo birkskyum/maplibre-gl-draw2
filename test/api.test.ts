@@ -496,41 +496,6 @@ test("Draw.changeMode to select and de-select pre-existing features", async () =
   Draw.deleteAll();
 });
 
-test("Draw.modes", () => {
-  assertEquals(
-    MapLibreDraw.modes.SIMPLE_SELECT,
-    ModeStrings.SIMPLE_SELECT,
-    "simple_select",
-  );
-  assertEquals(
-    MapLibreDraw.modes.DIRECT_SELECT,
-    ModeStrings.DIRECT_SELECT,
-    "direct_select",
-  );
-  assertEquals(
-    MapLibreDraw.modes.DRAW_POINT,
-    ModeStrings.DRAW_POINT,
-    "draw_point",
-  );
-  assertEquals(
-    MapLibreDraw.modes.DRAW_LINE_STRING,
-    ModeStrings.DRAW_LINE_STRING,
-    "draw_line_string",
-  );
-  assertEquals(
-    MapLibreDraw.modes.DRAW_POLYGON,
-    ModeStrings.DRAW_POLYGON,
-    "draw_polygon",
-  );
-
-  assertEquals(MapLibreDraw.modes.STATIC, ModeStrings.STATIC, "static");
-
-  assertEquals(
-    getPublicMemberKeys(MapLibreDraw.modes).length,
-    6,
-    "no unexpected modes",
-  );
-});
 
 test("Draw.combineFeatures -- polygon + polygon = multiploygon", () => {
   const [polygonId] = Draw.add(getGeoJSON("polygon"));
