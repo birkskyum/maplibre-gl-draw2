@@ -1,9 +1,5 @@
 {
   "name": "@birkskyum/maplibre-gl-draw",
-  "version": "1.4.3",
-  "engines": {
-    "node": "^18.0.0 || >=20.0.0"
-  },
   "description": "A drawing component for MapLibre GL JS",
   "author": "Birk Skyum",
   "license": "ISC",
@@ -26,12 +22,7 @@
     "dist/*",
     "src/"
   ],
-  "keywords": [
-    "webgl",
-    "maplibre",
-    "draw",
-    "drawing"
-  ],
+  
   "type": "module",
   "scripts": {
     "lint": "biome lint .",
