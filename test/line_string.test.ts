@@ -1,5 +1,5 @@
 import test from "node:test";
-import assert from "node:assert/strict";
+import {assert, assertEquals, assertNotEquals, assertThrows} from "@std/assert";
 import { spy } from "sinon";
 import { Feat } from "../src/feature_types/feature.ts";
 import { LineStringFeat } from "../src/feature_types/line_string.ts";
@@ -16,58 +16,58 @@ test("LineString constructor and API", () => {
   const lineString = new LineStringFeat(ctx, rawLine);
 
   // Instance members
-  assert.equal(lineString.ctx, ctx, "lineString.ctx");
-  assert.equal(
+  assertEquals(lineString.ctx, ctx, "lineString.ctx");
+  assertEquals(
     lineString.coordinates,
     rawLine.geometry.coordinates,
     "lineString.coordinates",
   );
-  assert.equal(
+  assertEquals(
     lineString.properties,
     rawLine.properties,
     "lineString.properties",
   );
-  assert.equal(lineString.id, rawLine.id, "lineString.id");
-  assert.equal(lineString.type, rawLine.geometry.type, "lineString.type");
-  assert.equal(
+  assertEquals(lineString.id, rawLine.id, "lineString.id");
+  assertEquals(lineString.type, rawLine.geometry.type, "lineString.type");
+  assertEquals(
     getPublicMemberKeys(lineString).length,
     5,
     "no unexpected instance members",
   );
 
   // Prototype members
-  assert.equal(
+  assertEquals(
     typeof LineStringFeat.prototype.isValid,
     "function",
     "lineString.isValid",
   );
-  assert.equal(
+  assertEquals(
     typeof LineStringFeat.prototype.addCoordinate,
     "function",
     "lineString.addCoordinate",
   );
-  assert.equal(
+  assertEquals(
     typeof LineStringFeat.prototype.getCoordinate,
     "function",
     "lineString.getCoordinate",
   );
-  assert.equal(
+  assertEquals(
     typeof LineStringFeat.prototype.removeCoordinate,
     "function",
     "lineString.removeCoordinate",
   );
-  assert.equal(
+  assertEquals(
     typeof LineStringFeat.prototype.updateCoordinate,
     "function",
     "lineString.updateCoordinate",
   );
-  assert.equal(
+  assertEquals(
     Object.getOwnPropertyNames(LineStringFeat.prototype).length,
     6,
     "no unexpected prototype members",
   );
 
-  assert.ok(
+  assert(
     LineStringFeat.prototype instanceof Feat,
     "inherits from Feature",
   );
@@ -79,7 +79,7 @@ test("LineString#isValid", () => {
     createMockFeatureContext(),
     validRawLine,
   );
-  assert.equal(validLineString.isValid(), true, "returns true when valid");
+  assertEquals(validLineString.isValid(), true, "returns true when valid");
 
   const invalidRawLineA = createFeature("line");
   invalidRawLineA.geometry.coordinates = [3];
@@ -87,7 +87,7 @@ test("LineString#isValid", () => {
     createMockFeatureContext(),
     invalidRawLineA,
   );
-  assert.equal(
+  assertEquals(
     invalidLineStringA.isValid(),
     false,
     "returns false when there is one coordinate",
@@ -99,7 +99,7 @@ test("LineString#isValid", () => {
     createMockFeatureContext(),
     invalidRawLineB,
   );
-  assert.equal(
+  assertEquals(
     invalidLineStringB.isValid(),
     false,
     "returns false when there are no coordinates",
@@ -116,8 +116,8 @@ test("LineString#addCoordinate", () => {
   const changedSpy = spy(lineString, "changed");
 
   lineString.addCoordinate(1, 5, 6);
-  assert.equal(changedSpy.callCount, 1, "called lineString.changed()");
-  assert.deepEqual(
+  assertEquals(changedSpy.callCount, 1, "called lineString.changed()");
+  assertEquals(
     lineString.getCoordinates(),
     [
       [1, 2],
@@ -128,7 +128,7 @@ test("LineString#addCoordinate", () => {
   );
 
   lineString.addCoordinate("0", 7, 8);
-  assert.deepEqual(
+  assertEquals(
     lineString.getCoordinates(),
     [
       [7, 8],
@@ -148,8 +148,8 @@ test("LineString#getCoordinate", () => {
   ];
   const lineString = new LineStringFeat(createMockFeatureContext(), rawLine);
 
-  assert.deepEqual(lineString.getCoordinate(0), [1, 2], "number path works");
-  assert.deepEqual(lineString.getCoordinate("1"), [3, 4], "string path works");
+  assertEquals(lineString.getCoordinate(0), [1, 2], "number path works");
+  assertEquals(lineString.getCoordinate("1"), [3, 4], "string path works");
 });
 
 test("LineString#removeCoordinate", () => {
@@ -162,8 +162,8 @@ test("LineString#removeCoordinate", () => {
   const changedSpy = spy(lineString, "changed");
 
   lineString.removeCoordinate(1);
-  assert.equal(changedSpy.callCount, 1, "called lineString.changed()");
-  assert.deepEqual(
+  assertEquals(changedSpy.callCount, 1, "called lineString.changed()");
+  assertEquals(
     lineString.getCoordinates(),
     [[1, 2]],
     "coordinate removed from correct place",
@@ -181,8 +181,8 @@ test("LineString#updateCoordinate", () => {
   const changedSpy = spy(lineString, "changed");
 
   lineString.updateCoordinate(1, 7, 8);
-  assert.equal(changedSpy.callCount, 1, "called lineString.changed()");
-  assert.deepEqual(
+  assertEquals(changedSpy.callCount, 1, "called lineString.changed()");
+  assertEquals(
     lineString.getCoordinates(),
     [
       [1, 2],
@@ -207,14 +207,14 @@ test("LineString integration", async () => {
 
   drawGeometry(map, Draw, "LineString", lineStringCoordinates, () => {
     const feats = Draw.getAll().features;
-    assert.equal(1, feats.length, "only one");
-    assert.equal("LineString", feats[0].geometry.type, "of the right type");
-    assert.equal(
+    assertEquals(1, feats.length, "only one");
+    assertEquals("LineString", feats[0].geometry.type, "of the right type");
+    assertEquals(
       lineStringCoordinates[0].length,
       feats[0].geometry.coordinates[0].length,
       "right number of points",
     );
-    assert.deepEqual(
+    assertEquals(
       [...lineStringCoordinates, [20, 40]],
       feats[0].geometry.coordinates,
       "in the right spot",

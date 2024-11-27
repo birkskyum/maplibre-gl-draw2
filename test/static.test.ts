@@ -1,6 +1,6 @@
 /* eslint no-shadow:[0] */
 import test from "node:test";
-import assert from "node:assert/strict";
+import {assert, assertEquals, assertNotEquals, assertThrows} from "@std/assert";
 import { spy } from "sinon";
 
 import { MapLibreDraw } from "../src/index.ts";
@@ -60,14 +60,14 @@ test("static", async (t) => {
     await afterNextRender();
     map.dragPan.disable.resetHistory();
     map.fire("mousedown", makeMouseEvent(0, 0, { shiftKey: true }));
-    assert.equal(map.dragPan.disable.callCount, 0, "dragPan is still enabled");
+    assertEquals(map.dragPan.disable.callCount, 0, "dragPan is still enabled");
     map.fire("mousemove", makeMouseEvent(15, 15, { shiftKey: true }));
     map.fire("mouseup", makeMouseEvent(15, 15, { shiftKey: true }));
 
     const args = getFireArgs().filter(
       (arg) => arg[0] === "draw.selectionchange",
     );
-    assert.equal(args.length, 0, "should have zero selectionchange events");
+    assertEquals(args.length, 0, "should have zero selectionchange events");
     cleanUp();
   });
 
@@ -94,7 +94,7 @@ test("static", async (t) => {
     const args = getFireArgs().filter(
       (arg) => arg[0] === "draw.selectionchange",
     );
-    assert.equal(args.length, 0, "should have zero selectionchange events");
+    assertEquals(args.length, 0, "should have zero selectionchange events");
     cleanUp();
   });
 });

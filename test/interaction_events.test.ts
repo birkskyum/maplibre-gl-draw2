@@ -1,7 +1,7 @@
 // These tests ensure that user interactions fire the right events
 
 import test from "node:test";
-import assert from "node:assert/strict";
+import {assert, assertEquals, assertNotEquals, assertThrows} from "@std/assert";
 import { spy } from "sinon";
 import { MapLibreDraw } from "../src/index.ts";
 import { mouseClick } from "./utils/mouse_click.ts";
@@ -62,13 +62,13 @@ test("ensure user interactions fire right events", async (t) => {
       assert.fail(`${eventName} never called`);
       return {};
     }
-    assert.ok(`${eventName} called`);
+    assert(`${eventName} called`);
     const actualEventData = Object.assign({}, call.args[1]);
 
     if (actualEventData.features) {
       actualEventData.features = actualEventData.features.map(withoutId);
     }
-    assert.deepEqual(actualEventData, expectedEventData, "with correct data");
+    assertEquals(actualEventData, expectedEventData, "with correct data");
     return call.args[1];
   }
 
@@ -108,7 +108,7 @@ test("ensure user interactions fire right events", async (t) => {
     firedWith("draw.modechange", {
       mode: "draw_point",
     });
-    assert.deepEqual(
+    assertEquals(
       flushDrawEvents(),
       ["draw.modechange"],
       "no unexpected draw events",
@@ -145,7 +145,7 @@ test("ensure user interactions fire right events", async (t) => {
       points: [],
     });
 
-    assert.deepEqual(
+    assertEquals(
       flushDrawEvents(),
       ["draw.create", "draw.modechange", "draw.selectionchange"],
       "no unexpected draw events",
@@ -163,7 +163,7 @@ test("ensure user interactions fire right events", async (t) => {
       features: [],
       points: [],
     });
-    assert.deepEqual(
+    assertEquals(
       flushDrawEvents(),
       ["draw.selectionchange"],
       "no unexpected draw events",
@@ -181,7 +181,7 @@ test("ensure user interactions fire right events", async (t) => {
       features: [pointA],
       points: [],
     });
-    assert.deepEqual(
+    assertEquals(
       flushDrawEvents(),
       ["draw.selectionchange"],
       "no unexpected draw events",
@@ -209,7 +209,7 @@ test("ensure user interactions fire right events", async (t) => {
       action: "move",
       features: [pointB],
     });
-    assert.deepEqual(
+    assertEquals(
       flushDrawEvents(),
       ["draw.update"],
       "no unexpected draw events",
@@ -223,7 +223,7 @@ test("ensure user interactions fire right events", async (t) => {
     firedWith("draw.delete", {
       features: [pointB],
     });
-    assert.deepEqual(
+    assertEquals(
       flushDrawEvents(),
       ["draw.delete"],
       "no unexpected draw events",
@@ -236,7 +236,7 @@ test("ensure user interactions fire right events", async (t) => {
     firedWith("draw.modechange", {
       mode: "draw_line_string",
     });
-    assert.deepEqual(
+    assertEquals(
       flushDrawEvents(),
       ["draw.modechange"],
       "no unexpected draw events",
@@ -287,7 +287,7 @@ test("ensure user interactions fire right events", async (t) => {
       points: [],
     });
 
-    assert.deepEqual(
+    assertEquals(
       flushDrawEvents(),
       ["draw.create", "draw.modechange", "draw.selectionchange"],
       "no unexpected draw events",
@@ -302,7 +302,7 @@ test("ensure user interactions fire right events", async (t) => {
       features: [],
       points: [],
     });
-    assert.deepEqual(
+    assertEquals(
       flushDrawEvents(),
       ["draw.selectionchange"],
       "no unexpected draw events",
@@ -318,7 +318,7 @@ test("ensure user interactions fire right events", async (t) => {
       features: [lineA],
       points: [],
     });
-    assert.deepEqual(
+    assertEquals(
       flushDrawEvents(),
       ["draw.selectionchange"],
       "no unexpected draw events",
@@ -356,7 +356,7 @@ test("ensure user interactions fire right events", async (t) => {
       features: [lineB],
     });
 
-    assert.deepEqual(
+    assertEquals(
       flushDrawEvents(),
       ["draw.update"],
       "no unexpected draw events",
@@ -388,7 +388,7 @@ test("ensure user interactions fire right events", async (t) => {
       ],
     });
 
-    assert.deepEqual(
+    assertEquals(
       flushDrawEvents(),
       ["draw.modechange", "draw.selectionchange"],
       "no unexpected draw events",
@@ -425,7 +425,7 @@ test("ensure user interactions fire right events", async (t) => {
       action: "change_coordinates",
       features: [lineC],
     });
-    assert.deepEqual(
+    assertEquals(
       flushDrawEvents(),
       ["draw.update", "draw.selectionchange"],
       "no unexpected draw events",
@@ -455,7 +455,7 @@ test("ensure user interactions fire right events", async (t) => {
       action: "change_coordinates",
       features: [lineD],
     });
-    assert.deepEqual(
+    assertEquals(
       flushDrawEvents(),
       ["draw.update"],
       "no unexpected draw events",
@@ -485,7 +485,7 @@ test("ensure user interactions fire right events", async (t) => {
       action: "change_coordinates",
       features: [lineE],
     });
-    assert.deepEqual(
+    assertEquals(
       flushDrawEvents(),
       ["draw.update", "draw.selectionchange"],
       "no unexpected draw events",
@@ -510,7 +510,7 @@ test("ensure user interactions fire right events", async (t) => {
       points: [],
     });
 
-    assert.deepEqual(
+    assertEquals(
       flushDrawEvents(),
       ["draw.modechange", "draw.selectionchange"],
       "no unexpected draw events",
@@ -566,7 +566,7 @@ test("ensure user interactions fire right events", async (t) => {
       points: [],
     });
 
-    assert.deepEqual(
+    assertEquals(
       flushDrawEvents(),
       ["draw.create", "draw.modechange", "draw.selectionchange"],
       "no unexpected draw events",
@@ -583,7 +583,7 @@ test("ensure user interactions fire right events", async (t) => {
       features: [],
       points: [],
     });
-    assert.deepEqual(
+    assertEquals(
       flushDrawEvents(),
       ["draw.selectionchange"],
       "no unexpected draw events",
@@ -608,7 +608,7 @@ test("ensure user interactions fire right events", async (t) => {
       features: [lineE, polygonA],
       points: [],
     });
-    assert.deepEqual(
+    assertEquals(
       flushDrawEvents(),
       ["draw.selectionchange"],
       "no unexpected draw events",
@@ -663,7 +663,7 @@ test("ensure user interactions fire right events", async (t) => {
       features: [lineF, polygonB],
     });
 
-    assert.deepEqual(
+    assertEquals(
       flushDrawEvents(),
       ["draw.update"],
       "no unexpected draw events",
@@ -680,7 +680,7 @@ test("ensure user interactions fire right events", async (t) => {
       features: [],
       points: [],
     });
-    assert.deepEqual(
+    assertEquals(
       flushDrawEvents(),
       ["draw.selectionchange"],
       "no unexpected draw events",
@@ -697,7 +697,7 @@ test("ensure user interactions fire right events", async (t) => {
       features: [polygonB],
       points: [],
     });
-    assert.deepEqual(
+    assertEquals(
       flushDrawEvents(),
       ["draw.selectionchange"],
       "no unexpected draw events",
@@ -728,7 +728,7 @@ test("ensure user interactions fire right events", async (t) => {
       ],
     });
 
-    assert.deepEqual(
+    assertEquals(
       flushDrawEvents(),
       ["draw.modechange", "draw.selectionchange"],
       "no unexpected draw events",
@@ -739,7 +739,7 @@ test("ensure user interactions fire right events", async (t) => {
     // Now in `simple_select` mode ...
     mouseClick(map, makeMouseEvent(20, 10, { shiftKey: true }));
     await afterNextRender();
-    assert.deepEqual(
+    assertEquals(
       flushDrawEvents(),
       ["draw.selectionchange"],
       "no unexpected draw events",
@@ -780,7 +780,7 @@ test("ensure user interactions fire right events", async (t) => {
       action: "change_coordinates",
       features: [polygonC],
     });
-    assert.deepEqual(
+    assertEquals(
       flushDrawEvents(),
       ["draw.update", "draw.selectionchange"],
       "no unexpected draw events",
@@ -816,7 +816,7 @@ test("ensure user interactions fire right events", async (t) => {
       action: "change_coordinates",
       features: [polygonD],
     });
-    assert.deepEqual(
+    assertEquals(
       flushDrawEvents(),
       ["draw.update"],
       "no unexpected draw events",
@@ -853,7 +853,7 @@ test("ensure user interactions fire right events", async (t) => {
         action: "change_coordinates",
         features: [polygonE],
       });
-      assert.deepEqual(
+      assertEquals(
         flushDrawEvents(),
         ["draw.update", "draw.selectionchange"],
         "no unexpected draw events",
@@ -878,7 +878,7 @@ test("ensure user interactions fire right events", async (t) => {
       features: [polygonE],
       points: [],
     });
-    assert.deepEqual(
+    assertEquals(
       flushDrawEvents(),
       ["draw.selectionchange"],
       "no unexpected draw events",
@@ -896,7 +896,7 @@ test("ensure user interactions fire right events", async (t) => {
       features: [polygonE, lineF],
       points: [],
     });
-    assert.deepEqual(
+    assertEquals(
       flushDrawEvents(),
       ["draw.selectionchange"],
       "no unexpected draw events",
@@ -935,7 +935,7 @@ test("ensure user interactions fire right events", async (t) => {
     Draw.delete("point");
 
     await afterNextRender();
-    assert.deepEqual(flushDrawEvents(), [], "no unexpected draw events");
+    assertEquals(flushDrawEvents(), [], "no unexpected draw events");
   });
 
   await t.test(
@@ -963,7 +963,7 @@ test("ensure user interactions fire right events", async (t) => {
       firedWith("draw.delete", {
         features: [line],
       });
-      assert.deepEqual(
+      assertEquals(
         flushDrawEvents(),
         ["draw.delete"],
         "no unexpected draw events",
@@ -981,8 +981,8 @@ test("ensure user interactions fire right events", async (t) => {
     firedWith("draw.modechange", {
       mode: "simple_select",
     });
-    assert.equal(Draw.getAll().features.length, 0, "no feature created");
-    assert.deepEqual(
+    assertEquals(Draw.getAll().features.length, 0, "no feature created");
+    assertEquals(
       flushDrawEvents(),
       ["draw.modechange"],
       "no unexpected draw events",
@@ -999,8 +999,8 @@ test("ensure user interactions fire right events", async (t) => {
     firedWith("draw.modechange", {
       mode: "simple_select",
     });
-    assert.equal(Draw.getAll().features.length, 0, "no feature created");
-    assert.deepEqual(
+    assertEquals(Draw.getAll().features.length, 0, "no feature created");
+    assertEquals(
       flushDrawEvents(),
       ["draw.modechange"],
       "no unexpected draw events",
@@ -1043,7 +1043,7 @@ test("ensure user interactions fire right events", async (t) => {
         mode: "simple_select",
       });
 
-      assert.deepEqual(
+      assertEquals(
         flushDrawEvents(),
         ["draw.create", "draw.modechange", "draw.selectionchange"],
         "no unexpected draw events",
@@ -1065,8 +1065,8 @@ test("ensure user interactions fire right events", async (t) => {
       firedWith("draw.modechange", {
         mode: "simple_select",
       });
-      assert.equal(Draw.getAll().features.length, 0, "no feature created");
-      assert.deepEqual(
+      assertEquals(Draw.getAll().features.length, 0, "no feature created");
+      assertEquals(
         flushDrawEvents(),
         ["draw.modechange"],
         "no unexpected draw events",
@@ -1114,7 +1114,7 @@ test("ensure user interactions fire right events", async (t) => {
         mode: "simple_select",
       });
 
-      assert.deepEqual(
+      assertEquals(
         flushDrawEvents(),
         ["draw.create", "draw.modechange", "draw.selectionchange"],
         "no unexpected draw events",
@@ -1134,8 +1134,8 @@ test("ensure user interactions fire right events", async (t) => {
     firedWith("draw.modechange", {
       mode: "simple_select",
     });
-    assert.equal(Draw.getAll().features.length, 0, "no feature created");
-    assert.deepEqual(
+    assertEquals(Draw.getAll().features.length, 0, "no feature created");
+    assertEquals(
       flushDrawEvents(),
       ["draw.modechange"],
       "no unexpected draw events",
@@ -1148,6 +1148,6 @@ test("ensure user interactions fire right events", async (t) => {
     mouseClick(map, makeMouseEvent(0, 0, { shiftKey: true }));
     mouseClick(map, makeMouseEvent(100, 100, { shiftKey: true }));
     await afterNextRender();
-    assert.deepEqual(flushDrawEvents(), [], "no unexpected draw events");
+    assertEquals(flushDrawEvents(), [], "no unexpected draw events");
   });
 });

@@ -1,5 +1,5 @@
 import test from "node:test";
-import assert from "node:assert/strict";
+import {assert, assertEquals, assertNotEquals, assertThrows} from "@std/assert";
 import { isTap } from "../src/lib/is_tap.ts";
 
 // By adding these values as options and stating them in the test,
@@ -20,17 +20,17 @@ test("isTap easy", () => {
     point: { x: 1, y: 1 },
     time: 1,
   };
-  assert.equal(
+  assertEquals(
     isTap({}, b, testOptions),
     true,
     "true when start is missing point and time",
   );
-  assert.equal(
+  assertEquals(
     isTap({ time: 2000 }, b, testOptions),
     true,
     "true when start has only time",
   );
-  assert.equal(
+  assertEquals(
     isTap(a, b, testOptions),
     true,
     "true when start and end match exactly",
@@ -46,7 +46,7 @@ test("isTap when moving barely at all, same times", () => {
     point: { x: 2, y: 1.5 },
     time: 1,
   };
-  assert.equal(isTap(a, b, testOptions), true);
+  assertEquals(isTap(a, b, testOptions), true);
 });
 
 test("isTap when moving just under the distance limit, same times", () => {
@@ -59,7 +59,7 @@ test("isTap when moving just under the distance limit, same times", () => {
     time: 1,
   };
   // Move distance ~24.89016
-  assert.equal(isTap(a, b, testOptions), true);
+  assertEquals(isTap(a, b, testOptions), true);
 });
 
 test("isTap when moving just over the distance limit, same times", () => {
@@ -72,7 +72,7 @@ test("isTap when moving just over the distance limit, same times", () => {
     time: 1,
   };
   // Move distance ~25.03158
-  assert.equal(isTap(a, b, testOptions), false);
+  assertEquals(isTap(a, b, testOptions), false);
 });
 
 test("isTap when moving barely at all, just before the time limit", () => {
@@ -84,7 +84,7 @@ test("isTap when moving barely at all, just before the time limit", () => {
     point: { x: 2, y: 1.5 },
     time: 250,
   };
-  assert.equal(isTap(a, b, testOptions), true);
+  assertEquals(isTap(a, b, testOptions), true);
 });
 
 test("isTap when moving just under the limit, just after the time limit", () => {
@@ -97,7 +97,7 @@ test("isTap when moving just under the limit, just after the time limit", () => 
     time: 252,
   };
   // Move distance ~24.89016
-  assert.equal(isTap(a, b, testOptions), false);
+  assertEquals(isTap(a, b, testOptions), false);
 });
 
 test("isTap when moving just over the limit, same times", () => {
@@ -110,5 +110,5 @@ test("isTap when moving just over the limit, same times", () => {
     time: 1,
   };
   // Move distance ~25.03158
-  assert.equal(isTap(a, b, testOptions), false);
+  assertEquals(isTap(a, b, testOptions), false);
 });

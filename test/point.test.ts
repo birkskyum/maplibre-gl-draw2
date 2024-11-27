@@ -1,5 +1,5 @@
 import test from "node:test";
-import assert from "node:assert/strict";
+import {assert, assertEquals, assertNotEquals, assertThrows} from "@std/assert";
 import { spy } from "sinon";
 import { Feat } from "../src/feature_types/feature.ts";
 import { PointFeat } from "../src/feature_types/point.ts";
@@ -16,40 +16,40 @@ test("Point constructor and API", () => {
   const point = new PointFeat(ctx, rawPoint);
 
   // Instance members
-  assert.equal(point.ctx, ctx, "point.ctx");
-  assert.equal(
+  assertEquals(point.ctx, ctx, "point.ctx");
+  assertEquals(
     point.coordinates,
     rawPoint.geometry.coordinates,
     "point.coordinates",
   );
-  assert.equal(point.properties, rawPoint.properties, "point.properties");
-  assert.equal(point.id, rawPoint.id, "point.id");
-  assert.equal(point.type, rawPoint.geometry.type, "point.type");
-  assert.equal(
+  assertEquals(point.properties, rawPoint.properties, "point.properties");
+  assertEquals(point.id, rawPoint.id, "point.id");
+  assertEquals(point.type, rawPoint.geometry.type, "point.type");
+  assertEquals(
     getPublicMemberKeys(point).length,
     5,
     "no unexpected instance members",
   );
 
   // Prototype members
-  assert.equal(typeof PointFeat.prototype.isValid, "function", "point.isValid");
-  assert.equal(
+  assertEquals(typeof PointFeat.prototype.isValid, "function", "point.isValid");
+  assertEquals(
     typeof PointFeat.prototype.getCoordinate,
     "function",
     "point.getCoordinate",
   );
-  assert.equal(
+  assertEquals(
     typeof PointFeat.prototype.updateCoordinate,
     "function",
     "point.updateCoordinate",
   );
-  assert.equal(
+  assertEquals(
     Object.getOwnPropertyNames(PointFeat.prototype).length,
     4,
     "no unexpected prototype members",
   );
 
-  assert.ok(
+  assert(
     PointFeat.prototype instanceof Feat,
     "inherits from Feature",
   );
@@ -58,7 +58,7 @@ test("Point constructor and API", () => {
 test("Point#isValid", () => {
   const validRawPoint = createFeature("point");
   const validPoint = new PointFeat(createMockFeatureContext(), validRawPoint);
-  assert.equal(validPoint.isValid(), true, "returns true for valid point");
+  assertEquals(validPoint.isValid(), true, "returns true for valid point");
 
   const invalidRawPointA = createFeature("point");
   invalidRawPointA.geometry.coordinates = [0, "1"];
@@ -66,7 +66,7 @@ test("Point#isValid", () => {
     createMockFeatureContext(),
     invalidRawPointA,
   );
-  assert.equal(
+  assertEquals(
     invalidPointA.isValid(),
     false,
     "returns false with non-number coordinate",
@@ -78,7 +78,7 @@ test("Point#isValid", () => {
     createMockFeatureContext(),
     invalidRawPointA,
   );
-  assert.equal(
+  assertEquals(
     invalidPointB.isValid(),
     false,
     "returns false with non-number coordinate, again",
@@ -91,18 +91,18 @@ test("Point#updateCoordinate, Point#getCoordinate", () => {
   const point = new PointFeat(createMockFeatureContext(), rawPoint);
   const changedSpy = spy(point, "changed");
 
-  assert.deepEqual(point.getCoordinate(), [1, 2]);
+  assertEquals(point.getCoordinate(), [1, 2]);
 
   point.updateCoordinate(3, 4, 5);
-  assert.equal(changedSpy.callCount, 1);
-  assert.deepEqual(
+  assertEquals(changedSpy.callCount, 1);
+  assertEquals(
     point.getCoordinate(),
     [4, 5],
     "handles 3 arguments, ignoring the first (as path)",
   );
 
   point.updateCoordinate(6, 7);
-  assert.deepEqual(point.getCoordinate(), [6, 7], "handles 2 arguments");
+  assertEquals(point.getCoordinate(), [6, 7], "handles 2 arguments");
 });
 
 test("Point integration test", async () => {
@@ -116,9 +116,9 @@ test("Point integration test", async () => {
   await drawGeometry(map, Draw, "Point", pointCoordinates);
 
   const feats = Draw.getAll().features;
-  assert.equal(1, feats.length, "only one");
-  assert.equal("Point", feats[0].geometry.type, "of the right type");
-  assert.deepEqual(
+  assertEquals(1, feats.length, "only one");
+  assertEquals("Point", feats[0].geometry.type, "of the right type");
+  assertEquals(
     [10, 10],
     feats[0].geometry.coordinates,
     "in the right spot",

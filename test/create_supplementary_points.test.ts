@@ -1,5 +1,5 @@
 import test from "node:test";
-import assert from "node:assert/strict";
+import {assert, assertEquals, assertNotEquals, assertThrows} from "@std/assert";
 import { createMap } from "./utils/create_map.ts";
 import { createSupplementaryPoints } from "../src/lib/create_supplementary_points.ts";
 
@@ -17,7 +17,7 @@ test("createSupplementaryPoints with a point", () => {
 
   const result = createSupplementaryPoints(point);
 
-  assert.deepEqual(result, [
+  assertEquals(result, [
     {
       geometry: {
         coordinates: [10, 15],
@@ -52,7 +52,7 @@ test("createSupplementaryPoints with a line, no midpoints", () => {
 
   const result = createSupplementaryPoints(line);
 
-  assert.deepEqual(
+  assertEquals(
     result,
     [
       {
@@ -120,7 +120,7 @@ test("createSupplementaryPoints with a polygon, no midpoints", () => {
   };
   const result = createSupplementaryPoints(polygon);
 
-  assert.deepEqual(
+  assertEquals(
     result,
     [
       {
@@ -203,7 +203,7 @@ test("createSupplementaryPoints with line, midpoints, selected coordinate", () =
     selectedPaths: "1",
   });
 
-  assert.deepEqual(
+  assertEquals(
     results,
     [
       {
@@ -306,7 +306,7 @@ test("createSupplementaryPoints with polygon, midpoints, selection", () => {
     selectedPaths: "0.1",
   });
 
-  assert.deepEqual(
+  assertEquals(
     results,
     [
       {
@@ -452,7 +452,7 @@ test("createSupplementaryPoints with MultiLineString, midpoints, selected coordi
     selectedPaths: "1.2",
   });
 
-  assert.deepEqual(results, [
+  assertEquals(results, [
     {
       geometry: {
         coordinates: [0, 0],
@@ -611,7 +611,7 @@ test("createSupplementaryPoints with a line, not all midpoints rendered because 
     midpoints: true,
   });
 
-  assert.deepEqual(
+  assertEquals(
     result,
     [
       {
@@ -693,7 +693,7 @@ test("createSupplementaryPoints with a line, not all midpoints rendered because 
     midpoints: true,
   });
 
-  assert.deepEqual(
+  assertEquals(
     result,
     [
       {

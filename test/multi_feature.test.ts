@@ -1,5 +1,5 @@
 import test from "node:test";
-import assert from "node:assert/strict";
+import {assert, assertEquals, assertNotEquals, assertThrows} from "@std/assert";
 import { spy } from "sinon";
 import { Feat } from "../src/feature_types/feature.ts";
 import { PointFeat } from "../src/feature_types/point.ts";
@@ -10,54 +10,54 @@ import { createMockFeatureContext } from "./utils/create_mock_feature_context.ts
 import { getPublicMemberKeys } from "./utils/get_public_member_keys.ts";
 
 test("MultiPoint via MultiFeature", () => {
-  assert.ok(
+  assert(
     MultiFeat.prototype instanceof Feat,
     "inherits from Feature",
   );
 
   // Prototype members
-  assert.equal(
+  assertEquals(
     typeof MultiFeat.prototype.isValid,
     "function",
     "polygon.isValid",
   );
-  assert.equal(
+  assertEquals(
     typeof MultiFeat.prototype.setCoordinates,
     "function",
     "polygon.setCoordinates",
   );
-  assert.equal(
+  assertEquals(
     typeof MultiFeat.prototype.getCoordinate,
     "function",
     "polygon.getCoordinate",
   );
-  assert.equal(
+  assertEquals(
     typeof MultiFeat.prototype.getCoordinates,
     "function",
     "polygon.getCoordinates",
   );
-  assert.equal(
+  assertEquals(
     typeof MultiFeat.prototype.updateCoordinate,
     "function",
     "polygon.updateCoordinate",
   );
-  assert.equal(
+  assertEquals(
     typeof MultiFeat.prototype.addCoordinate,
     "function",
     "polygon.addCoordinate",
   );
-  assert.equal(
+  assertEquals(
     typeof MultiFeat.prototype.removeCoordinate,
     "function",
     "polygon.removeCoordinate",
   );
-  assert.equal(
+  assertEquals(
     typeof MultiFeat.prototype.getFeatures,
     "function",
     "polygon.getFeatures",
   );
 
-  assert.equal(
+  assertEquals(
     Object.getOwnPropertyNames(MultiFeat.prototype).length,
     10,
     "no unexpected prototype members",
@@ -80,24 +80,26 @@ test("MultiPoint", () => {
   };
   const ctx = createMockFeatureContext();
   let multiPoint;
-  assert.doesNotThrow(() => {
+  try{
     multiPoint = new MultiFeat(ctx, rawMultiPoint);
-  }, "MultiPoint type does not throw");
+  } catch(e) {
+    throw "MultiPoint type does not throw";
+  }
   const changedSpy = spy(multiPoint, "changed");
 
   // Instance members
-  assert.equal(multiPoint.ctx, ctx, "multiPoint.ctx");
-  assert.equal(multiPoint.coordinates, undefined, "no coordinates");
-  assert.deepEqual(
+  assertEquals(multiPoint.ctx, ctx, "multiPoint.ctx");
+  assertEquals(multiPoint.coordinates, undefined, "no coordinates");
+  assertEquals(
     multiPoint.properties,
     { foo: "bar" },
     "multiPoint.properties",
   );
-  assert.equal(multiPoint.id, "wahoo", "multiPoint.id");
-  assert.equal(multiPoint.type, "MultiPoint", "multiPoint.type");
-  assert.equal(multiPoint.features.length, 3, "multiPoint.features");
+  assertEquals(multiPoint.id, "wahoo", "multiPoint.id");
+  assertEquals(multiPoint.type, "MultiPoint", "multiPoint.type");
+  assertEquals(multiPoint.features.length, 3, "multiPoint.features");
   // multiPoint.changed gets counted because it's used below
-  assert.equal(
+  assertEquals(
     Object.getOwnPropertyNames(multiPoint).length,
     8,
     "no unexpected instance members",
@@ -107,7 +109,7 @@ test("MultiPoint", () => {
   const pointB = multiPoint.features[1];
   const pointC = multiPoint.features[2];
 
-  assert.deepEqual(
+  assertEquals(
     pointA,
     new PointFeat(ctx, {
       id: pointA.id,
@@ -119,7 +121,7 @@ test("MultiPoint", () => {
       },
     }),
   );
-  assert.deepEqual(
+  assertEquals(
     pointB,
     new PointFeat(ctx, {
       id: pointB.id,
@@ -131,7 +133,7 @@ test("MultiPoint", () => {
       },
     }),
   );
-  assert.deepEqual(
+  assertEquals(
     pointC,
     new PointFeat(ctx, {
       id: pointC.id,
@@ -148,45 +150,45 @@ test("MultiPoint", () => {
   const pointBGetCoordinateSpy = spy(pointB, "getCoordinate");
   const pointCGetCoordinateSpy = spy(pointC, "getCoordinate");
   const coordinate = multiPoint.getCoordinate("2");
-  assert.equal(
+  assertEquals(
     pointAGetCoordinateSpy.callCount,
     0,
     "point A getCoordinate not called",
   );
-  assert.equal(
+  assertEquals(
     pointBGetCoordinateSpy.callCount,
     0,
     "point B getCoordinate not called",
   );
-  assert.equal(pointCGetCoordinateSpy.callCount, 1, "point C getCoordinate");
-  assert.deepEqual(coordinate, [3, 3], "correct coordinate");
+  assertEquals(pointCGetCoordinateSpy.callCount, 1, "point C getCoordinate");
+  assertEquals(coordinate, [3, 3], "correct coordinate");
 
   const pointAUpdateCoordinateSpy = spy(pointA, "updateCoordinate");
   const pointBUpdateCoordinateSpy = spy(pointB, "updateCoordinate");
   const pointCUpdateCoordinateSpy = spy(pointC, "updateCoordinate");
   multiPoint.updateCoordinate("0", 99, 100);
-  assert.equal(
+  assertEquals(
     pointAUpdateCoordinateSpy.callCount,
     1,
     "point A updateCoordinate",
   );
-  assert.equal(
+  assertEquals(
     pointBUpdateCoordinateSpy.callCount,
     0,
     "point B updateCoordinate not called",
   );
-  assert.equal(
+  assertEquals(
     pointCUpdateCoordinateSpy.callCount,
     0,
     "point C updateCoordinate not called",
   );
-  assert.deepEqual(
+  assertEquals(
     multiPoint.getCoordinate("0"),
     [99, 100],
     "correct coordinate",
   );
 
-  assert.deepEqual(
+  assertEquals(
     multiPoint.getCoordinates(),
     [
       [99, 100],
@@ -200,15 +202,15 @@ test("MultiPoint", () => {
     [6, 6],
     [7, 7],
   ]);
-  assert.equal(changedSpy.callCount, 2, "changed called by setCoordinates");
-  assert.deepEqual(multiPoint.getCoordinates(), [
+  assertEquals(changedSpy.callCount, 2, "changed called by setCoordinates");
+  assertEquals(multiPoint.getCoordinates(), [
     [6, 6],
     [7, 7],
   ]);
 
-  assert.equal(multiPoint.isValid(), true, "positive validation works");
+  assertEquals(multiPoint.isValid(), true, "positive validation works");
   multiPoint.setCoordinates([[1], []]);
-  assert.equal(multiPoint.isValid(), false, "negative validation works");
+  assertEquals(multiPoint.isValid(), false, "negative validation works");
 });
 
 // Tests below less in depth becuase we know the
@@ -250,14 +252,16 @@ test("MultiPolygon via MultiFeature", () => {
   };
   const ctx = createMockFeatureContext();
   let multiPolygon;
-  assert.doesNotThrow(() => {
+  try{
     multiPolygon = new MultiFeat(ctx, rawMultiPolygon);
-  }, "MultiPolygon type does not throw");
+  } catch(e) {
+  throw "MultiPolygon type does not throw"
+  }
 
   const polygonA = multiPolygon.features[0];
   const polygonB = multiPolygon.features[1];
 
-  assert.deepEqual(
+  assertEquals(
     polygonA,
     new PolygonFeat(ctx, {
       id: polygonA.id,
@@ -277,7 +281,7 @@ test("MultiPolygon via MultiFeature", () => {
       },
     }),
   );
-  assert.deepEqual(
+  assertEquals(
     polygonB,
     new PolygonFeat(ctx, {
       id: polygonB.id,
@@ -328,14 +332,16 @@ test("MultiLineString via MultiFeature", () => {
   };
   const ctx = createMockFeatureContext();
   let multiLineString;
-  assert.doesNotThrow(() => {
+  try {
     multiLineString = new MultiFeat(ctx, rawMultiLineString);
-  }, "MultiLineString type does not throw");
+  } catch (e) { 
+    throw "MultiLineString type does not throw"
+  }
 
   const lineStringA = multiLineString.features[0];
   const lineStringB = multiLineString.features[1];
 
-  assert.deepEqual(
+  assertEquals(
     lineStringA,
     new LineStringFeat(ctx, {
       id: lineStringA.id,
@@ -351,7 +357,7 @@ test("MultiLineString via MultiFeature", () => {
       },
     }),
   );
-  assert.deepEqual(
+  assertEquals(
     lineStringB,
     new LineStringFeat(ctx, {
       id: lineStringB.id,
@@ -391,8 +397,8 @@ test("Invalid MultiFeature type", () => {
     },
   };
   let thing;
-  assert.throws(() => {
+  assertThrows(() => {
     thing = new MultiFeat(createMockFeatureContext(), rawThing);
   }, "invalid type throws");
-  assert.equal(thing, undefined);
+  assertEquals(thing, undefined);
 });

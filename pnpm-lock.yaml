@@ -54,6 +54,9 @@ importers:
       '@rollup/plugin-typescript':
         specifier: ^12.1.1
         version: 12.1.1(rollup@4.27.4)(tslib@2.8.1)(typescript@5.7.2)
+      '@std/assert':
+        specifier: npm:@jsr/std__assert@^1.0.8
+        version: '@jsr/std__assert@1.0.8'
       '@turf/bbox-clip':
         specifier: ^7.1.0
         version: 7.1.0
@@ -322,6 +325,12 @@ packages:
 
   '@jsr/birkskyum__geojson-normalize@1.0.3':
     resolution: {integrity: sha512-ypbqCaEX2BzeF617+x81TLPDa8fFLWySkyvuYHmvwwQHxosXkE+xOAYTstV370Nv7G50U78IgT2xNpkAW7y+Rw==, tarball: https://npm.jsr.io/~/11/@jsr/birkskyum__geojson-normalize/1.0.3.tgz}
+
+  '@jsr/std__assert@1.0.8':
+    resolution: {integrity: sha512-2Sw6q3pyvy8loqtFzvtI5OKkTK7i/bWqqChz8b+/+MdyiFlYax4cIoh883/gWz+L8ghK1bbrhnNyhju8GMOkMg==, tarball: https://npm.jsr.io/~/11/@jsr/std__assert/1.0.8.tgz}
+
+  '@jsr/std__internal@1.0.5':
+    resolution: {integrity: sha512-W2aN7UypJJ6EkfyXt5hBeIijBb8CmZk0jdjCzhOROr0SrXsXZ/V/9Qu1N0NxumFauPDAJz9NcP1mmZ9ZVSXwpQ==, tarball: https://npm.jsr.io/~/11/@jsr/std__internal/1.0.5.tgz}
 
   '@mapbox/cloudfriend@8.2.0':
     resolution: {integrity: sha512-9hw8OjddquY7aj+nA4F4jmNVs4LQ/WuW0YqSVhTrHQN9VW12Czs47RzHMaN4px9f3T1T3q1CszXObuBrb5xXvw==}
@@ -1824,6 +1833,12 @@ snapshots:
   '@jsr/birkskyum__geojson-normalize@1.0.3':
     dependencies:
       '@types/geojson': 7946.0.14
+
+  '@jsr/std__assert@1.0.8':
+    dependencies:
+      '@jsr/std__internal': 1.0.5
+
+  '@jsr/std__internal@1.0.5': {}
 
   '@mapbox/cloudfriend@8.2.0':
     dependencies:

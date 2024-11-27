@@ -1,5 +1,5 @@
 import test from "node:test";
-import assert from "node:assert/strict";
+import {assert, assertEquals, assertNotEquals, assertThrows} from "@std/assert";
 import { getGeoJSON } from "./utils/get_geojson.ts";
 import { createMockFeatureContext } from "./utils/create_mock_feature_context.ts";
 import { PointFeat } from "../src/feature_types/point.ts";
@@ -13,21 +13,21 @@ test("moveFeatures point", () => {
   const point = new PointFeat(mockFeatureContext, getGeoJSON("point"));
   point.setCoordinates([10, 20]);
   moveFeatures([point], { lng: 7, lat: 13 });
-  assert.deepEqual(point.getCoordinates(), [17, 33]);
+  assertEquals(point.getCoordinates(), [17, 33]);
 });
 
 test("moveFeatures point beyond north limit map", () => {
   const point = new PointFeat(mockFeatureContext, getGeoJSON("point"));
   point.setCoordinates([10, 20]);
   moveFeatures([point], { lng: 50, lat: 120 });
-  assert.deepEqual(point.getCoordinates(), [60, 85]);
+  assertEquals(point.getCoordinates(), [60, 85]);
 });
 
 test("moveFeatures point beyond south limit", () => {
   const point = new PointFeat(mockFeatureContext, getGeoJSON("point"));
   point.setCoordinates([10, 20]);
   moveFeatures([point], { lng: -20, lat: -200 });
-  assert.deepEqual(point.getCoordinates(), [-10, -85]);
+  assertEquals(point.getCoordinates(), [-10, -85]);
 });
 
 test("moveFeatures line", () => {
@@ -38,7 +38,7 @@ test("moveFeatures line", () => {
     [17, 33],
   ]);
   moveFeatures([line], { lng: 7, lat: 13 });
-  assert.deepEqual(line.getCoordinates(), [
+  assertEquals(line.getCoordinates(), [
     [17, 28],
     [-3, -17],
     [24, 46],
@@ -53,7 +53,7 @@ test("moveFeatures line beyond north limit", () => {
     [17, 33],
   ]);
   moveFeatures([line], { lng: 7, lat: 60 });
-  assert.deepEqual(
+  assertEquals(
     line.getCoordinates(),
     [
       [17, 72],
@@ -72,7 +72,7 @@ test("moveFeatures line beyond south pole", () => {
     [17, 33],
   ]);
   moveFeatures([line], { lng: -7, lat: -100 });
-  assert.deepEqual(
+  assertEquals(
     line.getCoordinates(),
     [
       [3, -45],
@@ -94,7 +94,7 @@ test("moveFeatures polygon", () => {
     ],
   ]);
   moveFeatures([polygon], { lng: -23, lat: 31.33 });
-  assert.deepEqual(polygon.getCoordinates(), [
+  assertEquals(polygon.getCoordinates(), [
     [
       [-23, 31.33],
       [-23, 41.33],
@@ -116,7 +116,7 @@ test("moveFeatures polygon beyond north limit", () => {
     ],
   ]);
   moveFeatures([polygon], { lng: -0.5, lat: 100 });
-  assert.deepEqual(
+  assertEquals(
     polygon.getCoordinates(),
     [
       [
@@ -142,7 +142,7 @@ test("moveFeatures polygon beyond south pole", () => {
     ],
   ]);
   moveFeatures([polygon], { lng: 1, lat: -80.44 });
-  assert.deepEqual(
+  assertEquals(
     polygon.getCoordinates(),
     [
       [
@@ -176,8 +176,8 @@ test("moveFeatures multiple features", () => {
     ],
   ]);
   moveFeatures([point, line, polygon], { lng: 5, lat: -7 });
-  assert.deepEqual(point.getCoordinates(), [15, 13], "point moved");
-  assert.deepEqual(
+  assertEquals(point.getCoordinates(), [15, 13], "point moved");
+  assertEquals(
     line.getCoordinates(),
     [
       [15, 8],
@@ -186,7 +186,7 @@ test("moveFeatures multiple features", () => {
     ],
     "line moved",
   );
-  assert.deepEqual(
+  assertEquals(
     polygon.getCoordinates(),
     [
       [
@@ -220,8 +220,8 @@ test("moveFeatures multiple features beyond north limit", () => {
     ],
   ]);
   moveFeatures([point, line, polygon], { lng: 5, lat: 200 });
-  assert.deepEqual(point.getCoordinates(), [15, 85], "point lat only moved 40");
-  assert.deepEqual(
+  assertEquals(point.getCoordinates(), [15, 85], "point lat only moved 40");
+  assertEquals(
     line.getCoordinates(),
     [
       [15, 55],
@@ -230,7 +230,7 @@ test("moveFeatures multiple features beyond north limit", () => {
     ],
     "line lat only moved 40",
   );
-  assert.deepEqual(
+  assertEquals(
     polygon.getCoordinates(),
     [
       [
@@ -264,12 +264,12 @@ test("moveFeatures multiple features beyond south limit", () => {
     ],
   ]);
   moveFeatures([point, line, polygon], { lng: 5, lat: -120 });
-  assert.deepEqual(
+  assertEquals(
     point.getCoordinates(),
     [15, -40],
     "point lat only moved -60",
   );
-  assert.deepEqual(
+  assertEquals(
     line.getCoordinates(),
     [
       [15, -45],
@@ -278,7 +278,7 @@ test("moveFeatures multiple features beyond south limit", () => {
     ],
     "line lat only moved -60",
   );
-  assert.deepEqual(
+  assertEquals(
     polygon.getCoordinates(),
     [
       [

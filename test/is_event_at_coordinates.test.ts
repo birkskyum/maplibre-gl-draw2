@@ -1,9 +1,9 @@
 import test from "node:test";
-import assert from "node:assert/strict";
+import {assert, assertEquals, assertNotEquals, assertThrows} from "@std/assert";
 import { isEventAtCoordinates } from "../src/lib/is_event_at_coordinates.ts";
 
 test("isEventAtCoordinates", () => {
-  assert.ok(
+  assert(
     isEventAtCoordinates(
       {
         lngLat: {
@@ -14,7 +14,7 @@ test("isEventAtCoordinates", () => {
       [3, 29],
     ),
   );
-  assert.equal(
+  assertEquals(
     isEventAtCoordinates(
       {
         lngLat: {
@@ -27,7 +27,7 @@ test("isEventAtCoordinates", () => {
     false,
   );
 
-  assert.equal(
+  assertEquals(
     isEventAtCoordinates(
       {
         nothing: true,

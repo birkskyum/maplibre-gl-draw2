@@ -1,6 +1,6 @@
 /* eslint no-shadow:[0] */
 import test from "node:test";
-import assert from "node:assert/strict";
+import {assert, assertEquals, assertNotEquals, assertThrows} from "@std/assert";
 import createSyntheticEvent from "synthetic-dom-events";
 import { spy } from "sinon";
 
@@ -65,7 +65,7 @@ test("simple_select", async (t) => {
     map.dragPan.enable.resetHistory();
     map.dragPan.disable.resetHistory();
     map.fire("mousedown", makeMouseEvent(0, 0, { shiftKey: true }));
-    assert.equal(map.dragPan.disable.callCount, 1, "disable dragPan");
+    assertEquals(map.dragPan.disable.callCount, 1, "disable dragPan");
     map.fire(
       "mousemove",
       makeMouseEvent(15, 15, {
@@ -74,7 +74,7 @@ test("simple_select", async (t) => {
       }),
     );
     await afterNextRender();
-    assert.equal(
+    assertEquals(
       map.getContainer().className.indexOf("mouse-add") > -1,
       true,
       "mouse-add class has been set",
@@ -82,25 +82,25 @@ test("simple_select", async (t) => {
     map.fire("mouseup", makeMouseEvent(15, 15, { shiftKey: true }));
 
     await afterNextRender();
-    assert.equal(
+    assertEquals(
       map.getContainer().className.indexOf("mouse-move") > -1,
       true,
       "mouse-move class has been set",
     );
     const fireArgs = getFireArgs();
     const args = fireArgs.filter((arg) => arg[0] === "draw.selectionchange");
-    assert.equal(
+    assertEquals(
       args.length,
       1,
       "should have one and only one selectionchange event",
     );
     if (args.length > 0) {
-      assert.equal(
+      assertEquals(
         args[0][1].features.length,
         1,
         "should have one feature selected",
       );
-      assert.equal(
+      assertEquals(
         args[0][1].features[0].id,
         id,
         "should be the feature we expect to be selected",
@@ -110,23 +110,23 @@ test("simple_select", async (t) => {
     const actionableArgs = fireArgs.filter(
       (arg) => arg[0] === "draw.actionable",
     );
-    assert.ok(
+    assert(
       actionableArgs.length > 0,
       "should have fired an actionable event",
     );
     if (actionableArgs.length > 0) {
       const actionable = actionableArgs[actionableArgs.length - 1][1];
-      assert.equal(
+      assertEquals(
         actionable.actions.combineFeatures,
         false,
         "should fire correct combine actionable",
       );
-      assert.equal(
+      assertEquals(
         actionable.actions.uncombineFeatures,
         false,
         "should fire correct uncombine actionable",
       );
-      assert.equal(
+      assertEquals(
         actionable.actions.trash,
         true,
         "should fire correct trash actionable",
@@ -162,9 +162,9 @@ test("simple_select", async (t) => {
     await afterNextRender();
     const fireArgs = getFireArgs();
     const args = fireArgs.filter((arg) => arg[0] === "draw.selectionchange");
-    assert.equal(args.length, 1, "should have one and only one select event");
+    assertEquals(args.length, 1, "should have one and only one select event");
     if (args.length > 0) {
-      assert.equal(
+      assertEquals(
         args[0][1].features.length,
         ids.length,
         "should have all features selected",
@@ -174,23 +174,23 @@ test("simple_select", async (t) => {
     const actionableArgs = fireArgs.filter(
       (arg) => arg[0] === "draw.actionable",
     );
-    assert.ok(
+    assert(
       actionableArgs.length > 0,
       "should have fired an actionable event",
     );
     if (actionableArgs.length > 0) {
       const actionable = actionableArgs[actionableArgs.length - 1][1];
-      assert.equal(
+      assertEquals(
         actionable.actions.combineFeatures,
         true,
         "should fire correct combine actionable",
       );
-      assert.equal(
+      assertEquals(
         actionable.actions.uncombineFeatures,
         false,
         "should fire correct uncombine actionable",
       );
-      assert.equal(
+      assertEquals(
         actionable.actions.trash,
         true,
         "should fire correct trash actionable",
@@ -216,7 +216,7 @@ test("simple_select", async (t) => {
     map.fire("mouseup", makeMouseEvent(-15, -15, { shiftKey: true }));
 
     await afterNextRender();
-    assert.equal(
+    assertEquals(
       getFireArgs().filter((arg) => arg[0] === "draw.selectionchange").length,
       0,
       "there should be no draw.selectionchange event",
@@ -236,7 +236,7 @@ test("simple_select", async (t) => {
     map.fire("mouseup", makeMouseEvent(15, 15, { shiftKey: true }));
 
     await afterNextRender();
-    assert.equal(
+    assertEquals(
       getFireArgs().filter((arg) => arg[0] === "draw.selectionchange").length,
       0,
       "there should be no draw.selectionchange event",
@@ -257,13 +257,13 @@ test("simple_select", async (t) => {
     const args = getFireArgs().filter(
       (arg) => arg[0] === "draw.selectionchange",
     );
-    assert.equal(
+    assertEquals(
       args.length,
       1,
       "should have one and only one selectionchange event",
     );
     if (args.length > 0) {
-      assert.equal(
+      assertEquals(
         args[0][1].features.length,
         0,
         "should have no features selected",
@@ -284,25 +284,25 @@ test("simple_select", async (t) => {
     map.fire("mouseup", makeMouseEvent(50, 30));
 
     await afterNextRender();
-    assert.equal(
+    assertEquals(
       map.doubleClickZoom.disable.callCount,
       1,
       "disable doubleClickZoom",
     );
     let args = getFireArgs();
     args = args.filter((arg) => arg[0] === "draw.selectionchange");
-    assert.equal(
+    assertEquals(
       args.length,
       1,
       "should have one and only one selectionchange event",
     );
     if (args.length > 0) {
-      assert.equal(
+      assertEquals(
         args[0][1].features.length,
         1,
         "should have only one feature selected",
       );
-      assert.equal(
+      assertEquals(
         args[0][1].features[0].id,
         id,
         "should be the feature we expect to be selected",
@@ -324,18 +324,18 @@ test("simple_select", async (t) => {
     await afterNextRender();
     let args = getFireArgs();
     args = args.filter((arg) => arg[0] === "draw.selectionchange");
-    assert.equal(
+    assertEquals(
       args.length,
       1,
       "should have one and only one selectionchange event",
     );
     if (args.length > 0) {
-      assert.equal(
+      assertEquals(
         args[0][1].features.length,
         1,
         "should have only one feature selected",
       );
-      assert.equal(
+      assertEquals(
         args[0][1].features[0].id,
         id,
         "should be the feature we expect to be selected",
@@ -357,25 +357,25 @@ test("simple_select", async (t) => {
       map.fire("mouseup", makeMouseEvent(50, 30, { shiftKey: true }));
 
       await afterNextRender();
-      assert.equal(
+      assertEquals(
         map.doubleClickZoom.disable.callCount,
         1,
         "disable doubleClickZoom",
       );
-      assert.equal(
+      assertEquals(
         map.getContainer().className.indexOf("mouse-pointer") > -1,
         true,
         "mouse-pointer class has been set",
       );
       let args = getFireArgs();
       args = args.filter((arg) => arg[0] === "draw.selectionchange");
-      assert.equal(
+      assertEquals(
         args.length,
         1,
         "should have one and only one selectionchange event",
       );
       if (args.length > 0) {
-        assert.equal(
+        assertEquals(
           args[0][1].features.length,
           0,
           "should have no features selected",
@@ -394,24 +394,24 @@ test("simple_select", async (t) => {
     await afterNextRender();
     let args = getFireArgs();
     args = args.filter((arg) => arg[0] === "draw.delete");
-    assert.equal(
+    assertEquals(
       args.length,
       1,
       "should have one and only one draw.delete event",
     );
-    assert.equal(
+    assertEquals(
       args[0][1].features.length,
       1,
       "should delete only one feature",
     );
-    assert.equal(
+    assertEquals(
       args[0][1].features[0].id,
       id,
       "should delete the feature we expect it to delete",
     );
 
     const selectedFeatures = Draw.getSelectedIds();
-    assert.equal(
+    assertEquals(
       selectedFeatures.length,
       0,
       "nothing should be selected anymore",
@@ -434,30 +434,30 @@ test("simple_select", async (t) => {
       map.fire("mouseup", makeMouseEvent(50, 30, false));
 
       await afterNextRender();
-      assert.equal(
+      assertEquals(
         map.doubleClickZoom.disable.callCount,
         2,
         "disable doubleClickZoom. Once for click, once for direct_select",
       );
-      assert.equal(
+      assertEquals(
         map.doubleClickZoom.enable.callCount,
         1,
         "double click zoom has been enabled",
       );
-      assert.equal(
+      assertEquals(
         map.getContainer().className.indexOf("mouse-move") > -1,
         true,
         "mouse-move class has been set",
       );
       let args = getFireArgs();
       args = args.filter((arg) => arg[0] === "draw.modechange");
-      assert.equal(
+      assertEquals(
         args.length,
         1,
         "should have one and only one modechange event",
       );
       if (args.length > 0) {
-        assert.equal(
+        assertEquals(
           args[0][1].mode,
           "direct_select",
           "should change to direct select",
@@ -482,20 +482,20 @@ test("simple_select", async (t) => {
       map.fire("mouseup", makeMouseEvent(clickPosition[0], clickPosition[1]));
 
       await afterNextRender();
-      assert.equal(
+      assertEquals(
         map.doubleClickZoom.enable.callCount,
         1,
         "double click zoom has been enabled",
       );
       let args = getFireArgs();
       args = args.filter((arg) => arg[0] === "draw.modechange");
-      assert.equal(
+      assertEquals(
         args.length,
         1,
         "should have one and only one modechange event",
       );
       if (args.length > 0) {
-        assert.equal(
+        assertEquals(
           args[0][1].mode,
           "direct_select",
           "should change to direct select",
@@ -522,13 +522,13 @@ test("simple_select", async (t) => {
       await afterNextRender();
       let args = getFireArgs();
       args = args.filter((arg) => arg[0] === "draw.modechange");
-      assert.equal(
+      assertEquals(
         args.length,
         1,
         "should have one and only one modechange event",
       );
       if (args.length > 0) {
-        assert.equal(
+        assertEquals(
           args[0][1].mode,
           "direct_select",
           "should change to direct select",
@@ -564,13 +564,13 @@ test("simple_select", async (t) => {
 
       const movedPoint = Draw.get(pointId);
       const args = getFireArgs().filter((arg) => arg[0] === "draw.update");
-      assert.equal(args.length, 1, "draw.update called once");
-      assert.equal(
+      assertEquals(args.length, 1, "draw.update called once");
+      assertEquals(
         movedPoint.geometry.coordinates[0],
         endPosition[0],
         "point lng moved to touchend location",
       );
-      assert.equal(
+      assertEquals(
         movedPoint.geometry.coordinates[1],
         endPosition[1],
         "point lat moved to touchend location",
@@ -591,40 +591,40 @@ test("simple_select", async (t) => {
       map.fire("mouseup", makeMouseEvent(50, 30, { shiftKey: true }));
 
       await afterNextRender();
-      assert.equal(
+      assertEquals(
         map.getContainer().className.indexOf("mouse-move") > -1,
         true,
         "mouse-move class has been set",
       );
-      assert.equal(
+      assertEquals(
         Draw.getSelectedIds().indexOf(pointId) !== -1,
         true,
         "point is still selected",
       );
-      assert.equal(
+      assertEquals(
         Draw.getSelectedIds().indexOf(id) !== -1,
         true,
         "polygon is now selected",
       );
       let args = getFireArgs();
       args = args.filter((arg) => arg[0] === "draw.selectionchange");
-      assert.equal(
+      assertEquals(
         args.length,
         1,
         "should have one and only one selectionchange event",
       );
       if (args.length > 0) {
-        assert.equal(
+        assertEquals(
           args[0][1].features.length,
           2,
           "should have two features selected",
         );
-        assert.equal(
+        assertEquals(
           args[0][1].features[0].id,
           pointId,
           "selection includes point",
         );
-        assert.equal(
+        assertEquals(
           args[0][1].features[1].id,
           id,
           "selection includes polygon",
@@ -647,35 +647,35 @@ test("simple_select", async (t) => {
       map.fire("mouseup", makeMouseEvent(50, 30, false));
 
       await afterNextRender();
-      assert.equal(
+      assertEquals(
         map.getContainer().className.indexOf("mouse-move") > -1,
         true,
         "mouse-move class has been set",
       );
-      assert.equal(
+      assertEquals(
         Draw.getSelectedIds().indexOf(pointId) === -1,
         true,
         "point is no longer selected",
       );
-      assert.equal(
+      assertEquals(
         Draw.getSelectedIds().indexOf(id) !== -1,
         true,
         "polygon is now selected",
       );
       let args = getFireArgs();
       args = args.filter((arg) => arg[0] === "draw.selectionchange");
-      assert.equal(
+      assertEquals(
         args.length,
         1,
         "should have one and only one selectionchange event",
       );
       if (args.length > 0) {
-        assert.equal(
+        assertEquals(
           args[0][1].features.length,
           1,
           "should have only one feature selected",
         );
-        assert.equal(
+        assertEquals(
           args[0][1].features[0].id,
           id,
           "should be the feature we expect to be selected",
@@ -729,102 +729,102 @@ test("simple_select", async (t) => {
     );
 
     const movedPoint = Draw.get(pointId);
-    assert.equal(
+    assertEquals(
       movedPoint.geometry.coordinates[0],
       startPosition[0] + 25,
       "point lng moved",
     );
-    assert.equal(
+    assertEquals(
       movedPoint.geometry.coordinates[1],
       startPosition[1] + 25,
       "point lat moved",
     );
-    assert.equal(
+    assertEquals(
       countPositions(movedPoint),
       countPositions(getGeoJSON("point")),
       "point has same number of postions",
     );
 
     const movedMultiPoint = Draw.get(multiPointId);
-    assert.equal(
+    assertEquals(
       movedMultiPoint.geometry.coordinates[0][0],
       getGeoJSON("multiPoint").geometry.coordinates[0][0] + 25,
       "multipoint lng moved",
     );
-    assert.equal(
+    assertEquals(
       movedMultiPoint.geometry.coordinates[0][1],
       getGeoJSON("multiPoint").geometry.coordinates[0][1] + 25,
       "multipoint lat moved",
     );
-    assert.equal(
+    assertEquals(
       countPositions(movedMultiPoint),
       countPositions(getGeoJSON("multiPoint")),
       "multiPoint has same number of postions",
     );
 
     const movedLineString = Draw.get(lineStringId);
-    assert.equal(
+    assertEquals(
       movedLineString.geometry.coordinates[0][0],
       getGeoJSON("line").geometry.coordinates[0][0] + 25,
       "line lng moved",
     );
-    assert.equal(
+    assertEquals(
       movedLineString.geometry.coordinates[0][1],
       getGeoJSON("line").geometry.coordinates[0][1] + 25,
       "line lat moved",
     );
-    assert.equal(
+    assertEquals(
       countPositions(movedLineString),
       countPositions(getGeoJSON("line")),
       "line has same number of postions",
     );
 
     const movedMultiLineString = Draw.get(multiLineStringId);
-    assert.equal(
+    assertEquals(
       movedMultiLineString.geometry.coordinates[0][0][0],
       getGeoJSON("multiLineString").geometry.coordinates[0][0][0] + 25,
       "multiLineString lng moved",
     );
-    assert.equal(
+    assertEquals(
       movedMultiLineString.geometry.coordinates[0][0][1],
       getGeoJSON("multiLineString").geometry.coordinates[0][0][1] + 25,
       "multiLineString lat moved",
     );
-    assert.equal(
+    assertEquals(
       countPositions(movedMultiLineString),
       countPositions(getGeoJSON("multiLineString")),
       "multiLineString has same number of postions",
     );
 
     const movedPolygon = Draw.get(polygonId);
-    assert.equal(
+    assertEquals(
       movedPolygon.geometry.coordinates[0][0][0],
       getGeoJSON("polygon").geometry.coordinates[0][0][0] + 25,
       "polygon lng moved",
     );
-    assert.equal(
+    assertEquals(
       movedPolygon.geometry.coordinates[0][0][1],
       getGeoJSON("polygon").geometry.coordinates[0][0][1] + 25,
       "polygon lat moved",
     );
-    assert.equal(
+    assertEquals(
       countPositions(movedPolygon),
       countPositions(getGeoJSON("polygon")),
       "polygon has same number of postions",
     );
 
     const movedMultiPolygon = Draw.get(multiPolygonId);
-    assert.equal(
+    assertEquals(
       movedMultiPolygon.geometry.coordinates[0][0][0][0],
       getGeoJSON("multiPolygon").geometry.coordinates[0][0][0][0] + 25,
       "multiPolygon lng moved",
     );
-    assert.equal(
+    assertEquals(
       movedMultiPolygon.geometry.coordinates[0][0][0][1],
       getGeoJSON("multiPolygon").geometry.coordinates[0][0][0][1] + 25,
       "multiPolygon lat moved",
     );
-    assert.equal(
+    assertEquals(
       countPositions(movedMultiPolygon),
       countPositions(getGeoJSON("multiPolygon")),
       "multiPolygon has same number of postions",
@@ -860,12 +860,12 @@ test("simple_select", async (t) => {
       );
 
       const movedPoint = Draw.get(pointId);
-      assert.equal(
+      assertEquals(
         movedPoint.geometry.coordinates[0],
         startPosition[0] + 15,
         "point lng moved only the first amount",
       );
-      assert.equal(
+      assertEquals(
         movedPoint.geometry.coordinates[1],
         startPosition[1] + 15,
         "point lat moved only the first amount",
@@ -902,13 +902,13 @@ test("simple_select", async (t) => {
 
       const movedPoint = Draw.get(pointId);
       const args = getFireArgs().filter((arg) => arg[0] === "draw.update");
-      assert.equal(args.length, 1, "draw.update called once");
-      assert.equal(
+      assertEquals(args.length, 1, "draw.update called once");
+      assertEquals(
         movedPoint.geometry.coordinates[0],
         startPosition[0] + 15,
         "point lng moved only the first amount",
       );
-      assert.equal(
+      assertEquals(
         movedPoint.geometry.coordinates[1],
         startPosition[1] + 15,
         "point lat moved only the first amount",
@@ -947,13 +947,13 @@ test("simple_select", async (t) => {
 
       const movedPoint = Draw.get(pointId);
       const args = getFireArgs().filter((arg) => arg[0] === "draw.update");
-      assert.equal(args.length, 2, "draw.update called twice");
-      assert.equal(
+      assertEquals(args.length, 2, "draw.update called twice");
+      assertEquals(
         movedPoint.geometry.coordinates[0],
         startPosition[0] + 25,
         "point lng moved to the mouseup location",
       );
-      assert.equal(
+      assertEquals(
         movedPoint.geometry.coordinates[1],
         startPosition[1] + 25,
         "point lat moved to the mouseup location",
@@ -965,17 +965,17 @@ test("simple_select", async (t) => {
     Draw.changeMode("draw_line_string");
     mouseClick(map, makeMouseEvent(1, 1));
     mouseClick(map, makeMouseEvent(1, 1));
-    assert.equal(
+    assertEquals(
       Draw.getMode(),
       "simple_select",
       "should be in simple_select mode",
     );
-    assert.equal(
+    assertEquals(
       Draw.getSelected().features.length,
       0,
       "should not get any selected features",
     );
-    assert.equal(
+    assertEquals(
       context.store._emitSelectionChange,
       undefined,
       "should not emit selection change",
@@ -988,17 +988,17 @@ test("simple_select", async (t) => {
     mouseClick(map, makeMouseEvent(1, 1));
     mouseClick(map, makeMouseEvent(16, 16));
     mouseClick(map, makeMouseEvent(16, 16));
-    assert.equal(
+    assertEquals(
       Draw.getMode(),
       "simple_select",
       "should be in simple_select mode",
     );
-    assert.equal(
+    assertEquals(
       Draw.getSelected().features.length,
       0,
       "should not get any selected features",
     );
-    assert.equal(
+    assertEquals(
       context.store._emitSelectionChange,
       undefined,
       "should not emit selection change",
@@ -1031,13 +1031,13 @@ test("simple_select", async (t) => {
 
       const movedPoint = Draw.get(pointId);
       const args = getFireArgs().filter((arg) => arg[0] === "draw.update");
-      assert.equal(args.length, 1, "draw.update called once");
-      assert.equal(
+      assertEquals(args.length, 1, "draw.update called once");
+      assertEquals(
         movedPoint.geometry.coordinates[0],
         endPosition[0],
         "point lng moved to the last touchmove position",
       );
-      assert.equal(
+      assertEquals(
         movedPoint.geometry.coordinates[1],
         endPosition[1],
         "point lat moved the last touchmove position",

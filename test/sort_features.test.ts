@@ -1,5 +1,5 @@
 import test from "node:test";
-import assert from "node:assert/strict";
+import {assert, assertEquals, assertNotEquals, assertThrows} from "@std/assert";
 import { sortFeatures } from "../src/lib/sort_features.ts";
 
 test("sortFeatures", () => {
@@ -56,7 +56,7 @@ test("sortFeatures", () => {
     },
   ];
 
-  assert.deepEqual(sortFeatures(features), [
+  assertEquals(sortFeatures(features), [
     {
       geometry: { type: "Point" },
       properties: { id: 3 },

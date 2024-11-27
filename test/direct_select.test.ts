@@ -1,6 +1,6 @@
 /* eslint no-shadow:[0] */
 import test from "node:test";
-import assert from "node:assert/strict";
+import {assert, assertEquals, assertNotEquals, assertThrows} from "@std/assert";
 import turfCentroid from "@turf/centroid";
 import createSyntheticEvent from "synthetic-dom-events";
 import { spy } from "sinon";
@@ -72,23 +72,23 @@ test("direct_select", async (t) => {
       const actionableArgs = getFireArgs().filter(
         (arg) => arg[0] === "draw.actionable",
       );
-      assert.ok(
+      assert(
         actionableArgs.length > 0,
         "should have fired an actionable event",
       );
       if (actionableArgs.length > 0) {
         const actionable = actionableArgs[actionableArgs.length - 1][1];
-        assert.equal(
+        assertEquals(
           actionable.actions.combineFeatures,
           false,
           "should fire correct combine actionable",
         );
-        assert.equal(
+        assertEquals(
           actionable.actions.uncombineFeatures,
           false,
           "should fire correct uncombine actionable",
         );
-        assert.equal(
+        assertEquals(
           actionable.actions.trash,
           false,
           "should fire correct trash actionable",
@@ -115,23 +115,23 @@ test("direct_select", async (t) => {
       const actionableArgs = getFireArgs().filter(
         (arg) => arg[0] === "draw.actionable",
       );
-      assert.ok(
+      assert(
         actionableArgs.length > 0,
         "should have fired an actionable event",
       );
       if (actionableArgs.length > 0) {
         const actionable = actionableArgs[actionableArgs.length - 1][1];
-        assert.equal(
+        assertEquals(
           actionable.actions.combineFeatures,
           false,
           "should fire correct combine actionable",
         );
-        assert.equal(
+        assertEquals(
           actionable.actions.uncombineFeatures,
           false,
           "should fire correct uncombine actionable",
         );
-        assert.equal(
+        assertEquals(
           actionable.actions.trash,
           true,
           "should fire correct trash actionable",
@@ -158,23 +158,23 @@ test("direct_select", async (t) => {
       const actionableArgs = getFireArgs().filter(
         (arg) => arg[0] === "draw.actionable",
       );
-      assert.ok(
+      assert(
         actionableArgs.length > 0,
         "should have fired an actionable event",
       );
       if (actionableArgs.length > 0) {
         const actionable = actionableArgs[actionableArgs.length - 1][1];
-        assert.equal(
+        assertEquals(
           actionable.actions.combineFeatures,
           false,
           "should fire correct combine actionable",
         );
-        assert.equal(
+        assertEquals(
           actionable.actions.uncombineFeatures,
           false,
           "should fire correct uncombine actionable",
         );
-        assert.equal(
+        assertEquals(
           actionable.actions.trash,
           true,
           "should fire correct trash actionable",
@@ -223,7 +223,7 @@ test("direct_select", async (t) => {
       await afterNextRender();
       Draw.trash();
       const afterTrash = Draw.get(ids[0]);
-      assert.deepEqual(afterTrash.geometry.coordinates, [
+      assertEquals(afterTrash.geometry.coordinates, [
         [0, 0],
         [10, 0],
         [20, 0],
@@ -258,7 +258,7 @@ test("direct_select", async (t) => {
       );
       map.fire("mouseup", makeMouseEvent(clickAt[0] + 30, clickAt[1] + 30));
       const afterMove = Draw.get(ids[0]);
-      assert.deepEqual(
+      assertEquals(
         getGeoJSON("polygon").geometry,
         afterMove.geometry,
         "should be the same after the drag",
@@ -300,13 +300,13 @@ test("direct_select", async (t) => {
 
       const afterMove = Draw.get(ids[0]);
       const args = getFireArgs().filter((arg) => arg[0] === "draw.update");
-      assert.equal(args.length, 1, "draw.update called once");
-      assert.equal(
+      assertEquals(args.length, 1, "draw.update called once");
+      assertEquals(
         afterMove.geometry.coordinates[0][1][0],
         startPosition[0] + 15,
         "point lng moved only the first amount",
       );
-      assert.equal(
+      assertEquals(
         afterMove.geometry.coordinates[0][1][1],
         startPosition[1] + 15,
         "point lat moved only the first amount",
@@ -350,13 +350,13 @@ test("direct_select", async (t) => {
 
       const afterMove = Draw.get(ids[0]);
       const args = getFireArgs().filter((arg) => arg[0] === "draw.update");
-      assert.equal(args.length, 2, "draw.update called twice");
-      assert.equal(
+      assertEquals(args.length, 2, "draw.update called twice");
+      assertEquals(
         afterMove.geometry.coordinates[0][1][0],
         startPosition[0] + 30,
         "point lng moved to the mouseup location",
       );
-      assert.equal(
+      assertEquals(
         afterMove.geometry.coordinates[0][1][1],
         startPosition[1] + 30,
         "point lat moved to the mouseup location",
@@ -388,13 +388,13 @@ test("direct_select", async (t) => {
 
       const afterMove = Draw.get(polygonId);
       const args = getFireArgs().filter((arg) => arg[0] === "draw.update");
-      assert.equal(args.length, 1, "draw.update called once");
-      assert.equal(
+      assertEquals(args.length, 1, "draw.update called once");
+      assertEquals(
         afterMove.geometry.coordinates[0][1][0],
         startPosition[0] + 15,
         "point lng moved to the mouseup location",
       );
-      assert.equal(
+      assertEquals(
         afterMove.geometry.coordinates[0][1][1],
         startPosition[1] + 15,
         "point lat moved to the mouseup location",
@@ -412,7 +412,7 @@ test("direct_select", async (t) => {
         featureId: lineId,
       });
 
-      assert.equal(
+      assertEquals(
         Draw.getSelectedPoints().features[0],
         undefined,
         "no initial selection",
@@ -424,7 +424,7 @@ test("direct_select", async (t) => {
 
       map.fire.resetHistory();
       mouseClick(map, makeMouseEvent(startPosition[0], startPosition[1]));
-      assert.deepEqual(
+      assertEquals(
         Draw.getSelectedPoints().features[0].geometry.coordinates,
         startPosition,
         "click saves selection",
@@ -438,7 +438,7 @@ test("direct_select", async (t) => {
       map.fire("mouseup", makeMouseEvent(endPosition[0], endPosition[1]));
       await afterNextRender();
 
-      assert.deepEqual(
+      assertEquals(
         Draw.getSelectedPoints().features[0].geometry.coordinates,
         endPosition,
         "selection is accurate after dragging",

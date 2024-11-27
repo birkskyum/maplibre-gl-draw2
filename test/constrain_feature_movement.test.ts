@@ -1,5 +1,5 @@
 import test from "node:test";
-import assert from "node:assert/strict";
+import {assert, assertEquals, assertNotEquals, assertThrows} from "@std/assert";
 import { getGeoJSON } from "./utils/get_geojson.ts";
 import { constrainFeatureMovement } from "../src/lib/constrain_feature_movement.ts";
 
@@ -10,7 +10,7 @@ test("constrainFeatureMovement point, no constraint", () => {
     lat: 13,
     lng: 0,
   });
-  assert.deepEqual(constrainedDelta, {
+  assertEquals(constrainedDelta, {
     lat: 13,
     lng: 0,
   });
@@ -23,7 +23,7 @@ test("constrainFeatureMovement point, requiring northern constraint", () => {
     lat: 80,
     lng: 0,
   });
-  assert.deepEqual(
+  assertEquals(
     constrainedDelta,
     {
       lat: 65,
@@ -40,7 +40,7 @@ test("constrainFeatureMovement point, requiring southern constraint", () => {
     lat: -80,
     lng: 0,
   });
-  assert.deepEqual(
+  assertEquals(
     constrainedDelta,
     {
       lat: -65,
@@ -57,7 +57,7 @@ test("constrainFeatureMovement point, requiring western wrap", () => {
     lat: 10,
     lng: -300,
   });
-  assert.deepEqual(
+  assertEquals(
     constrainedDelta,
     {
       lat: 10,
@@ -74,7 +74,7 @@ test("constrainFeatureMovement point, requiring eastern wrap", () => {
     lat: 10,
     lng: 300,
   });
-  assert.deepEqual(
+  assertEquals(
     constrainedDelta,
     {
       lat: 10,
@@ -95,7 +95,7 @@ test("constrainFeatureMovement line, no constraint", () => {
     lat: 13,
     lng: 0,
   });
-  assert.deepEqual(constrainedDelta, {
+  assertEquals(constrainedDelta, {
     lat: 13,
     lng: 0,
   });
@@ -111,7 +111,7 @@ test("constrainFeatureMovement line, requiring northern inner constraint", () =>
     lat: 7,
     lng: 0,
   });
-  assert.deepEqual(
+  assertEquals(
     constrainedDelta,
     {
       lat: 5,
@@ -131,7 +131,7 @@ test("constrainFeatureMovement line, requiring northern outer constraint", () =>
     lat: 12,
     lng: 0,
   });
-  assert.deepEqual(
+  assertEquals(
     constrainedDelta,
     {
       lat: 9,
@@ -151,7 +151,7 @@ test("constrainFeatureMovement line, requiring southern inner constraint", () =>
     lat: -7,
     lng: 0,
   });
-  assert.deepEqual(
+  assertEquals(
     constrainedDelta,
     {
       lat: -5,
@@ -171,7 +171,7 @@ test("constrainFeatureMovement line, requiring southern outer constraint", () =>
     lat: -12,
     lng: 0,
   });
-  assert.deepEqual(
+  assertEquals(
     constrainedDelta,
     {
       lat: -9,
@@ -192,7 +192,7 @@ test("constrainFeatureMovement line, requiring western wrap", () => {
     lat: 0,
     lng: -280,
   });
-  assert.deepEqual(constrainedDelta, {
+  assertEquals(constrainedDelta, {
     lat: 0,
     lng: 80,
   });
@@ -209,7 +209,7 @@ test("constrainFeatureMovement line, requiring eastern wrap", () => {
     lat: 0,
     lng: 255,
   });
-  assert.deepEqual(constrainedDelta, {
+  assertEquals(constrainedDelta, {
     lat: 0,
     lng: -105,
   });
@@ -229,7 +229,7 @@ test("constrainFeatureMovement polygon, no constraint", () => {
     lat: 13,
     lng: 0,
   });
-  assert.deepEqual(constrainedDelta, {
+  assertEquals(constrainedDelta, {
     lat: 13,
     lng: 0,
   });
@@ -249,7 +249,7 @@ test("constrainFeatureMovement polygon, requiring northern inner constraint", ()
     lat: 7,
     lng: 0,
   });
-  assert.deepEqual(
+  assertEquals(
     constrainedDelta,
     {
       lat: 5,
@@ -273,7 +273,7 @@ test("constrainFeatureMovement polygon, requiring northern outer constraint", ()
     lat: 12,
     lng: 0,
   });
-  assert.deepEqual(
+  assertEquals(
     constrainedDelta,
     {
       lat: 9,
@@ -297,7 +297,7 @@ test("constrainFeatureMovement polygon, requiring southern inner constraint", ()
     lat: -7,
     lng: 0,
   });
-  assert.deepEqual(
+  assertEquals(
     constrainedDelta,
     {
       lat: -5,
@@ -321,7 +321,7 @@ test("constrainFeatureMovement polygon, requiring southern outer constraint", ()
     lat: -12,
     lng: 0,
   });
-  assert.deepEqual(
+  assertEquals(
     constrainedDelta,
     {
       lat: -9,
@@ -345,7 +345,7 @@ test("constrainFeatureMovement polygon, requiring western wrap", () => {
     lat: 70,
     lng: -270,
   });
-  assert.deepEqual(constrainedDelta, {
+  assertEquals(constrainedDelta, {
     lat: 70,
     lng: 90,
   });
@@ -365,7 +365,7 @@ test("constrainFeatureMovement polygon, requiring eastern wrap", () => {
     lat: 35,
     lng: 270,
   });
-  assert.deepEqual(constrainedDelta, {
+  assertEquals(constrainedDelta, {
     lat: 35,
     lng: -90,
   });
@@ -392,7 +392,7 @@ test("constrainFeatureMovement many features, no constraint", () => {
     lat: 13,
     lng: 0,
   });
-  assert.deepEqual(constrainedDelta, {
+  assertEquals(constrainedDelta, {
     lat: 13,
     lng: 0,
   });
@@ -419,7 +419,7 @@ test("constrainFeatureMovement many features, requiring northern inner constrain
     lat: 13,
     lng: 0,
   });
-  assert.deepEqual(
+  assertEquals(
     constrainedDelta,
     {
       lat: 5,
@@ -450,7 +450,7 @@ test("constrainFeatureMovement many features, requiring northern outer constrain
     lat: 100,
     lng: 0,
   });
-  assert.deepEqual(
+  assertEquals(
     constrainedDelta,
     {
       lat: 65,
@@ -481,7 +481,7 @@ test("constrainFeatureMovement many features, requiring southern inner constrain
     lat: -10,
     lng: 0,
   });
-  assert.deepEqual(
+  assertEquals(
     constrainedDelta,
     {
       lat: -5,
@@ -512,7 +512,7 @@ test("constrainFeatureMovement many features, requiring southern outer constrain
     lat: -200,
     lng: 0,
   });
-  assert.deepEqual(
+  assertEquals(
     constrainedDelta,
     {
       lat: -90,
@@ -543,7 +543,7 @@ test("constrainFeatureMovement many features, requiring western wrap", () => {
     lat: 27,
     lng: -310,
   });
-  assert.deepEqual(constrainedDelta, {
+  assertEquals(constrainedDelta, {
     lat: 27,
     lng: 50,
   });
@@ -570,7 +570,7 @@ test("constrainFeatureMovement many features, requiring eastern wrap", () => {
     lat: 27,
     lng: 260,
   });
-  assert.deepEqual(constrainedDelta, {
+  assertEquals(constrainedDelta, {
     lat: 27,
     lng: -100,
   });

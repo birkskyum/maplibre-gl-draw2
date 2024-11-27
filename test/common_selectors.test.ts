@@ -1,12 +1,12 @@
 import test from "node:test";
-import assert from "node:assert/strict";
+import {assert, assertEquals, assertNotEquals, assertThrows} from "@std/assert";
 
 import * as commonSelectors from "../src/lib/common_selectors.ts";
 
 test("commonSelectors.isOfMetaType", () => {
   const isFoo = commonSelectors.isOfMetaType("foo");
-  assert.equal(typeof isFoo, "function");
-  assert.ok(
+  assertEquals(typeof isFoo, "function");
+  assert(
     isFoo({
       featureTarget: {
         properties: {
@@ -15,8 +15,8 @@ test("commonSelectors.isOfMetaType", () => {
       },
     }),
   );
-  assert.equal(isFoo({}), false);
-  assert.equal(
+  assertEquals(isFoo({}), false);
+  assertEquals(
     isFoo({
       featureTarget: {
         properties: {
@@ -29,7 +29,7 @@ test("commonSelectors.isOfMetaType", () => {
 });
 
 test("commonSelectors.isShiftMousedown", () => {
-  assert.ok(
+  assert(
     commonSelectors.isShiftMousedown({
       originalEvent: {
         shiftKey: true,
@@ -38,7 +38,7 @@ test("commonSelectors.isShiftMousedown", () => {
     }),
   );
 
-  assert.equal(
+  assertEquals(
     commonSelectors.isShiftMousedown({
       originalEvent: {
         shiftKey: false,
@@ -48,7 +48,7 @@ test("commonSelectors.isShiftMousedown", () => {
     false,
   );
 
-  assert.equal(
+  assertEquals(
     commonSelectors.isShiftMousedown({
       originalEvent: {
         shiftKey: true,
@@ -58,7 +58,7 @@ test("commonSelectors.isShiftMousedown", () => {
     false,
   );
 
-  assert.equal(
+  assertEquals(
     commonSelectors.isShiftMousedown({
       nothing: false,
     }),
@@ -67,7 +67,7 @@ test("commonSelectors.isShiftMousedown", () => {
 });
 
 test("commonSelectors.isActiveFeature", () => {
-  assert.ok(
+  assert(
     commonSelectors.isActiveFeature({
       featureTarget: {
         properties: {
@@ -78,14 +78,14 @@ test("commonSelectors.isActiveFeature", () => {
     }),
   );
 
-  assert.equal(
+  assertEquals(
     commonSelectors.isActiveFeature({
       foo: "bar",
     }),
     false,
   );
 
-  assert.equal(
+  assertEquals(
     commonSelectors.isActiveFeature({
       featureTarget: {
         properties: {
@@ -97,7 +97,7 @@ test("commonSelectors.isActiveFeature", () => {
     false,
   );
 
-  assert.equal(
+  assertEquals(
     commonSelectors.isActiveFeature({
       featureTarget: {
         properties: {
@@ -109,7 +109,7 @@ test("commonSelectors.isActiveFeature", () => {
     false,
   );
 
-  assert.equal(
+  assertEquals(
     commonSelectors.isActiveFeature({
       featureTarget: {
         properties: {
@@ -121,14 +121,14 @@ test("commonSelectors.isActiveFeature", () => {
     false,
   );
 
-  assert.equal(
+  assertEquals(
     commonSelectors.isActiveFeature({
       nothing: false,
     }),
     false,
   );
 
-  assert.equal(
+  assertEquals(
     commonSelectors.isActiveFeature({
       featureTarget: {},
     }),
@@ -137,7 +137,7 @@ test("commonSelectors.isActiveFeature", () => {
 });
 
 test("commonSelectors.isInactiveFeature", () => {
-  assert.ok(
+  assert(
     commonSelectors.isInactiveFeature({
       featureTarget: {
         properties: {
@@ -148,14 +148,14 @@ test("commonSelectors.isInactiveFeature", () => {
     }),
   );
 
-  assert.equal(
+  assertEquals(
     commonSelectors.isInactiveFeature({
       foo: "bar",
     }),
     false,
   );
 
-  assert.equal(
+  assertEquals(
     commonSelectors.isInactiveFeature({
       featureTarget: {
         properties: {
@@ -167,7 +167,7 @@ test("commonSelectors.isInactiveFeature", () => {
     false,
   );
 
-  assert.equal(
+  assertEquals(
     commonSelectors.isInactiveFeature({
       featureTarget: {
         properties: {
@@ -179,7 +179,7 @@ test("commonSelectors.isInactiveFeature", () => {
     false,
   );
 
-  assert.equal(
+  assertEquals(
     commonSelectors.isInactiveFeature({
       featureTarget: {
         properties: {
@@ -191,14 +191,14 @@ test("commonSelectors.isInactiveFeature", () => {
     false,
   );
 
-  assert.equal(
+  assertEquals(
     commonSelectors.isInactiveFeature({
       nothing: false,
     }),
     false,
   );
 
-  assert.equal(
+  assertEquals(
     commonSelectors.isInactiveFeature({
       featureTarget: {},
     }),
@@ -207,26 +207,26 @@ test("commonSelectors.isInactiveFeature", () => {
 });
 
 test("commonSelectors.noTarget", () => {
-  assert.ok(
+  assert(
     commonSelectors.noTarget({
       something: 1,
     }),
   );
 
-  assert.ok(
+  assert(
     commonSelectors.noTarget({
       FeatureTarget: 1,
     }),
   );
 
-  assert.equal(
+  assertEquals(
     commonSelectors.noTarget({
       featureTarget: {},
     }),
     false,
   );
 
-  assert.equal(
+  assertEquals(
     commonSelectors.noTarget({
       featureTarget: null,
     }),
@@ -235,7 +235,7 @@ test("commonSelectors.noTarget", () => {
 });
 
 test("commonSelectors.isFeature", () => {
-  assert.ok(
+  assert(
     commonSelectors.isFeature({
       featureTarget: {
         properties: {
@@ -245,14 +245,14 @@ test("commonSelectors.isFeature", () => {
     }),
   );
 
-  assert.equal(
+  assertEquals(
     commonSelectors.isFeature({
       feee: 2,
     }),
     false,
   );
 
-  assert.equal(
+  assertEquals(
     commonSelectors.isFeature({
       featureTarget: {
         properties: {
@@ -263,14 +263,14 @@ test("commonSelectors.isFeature", () => {
     false,
   );
 
-  assert.equal(
+  assertEquals(
     commonSelectors.isFeature({
       nothing: false,
     }),
     false,
   );
 
-  assert.equal(
+  assertEquals(
     commonSelectors.isFeature({
       featureTarget: {},
     }),
@@ -279,7 +279,7 @@ test("commonSelectors.isFeature", () => {
 });
 
 test("commonSelectors.isShiftDown", () => {
-  assert.ok(
+  assert(
     commonSelectors.isShiftDown({
       originalEvent: {
         shiftKey: true,
@@ -287,7 +287,7 @@ test("commonSelectors.isShiftDown", () => {
     }),
   );
 
-  assert.equal(
+  assertEquals(
     commonSelectors.isShiftDown({
       originalEvent: {
         shiftKey: false,
@@ -296,14 +296,14 @@ test("commonSelectors.isShiftDown", () => {
     false,
   );
 
-  assert.equal(
+  assertEquals(
     commonSelectors.isShiftDown({
       originalEvent: {},
     }),
     false,
   );
 
-  assert.equal(
+  assertEquals(
     commonSelectors.isShiftDown({
       nothing: true,
     }),
@@ -312,20 +312,20 @@ test("commonSelectors.isShiftDown", () => {
 });
 
 test("commonSelectors.isEscapeKey", () => {
-  assert.ok(
+  assert(
     commonSelectors.isEscapeKey({
       keyCode: 27,
     }),
   );
 
-  assert.equal(
+  assertEquals(
     commonSelectors.isEscapeKey({
       keyCode: 13,
     }),
     false,
   );
 
-  assert.equal(
+  assertEquals(
     commonSelectors.isEscapeKey({
       originalEvent: {},
     }),
@@ -334,20 +334,20 @@ test("commonSelectors.isEscapeKey", () => {
 });
 
 test("commonSelectors.isEnterKey", () => {
-  assert.ok(
+  assert(
     commonSelectors.isEnterKey({
       keyCode: 13,
     }),
   );
 
-  assert.equal(
+  assertEquals(
     commonSelectors.isEnterKey({
       keyCode: 27,
     }),
     false,
   );
 
-  assert.equal(
+  assertEquals(
     commonSelectors.isEnterKey({
       originalEvent: {},
     }),
@@ -356,6 +356,6 @@ test("commonSelectors.isEnterKey", () => {
 });
 
 test("commonSelectors.true", () => {
-  assert.ok(commonSelectors.isTrue());
-  assert.ok(commonSelectors.isTrue(false));
+  assert(commonSelectors.isTrue());
+  assert(commonSelectors.isTrue(false));
 });

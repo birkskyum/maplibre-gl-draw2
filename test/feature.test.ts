@@ -1,5 +1,5 @@
 import test from "node:test";
-import assert from "node:assert/strict";
+import {assert, assertEquals, assertNotEquals, assertThrows} from "@std/assert";
 
 import { spy } from "sinon";
 import { Feat } from "../src/feature_types/feature.ts";
@@ -13,62 +13,62 @@ test("Feature contrusctor and API", () => {
   const feature = new Feat(ctx, featureGeoJson);
 
   // Instance members
-  assert.equal(feature.ctx, ctx, "feature.ctx");
-  assert.equal(
+  assertEquals(feature.ctx, ctx, "feature.ctx");
+  assertEquals(
     feature.coordinates,
     featureGeoJson.geometry.coordinates,
     "feature.coordinates",
   );
-  assert.equal(
+  assertEquals(
     feature.properties,
     featureGeoJson.properties,
     "feature.properties",
   );
-  assert.equal(feature.id, featureGeoJson.id, "feature.id");
-  assert.equal(feature.type, featureGeoJson.geometry.type, "feature.type");
-  assert.equal(
+  assertEquals(feature.id, featureGeoJson.id, "feature.id");
+  assertEquals(feature.type, featureGeoJson.geometry.type, "feature.type");
+  assertEquals(
     getPublicMemberKeys(feature).length,
     5,
     "no unexpected instance members",
   );
 
   // Prototype members
-  assert.equal(
+  assertEquals(
     typeof Feat.prototype.changed,
     "function",
     "feature.changed",
   );
-  assert.equal(
+  assertEquals(
     typeof Feat.prototype.incomingCoords,
     "function",
     "feature.incomingCoords",
   );
-  assert.equal(
+  assertEquals(
     typeof Feat.prototype.setCoordinates,
     "function",
     "feature.setCoordinates",
   );
-  assert.equal(
+  assertEquals(
     typeof Feat.prototype.getCoordinates,
     "function",
     "feature.getCoordinates",
   );
-  assert.equal(
+  assertEquals(
     typeof Feat.prototype.toGeoJSON,
     "function",
     "feature.toGeoJSON",
   );
-  assert.equal(
+  assertEquals(
     typeof Feat.prototype.internal,
     "function",
     "feature.internal",
   );
-  assert.equal(
+  assertEquals(
     typeof Feat.prototype.setProperty,
     "function",
     "feature.setProperty",
   );
-  assert.equal(
+  assertEquals(
     Object.getOwnPropertyNames(Feat.prototype).length,
     9,
     "no unexpected prototype members",
@@ -82,12 +82,12 @@ test("Feature contrusctor and API", () => {
     },
   };
   const featureWithDefaultsOnly = new Feat(ctx, simpleFeatureGeoJson);
-  assert.deepEqual(
+  assertEquals(
     featureWithDefaultsOnly.properties,
     {},
     "feature.properties defaults to {}",
   );
-  assert.ok(featureWithDefaultsOnly.id, "feature.id is provided");
+  assert(featureWithDefaultsOnly.id, "feature.id is provided");
 });
 
 test("Feature#changed", () => {
@@ -97,12 +97,12 @@ test("Feature#changed", () => {
 
   ctx.store.featureChanged.resetHistory();
   feature.changed();
-  assert.equal(
+  assertEquals(
     ctx.store.featureChanged.callCount,
     1,
     "called function on store",
   );
-  assert.deepEqual(
+  assertEquals(
     ctx.store.featureChanged.getCall(0).args,
     [featureGeoJson.id],
     "with correct args",
@@ -117,8 +117,8 @@ test("Feature#incomingCoords", () => {
   const changedSpy = spy(feature, "changed");
 
   feature.incomingCoords([1, 2]);
-  assert.deepEqual(feature.coordinates, [1, 2]);
-  assert.equal(changedSpy.callCount, 1);
+  assertEquals(feature.coordinates, [1, 2]);
+  assertEquals(changedSpy.callCount, 1);
 });
 
 test("Feature#setCoordinates, Feature#setCoordinates", () => {
@@ -128,19 +128,19 @@ test("Feature#setCoordinates, Feature#setCoordinates", () => {
   const feature = new Feat(ctx, featureGeoJson);
   const changedSpy = spy(feature, "changed");
 
-  assert.deepEqual(feature.getCoordinates(), [9, 10]);
+  assertEquals(feature.getCoordinates(), [9, 10]);
 
   feature.setCoordinates([1, 2]);
-  assert.deepEqual(feature.coordinates, [1, 2]);
-  assert.deepEqual(feature.getCoordinates(), [1, 2]);
-  assert.equal(changedSpy.callCount, 1);
+  assertEquals(feature.coordinates, [1, 2]);
+  assertEquals(feature.getCoordinates(), [1, 2]);
+  assertEquals(changedSpy.callCount, 1);
 });
 
 test("Feature#toGeoJSON", () => {
   const ctx = createMockFeatureContext();
   const polygon = createFeature("polygon");
   const feature = new Feat(ctx, polygon);
-  assert.deepEqual(feature.toGeoJSON(), {
+  assertEquals(feature.toGeoJSON(), {
     id: feature.id,
     type: "Feature",
     properties: feature.properties,
@@ -155,7 +155,7 @@ test("Feature#internal - when userProperties is true", () => {
   const ctx = createMockFeatureContext({ userProperties: true });
   const polygon = createFeature("polygon");
   const feature = new Feat(ctx, polygon);
-  assert.deepEqual(feature.internal("foo"), {
+  assertEquals(feature.internal("foo"), {
     type: "Feature",
     properties: {
       user_a: "b",
@@ -176,7 +176,7 @@ test("Feature#internal - when userProperties is false", () => {
   const ctx = createMockFeatureContext({ userProperties: false });
   const polygon = createFeature("polygon");
   const feature = new Feat(ctx, polygon);
-  assert.deepEqual(feature.internal("foo"), {
+  assertEquals(feature.internal("foo"), {
     type: "Feature",
     properties: {
       id: feature.id,
@@ -197,5 +197,5 @@ test("Feature#setProperty", () => {
   const polygon = createFeature("polygon");
   const feature = new Feat(ctx, polygon);
   feature.setProperty("size", 200);
-  assert.equal(feature.properties.size, 200);
+  assertEquals(feature.properties.size, 200);
 });

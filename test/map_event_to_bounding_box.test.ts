@@ -1,9 +1,9 @@
 import test from "node:test";
-import assert from "node:assert/strict";
+import {assert, assertEquals, assertNotEquals, assertThrows} from "@std/assert";
 import { mapEventToBoundingBox } from "../src/lib/map_event_to_bounding_box.ts";
 
 test("mapEventToBoundingBox", () => {
-  assert.deepEqual(
+  assertEquals(
     mapEventToBoundingBox({
       point: {
         x: 1,
@@ -16,7 +16,7 @@ test("mapEventToBoundingBox", () => {
     ],
   );
 
-  assert.deepEqual(
+  assertEquals(
     mapEventToBoundingBox(
       {
         point: {
@@ -32,7 +32,7 @@ test("mapEventToBoundingBox", () => {
     ],
   );
 
-  assert.deepEqual(
+  assertEquals(
     mapEventToBoundingBox(
       {
         point: {

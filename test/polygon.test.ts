@@ -1,5 +1,5 @@
 import test from "node:test";
-import assert from "node:assert/strict";
+import {assert, assertEquals, assertNotEquals, assertThrows} from "@std/assert";
 import { spy } from "sinon";
 import { Feat } from "../src/feature_types/feature.ts";
 import { PolygonFeat } from "../src/feature_types/polygon.ts";
@@ -25,8 +25,8 @@ test("Polygon constructor and API", () => {
   const polygon = new PolygonFeat(ctx, rawPolygon);
 
   // Instance members
-  assert.equal(polygon.ctx, ctx, "polygon.ctx");
-  assert.deepEqual(
+  assertEquals(polygon.ctx, ctx, "polygon.ctx");
+  assertEquals(
     polygon.coordinates,
     [
       [
@@ -38,63 +38,63 @@ test("Polygon constructor and API", () => {
     ],
     "polygon.coordinates remove the last coordinate of the ring (which matches the first)",
   );
-  assert.equal(polygon.properties, rawPolygon.properties, "polygon.properties");
-  assert.equal(polygon.id, rawPolygon.id, "polygon.id");
-  assert.equal(polygon.type, rawPolygon.geometry.type, "polygon.type");
-  assert.equal(
+  assertEquals(polygon.properties, rawPolygon.properties, "polygon.properties");
+  assertEquals(polygon.id, rawPolygon.id, "polygon.id");
+  assertEquals(polygon.type, rawPolygon.geometry.type, "polygon.type");
+  assertEquals(
     getPublicMemberKeys(polygon).length,
     5,
     "no unexpected instance members",
   );
 
   // Prototype members
-  assert.equal(
+  assertEquals(
     typeof PolygonFeat.prototype.isValid,
     "function",
     "polygon.isValid",
   );
-  assert.equal(
+  assertEquals(
     typeof PolygonFeat.prototype.incomingCoords,
     "function",
     "polygon.incomingCoords",
   );
-  assert.equal(
+  assertEquals(
     typeof PolygonFeat.prototype.setCoordinates,
     "function",
     "polygon.setCoordinates",
   );
-  assert.equal(
+  assertEquals(
     typeof PolygonFeat.prototype.addCoordinate,
     "function",
     "polygon.addCoordinate",
   );
-  assert.equal(
+  assertEquals(
     typeof PolygonFeat.prototype.getCoordinate,
     "function",
     "polygon.getCoordinate",
   );
-  assert.equal(
+  assertEquals(
     typeof PolygonFeat.prototype.getCoordinates,
     "function",
     "polygon.getCoordinates",
   );
-  assert.equal(
+  assertEquals(
     typeof PolygonFeat.prototype.removeCoordinate,
     "function",
     "polygon.removeCoordinate",
   );
-  assert.equal(
+  assertEquals(
     typeof PolygonFeat.prototype.updateCoordinate,
     "function",
     "polygon.updateCoordinate",
   );
-  assert.equal(
+  assertEquals(
     Object.getOwnPropertyNames(PolygonFeat.prototype).length,
     9,
     "no unexpected prototype members",
   );
 
-  assert.ok(
+  assert(
     PolygonFeat.prototype instanceof Feat,
     "inherits from Feature",
   );
@@ -106,7 +106,7 @@ test("Polygon#isValid", () => {
     createMockFeatureContext(),
     validRawPolygon,
   );
-  assert.equal(validPolygon.isValid(), true, "returns true for valid polygons");
+  assertEquals(validPolygon.isValid(), true, "returns true for valid polygons");
 
   const invalidRawPolygonA = createFeature("polygon");
   invalidRawPolygonA.geometry.coordinates = [
@@ -124,7 +124,7 @@ test("Polygon#isValid", () => {
     createMockFeatureContext(),
     invalidRawPolygonA,
   );
-  assert.equal(
+  assertEquals(
     invalidPolygonA.isValid(),
     false,
     "returns false when a ring has fewer than 3 coordinates",
@@ -144,8 +144,8 @@ test("Polygon#incomingCoords, Polygon#getCoordinates", () => {
       [1, 2],
     ],
   ]);
-  assert.equal(changedSpy.callCount, 1, "calls polygon.changed");
-  assert.deepEqual(
+  assertEquals(changedSpy.callCount, 1, "calls polygon.changed");
+  assertEquals(
     polygon.coordinates,
     [
       [
@@ -156,7 +156,7 @@ test("Polygon#incomingCoords, Polygon#getCoordinates", () => {
     ],
     "sets new coordinates, eliminating last (closing) one",
   );
-  assert.deepEqual(
+  assertEquals(
     polygon.getCoordinates(),
     [
       [
@@ -182,8 +182,8 @@ test("Polygon#setCoordinates", () => {
       [5, 6],
     ],
   ]);
-  assert.equal(changedSpy.callCount, 1, "polygon.changed called");
-  assert.deepEqual(
+  assertEquals(changedSpy.callCount, 1, "polygon.changed called");
+  assertEquals(
     polygon.coordinates,
     [
       [
@@ -219,8 +219,8 @@ test("Polygon#addCoordinate, Polygon#removeCoordinate", () => {
 
   changedSpy.resetHistory();
   polygon.addCoordinate("1.1", 99, 100);
-  assert.equal(changedSpy.callCount, 1, "polygon.changed was called");
-  assert.deepEqual(
+  assertEquals(changedSpy.callCount, 1, "polygon.changed was called");
+  assertEquals(
     polygon.getCoordinates(),
     [
       [
@@ -244,8 +244,8 @@ test("Polygon#addCoordinate, Polygon#removeCoordinate", () => {
 
   changedSpy.resetHistory();
   polygon.removeCoordinate("0.3");
-  assert.equal(changedSpy.callCount, 1, "polygon.changed was called");
-  assert.deepEqual(
+  assertEquals(changedSpy.callCount, 1, "polygon.changed was called");
+  assertEquals(
     polygon.getCoordinates(),
     [
       [
@@ -289,14 +289,14 @@ test("Polygon#updateCoordinate, Polygon#getCoordinate", () => {
   const changedSpy = spy(polygon, "changed");
 
   changedSpy.resetHistory();
-  assert.deepEqual(
+  assertEquals(
     polygon.getCoordinate("1.2"),
     [4, 3],
     "getCoordinate returns right one",
   );
   polygon.updateCoordinate("1.2", 99, 100);
-  assert.equal(changedSpy.callCount, 1, "polygon.changed was called");
-  assert.deepEqual(
+  assertEquals(changedSpy.callCount, 1, "polygon.changed was called");
+  assertEquals(
     polygon.getCoordinates(),
     [
       [
@@ -316,7 +316,7 @@ test("Polygon#updateCoordinate, Polygon#getCoordinate", () => {
     ],
     "correct coordinate was changed",
   );
-  assert.deepEqual(
+  assertEquals(
     polygon.getCoordinate("1.2"),
     [99, 100],
     "getCoordinate still works",
@@ -342,14 +342,14 @@ test("Polygon integration", async () => {
   await drawGeometry(map, Draw, "Polygon", polygonCoordinates);
 
   const feats = Draw.getAll().features;
-  assert.equal(1, feats.length, "only one");
-  assert.equal("Polygon", feats[0].geometry.type, "of the right type");
-  assert.equal(
+  assertEquals(1, feats.length, "only one");
+  assertEquals("Polygon", feats[0].geometry.type, "of the right type");
+  assertEquals(
     feats[0].geometry.coordinates[0].length,
     polygonCoordinates[0].length,
     "right number of points",
   );
-  assert.deepEqual(
+  assertEquals(
     feats[0].geometry.coordinates,
     polygonCoordinates,
     "in the right spot",

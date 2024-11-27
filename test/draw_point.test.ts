@@ -1,5 +1,5 @@
 import test from "node:test";
-import assert from "node:assert/strict";
+import {assert, assertEquals, assertNotEquals, assertThrows} from "@std/assert";
 import { MapLibreDraw } from "../src/index.ts";
 import { mouseClick } from "./utils/mouse_click.ts";
 import { touchTap } from "./utils/touch_tap.ts";
@@ -20,7 +20,7 @@ test("draw_point mode initialization", () => {
   const modeHandler = drawPointMode(context);
   modeHandler.start.call(lifecycleContext);
 
-  assert.equal(context.store.add.callCount, 1, "store.add called");
+  assertEquals(context.store.add.callCount, 1, "store.add called");
 
   const emptypoint = new PointFeat(context, {
     type: "Feature",
@@ -31,7 +31,7 @@ test("draw_point mode initialization", () => {
     },
   });
   // Strip ids for this comparison
-  assert.deepEqual(
+  assertEquals(
     Object.assign({}, context.store.add.getCall(0).args[0], { id: null }),
     Object.assign({}, emptypoint, { id: null }),
     "with a new line",
@@ -44,33 +44,33 @@ test("draw_point start", () => {
   const modeHandler = drawPointMode(context);
   modeHandler.start.call(lifecycleContext);
 
-  assert.equal(
+  assertEquals(
     context.store.clearSelected.callCount,
     1,
     "store.clearSelected called",
   );
-  assert.equal(
+  assertEquals(
     context.ui.queueMapClasses.callCount,
     1,
     "ui.queueMapClasses called",
   );
-  assert.deepEqual(
+  assertEquals(
     context.ui.queueMapClasses.getCall(0).args,
     [{ mouse: "add" }],
     "ui.queueMapClasses received correct arguments",
   );
-  assert.equal(
+  assertEquals(
     context.ui.setActiveButton.callCount,
     1,
     "ui.setActiveButton called",
   );
-  assert.deepEqual(
+  assertEquals(
     context.ui.setActiveButton.getCall(0).args,
     ["point"],
     "ui.setActiveButton received correct arguments",
   );
 
-  assert.equal(lifecycleContext.on.callCount, 12, "this.on called");
+  assertEquals(lifecycleContext.on.callCount, 12, "this.on called");
 });
 
 test("draw_point stop with point placed", () => {
@@ -85,17 +85,17 @@ test("draw_point stop with point placed", () => {
   point.updateCoordinate(10, 20);
 
   modeHandler.stop.call(lifecycleContext);
-  assert.equal(
+  assertEquals(
     context.ui.setActiveButton.callCount,
     2,
     "ui.setActiveButton called",
   );
-  assert.deepEqual(
+  assertEquals(
     context.ui.setActiveButton.getCall(1).args,
     [undefined],
     "ui.setActiveButton received correct arguments",
   );
-  assert.equal(context.store.delete.callCount, 0, "store.delete not called");
+  assertEquals(context.store.delete.callCount, 0, "store.delete not called");
 });
 
 test("draw_point stop with no point placed", () => {
@@ -109,18 +109,18 @@ test("draw_point stop with no point placed", () => {
 
   modeHandler.stop.call(lifecycleContext);
 
-  assert.equal(
+  assertEquals(
     context.ui.setActiveButton.callCount,
     2,
     "ui.setActiveButton called",
   );
-  assert.deepEqual(
+  assertEquals(
     context.ui.setActiveButton.getCall(1).args,
     [undefined],
     "ui.setActiveButton received correct arguments",
   );
-  assert.equal(context.store.delete.callCount, 1, "store.delete called");
-  assert.deepEqual(
+  assertEquals(context.store.delete.callCount, 1, "store.delete called");
+  assertEquals(
     context.store.delete.getCall(0).args,
     [[point.id], { silent: true }],
     "store.delete received correct arguments",
@@ -148,7 +148,7 @@ test("draw_point render the active point", () => {
     },
   };
   modeHandler.render(geojson, (x) => memo.push(x));
-  assert.equal(memo.length, 0, "active point does not render");
+  assertEquals(memo.length, 0, "active point does not render");
 });
 
 test("draw_point render an inactive feature", () => {
@@ -172,8 +172,8 @@ test("draw_point render an inactive feature", () => {
     },
   };
   modeHandler.render(geojson, (x) => memo.push(x));
-  assert.equal(memo.length, 1, "does render");
-  assert.deepEqual(
+  assertEquals(memo.length, 1, "does render");
+  assertEquals(
     memo[0],
     {
       type: "Feature",
@@ -210,14 +210,14 @@ test("draw_point mouse interaction", async (t) => {
     mouseClick(map, makeMouseEvent(10, 20));
 
     const { features } = Draw.getAll();
-    assert.equal(features.length, 1, "point created");
+    assertEquals(features.length, 1, "point created");
     const point = Draw.getAll().features[0];
-    assert.equal(point.geometry.type, "Point");
+    assertEquals(point.geometry.type, "Point");
 
-    assert.deepEqual(point.geometry.coordinates, [10, 20], "coordinate added");
+    assertEquals(point.geometry.coordinates, [10, 20], "coordinate added");
 
     mouseClick(map, makeMouseEvent(30, 30));
-    assert.equal(
+    assertEquals(
       features.length,
       1,
       "mode has changed, so another click does not create another point",
@@ -230,9 +230,9 @@ test("draw_point mouse interaction", async (t) => {
 
     container.dispatchEvent(escapeEvent);
 
-    assert.equal(Draw.getAll().features.length, 0, "no feature added");
+    assertEquals(Draw.getAll().features.length, 0, "no feature added");
     mouseClick(map, makeMouseEvent(30, 30));
-    assert.equal(
+    assertEquals(
       Draw.getAll().features.length,
       0,
       "mode has changed, so a click does not create another point",
@@ -245,9 +245,9 @@ test("draw_point mouse interaction", async (t) => {
 
     container.dispatchEvent(enterEvent);
 
-    assert.equal(Draw.getAll().features.length, 0, "no feature added");
+    assertEquals(Draw.getAll().features.length, 0, "no feature added");
     mouseClick(map, makeMouseEvent(30, 30));
-    assert.equal(
+    assertEquals(
       Draw.getAll().features.length,
       0,
       "mode has changed, so a click does not create another point",
@@ -260,9 +260,9 @@ test("draw_point mouse interaction", async (t) => {
 
     Draw.trash();
 
-    assert.equal(Draw.getAll().features.length, 0, "no feature added");
+    assertEquals(Draw.getAll().features.length, 0, "no feature added");
     mouseClick(map, makeMouseEvent(30, 30));
-    assert.equal(
+    assertEquals(
       Draw.getAll().features.length,
       0,
       "mode has changed, so a click does not create another point",
@@ -288,14 +288,14 @@ test("draw_point touch interaction", async (t) => {
     touchTap(map, makeTouchEvent(10, 20));
 
     const { features } = Draw.getAll();
-    assert.equal(features.length, 1, "point created");
+    assertEquals(features.length, 1, "point created");
     const point = Draw.getAll().features[0];
-    assert.equal(point.geometry.type, "Point");
+    assertEquals(point.geometry.type, "Point");
 
-    assert.deepEqual(point.geometry.coordinates, [10, 20], "coordinate added");
+    assertEquals(point.geometry.coordinates, [10, 20], "coordinate added");
 
     touchTap(map, makeTouchEvent(30, 30));
-    assert.equal(
+    assertEquals(
       features.length,
       1,
       "mode has changed, so another click does not create another point",

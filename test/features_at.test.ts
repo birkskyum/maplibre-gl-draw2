@@ -1,5 +1,5 @@
 import test from "node:test";
-import assert from "node:assert/strict";
+import {assert, assertEquals, assertNotEquals, assertThrows} from "@std/assert";
 import { featuresAt } from "../src/lib/features_at.ts";
 import { theme } from "../src/lib/theme.ts";
 import * as Constants from "../src/constants.ts";
@@ -183,7 +183,7 @@ test("featuresAt with click bounding box", () => {
     mockContext,
   );
 
-  assert.deepEqual(
+  assertEquals(
     result,
     [
       {
@@ -228,7 +228,7 @@ test("featuresAt with touch bounding box", () => {
     mockContext,
   );
 
-  assert.deepEqual(
+  assertEquals(
     result,
     [
       {
@@ -277,7 +277,7 @@ test("featuresAt should not include missing style layers", () => {
     ],
     mockContext,
   );
-  assert.deepEqual(
+  assertEquals(
     result,
     [],
     "sorts, filters based on properties.meta, removes duplicates",
@@ -294,7 +294,7 @@ test("featuresAt should not include missing style layers", () => {
     ],
     mockContext,
   );
-  assert.deepEqual(
+  assertEquals(
     result,
     [
       {

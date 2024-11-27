@@ -1,5 +1,5 @@
 import test from "node:test";
-import assert from "node:assert/strict";
+import {assert, assertEquals, assertNotEquals, assertThrows} from "@std/assert";
 import { spy } from "sinon";
 
 import { DrawStore } from "../src/store.ts";
@@ -19,8 +19,8 @@ function createStore() {
 }
 
 test("Store has correct properties", () => {
-  assert.ok(DrawStore, "store exists");
-  assert.ok(typeof DrawStore === "function", "store is a function");
+  assert(DrawStore, "store exists");
+  assert(typeof DrawStore === "function", "store is a function");
 });
 
 test("Store constructor and public API", () => {
@@ -29,7 +29,7 @@ test("Store constructor and public API", () => {
   const store = new DrawStore(ctx);
 
   // instance members
-  assert.deepEqual(
+  assertEquals(
     store.sources,
     {
       hot: [],
@@ -37,132 +37,132 @@ test("Store constructor and public API", () => {
     },
     "exposes store.sources",
   );
-  assert.equal(store.ctx, ctx, "exposes store.ctx");
-  assert.equal(store.ctx.map, map, "exposes store.ctx.map");
-  assert.equal(store.isDirty, false, "exposes store.isDirty");
-  assert.equal(typeof store.render, "function", "exposes store.render");
+  assertEquals(store.ctx, ctx, "exposes store.ctx");
+  assertEquals(store.ctx.map, map, "exposes store.ctx.map");
+  assertEquals(store.isDirty, false, "exposes store.isDirty");
+  assertEquals(typeof store.render, "function", "exposes store.render");
 
-  assert.equal(
+  assertEquals(
     getPublicMemberKeys(store).length,
     4,
     "no unexpected instance members",
   );
 
   // prototype members
-  assert.equal(
+  assertEquals(
     typeof DrawStore.prototype.setDirty,
     "function",
     "exposes store.setDirty",
   );
-  assert.equal(
+  assertEquals(
     typeof DrawStore.prototype.createRenderBatch,
     "function",
     "exposes store.createRenderBatch",
   );
-  assert.equal(
+  assertEquals(
     typeof DrawStore.prototype.featureChanged,
     "function",
     "exposes store.featureChanged",
   );
-  assert.equal(
+  assertEquals(
     typeof DrawStore.prototype.getChangedIds,
     "function",
     "exposes store.getChangedIds",
   );
-  assert.equal(
+  assertEquals(
     typeof DrawStore.prototype.clearChangedIds,
     "function",
     "exposes store.clearChangedIds",
   );
-  assert.equal(
+  assertEquals(
     typeof DrawStore.prototype.getAllIds,
     "function",
     "exposes store.getAllIds",
   );
-  assert.equal(typeof DrawStore.prototype.add, "function", "exposes store.add");
-  assert.equal(typeof DrawStore.prototype.get, "function", "exposes store.get");
-  assert.equal(
+  assertEquals(typeof DrawStore.prototype.add, "function", "exposes store.add");
+  assertEquals(typeof DrawStore.prototype.get, "function", "exposes store.get");
+  assertEquals(
     typeof DrawStore.prototype.getAll,
     "function",
     "exposes store.getAll",
   );
-  assert.equal(
+  assertEquals(
     typeof DrawStore.prototype.select,
     "function",
     "exposes store.select",
   );
-  assert.equal(
+  assertEquals(
     typeof DrawStore.prototype.deselect,
     "function",
     "exposes store.deselect",
   );
-  assert.equal(
+  assertEquals(
     typeof DrawStore.prototype.clearSelected,
     "function",
     "exposes store.clearSelected",
   );
-  assert.equal(
+  assertEquals(
     typeof DrawStore.prototype.getSelectedIds,
     "function",
     "exposes store.getSelectedIds",
   );
-  assert.equal(
+  assertEquals(
     typeof DrawStore.prototype.getSelected,
     "function",
     "exposes store.getSelected",
   );
-  assert.equal(
+  assertEquals(
     typeof DrawStore.prototype.isSelected,
     "function",
     "exposes store.isSelected",
   );
-  assert.equal(
+  assertEquals(
     typeof DrawStore.prototype.delete,
     "function",
     "exposes store.delete",
   );
-  assert.equal(
+  assertEquals(
     typeof DrawStore.prototype.setSelected,
     "function",
     "exposes store.setSelected",
   );
-  assert.equal(
+  assertEquals(
     typeof DrawStore.prototype.setSelectedCoordinates,
     "function",
     "exposes store.setSelectedCoordinates",
   );
-  assert.equal(
+  assertEquals(
     typeof DrawStore.prototype.getSelectedCoordinates,
     "function",
     "exposes store.getSelectedCoordinates",
   );
-  assert.equal(
+  assertEquals(
     typeof DrawStore.prototype.clearSelectedCoordinates,
     "function",
     "exposes store.clearSelectedCoordinates",
   );
-  assert.equal(
+  assertEquals(
     typeof DrawStore.prototype.setFeatureProperty,
     "function",
     "exposes store.setFeatureProperty",
   );
-  assert.equal(
+  assertEquals(
     typeof DrawStore.prototype.storeMapConfig,
     "function",
     "exposes store.storeMapConfig",
   );
-  assert.equal(
+  assertEquals(
     typeof DrawStore.prototype.restoreMapConfig,
     "function",
     "exposes store.restoreMapConfig",
   );
-  assert.equal(
+  assertEquals(
     typeof DrawStore.prototype.getInitialConfigValue,
     "function",
     "exposes store.getInitialConfigValue",
   );
 
-  assert.equal(
+  assertEquals(
     Object.getOwnPropertyNames(DrawStore.prototype).length,
     26,
     "no untested prototype members",
@@ -171,9 +171,9 @@ test("Store constructor and public API", () => {
 
 test("Store#setDirty", () => {
   const store = createStore();
-  assert.equal(store.isDirty, false);
+  assertEquals(store.isDirty, false);
   store.setDirty();
-  assert.equal(store.isDirty, true);
+  assertEquals(store.isDirty, true);
 });
 
 test("Store#createRenderBatch", () => {
@@ -183,18 +183,18 @@ test("Store#createRenderBatch", () => {
     numRenders++;
   };
   store.render();
-  assert.equal(numRenders, 1, "render incrementes number of renders");
+  assertEquals(numRenders, 1, "render incrementes number of renders");
   let renderBatch = store.createRenderBatch();
   store.render();
   store.render();
   store.render();
-  assert.equal(numRenders, 1, "when batching render doesn't get incremented");
+  assertEquals(numRenders, 1, "when batching render doesn't get incremented");
   renderBatch();
-  assert.equal(numRenders, 2, "when releasing batch, render only happens once");
+  assertEquals(numRenders, 2, "when releasing batch, render only happens once");
 
   renderBatch = store.createRenderBatch();
   renderBatch();
-  assert.equal(
+  assertEquals(
     numRenders,
     2,
     "when releasing batch, render doesn't happen if render wasn't called",
@@ -203,34 +203,34 @@ test("Store#createRenderBatch", () => {
 
 test("Store#featureChanged, Store#getChangedIds, Store#clearChangedIds", () => {
   const store = createStore();
-  assert.deepEqual(store.getChangedIds(), []);
+  assertEquals(store.getChangedIds(), []);
   store.featureChanged("x");
-  assert.deepEqual(store.getChangedIds(), ["x"]);
+  assertEquals(store.getChangedIds(), ["x"]);
   store.featureChanged("y");
-  assert.deepEqual(store.getChangedIds(), ["x", "y"]);
+  assertEquals(store.getChangedIds(), ["x", "y"]);
   store.featureChanged("x");
-  assert.deepEqual(store.getChangedIds(), ["x", "y"], "ids do not duplicate");
+  assertEquals(store.getChangedIds(), ["x", "y"], "ids do not duplicate");
   store.clearChangedIds();
-  assert.deepEqual(store.getChangedIds(), []);
+  assertEquals(store.getChangedIds(), []);
 });
 
 test("Store#add, Store#get, Store#getAll", () => {
   const store = createStore();
-  assert.equal(store.get(1), undefined);
-  assert.deepEqual(store.getAll(), []);
+  assertEquals(store.get(1), undefined);
+  assertEquals(store.getAll(), []);
   const point = createFeature("point");
   const line = createFeature("line");
   store.add(point);
-  assert.equal(store.get(point.id), point);
-  assert.deepEqual(store.getAll(), [point]);
+  assertEquals(store.get(point.id), point);
+  assertEquals(store.getAll(), [point]);
   store.add(line);
-  assert.equal(store.get(point.id), point);
-  assert.equal(store.get(line.id), line);
-  assert.deepEqual(store.getAll(), [point, line]);
+  assertEquals(store.get(point.id), point);
+  assertEquals(store.get(line.id), line);
+  assertEquals(store.getAll(), [point, line]);
   store.add(point);
-  assert.equal(store.get(point.id), point);
-  assert.equal(store.get(line.id), line);
-  assert.deepEqual(store.getAll(), [point, line]);
+  assertEquals(store.get(point.id), point);
+  assertEquals(store.get(line.id), line);
+  assertEquals(store.getAll(), [point, line]);
 });
 
 test("selection methods", async (t) => {
@@ -244,38 +244,38 @@ test("selection methods", async (t) => {
   const f4 = createFeature("point");
   store.add(f4);
 
-  assert.deepEqual(store.getSelectedIds(), []);
+  assertEquals(store.getSelectedIds(), []);
 
   t.test("select one feature", () => {
     store.select(f1.id);
-    assert.deepEqual(
+    assertEquals(
       store.getSelectedIds(),
       [f1.id],
       "f1 returns in selected ids array",
     );
-    assert.deepEqual(
+    assertEquals(
       store.getSelected(),
       [f1.toGeoJSON()],
       "f1 returns in selected array",
     );
-    assert.equal(store.isSelected(f1.id), true, "isSelected affirms f1");
-    assert.equal(store.isSelected(f2.id), false, "isSelected rejects f2");
+    assertEquals(store.isSelected(f1.id), true, "isSelected affirms f1");
+    assertEquals(store.isSelected(f2.id), false, "isSelected rejects f2");
   });
 
   await t.test("select a second feature", () => {
     store.select(f2.id);
-    assert.deepEqual(
+    assertEquals(
       store.getSelectedIds(),
       [f1.id, f2.id],
       "f1 and f2 return in selected ids array",
     );
-    assert.deepEqual(
+    assertEquals(
       store.getSelected(),
       [f1, f2],
       "f1 and f2 return in selected array",
     );
-    assert.equal(store.isSelected(f1.id), true, "isSelected affirms f1");
-    assert.equal(store.isSelected(f2.id), true, "isSelected affirms f2");
+    assertEquals(store.isSelected(f1.id), true, "isSelected affirms f1");
+    assertEquals(store.isSelected(f2.id), true, "isSelected affirms f2");
   });
 
   await t.test("try to re-select first feature", () => {
@@ -284,7 +284,7 @@ test("selection methods", async (t) => {
 
   await t.test("deselect a feature", () => {
     store.deselect(f1.id);
-    assert.deepEqual(
+    assertEquals(
       store.getSelectedIds(),
       [f2.id],
       "deselection of f1 clears it from selected array",
@@ -294,7 +294,7 @@ test("selection methods", async (t) => {
   await t.test("serially select more features", () => {
     store.select(f3.id);
     store.select(f4.id);
-    assert.deepEqual(
+    assertEquals(
       store.getSelectedIds(),
       [f2.id, f3.id, f4.id],
       "serial selection of f3 and f4 reflected in selected array",
@@ -303,17 +303,17 @@ test("selection methods", async (t) => {
 
   await t.test("clear selection", () => {
     store.clearSelected();
-    assert.deepEqual(store.getSelectedIds(), []);
+    assertEquals(store.getSelectedIds(), []);
   });
 
   t.test("select an array of features", () => {
     store.select([f1.id, f3.id, f4.id]);
-    assert.deepEqual(store.getSelectedIds(), [f1.id, f3.id, f4.id]);
+    assertEquals(store.getSelectedIds(), [f1.id, f3.id, f4.id]);
   });
 
   await t.test("deselect an array of features", () => {
     store.deselect([f1.id, f4.id]);
-    assert.deepEqual(store.getSelectedIds(), [f3.id]);
+    assertEquals(store.getSelectedIds(), [f3.id]);
   });
 });
 
@@ -326,18 +326,18 @@ test("Store#delete", () => {
   store.add(point);
   store.add(line);
   store.add(polygon);
-  assert.deepEqual(store.getAll(), [point, line, polygon]);
-  assert.deepEqual(store.getAllIds(), [point.id, line.id, polygon.id]);
+  assertEquals(store.getAll(), [point, line, polygon]);
+  assertEquals(store.getAllIds(), [point.id, line.id, polygon.id]);
 
-  assert.deepEqual(store.getSelectedIds(), []);
+  assertEquals(store.getSelectedIds(), []);
   store.select(line.id);
-  assert.deepEqual(store.getSelectedIds(), [line.id]);
+  assertEquals(store.getSelectedIds(), [line.id]);
 
   store.delete(line.id);
-  assert.deepEqual(store.getAll(), [point, polygon]);
-  assert.deepEqual(store.getAllIds(), [point.id, polygon.id]);
-  assert.deepEqual(store.getSelectedIds(), []);
-  assert.equal(store.isDirty, true, "after deletion store is dirty");
+  assertEquals(store.getAll(), [point, polygon]);
+  assertEquals(store.getAllIds(), [point.id, polygon.id]);
+  assertEquals(store.getSelectedIds(), []);
+  assertEquals(store.isDirty, true, "after deletion store is dirty");
 });
 
 test("Store#setSelected", () => {
@@ -347,16 +347,16 @@ test("Store#setSelected", () => {
   const polygon = createFeature("polygon");
 
   store.setSelected(point.id, { silent: true });
-  assert.deepEqual(store.getSelectedIds(), [point.id]);
+  assertEquals(store.getSelectedIds(), [point.id]);
 
   store.setSelected([line.id, polygon.id], { silent: true });
-  assert.deepEqual(store.getSelectedIds(), [line.id, polygon.id]);
+  assertEquals(store.getSelectedIds(), [line.id, polygon.id]);
 
   store.setSelected(line.id, { silent: true });
-  assert.deepEqual(store.getSelectedIds(), [line.id]);
+  assertEquals(store.getSelectedIds(), [line.id]);
 
   store.setSelected(undefined, { silent: true });
-  assert.deepEqual(store.getSelectedIds(), []);
+  assertEquals(store.getSelectedIds(), []);
 });
 
 test("Store#setFeatureProperty", () => {
@@ -366,8 +366,8 @@ test("Store#setFeatureProperty", () => {
   store.add(point);
   store.clearChangedIds();
   store.setFeatureProperty(point.id, "size", 200);
-  assert.deepEqual(store.getChangedIds(), [point.id]);
-  assert.equal(
+  assertEquals(store.getChangedIds(), [point.id]);
+  assertEquals(
     store.get(point.id).properties.size,
     200,
     "sets the property on the feature",
@@ -379,7 +379,7 @@ test("Store#storeAndRestoreMapConfig", () => {
   // Disable doubleClickZoom
   map.doubleClickZoom.disable();
   // Check it's disabled
-  assert.equal(
+  assertEquals(
     map.doubleClickZoom.isEnabled(),
     false,
     "Disables doubleClickZoom on the map",
@@ -388,7 +388,7 @@ test("Store#storeAndRestoreMapConfig", () => {
   const store = new DrawStore(ctx);
   store.storeMapConfig();
   // Check we can get the initial state of it
-  assert.equal(
+  assertEquals(
     store.getInitialConfigValue("doubleClickZoom"),
     false,
     "Retrieves the initial value for the doubleClickZoom",
@@ -396,7 +396,7 @@ test("Store#storeAndRestoreMapConfig", () => {
   // Enable it again, byt then use restore to reset the initial state
   map.doubleClickZoom.enable();
   store.restoreMapConfig();
-  assert.equal(
+  assertEquals(
     map.doubleClickZoom.isEnabled(),
     false,
     "Restores doubleClickZoom on the map",

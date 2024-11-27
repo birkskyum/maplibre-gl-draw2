@@ -1,5 +1,5 @@
 import test from "node:test";
-import assert from "node:assert/strict";
+import {assert, assertEquals, assertNotEquals, assertThrows} from "@std/assert";
 import { spy } from "sinon";
 import { ModeHandler } from "../src/lib/mode_handler.ts";
 import { createMockModeHandlerContext } from "./utils/create_mock_mode_handler_context.ts";
@@ -7,32 +7,32 @@ import { createMockMode } from "./utils/create_mock_mode.ts";
 
 test("returned API", () => {
   const mh = ModeHandler(createMockMode(), createMockModeHandlerContext());
-  assert.equal(typeof mh.render, "function", "exposes render");
-  assert.equal(typeof mh.stop, "function", "exposes stop");
-  assert.equal(typeof mh.trash, "function", "exposes trash");
-  assert.equal(typeof mh.drag, "function", "exposes drag");
-  assert.equal(typeof mh.click, "function", "exposes click");
-  assert.equal(typeof mh.mousemove, "function", "exposes mousemove");
-  assert.equal(typeof mh.mousedown, "function", "exposes mousedown");
-  assert.equal(typeof mh.mouseup, "function", "exposes mouseup");
-  assert.equal(typeof mh.mouseout, "function", "exposes mouseout");
-  assert.equal(typeof mh.keydown, "function", "exposes keydown");
-  assert.equal(typeof mh.keyup, "function", "exposes keyup");
-  assert.equal(typeof mh.touchstart, "function", "exposes touchstart");
-  assert.equal(typeof mh.touchmove, "function", "exposes touchmove");
-  assert.equal(typeof mh.touchend, "function", "exposes touchend");
-  assert.equal(typeof mh.tap, "function", "exposes tap");
-  assert.equal(
+  assertEquals(typeof mh.render, "function", "exposes render");
+  assertEquals(typeof mh.stop, "function", "exposes stop");
+  assertEquals(typeof mh.trash, "function", "exposes trash");
+  assertEquals(typeof mh.drag, "function", "exposes drag");
+  assertEquals(typeof mh.click, "function", "exposes click");
+  assertEquals(typeof mh.mousemove, "function", "exposes mousemove");
+  assertEquals(typeof mh.mousedown, "function", "exposes mousedown");
+  assertEquals(typeof mh.mouseup, "function", "exposes mouseup");
+  assertEquals(typeof mh.mouseout, "function", "exposes mouseout");
+  assertEquals(typeof mh.keydown, "function", "exposes keydown");
+  assertEquals(typeof mh.keyup, "function", "exposes keyup");
+  assertEquals(typeof mh.touchstart, "function", "exposes touchstart");
+  assertEquals(typeof mh.touchmove, "function", "exposes touchmove");
+  assertEquals(typeof mh.touchend, "function", "exposes touchend");
+  assertEquals(typeof mh.tap, "function", "exposes tap");
+  assertEquals(
     typeof mh.combineFeatures,
     "function",
     "exposes combineFeatures",
   );
-  assert.equal(
+  assertEquals(
     typeof mh.uncombineFeatures,
     "function",
     "exposes uncombineFeatures",
   );
-  assert.equal(Object.keys(mh).length, 17, "no unexpected properties");
+  assertEquals(Object.keys(mh).length, 17, "no unexpected properties");
 });
 
 test("ModeHandler calling mode.start with context, and delegation functionality", () => {
@@ -48,30 +48,30 @@ test("ModeHandler calling mode.start with context, and delegation functionality"
   const drawContext = createMockModeHandlerContext();
 
   const mh = ModeHandler(mode, drawContext);
-  assert.equal(
+  assertEquals(
     handleStartSpy.callCount,
     1,
     "start was called on mode handler creation",
   );
-  assert.equal(typeof startContext.on, "function", "start context has on()");
-  assert.equal(
+  assertEquals(typeof startContext.on, "function", "start context has on()");
+  assertEquals(
     typeof startContext.render,
     "function",
     "start context has render()",
   );
-  assert.equal(
+  assertEquals(
     Object.keys(startContext).length,
     2,
     "start context has no unexpected properties",
   );
 
   startContext.render("foo");
-  assert.ok(
+  assert(
     drawContext.store.featureChanged.calledWith("foo"),
     "start context render calls store.featureChanged",
   );
 
-  assert.throws(() => {
+  assertThrows(() => {
     startContext.on(
       "bar",
       () => true,
@@ -80,12 +80,12 @@ test("ModeHandler calling mode.start with context, and delegation functionality"
   }, "start context on throws on unknown event type");
 
   mh.mousedown({ one: 1 });
-  assert.equal(
+  assertEquals(
     drawContext.store.render.callCount,
     0,
     "render not called if no handler fires",
   );
-  assert.equal(
+  assertEquals(
     drawContext.ui.updateMapClasses.callCount,
     0,
     "updateMapClasses not called if no handler fires",
@@ -94,22 +94,22 @@ test("ModeHandler calling mode.start with context, and delegation functionality"
   const mousedownSpy = spy();
   startContext.on("mousedown", () => true, mousedownSpy);
   mh.mousedown({ two: 2 });
-  assert.equal(
+  assertEquals(
     mousedownSpy.callCount,
     1,
     "mousedown callback called via delegation",
   );
-  assert.deepEqual(
+  assertEquals(
     mousedownSpy.getCall(0).args,
     [{ two: 2 }],
     "with correct argument",
   );
-  assert.equal(
+  assertEquals(
     drawContext.store.render.callCount,
     1,
     "render called if handler fires",
   );
-  assert.equal(
+  assertEquals(
     drawContext.ui.updateMapClasses.callCount,
     1,
     "updateMapClasses called if handler fires",
@@ -119,19 +119,19 @@ test("ModeHandler calling mode.start with context, and delegation functionality"
   mousedownSpy.resetHistory();
   startContext.on("mousedown", (e) => !e.three, mousedownFailSpy);
   mh.mousedown({ three: 3 });
-  assert.equal(
+  assertEquals(
     mousedownFailSpy.callCount,
     0,
     "delegation only calls callbacks with selectors returning true",
   );
-  assert.equal(mousedownSpy.callCount, 1);
-  assert.deepEqual(mousedownSpy.getCall(0).args, [{ three: 3 }]);
+  assertEquals(mousedownSpy.callCount, 1);
+  assertEquals(mousedownSpy.getCall(0).args, [{ three: 3 }]);
 
   const dragSpy = spy();
   startContext.on("drag", () => true, dragSpy);
   mh.drag({ two: 2 });
-  assert.equal(dragSpy.callCount, 1, "drag callback called via delegation");
-  assert.deepEqual(
+  assertEquals(dragSpy.callCount, 1, "drag callback called via delegation");
+  assertEquals(
     dragSpy.getCall(0).args,
     [{ two: 2 }],
     "with correct argument",
@@ -140,8 +140,8 @@ test("ModeHandler calling mode.start with context, and delegation functionality"
   const clickSpy = spy();
   startContext.on("click", () => true, clickSpy);
   mh.click({ two: 2 });
-  assert.equal(clickSpy.callCount, 1, "click callback called via delegation");
-  assert.deepEqual(
+  assertEquals(clickSpy.callCount, 1, "click callback called via delegation");
+  assertEquals(
     clickSpy.getCall(0).args,
     [{ two: 2 }],
     "with correct argument",
@@ -150,12 +150,12 @@ test("ModeHandler calling mode.start with context, and delegation functionality"
   const mousemoveSpy = spy();
   startContext.on("mousemove", () => true, mousemoveSpy);
   mh.mousemove({ two: 2 });
-  assert.equal(
+  assertEquals(
     mousemoveSpy.callCount,
     1,
     "mousemove callback called via delegation",
   );
-  assert.deepEqual(
+  assertEquals(
     mousemoveSpy.getCall(0).args,
     [{ two: 2 }],
     "with correct argument",
@@ -164,12 +164,12 @@ test("ModeHandler calling mode.start with context, and delegation functionality"
   const mouseupSpy = spy();
   startContext.on("mouseup", () => true, mouseupSpy);
   mh.mouseup({ two: 2 });
-  assert.equal(
+  assertEquals(
     mouseupSpy.callCount,
     1,
     "mouseup callback called via delegation",
   );
-  assert.deepEqual(
+  assertEquals(
     mouseupSpy.getCall(0).args,
     [{ two: 2 }],
     "with correct argument",
@@ -178,12 +178,12 @@ test("ModeHandler calling mode.start with context, and delegation functionality"
   const mouseoutSpy = spy();
   startContext.on("mouseout", () => true, mouseoutSpy);
   mh.mouseout({ two: 2 });
-  assert.equal(
+  assertEquals(
     mouseoutSpy.callCount,
     1,
     "mouseout callback called via delegation",
   );
-  assert.deepEqual(
+  assertEquals(
     mouseoutSpy.getCall(0).args,
     [{ two: 2 }],
     "with correct argument",
@@ -192,12 +192,12 @@ test("ModeHandler calling mode.start with context, and delegation functionality"
   const keydownSpy = spy();
   startContext.on("keydown", () => true, keydownSpy);
   mh.keydown({ two: 2 });
-  assert.equal(
+  assertEquals(
     keydownSpy.callCount,
     1,
     "keydown callback called via delegation",
   );
-  assert.deepEqual(
+  assertEquals(
     keydownSpy.getCall(0).args,
     [{ two: 2 }],
     "with correct argument",
@@ -206,8 +206,8 @@ test("ModeHandler calling mode.start with context, and delegation functionality"
   const keyupSpy = spy();
   startContext.on("keyup", () => true, keyupSpy);
   mh.keyup({ two: 2 });
-  assert.equal(keyupSpy.callCount, 1, "keyup callback called via delegation");
-  assert.deepEqual(
+  assertEquals(keyupSpy.callCount, 1, "keyup callback called via delegation");
+  assertEquals(
     keyupSpy.getCall(0).args,
     [{ two: 2 }],
     "with correct argument",
@@ -216,12 +216,12 @@ test("ModeHandler calling mode.start with context, and delegation functionality"
   const touchstartSpy = spy();
   startContext.on("touchstart", () => true, touchstartSpy);
   mh.touchstart({ two: 2 });
-  assert.equal(
+  assertEquals(
     touchstartSpy.callCount,
     1,
     "touchstart callback called via delegation",
   );
-  assert.deepEqual(
+  assertEquals(
     touchstartSpy.getCall(0).args,
     [{ two: 2 }],
     "with correct argument",
@@ -230,12 +230,12 @@ test("ModeHandler calling mode.start with context, and delegation functionality"
   const touchmoveSpy = spy();
   startContext.on("touchmove", () => true, touchmoveSpy);
   mh.touchmove({ two: 2 });
-  assert.equal(
+  assertEquals(
     touchmoveSpy.callCount,
     1,
     "touchmove callback called via delegation",
   );
-  assert.deepEqual(
+  assertEquals(
     touchmoveSpy.getCall(0).args,
     [{ two: 2 }],
     "with correct argument",
@@ -244,12 +244,12 @@ test("ModeHandler calling mode.start with context, and delegation functionality"
   const touchendSpy = spy();
   startContext.on("touchend", () => true, touchendSpy);
   mh.touchend({ two: 2 });
-  assert.equal(
+  assertEquals(
     touchendSpy.callCount,
     1,
     "touchend callback called via delegation",
   );
-  assert.deepEqual(
+  assertEquals(
     touchendSpy.getCall(0).args,
     [{ two: 2 }],
     "with correct argument",
@@ -261,7 +261,7 @@ test("ModeHandler#stop calling mode.stop", () => {
   const mh = ModeHandler(mode, createMockModeHandlerContext());
 
   mh.stop();
-  assert.equal(mode.stop.callCount, 1, "mode.stop called");
+  assertEquals(mode.stop.callCount, 1, "mode.stop called");
 });
 
 test("ModeHandler#stop not calling nonexistent mode.stop", () => {
@@ -269,9 +269,11 @@ test("ModeHandler#stop not calling nonexistent mode.stop", () => {
   delete mode.stop;
   const mh = ModeHandler(mode, createMockModeHandlerContext());
 
-  assert.doesNotThrow(() => {
+  try {
     mh.stop();
-  });
+  } catch (e) {
+    throw e
+  }
 });
 
 test("Modehandler#trash", () => {
@@ -280,8 +282,8 @@ test("Modehandler#trash", () => {
   const mh = ModeHandler(mode, drawContext);
 
   mh.trash();
-  assert.equal(mode.trash.callCount, 1, "mode.trash called");
-  assert.equal(drawContext.store.render.callCount, 1, "store.render called");
+  assertEquals(mode.trash.callCount, 1, "mode.trash called");
+  assertEquals(drawContext.store.render.callCount, 1, "store.render called");
 });
 
 test("Modehandler#trash without a mode.trash", () => {
@@ -290,10 +292,12 @@ test("Modehandler#trash without a mode.trash", () => {
   const drawContext = createMockModeHandlerContext();
   const mh = ModeHandler(mode, drawContext);
 
-  assert.doesNotThrow(() => {
+  try{
     mh.trash();
-  });
-  assert.equal(
+  } catch (e) {
+    throw e
+  }
+  assertEquals(
     drawContext.store.render.callCount,
     0,
     "store.render not called",

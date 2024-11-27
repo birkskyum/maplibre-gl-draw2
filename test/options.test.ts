@@ -2,7 +2,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import test from "node:test";
-import assert from "node:assert/strict";
+import {assert, assertEquals, assertNotEquals, assertThrows} from "@std/assert";
 import { fileURLToPath } from "node:url";
 
 import { MapLibreDraw} from "../src/index.ts";
@@ -37,8 +37,8 @@ test("Options test", async (t) => {
         uncombine_features: true,
       },
     };
-    assert.deepEqual(defaultOptions, Draw.ctx.options);
-    assert.deepEqual(styleWithSourcesFixture, Draw.ctx.options.styles);
+    assertEquals(defaultOptions, Draw.ctx.options);
+    assertEquals(styleWithSourcesFixture, Draw.ctx.options.styles);
   });
 
   await t.test("use custom clickBuffer", () => {
@@ -64,7 +64,7 @@ test("Options test", async (t) => {
       },
     };
 
-    assert.deepEqual(defaultOptions, Draw.ctx.options);
+    assertEquals(defaultOptions, Draw.ctx.options);
   });
 
   t.test("hide all controls", () => {
@@ -89,7 +89,7 @@ test("Options test", async (t) => {
         uncombine_features: false,
       },
     };
-    assert.deepEqual(defaultOptions, Draw.ctx.options);
+    assertEquals(defaultOptions, Draw.ctx.options);
   });
 
   await t.test("hide controls but show point", () => {
@@ -118,7 +118,7 @@ test("Options test", async (t) => {
       },
     };
 
-    assert.deepEqual(defaultOptions, Draw.ctx.options);
+    assertEquals(defaultOptions, Draw.ctx.options);
   });
 
   t.test("hide only point control", () => {
@@ -144,7 +144,7 @@ test("Options test", async (t) => {
       },
     };
 
-    assert.deepEqual(defaultOptions, Draw.ctx.options);
+    assertEquals(defaultOptions, Draw.ctx.options);
   });
 
   await t.test("disable touch interaction", () => {
@@ -169,8 +169,8 @@ test("Options test", async (t) => {
         uncombine_features: true,
       },
     };
-    assert.deepEqual(defaultOptions, Draw.ctx.options);
-    assert.deepEqual(styleWithSourcesFixture, Draw.ctx.options.styles);
+    assertEquals(defaultOptions, Draw.ctx.options);
+    assertEquals(styleWithSourcesFixture, Draw.ctx.options.styles);
   });
 
   await t.test("custom styles", () => {
@@ -234,6 +234,6 @@ test("Options test", async (t) => {
       },
     ];
 
-    assert.deepEqual(styles, Draw.ctx.options.styles);
+    assertEquals(styles, Draw.ctx.options.styles);
   });
 });

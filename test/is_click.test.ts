@@ -1,5 +1,5 @@
 import test from "node:test";
-import assert from "node:assert/strict";
+import {assert, assertEquals, assertNotEquals, assertThrows} from "@std/assert";
 import { isClick } from "../src/lib/is_click.ts";
 
 // By adding these values as options and stating them in the test,
@@ -21,17 +21,17 @@ test("isClick easy", () => {
     point: { x: 1, y: 1 },
     time: 1,
   };
-  assert.equal(
+  assertEquals(
     isClick({}, b, testOptions),
     true,
     "true when start is missing point and time",
   );
-  assert.equal(
+  assertEquals(
     isClick({ time: 2000 }, b, testOptions),
     true,
     "true when start has only time",
   );
-  assert.equal(
+  assertEquals(
     isClick(a, b, testOptions),
     true,
     "true when start and end match exactly",
@@ -47,7 +47,7 @@ test("isClick when start/end have same time, very close coordinates", () => {
     point: { x: 2, y: 1.5 },
     time: 1,
   };
-  assert.equal(isClick(a, b, testOptions), true);
+  assertEquals(isClick(a, b, testOptions), true);
 });
 
 test("isClick when start/end have same coordinates, distant times", () => {
@@ -59,7 +59,7 @@ test("isClick when start/end have same coordinates, distant times", () => {
     point: { x: 1, y: 1 },
     time: 6000,
   };
-  assert.equal(isClick(a, b, testOptions), true);
+  assertEquals(isClick(a, b, testOptions), true);
 });
 
 test("isClick when start/end have very close coordinates, distant times", () => {
@@ -71,7 +71,7 @@ test("isClick when start/end have very close coordinates, distant times", () => 
     point: { x: 2, y: 1.15 },
     time: 6000,
   };
-  assert.equal(isClick(a, b, testOptions), true);
+  assertEquals(isClick(a, b, testOptions), true);
 });
 
 test("isClick when moving just under 4, same times", () => {
@@ -84,7 +84,7 @@ test("isClick when moving just under 4, same times", () => {
     time: 1,
   };
   // Move distance ~3.959798
-  assert.equal(isClick(a, b, testOptions), true);
+  assertEquals(isClick(a, b, testOptions), true);
 });
 
 test("isClick when moving just under 4, distant times", () => {
@@ -97,7 +97,7 @@ test("isClick when moving just under 4, distant times", () => {
     time: 6000,
   };
   // Move distance ~3.959798
-  assert.equal(isClick(a, b, testOptions), true);
+  assertEquals(isClick(a, b, testOptions), true);
 });
 
 test("isClick when moving just above 4, same times", () => {
@@ -110,7 +110,7 @@ test("isClick when moving just above 4, same times", () => {
     time: 1,
   };
   // Move distance ~4.101219
-  assert.equal(isClick(a, b, testOptions), true);
+  assertEquals(isClick(a, b, testOptions), true);
 });
 
 test("isClick when moving just above 4, very close times", () => {
@@ -123,7 +123,7 @@ test("isClick when moving just above 4, very close times", () => {
     time: 499,
   };
   // Move distance ~4.101219
-  assert.equal(isClick(a, b, testOptions), true);
+  assertEquals(isClick(a, b, testOptions), true);
 });
 
 test("isClick when moving just above 4, distant times", () => {
@@ -136,7 +136,7 @@ test("isClick when moving just above 4, distant times", () => {
     time: 6000,
   };
   // Move distance ~4.101219
-  assert.equal(isClick(a, b, testOptions), false);
+  assertEquals(isClick(a, b, testOptions), false);
 });
 
 test("isClick when moving just above 4, barely too distant times", () => {
@@ -149,7 +149,7 @@ test("isClick when moving just above 4, barely too distant times", () => {
     time: 501,
   };
   // Move distance ~4.101219
-  assert.equal(isClick(a, b, testOptions), false);
+  assertEquals(isClick(a, b, testOptions), false);
 });
 
 test("isClick when moving just below 12, same times", () => {
@@ -162,7 +162,7 @@ test("isClick when moving just below 12, same times", () => {
     time: 1,
   };
   // Move distance ~11.596551
-  assert.equal(isClick(a, b, testOptions), true);
+  assertEquals(isClick(a, b, testOptions), true);
 });
 
 test("isClick when moving just below 12, very close times", () => {
@@ -175,7 +175,7 @@ test("isClick when moving just below 12, very close times", () => {
     time: 499,
   };
   // Move distance ~11.596551
-  assert.equal(isClick(a, b, testOptions), true);
+  assertEquals(isClick(a, b, testOptions), true);
 });
 
 test("isClick when moving just below 12, distant times", () => {
@@ -188,7 +188,7 @@ test("isClick when moving just below 12, distant times", () => {
     time: 6000,
   };
   // Move distance ~11.596551
-  assert.equal(isClick(a, b, testOptions), false);
+  assertEquals(isClick(a, b, testOptions), false);
 });
 
 test("isClick when moving just below 12, barely too distant times", () => {
@@ -201,7 +201,7 @@ test("isClick when moving just below 12, barely too distant times", () => {
     time: 501,
   };
   // Move distance ~11.596551
-  assert.equal(isClick(a, b, testOptions), false);
+  assertEquals(isClick(a, b, testOptions), false);
 });
 
 test("isClick when moving just above 12, same times", () => {
@@ -214,7 +214,7 @@ test("isClick when moving just above 12, same times", () => {
     time: 1,
   };
   // Move distance ~12.020815
-  assert.equal(isClick(a, b, testOptions), false);
+  assertEquals(isClick(a, b, testOptions), false);
 });
 
 test("isClick when moving just above 12, distant times", () => {
@@ -227,5 +227,5 @@ test("isClick when moving just above 12, distant times", () => {
     time: 6000,
   };
   // Move distance ~12.020815
-  assert.equal(isClick(a, b, testOptions), false);
+  assertEquals(isClick(a, b, testOptions), false);
 });

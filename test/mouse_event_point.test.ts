@@ -1,5 +1,5 @@
 import test from "node:test";
-import assert from "node:assert/strict";
+import {assert, assertEquals, assertNotEquals, assertThrows} from "@std/assert";
 import Point from "@mapbox/point-geometry";
 import { mouseEventPoint } from "../src/lib/mouse_event_point.ts";
 
@@ -21,7 +21,7 @@ test("mouseEventPoint", () => {
   };
 
   const result = mouseEventPoint(mockEvent, mockContainer);
-  assert.equal(result instanceof Point, true);
-  assert.equal(result.x, 3);
-  assert.equal(result.y, 12);
+  assertEquals(result instanceof Point, true);
+  assertEquals(result.x, 3);
+  assertEquals(result.y, 12);
 });

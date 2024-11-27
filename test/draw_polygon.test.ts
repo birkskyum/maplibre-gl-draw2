@@ -1,5 +1,5 @@
 import test from "node:test";
-import assert from "node:assert/strict";
+import {assert, assertEquals, assertNotEquals, assertThrows} from "@std/assert";
 import { MapLibreDraw } from "../src/index.ts";
 import { createMap } from "./utils/create_map.ts";
 import { mouseClick } from "./utils/mouse_click.ts";
@@ -28,7 +28,7 @@ test("draw_polygon mode initialization", () => {
   const lifecycleContext = createMockLifecycleContext();
   mode.start.call(lifecycleContext);
 
-  assert.equal(context.store.add.callCount, 1, "store.add called");
+  assertEquals(context.store.add.callCount, 1, "store.add called");
 
   const emptyPolygon = new PolygonFeat(context, {
     type: "Feature",
@@ -39,7 +39,7 @@ test("draw_polygon mode initialization", () => {
     },
   });
   // Strip ids for this comparison
-  assert.deepEqual(
+  assertEquals(
     Object.assign({}, context.store.add.getCall(0).args[0], { id: null }),
     Object.assign({}, emptyPolygon, { id: null }),
     "with a new polygon",
@@ -52,34 +52,34 @@ test("draw_polygon start", async () => {
   const mode = drawPolygonMode(context);
 
   mode.start.call(lifecycleContext);
-  assert.equal(
+  assertEquals(
     context.store.clearSelected.callCount,
     1,
     "store.clearSelected called",
   );
-  assert.equal(
+  assertEquals(
     context.ui.queueMapClasses.callCount,
     1,
     "ui.queueMapClasses called",
   );
-  assert.deepEqual(
+  assertEquals(
     context.ui.queueMapClasses.getCall(0).args,
     [{ mouse: "add" }],
     "ui.queueMapClasses received correct arguments",
   );
-  assert.equal(
+  assertEquals(
     context.ui.setActiveButton.callCount,
     1,
     "ui.setActiveButton called",
   );
-  assert.deepEqual(
+  assertEquals(
     context.ui.setActiveButton.getCall(0).args,
     ["polygon"],
     "ui.setActiveButton received correct arguments",
   );
 
   await new Promise((resolve) => setTimeout(resolve, 10));
-  assert.equal(context.map.doubleClickZoom.disable.callCount, 1);
+  assertEquals(context.map.doubleClickZoom.disable.callCount, 1);
 });
 
 test("draw_polygon stop with valid polygon", () => {
@@ -93,17 +93,17 @@ test("draw_polygon stop with valid polygon", () => {
   testPolygon.isValid = () => true;
 
   mode.stop.call();
-  assert.equal(
+  assertEquals(
     context.ui.setActiveButton.callCount,
     2,
     "ui.setActiveButton called",
   );
-  assert.deepEqual(
+  assertEquals(
     context.ui.setActiveButton.getCall(1).args,
     [undefined],
     "ui.setActiveButton received correct arguments",
   );
-  assert.equal(context.store.delete.callCount, 0, "store.delete not called");
+  assertEquals(context.store.delete.callCount, 0, "store.delete not called");
 });
 
 test("draw_polygon stop with invalid polygon", () => {
@@ -117,18 +117,18 @@ test("draw_polygon stop with invalid polygon", () => {
   testPolygon.isValid = () => false;
 
   mode.stop.call();
-  assert.equal(
+  assertEquals(
     context.ui.setActiveButton.callCount,
     2,
     "ui.setActiveButton called",
   );
-  assert.deepEqual(
+  assertEquals(
     context.ui.setActiveButton.getCall(1).args,
     [undefined],
     "ui.setActiveButton received correct arguments",
   );
-  assert.equal(context.store.delete.callCount, 1, "store.delete called");
-  assert.deepEqual(
+  assertEquals(context.store.delete.callCount, 1, "store.delete called");
+  assertEquals(
     context.store.delete.getCall(0).args,
     [[testPolygon.id], { silent: true }],
     "store.delete received correct arguments",
@@ -154,7 +154,7 @@ test("draw_polygon render active polygon with no coordinates", () => {
     },
   };
   mode.render(geojson, (x) => memo.push(x));
-  assert.equal(memo.length, 0, "does not render");
+  assertEquals(memo.length, 0, "does not render");
 });
 
 test("draw_polygon render active polygon with 1 coordinate (and closer)", () => {
@@ -181,7 +181,7 @@ test("draw_polygon render active polygon with 1 coordinate (and closer)", () => 
     },
   };
   mode.render(geojson, (x) => memo.push(x));
-  assert.equal(memo.length, 0, "does not render");
+  assertEquals(memo.length, 0, "does not render");
 });
 
 test("draw_polygon render active polygon with 2 coordinates (and closer)", () => {
@@ -209,8 +209,8 @@ test("draw_polygon render active polygon with 2 coordinates (and closer)", () =>
     },
   };
   mode.render(geojson, (x) => memo.push(x));
-  assert.equal(memo.length, 2, "does render");
-  assert.deepEqual(
+  assertEquals(memo.length, 2, "does render");
+  assertEquals(
     memo[1],
     {
       type: "Feature",
@@ -258,8 +258,8 @@ test("draw_polygon render active polygon with 3 coordinates (and closer)", () =>
     },
   };
   mode.render(geojson, (x) => memo.push(x));
-  assert.equal(memo.length, 3, "does render");
-  assert.deepEqual(
+  assertEquals(memo.length, 3, "does render");
+  assertEquals(
     memo[0],
     {
       type: "Feature",
@@ -276,7 +276,7 @@ test("draw_polygon render active polygon with 3 coordinates (and closer)", () =>
     },
     "renders the start point point with meta: vertex",
   );
-  assert.deepEqual(
+  assertEquals(
     memo[1],
     {
       type: "Feature",
@@ -293,7 +293,7 @@ test("draw_polygon render active polygon with 3 coordinates (and closer)", () =>
     },
     "renders end point with meta: vertex",
   );
-  assert.deepEqual(
+  assertEquals(
     memo[2],
     {
       type: "Feature",
@@ -340,8 +340,8 @@ test("draw_polygon render inactive feature", () => {
     },
   };
   mode.render(geojson, (x) => memo.push(x));
-  assert.equal(memo.length, 1, "does render");
-  assert.deepEqual(
+  assertEquals(memo.length, 1, "does render");
+  assertEquals(
     memo[0],
     {
       type: "Feature",
@@ -378,11 +378,11 @@ test("draw_polygon mouse interaction", async (t) => {
     mouseClick(map, makeMouseEvent(10, 20));
 
     const { features } = Draw.getAll();
-    assert.equal(features.length, 1, "polygon created");
+    assertEquals(features.length, 1, "polygon created");
     const polygon = Draw.getAll().features[0];
-    assert.equal(polygon.geometry.type, "Polygon");
+    assertEquals(polygon.geometry.type, "Polygon");
 
-    assert.deepEqual(
+    assertEquals(
       polygon.geometry.coordinates,
       [
         [
@@ -398,7 +398,7 @@ test("draw_polygon mouse interaction", async (t) => {
   await t.test("move mouse", () => {
     map.fire("mousemove", makeMouseEvent(15, 23));
     const polygon = Draw.getAll().features[0];
-    assert.deepEqual(
+    assertEquals(
       polygon.geometry.coordinates,
       [
         [
@@ -414,7 +414,7 @@ test("draw_polygon mouse interaction", async (t) => {
   await t.test("move mouse again", () => {
     map.fire("mousemove", makeMouseEvent(30, 33));
     const polygon = Draw.getAll().features[0];
-    assert.deepEqual(
+    assertEquals(
       polygon.geometry.coordinates,
       [
         [
@@ -430,7 +430,7 @@ test("draw_polygon mouse interaction", async (t) => {
   await t.test("click to add another vertex", () => {
     mouseClick(map, makeMouseEvent(35, 35));
     const polygon = Draw.getAll().features[0];
-    assert.deepEqual(
+    assertEquals(
       polygon.geometry.coordinates,
       [
         [
@@ -450,7 +450,7 @@ test("draw_polygon mouse interaction", async (t) => {
     mouseClick(map, makeMouseEvent(55, 55));
     mouseClick(map, makeMouseEvent(55, 55));
     const polygon = Draw.getAll().features[0];
-    assert.deepEqual(
+    assertEquals(
       polygon.geometry.coordinates,
       [
         [
@@ -466,7 +466,7 @@ test("draw_polygon mouse interaction", async (t) => {
     );
 
     mouseClick(map, makeMouseEvent(40, 40));
-    assert.deepEqual(
+    assertEquals(
       polygon.geometry.coordinates,
       [
         [
@@ -491,7 +491,7 @@ test("draw_polygon mouse interaction", async (t) => {
     mouseClick(map, makeMouseEvent(3, 3));
 
     const polygon = Draw.getAll().features[0];
-    assert.deepEqual(polygon.geometry.coordinates, [
+    assertEquals(polygon.geometry.coordinates, [
       [
         [1, 1],
         [2, 2],
@@ -502,10 +502,10 @@ test("draw_polygon mouse interaction", async (t) => {
     ]);
 
     Draw.trash();
-    assert.equal(Draw.getAll().features.length, 0, "no feature added");
+    assertEquals(Draw.getAll().features.length, 0, "no feature added");
 
     mouseClick(map, makeMouseEvent(1, 1));
-    assert.equal(Draw.getAll().features.length, 0, "no longer drawing");
+    assertEquals(Draw.getAll().features.length, 0, "no longer drawing");
   });
 
   await t.test(
@@ -519,7 +519,7 @@ test("draw_polygon mouse interaction", async (t) => {
       mouseClick(map, makeMouseEvent(3, 3));
 
       const polygon = Draw.getAll().features[0];
-      assert.deepEqual(polygon.geometry.coordinates, [
+      assertEquals(polygon.geometry.coordinates, [
         [
           [1, 1],
           [2, 2],
@@ -531,10 +531,10 @@ test("draw_polygon mouse interaction", async (t) => {
 
       container.dispatchEvent(escapeEvent);
 
-      assert.equal(Draw.getAll().features.length, 0, "no feature added");
+      assertEquals(Draw.getAll().features.length, 0, "no feature added");
 
       mouseClick(map, makeMouseEvent(1, 1));
-      assert.equal(Draw.getAll().features.length, 0, "no longer drawing");
+      assertEquals(Draw.getAll().features.length, 0, "no longer drawing");
     },
   );
 
@@ -549,7 +549,7 @@ test("draw_polygon mouse interaction", async (t) => {
     mouseClick(map, makeMouseEvent(3, 3));
 
     const polygon = Draw.getAll().features[0];
-    assert.deepEqual(polygon.geometry.coordinates, [
+    assertEquals(polygon.geometry.coordinates, [
       [
         [1, 1],
         [2, 2],
@@ -561,8 +561,8 @@ test("draw_polygon mouse interaction", async (t) => {
 
     container.dispatchEvent(enterEvent);
 
-    assert.equal(Draw.getAll().features.length, 1, "the feature was added");
-    assert.deepEqual(
+    assertEquals(Draw.getAll().features.length, 1, "the feature was added");
+    assertEquals(
       Draw.getAll().features[0].geometry.coordinates,
       [
         [
@@ -576,35 +576,35 @@ test("draw_polygon mouse interaction", async (t) => {
     );
 
     mouseClick(map, makeMouseEvent(1, 1));
-    assert.equal(Draw.getAll().features.length, 1, "no longer drawing");
+    assertEquals(Draw.getAll().features.length, 1, "no longer drawing");
   });
 
   await t.test("start draw_polygon mode then changemode before a click", () => {
     Draw.deleteAll();
-    assert.equal(Draw.getAll().features.length, 0, "no features yet");
+    assertEquals(Draw.getAll().features.length, 0, "no features yet");
 
     Draw.changeMode("draw_polygon");
-    assert.equal(Draw.getAll().features.length, 1, "polygon is added");
+    assertEquals(Draw.getAll().features.length, 1, "polygon is added");
     const polygon = Draw.getAll().features[0];
-    assert.deepEqual(polygon.geometry.type, "Polygon");
+    assertEquals(polygon.geometry.type, "Polygon");
 
     Draw.changeMode("simple_select");
-    assert.equal(Draw.getAll().features.length, 0, "polygon is removed");
+    assertEquals(Draw.getAll().features.length, 0, "polygon is removed");
   });
 
   // ONE CLICK TESTS
 
   await t.test("start draw_polygon mode then enter after one click", () => {
     Draw.deleteAll();
-    assert.equal(Draw.getAll().features.length, 0, "no features yet");
+    assertEquals(Draw.getAll().features.length, 0, "no features yet");
 
     Draw.changeMode("draw_polygon");
-    assert.equal(Draw.getAll().features.length, 1, "polygon is added");
+    assertEquals(Draw.getAll().features.length, 1, "polygon is added");
     mouseClick(map, makeMouseEvent(1, 1));
     map.fire("mousemove", makeMouseEvent(16, 16));
 
     const polygon = Draw.getAll().features[0];
-    assert.deepEqual(
+    assertEquals(
       polygon.geometry.coordinates,
       [
         [
@@ -617,22 +617,22 @@ test("draw_polygon mouse interaction", async (t) => {
     );
 
     container.dispatchEvent(enterEvent);
-    assert.equal(Draw.getAll().features.length, 0, "polygon was removed");
+    assertEquals(Draw.getAll().features.length, 0, "polygon was removed");
   });
 
   await t.test(
     "start draw_polygon mode then start a point after one click",
     () => {
       Draw.deleteAll();
-      assert.equal(Draw.getAll().features.length, 0, "no features yet");
+      assertEquals(Draw.getAll().features.length, 0, "no features yet");
 
       Draw.changeMode("draw_polygon");
-      assert.equal(Draw.getAll().features.length, 1, "polygon is added");
+      assertEquals(Draw.getAll().features.length, 1, "polygon is added");
       mouseClick(map, makeMouseEvent(1, 1));
       map.fire("mousemove", makeMouseEvent(16, 16));
 
       const polygon = Draw.getAll().features[0];
-      assert.deepEqual(
+      assertEquals(
         polygon.geometry.coordinates,
         [
           [
@@ -645,7 +645,7 @@ test("draw_polygon mouse interaction", async (t) => {
       );
 
       container.dispatchEvent(startPointEvent);
-      assert.equal(Draw.get(polygon.id), undefined, "polygon was removed");
+      assertEquals(Draw.get(polygon.id), undefined, "polygon was removed");
     },
   );
 
@@ -653,15 +653,15 @@ test("draw_polygon mouse interaction", async (t) => {
     "start draw_polygon mode then start a line_string after one click",
     () => {
       Draw.deleteAll();
-      assert.equal(Draw.getAll().features.length, 0, "no features yet");
+      assertEquals(Draw.getAll().features.length, 0, "no features yet");
 
       Draw.changeMode("draw_polygon");
-      assert.equal(Draw.getAll().features.length, 1, "polygon is added");
+      assertEquals(Draw.getAll().features.length, 1, "polygon is added");
       mouseClick(map, makeMouseEvent(1, 1));
       map.fire("mousemove", makeMouseEvent(16, 16));
 
       const polygon = Draw.getAll().features[0];
-      assert.deepEqual(
+      assertEquals(
         polygon.geometry.coordinates,
         [
           [
@@ -674,7 +674,7 @@ test("draw_polygon mouse interaction", async (t) => {
       );
 
       container.dispatchEvent(startLineStringEvent);
-      assert.equal(Draw.get(polygon.id), undefined, "polygon was removed");
+      assertEquals(Draw.get(polygon.id), undefined, "polygon was removed");
     },
   );
 
@@ -682,15 +682,15 @@ test("draw_polygon mouse interaction", async (t) => {
     "start draw_polygon mode then start a new polygon after one click",
     () => {
       Draw.deleteAll();
-      assert.equal(Draw.getAll().features.length, 0, "no features yet");
+      assertEquals(Draw.getAll().features.length, 0, "no features yet");
 
       Draw.changeMode("draw_polygon");
-      assert.equal(Draw.getAll().features.length, 1, "polygon is added");
+      assertEquals(Draw.getAll().features.length, 1, "polygon is added");
       mouseClick(map, makeMouseEvent(1, 1));
       map.fire("mousemove", makeMouseEvent(16, 16));
 
       const polygon = Draw.getAll().features[0];
-      assert.deepEqual(
+      assertEquals(
         polygon.geometry.coordinates,
         [
           [
@@ -703,36 +703,36 @@ test("draw_polygon mouse interaction", async (t) => {
       );
 
       container.dispatchEvent(startPolygonEvent);
-      assert.equal(Draw.get(polygon.id), undefined, "polygon was removed");
+      assertEquals(Draw.get(polygon.id), undefined, "polygon was removed");
     },
   );
 
   await t.test("start draw_polygon mode then doubleclick", () => {
     Draw.deleteAll();
-    assert.equal(Draw.getAll().features.length, 0, "no features yet");
+    assertEquals(Draw.getAll().features.length, 0, "no features yet");
 
     Draw.changeMode("draw_polygon");
-    assert.equal(Draw.getAll().features.length, 1, "polygon is added");
+    assertEquals(Draw.getAll().features.length, 1, "polygon is added");
     mouseClick(map, makeMouseEvent(1, 1));
     mouseClick(map, makeMouseEvent(1, 1));
 
-    assert.equal(Draw.getAll().features.length, 0, "polygon was removed");
+    assertEquals(Draw.getAll().features.length, 0, "polygon was removed");
   });
 
   // TWO CLICK TESTS
 
   t.test("start draw_polygon mode then enter after two clicks", () => {
     Draw.deleteAll();
-    assert.equal(Draw.getAll().features.length, 0, "no features yet");
+    assertEquals(Draw.getAll().features.length, 0, "no features yet");
 
     Draw.changeMode("draw_polygon");
-    assert.equal(Draw.getAll().features.length, 1, "polygon is added");
+    assertEquals(Draw.getAll().features.length, 1, "polygon is added");
     mouseClick(map, makeMouseEvent(1, 1));
     mouseClick(map, makeMouseEvent(16, 16));
     map.fire("mousemove", makeMouseEvent(8, 0));
 
     const polygon = Draw.getAll().features[0];
-    assert.deepEqual(
+    assertEquals(
       polygon.geometry.coordinates,
       [
         [
@@ -746,23 +746,23 @@ test("draw_polygon mouse interaction", async (t) => {
     );
 
     container.dispatchEvent(enterEvent);
-    assert.equal(Draw.getAll().features.length, 0, "polygon was removed");
+    assertEquals(Draw.getAll().features.length, 0, "polygon was removed");
   });
 
   await t.test(
     "start draw_polygon mode then start a point after two clicks",
     () => {
       Draw.deleteAll();
-      assert.equal(Draw.getAll().features.length, 0, "no features yet");
+      assertEquals(Draw.getAll().features.length, 0, "no features yet");
 
       Draw.changeMode("draw_polygon");
-      assert.equal(Draw.getAll().features.length, 1, "polygon is added");
+      assertEquals(Draw.getAll().features.length, 1, "polygon is added");
       mouseClick(map, makeMouseEvent(1, 1));
       mouseClick(map, makeMouseEvent(16, 16));
       map.fire("mousemove", makeMouseEvent(8, 0));
 
       const polygon = Draw.getAll().features[0];
-      assert.deepEqual(
+      assertEquals(
         polygon.geometry.coordinates,
         [
           [
@@ -776,7 +776,7 @@ test("draw_polygon mouse interaction", async (t) => {
       );
 
       container.dispatchEvent(startPointEvent);
-      assert.equal(Draw.get(polygon.id), undefined, "polygon was removed");
+      assertEquals(Draw.get(polygon.id), undefined, "polygon was removed");
     },
   );
 
@@ -784,16 +784,16 @@ test("draw_polygon mouse interaction", async (t) => {
     "start draw_polygon mode then start a line_string after two clicks",
     () => {
       Draw.deleteAll();
-      assert.equal(Draw.getAll().features.length, 0, "no features yet");
+      assertEquals(Draw.getAll().features.length, 0, "no features yet");
 
       Draw.changeMode("draw_polygon");
-      assert.equal(Draw.getAll().features.length, 1, "polygon is added");
+      assertEquals(Draw.getAll().features.length, 1, "polygon is added");
       mouseClick(map, makeMouseEvent(1, 1));
       mouseClick(map, makeMouseEvent(16, 16));
       map.fire("mousemove", makeMouseEvent(8, 0));
 
       const polygon = Draw.getAll().features[0];
-      assert.deepEqual(
+      assertEquals(
         polygon.geometry.coordinates,
         [
           [
@@ -807,7 +807,7 @@ test("draw_polygon mouse interaction", async (t) => {
       );
 
       container.dispatchEvent(startLineStringEvent);
-      assert.equal(Draw.get(polygon.id), undefined, "polygon was removed");
+      assertEquals(Draw.get(polygon.id), undefined, "polygon was removed");
     },
   );
 
@@ -815,16 +815,16 @@ test("draw_polygon mouse interaction", async (t) => {
     "start draw_polygon mode then start a new polygon after two clicks",
     () => {
       Draw.deleteAll();
-      assert.equal(Draw.getAll().features.length, 0, "no features yet");
+      assertEquals(Draw.getAll().features.length, 0, "no features yet");
 
       Draw.changeMode("draw_polygon");
-      assert.equal(Draw.getAll().features.length, 1, "polygon is added");
+      assertEquals(Draw.getAll().features.length, 1, "polygon is added");
       mouseClick(map, makeMouseEvent(1, 1));
       mouseClick(map, makeMouseEvent(16, 16));
       map.fire("mousemove", makeMouseEvent(8, 0));
 
       const polygon = Draw.getAll().features[0];
-      assert.deepEqual(
+      assertEquals(
         polygon.geometry.coordinates,
         [
           [
@@ -838,21 +838,21 @@ test("draw_polygon mouse interaction", async (t) => {
       );
 
       container.dispatchEvent(startPolygonEvent);
-      assert.equal(Draw.get(polygon.id), undefined, "polygon was removed");
+      assertEquals(Draw.get(polygon.id), undefined, "polygon was removed");
     },
   );
 
   t.test("start draw_polygon mode then doubleclick", () => {
     Draw.deleteAll();
-    assert.equal(Draw.getAll().features.length, 0, "no features yet");
+    assertEquals(Draw.getAll().features.length, 0, "no features yet");
 
     Draw.changeMode("draw_polygon");
-    assert.equal(Draw.getAll().features.length, 1, "polygon is added");
+    assertEquals(Draw.getAll().features.length, 1, "polygon is added");
     mouseClick(map, makeMouseEvent(1, 1));
     mouseClick(map, makeMouseEvent(16, 16));
     mouseClick(map, makeMouseEvent(16, 16));
 
-    assert.equal(Draw.getAll().features.length, 0, "polygon was removed");
+    assertEquals(Draw.getAll().features.length, 0, "polygon was removed");
   });
 
   // FIVE CLICK TEST
@@ -861,10 +861,10 @@ test("draw_polygon mouse interaction", async (t) => {
     "end draw_polygon mode by clicking on the start point",
     async () => {
       Draw.deleteAll();
-      assert.equal(Draw.getAll().features.length, 0, "no features yet");
+      assertEquals(Draw.getAll().features.length, 0, "no features yet");
       Draw.changeMode("draw_polygon");
       let polygon = Draw.getAll().features[0];
-      assert.equal(polygon !== undefined, true, "polygon is added");
+      assertEquals(polygon !== undefined, true, "polygon is added");
       mouseClick(map, makeMouseEvent(0, 0));
       mouseClick(map, makeMouseEvent(20, 0));
       mouseClick(map, makeMouseEvent(20, 20));
@@ -876,7 +876,7 @@ test("draw_polygon mouse interaction", async (t) => {
       mouseClick(map, makeMouseEvent(0, 0));
 
       polygon = Draw.get(polygon.id);
-      assert.deepEqual(
+      assertEquals(
         polygon.geometry.coordinates,
         [
           [
@@ -912,11 +912,11 @@ test("draw_polygon touch interaction", async (t) => {
     touchTap(map, makeTouchEvent(100, 200));
 
     const { features } = Draw.getAll();
-    assert.equal(features.length, 1, "polygon created");
+    assertEquals(features.length, 1, "polygon created");
     const polygon = Draw.getAll().features[0];
-    assert.equal(polygon.geometry.type, "Polygon");
+    assertEquals(polygon.geometry.type, "Polygon");
 
-    assert.deepEqual(
+    assertEquals(
       polygon.geometry.coordinates,
       [
         [
@@ -932,7 +932,7 @@ test("draw_polygon touch interaction", async (t) => {
   await t.test("tap to add another vertex", () => {
     touchTap(map, makeTouchEvent(135, 135));
     const polygon = Draw.getAll().features[0];
-    assert.deepEqual(
+    assertEquals(
       polygon.geometry.coordinates,
       [
         [
@@ -952,7 +952,7 @@ test("draw_polygon touch interaction", async (t) => {
     touchTap(map, makeTouchEvent(550, 550));
     touchTap(map, makeTouchEvent(550, 550));
     const polygon = Draw.getAll().features[0];
-    assert.deepEqual(
+    assertEquals(
       polygon.geometry.coordinates,
       [
         [
@@ -968,7 +968,7 @@ test("draw_polygon touch interaction", async (t) => {
     );
 
     touchTap(map, makeTouchEvent(400, 400));
-    assert.deepEqual(
+    assertEquals(
       polygon.geometry.coordinates,
       [
         [
@@ -993,7 +993,7 @@ test("draw_polygon touch interaction", async (t) => {
     touchTap(map, makeTouchEvent(300, 300));
 
     const polygon = Draw.getAll().features[0];
-    assert.deepEqual(polygon.geometry.coordinates, [
+    assertEquals(polygon.geometry.coordinates, [
       [
         [100, 100],
         [200, 200],
@@ -1004,10 +1004,10 @@ test("draw_polygon touch interaction", async (t) => {
     ]);
 
     Draw.trash();
-    assert.equal(Draw.getAll().features.length, 0, "no feature added");
+    assertEquals(Draw.getAll().features.length, 0, "no feature added");
 
     touchTap(map, makeTouchEvent(1, 1));
-    assert.equal(Draw.getAll().features.length, 0, "no longer drawing");
+    assertEquals(Draw.getAll().features.length, 0, "no longer drawing");
   });
 
   document.body.removeChild(container);
