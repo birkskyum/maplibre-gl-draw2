@@ -1,6 +1,6 @@
 /* @refresh reload */
 import { render } from 'solid-js/web'
-import App from './app.tsx'
+import App from './app'
 
 import './index.css';
 

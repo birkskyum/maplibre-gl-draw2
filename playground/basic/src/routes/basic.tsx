@@ -5,7 +5,7 @@ import "../../../../dist/maplibre-gl-draw.css";
 import {MapLibreDraw } from "../../../../src/index.ts";
 import { createEffect } from "solid-js";
 
-import './Basic.css'
+import './basic.css'
 
 export default function Basic() {
   
