@@ -8,7 +8,6 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@birkskyum/maplibre-gl-draw": "file:..",
     "@solidjs/router": "^0.15.1",
     "autoprefixer": "^10.4.20",
     "maplibre-gl": "^4.7.1",
