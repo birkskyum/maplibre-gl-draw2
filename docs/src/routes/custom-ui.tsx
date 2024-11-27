@@ -1,11 +1,10 @@
 import "maplibre-gl/dist/maplibre-gl.css";
 import maplibregl from "maplibre-gl";
 
-import "../../../../dist/maplibre-gl-draw.css";
-import {MapLibreDraw } from "../../../../src/index.ts";
+import "../../../dist/maplibre-gl-draw.css";
+import {MapLibreDraw } from "../../../src/index.ts";
 import { createEffect } from "solid-js";
 import { Button } from "../components/button.tsx";
-import {DrawRectangle} from "../../../../src/modes/draw_rectangle.ts"
 
 
 export default function ReinitControl() {
@@ -20,18 +19,14 @@ export default function ReinitControl() {
     });
     
     const modes = MapLibreDraw.modes;
-    modes.draw_rectangle = DrawRectangle;
-
-    const Draw = new MapLibreDraw({ 
-      modes
-     });
+    const Draw = new MapLibreDraw({ modes });
     map.addControl(Draw, "top-right");
 
     map.on("load", () => {
       // Jump into draw point mode via a custom UI element
-      const startRectangle = document.getElementById("start-rectangle");
-      startRectangle!.onclick = function () {
-        Draw.changeMode("draw_rectangle");
+      const startPoint = document.getElementById("start-point");
+      startPoint!.onclick = function () {
+        Draw.changeMode("draw_point");
       };
 
       // Jump into draw line mode via a custom UI element
@@ -53,7 +48,7 @@ export default function ReinitControl() {
     <>
       <div id="map" class="h-full"></div>
       <div class="left-2 bottom-2 flex gap-1 absolute">
-        <Button id="start-rectangle">Rectangle</Button>
+        <Button id="start-point">Point</Button>
         <Button id="start-line">Line</Button>
         <Button id="start-polygon">Polygon</Button>
       </div> 

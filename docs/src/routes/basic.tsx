@@ -1,8 +1,8 @@
 import "maplibre-gl/dist/maplibre-gl.css";
 import maplibregl from "maplibre-gl";
 
-import "../../../../dist/maplibre-gl-draw.css";
-import {MapLibreDraw } from "../../../../src/index.ts";
+import "../../../dist/maplibre-gl-draw.css";
+import {MapLibreDraw } from "../../../src/index.ts";
 import { createEffect } from "solid-js";
 
 

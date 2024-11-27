@@ -264,9 +264,9 @@ export class DrawStore {
     Constants.interactions.forEach((interaction) => {
 		if (!this.ctx.map) return
 
-      const interactionSet = this.ctx.map[interaction];
+      const interactionSet = (this.ctx.map as any)[interaction];
       if (interactionSet) {
-        this._mapInitialConfig[interaction] = this.ctx.map[interaction]
+        this._mapInitialConfig[interaction] = (this.ctx.map as any)[interaction]
           .isEnabled();
       }
     });
@@ -277,9 +277,9 @@ export class DrawStore {
       const value = this._mapInitialConfig[key];
 	  if (!this.ctx.map) return
       if (value ) {
-		this.ctx.map[key].enable();
+		    (this.ctx.map as any)[key].enable();
       } else {
-        this.ctx.map[key].disable();
+        (this.ctx.map as any)[key].disable();
       }
     });
   }

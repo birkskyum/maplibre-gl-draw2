@@ -1,12 +1,12 @@
 import "maplibre-gl/dist/maplibre-gl.css";
 import maplibregl from "maplibre-gl";
 
-import "../../../../dist/maplibre-gl-draw.css";
-import {MapLibreDraw } from "../../../../src/index.ts";
+import "../../../dist/maplibre-gl-draw.css";
+import {MapLibreDraw } from "../../../src/index.ts";
+
 import { createEffect } from "solid-js";
 
-import { StaticMode } from "../../../../src/modes/static_mode.ts";
-import { ModeClasses } from "../../../../src/modes.ts";
+import { ModeClasses } from "../../../src/modes.ts";
 import { Button } from "../components/button.tsx";
 
 export default function Static() {
@@ -40,18 +40,18 @@ export default function Static() {
 
     map.on("load", () => {
       const startPolygon = document.getElementById("start-polygon");
-      startPolygon.onclick = function () {
+      startPolygon!.onclick = function () {
         Draw.changeMode("draw_polygon");
       };
       
       const staticMode = document.getElementById("static");
-      staticMode.onclick = function () {
+      staticMode!.onclick = function () {
         Draw.changeMode("static");
       };
     });
 
     const defaultSelect = document.getElementById("simple-select");
-    defaultSelect.onclick = function () {
+    defaultSelect!.onclick = function () {
       Draw.changeMode("simple_select");
     };
     map.addControl(Draw, "top-right");

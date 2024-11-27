@@ -128,7 +128,7 @@ export class DrawUI {
   }
 
   addButtons(): HTMLDivElement {
-    const controls = this.ctx.options.controls;
+    const controls: any = this.ctx.options.controls;
     const controlGroup = document.createElement("div");
     controlGroup.className =
       `${Constants.classes.CONTROL_GROUP} ${Constants.classes.CONTROL_BASE}`;
