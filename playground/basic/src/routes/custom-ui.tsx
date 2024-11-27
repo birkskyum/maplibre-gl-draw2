@@ -4,8 +4,8 @@ import maplibregl from "maplibre-gl";
 import "../../../../dist/maplibre-gl-draw.css";
 import {MapLibreDraw } from "../../../../src/index.ts";
 import { createEffect } from "solid-js";
+import { Button } from "../components/button.tsx";
 
-import './basic.css'
 
 export default function ReinitControl() {
   
@@ -24,50 +24,6 @@ export default function ReinitControl() {
     map.addControl(Draw, "top-right");
 
     map.on("load", () => {
-      // Add Draw to the map if it is inactive
-      const addButton = document.getElementById("addBtn");
-      addButton.onclick = function () {
-        if (drawIsActive) return;
-        drawIsActive = true;
-        map.addControl(Draw, "bottom-right");
-      };
-
-      // Remove draw from the map if it is active
-      const removeButton = document.getElementById("removeBtn");
-      removeButton.onclick = function () {
-        if (!drawIsActive) return;
-        drawIsActive = false;
-        map.removeControl(Draw);
-      };
-
-      // Toggle the style between dark and streets
-      const flipStyleButton = document.getElementById("flipStyleBtn");
-      let currentStyle = "positron-gl-style";
-      flipStyleButton.onclick = function () {
-        const style = currentStyle === "positron-gl-style"
-          ? "dark-matter-gl-style"
-          : "positron-gl-style";
-        map.setStyle(
-          `https://basemaps.cartocdn.com/gl/${currentStyle}/style.json`,
-        );
-        currentStyle = style;
-      };
-
-      // toggle double click zoom
-      const doubleClickZoom = document.getElementById("doubleClickZoom");
-      let doubleClickZoomOn = true;
-      doubleClickZoom.onclick = function () {
-        if (doubleClickZoomOn) {
-          doubleClickZoomOn = false;
-          map.doubleClickZoom.disable();
-          doubleClickZoom.innerText = "enable dblclick zoom";
-        } else {
-          map.doubleClickZoom.enable();
-          doubleClickZoomOn = true;
-          doubleClickZoom.innerText = "disable dblclick zoom";
-        }
-      };
-
       // Jump into draw point mode via a custom UI element
       const startPoint = document.getElementById("start-point");
       startPoint.onclick = function () {
@@ -91,14 +47,15 @@ export default function ReinitControl() {
   });
   return (
     <>
-        <div id="map" class="h-[100vh] "></div>
-    <div class="start-draw">
-      <div id="start-point">POINT</div>
-      <div id="start-line">LINE</div>
-      <div id="start-polygon">POLYGON</div>
-    </div> 
+      <div id="map" class="h-full"></div>
+      <div class="left-2 bottom-2 flex gap-1 absolute">
+        <Button id="start-point">Point</Button>
+        <Button id="start-line">Line</Button>
+        <Button id="start-polygon">Polygon</Button>
+      </div> 
     </>
   )
 }
+
 
 

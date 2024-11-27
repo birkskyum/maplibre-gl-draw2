@@ -5,7 +5,6 @@ import "../../../../dist/maplibre-gl-draw.css";
 import {MapLibreDraw } from "../../../../src/index.ts";
 import { createEffect } from "solid-js";
 
-import './basic.css'
 
 export default function Basic() {
   
@@ -26,7 +25,7 @@ export default function Basic() {
   });
   return (
     <>
-        <div id="map"></div>
+        <div id="map" class="h-full"></div>
   
     </>
   )

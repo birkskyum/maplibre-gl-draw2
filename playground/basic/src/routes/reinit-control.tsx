@@ -4,8 +4,8 @@ import maplibregl from "maplibre-gl";
 import "../../../../dist/maplibre-gl-draw.css";
 import {MapLibreDraw } from "../../../../src/index.ts";
 import { createEffect } from "solid-js";
+import { Button } from "../components/button.tsx";
 
-import './basic.css'
 
 export default function ReinitControl() {
   
@@ -29,7 +29,7 @@ export default function ReinitControl() {
       addButton.onclick = function () {
         if (drawIsActive) return;
         drawIsActive = true;
-        map.addControl(Draw, "bottom-right");
+        map.addControl(Draw, "top-right");
       };
 
       // Remove draw from the map if it is active
@@ -53,37 +53,20 @@ export default function ReinitControl() {
         currentStyle = style;
       };
 
-      // toggle double click zoom
-      const doubleClickZoom = document.getElementById("doubleClickZoom");
-      let doubleClickZoomOn = true;
-      doubleClickZoom.onclick = function () {
-        if (doubleClickZoomOn) {
-          doubleClickZoomOn = false;
-          map.doubleClickZoom.disable();
-          doubleClickZoom.innerText = "enable dblclick zoom";
-        } else {
-          map.doubleClickZoom.enable();
-          doubleClickZoomOn = true;
-          doubleClickZoom.innerText = "disable dblclick zoom";
-        }
-      };
-
     });
 
 
   });
   return (
     <>
-        <div id="map" class="h-[100vh] "></div>
+        <div id="map" class="h-full"></div>
 
-    <div class="toggle">
-      <button id="doubleClickZoom">disable dblclick zoom</button>
-      <button id="addBtn">add draw</button>
-      <button id="removeBtn">remove draw</button>
-      <button id="flipStyleBtn">change style</button>
+
+    <div class="left-2 bottom-2 flex gap-1 absolute">
+      <Button id="addBtn">Add draw"</Button>
+      <Button id="removeBtn">Remove draw</Button>
+      <Button id="flipStyleBtn">Change style</Button>
     </div>
     </>
   )
 }
-
-

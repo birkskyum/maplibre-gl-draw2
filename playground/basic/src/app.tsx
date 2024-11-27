@@ -17,9 +17,9 @@ export default function App (){
                 <nav>
                     <ul class="list-none p-0">
                         <li><A href="/basic" class="no-underline text-gray-700">Basic</A></li>
-                        <li><A href="/static" class="no-underline text-gray-700">Static</A></li>
                         <li><A href="/reinit-control" class="no-underline text-gray-700">Reinitialize control</A></li>
                         <li><A href="/custom-ui" class="no-underline text-gray-700">Custom UI</A></li>
+                        <li><A href="/static" class="no-underline text-gray-700">Static Mode</A></li>
                         
                     </ul>
                 </nav>

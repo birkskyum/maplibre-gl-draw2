@@ -5,7 +5,9 @@ import "../../../../dist/maplibre-gl-draw.css";
 import {MapLibreDraw } from "../../../../src/index.ts";
 import { createEffect } from "solid-js";
 
-import './static.css'
+import { StaticMode } from "../../../../src/modes/static_mode.ts";
+import { ModeClasses } from "../../../../src/modes.ts";
+import { Button } from "../components/button.tsx";
 
 export default function Static() {
   
@@ -18,91 +20,53 @@ export default function Static() {
       center: [0, 0],
     });
 
-    const modes = MapLibreDraw.modes;
-    const Draw = new MapLibreDraw({ modes });
-    let drawIsActive = true;
-    map.addControl(Draw, "top-right");
+    let modes = ModeClasses;
+
+    const Draw = new MapLibreDraw({ 
+      modes: modes,
+      defaultMode: "static",
+      displayControlsDefault: false,
+      controls: {
+          point: true,
+          line_string: true,
+          polygon: true,
+          trash: true,
+          combine_features: true,
+          uncombine_features: true
+      }
+     });
+
+
 
     map.on("load", () => {
-      // Add Draw to the map if it is inactive
-      const addButton = document.getElementById("addBtn");
-      addButton.onclick = function () {
-        if (drawIsActive) return;
-        drawIsActive = true;
-        map.addControl(Draw, "bottom-right");
-      };
-
-      // Remove draw from the map if it is active
-      const removeButton = document.getElementById("removeBtn");
-      removeButton.onclick = function () {
-        if (!drawIsActive) return;
-        drawIsActive = false;
-        map.removeControl(Draw);
-      };
-
-      // Toggle the style between dark and streets
-      const flipStyleButton = document.getElementById("flipStyleBtn");
-      let currentStyle = "positron-gl-style";
-      flipStyleButton.onclick = function () {
-        const style = currentStyle === "positron-gl-style"
-          ? "dark-matter-gl-style"
-          : "positron-gl-style";
-        map.setStyle(
-          `https://basemaps.cartocdn.com/gl/${currentStyle}/style.json`,
-        );
-        currentStyle = style;
-      };
-
-      // toggle double click zoom
-      const doubleClickZoom = document.getElementById("doubleClickZoom");
-      let doubleClickZoomOn = true;
-      doubleClickZoom.onclick = function () {
-        if (doubleClickZoomOn) {
-          doubleClickZoomOn = false;
-          map.doubleClickZoom.disable();
-          doubleClickZoom.innerText = "enable dblclick zoom";
-        } else {
-          map.doubleClickZoom.enable();
-          doubleClickZoomOn = true;
-          doubleClickZoom.innerText = "disable dblclick zoom";
-        }
-      };
-
-      // Jump into draw point mode via a custom UI element
-      const startPoint = document.getElementById("start-point");
-      startPoint.onclick = function () {
-        Draw.changeMode("draw_point");
-      };
-
-      // Jump into draw line mode via a custom UI element
-      const startLine = document.getElementById("start-line");
-      startLine.onclick = function () {
-        Draw.changeMode("draw_line_string");
-      };
-
-      // Jump into draw polygon mode via a custom UI element
       const startPolygon = document.getElementById("start-polygon");
       startPolygon.onclick = function () {
         Draw.changeMode("draw_polygon");
       };
+      
+      const staticMode = document.getElementById("static");
+      staticMode.onclick = function () {
+        Draw.changeMode("static");
+      };
     });
 
+    const defaultSelect = document.getElementById("simple-select");
+    defaultSelect.onclick = function () {
+      Draw.changeMode("simple_select");
+    };
+    map.addControl(Draw, "top-right");
 
   });
+
+
   return (
     <>
-        <div id="map" class="h-[100vh] "></div>
-    <div class="start-draw">
-      <div id="start-point">POINT</div>
-      <div id="start-line">LINE</div>
-      <div id="start-polygon">POLYGON</div>
-    </div>
-    <div class="toggle">
-      <button id="doubleClickZoom">disable dblclick zoom</button>
-      <button id="addBtn">add draw</button>
-      <button id="removeBtn">remove draw</button>
-      <button id="flipStyleBtn">change style</button>
-    </div>
+        <div id="map" class="h-full"></div>
+        <div class="left-2 bottom-2 flex gap-1 absolute">
+        <Button id="static">Static Mode</Button>
+        <Button id="simple-select">Simple Select</Button>
+        <Button id="start-polygon">Draw Polygon</Button>
+      </div> 
     </>
   )
 }
