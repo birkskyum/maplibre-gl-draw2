@@ -1,7 +1,7 @@
 /* eslint no-shadow:[0] */
 import fs from "node:fs";
 import path from "node:path";
-import test, { describe } from "node:test";
+import { test, describe } from "node:test";
 import {assert, assertEquals, assertNotEquals, assertThrows} from "@std/assert";
 import { fileURLToPath } from "node:url";
 

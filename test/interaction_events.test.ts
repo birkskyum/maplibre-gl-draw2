@@ -1,6 +1,6 @@
 // These tests ensure that user interactions fire the right events
 
-import test, { describe } from "node:test";
+import { test, describe } from "node:test";
 import {assert, assertEquals, assertNotEquals, assertThrows} from "@std/assert";
 import { spy } from "sinon";
 import { MapLibreDraw } from "../src/index.ts";

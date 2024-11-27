@@ -1,4 +1,4 @@
-import test, { describe } from "node:test";
+import { test, describe } from "node:test";
 import {assert, assertEquals, assertNotEquals, assertThrows} from "@std/assert";
 import { MapLibreDraw } from "../src/index.ts";
 import { mouseClick } from "./utils/mouse_click.ts";

@@ -1,5 +1,5 @@
 /* eslint no-shadow:[0] */
-import test, { describe } from "node:test";
+import { test, describe } from "node:test";
 import {assert, assertEquals, assertNotEquals, assertThrows} from "@std/assert";
 import { spy } from "sinon";
 
