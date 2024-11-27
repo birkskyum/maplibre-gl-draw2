@@ -1,4 +1,4 @@
-import test from "node:test";
+import { test } from "vitest";
 import {assert, assertEquals, assertNotStrictEquals, assertThrows} from "@std/assert";
 import { StringSet } from "../src/lib/string_set.ts";
 

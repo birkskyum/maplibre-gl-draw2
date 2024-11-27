@@ -1,5 +1,5 @@
 /* eslint no-shadow:[0] */
-import { test, describe } from "node:test";
+import { test, describe } from "vitest";
 import {assert, assertEquals, assertNotEquals, assertThrows} from "@std/assert";
 import createSyntheticEvent from "synthetic-dom-events";
 import { spy } from "sinon";

@@ -1,4 +1,4 @@
-import { test, describe } from "node:test";
+import { test, describe } from "vitest";
 import {assert, assertEquals, assertNotEquals, assertThrows} from "@std/assert";
 import { spy } from "sinon";
 
@@ -213,7 +213,7 @@ test("ui buttons control group container inserted above attribution control, in 
   cleanup();
 });
 
-test("ui buttons with all options.controls, no attribution control", async (t) => {
+describe("ui buttons with all options.controls, no attribution control", async (t) => {
   /* eslint-disable */
   const { context, cleanup } = createMockContext({
     controls: {

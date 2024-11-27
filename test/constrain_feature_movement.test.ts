@@ -1,4 +1,4 @@
-import test from "node:test";
+import { test } from "vitest";
 import {assert, assertEquals, assertNotEquals, assertThrows} from "@std/assert";
 import { getGeoJSON } from "./utils/get_geojson.ts";
 import { constrainFeatureMovement } from "../src/lib/constrain_feature_movement.ts";

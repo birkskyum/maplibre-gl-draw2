@@ -1,4 +1,4 @@
-import test from "node:test";
+import { test } from "vitest";
 import {assert, assertEquals, assertNotEquals, assertThrows} from "@std/assert";
 import { featuresAt } from "../src/lib/features_at.ts";
 import { theme } from "../src/lib/theme.ts";

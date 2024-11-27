@@ -1,15 +1,16 @@
 /* eslint no-shadow:[0] */
 import fs from "node:fs";
 import path from "node:path";
-import { test, describe } from "node:test";
+import { test, describe } from "vitest";
 import {assert, assertEquals, assertNotEquals, assertThrows} from "@std/assert";
 import { fileURLToPath } from "node:url";
+import { dirname, resolve } from 'node:path'
 
 import { MapLibreDraw} from "../src/index.ts";
 import { ModeClasses } from "../src/modes.ts";
 import { ModeStrings } from "../src/constants/modes.ts";
 
-const __dirname = fileURLToPath(new URL(".", import.meta.url));
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const styleWithSourcesFixture = JSON.parse(
   fs.readFileSync(path.join(__dirname, "./fixtures/style_with_sources.json")),
 );

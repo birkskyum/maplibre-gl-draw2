@@ -1,4 +1,4 @@
-import test from "node:test";
+import { test } from "vitest";
 import {assert, assertEquals, assertNotEquals, assertThrows} from "@std/assert";
 
 import * as commonSelectors from "../src/lib/common_selectors.ts";
