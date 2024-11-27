@@ -1,7 +1,7 @@
 /* eslint no-shadow:[0] */
 import fs from "node:fs";
 import path from "node:path";
-import test from "node:test";
+import test, { describe } from "node:test";
 import {assert, assertEquals, assertNotEquals, assertThrows} from "@std/assert";
 import { fileURLToPath } from "node:url";
 
@@ -14,8 +14,8 @@ const styleWithSourcesFixture = JSON.parse(
   fs.readFileSync(path.join(__dirname, "./fixtures/style_with_sources.json")),
 );
 
-test("Options test", async (t) => {
-  t.test("no options", () => {
+describe("Options test", async (t) => {
+  test("no options", () => {
     const Draw = new MapLibreDraw();
     const defaultOptions = {
       defaultMode: "simple_select",
@@ -41,7 +41,7 @@ test("Options test", async (t) => {
     assertEquals(styleWithSourcesFixture, Draw.ctx.options.styles);
   });
 
-  await t.test("use custom clickBuffer", () => {
+  await test("use custom clickBuffer", () => {
     const Draw = new MapLibreDraw({ clickBuffer: 10 });
     const defaultOptions = {
       defaultMode: ModeStrings.SIMPLE_SELECT,
@@ -67,7 +67,7 @@ test("Options test", async (t) => {
     assertEquals(defaultOptions, Draw.ctx.options);
   });
 
-  t.test("hide all controls", () => {
+  test("hide all controls", () => {
     const Draw = new MapLibreDraw({ displayControlsDefault: false });
     const defaultOptions = {
       defaultMode: "simple_select",
@@ -92,7 +92,7 @@ test("Options test", async (t) => {
     assertEquals(defaultOptions, Draw.ctx.options);
   });
 
-  await t.test("hide controls but show point", () => {
+  await test("hide controls but show point", () => {
     const Draw = new MapLibreDraw({
       displayControlsDefault: false,
       controls: { point: true },
@@ -121,7 +121,7 @@ test("Options test", async (t) => {
     assertEquals(defaultOptions, Draw.ctx.options);
   });
 
-  t.test("hide only point control", () => {
+  test("hide only point control", () => {
     const Draw = new MapLibreDraw({ controls: { point: false } });
     const defaultOptions = {
       defaultMode: "simple_select",
@@ -147,7 +147,7 @@ test("Options test", async (t) => {
     assertEquals(defaultOptions, Draw.ctx.options);
   });
 
-  await t.test("disable touch interaction", () => {
+  await test("disable touch interaction", () => {
     const Draw = new MapLibreDraw({ touchEnabled: false });
     const defaultOptions = {
       defaultMode: "simple_select",
@@ -173,7 +173,7 @@ test("Options test", async (t) => {
     assertEquals(styleWithSourcesFixture, Draw.ctx.options.styles);
   });
 
-  await t.test("custom styles", () => {
+  await test("custom styles", () => {
     const Draw = new MapLibreDraw({
       styles: [
         {

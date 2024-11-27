@@ -1,4 +1,4 @@
-import test from "node:test";
+import {test, describe} from "node:test";
 import {assert, assertEquals, assertNotEquals, assertThrows} from "@std/assert";
 import { MapLibreDraw } from "../src/index.ts";
 import { mouseClick } from "./utils/mouse_click.ts";
@@ -266,7 +266,7 @@ test("draw_line_string render inactive feature", () => {
   );
 });
 
-test("draw_line_string mouse interaction", async (t) => {
+describe("draw_line_string mouse interaction", async (t) => {
   const container = document.createElement("div");
   document.body.appendChild(container);
   const map = createMap({ container });
@@ -279,7 +279,7 @@ test("draw_line_string mouse interaction", async (t) => {
   // The following sub-tests share state ...
 
   Draw.changeMode("draw_line_string");
-  t.test("first click", () => {
+  test("first click", () => {
     mouseClick(map, makeMouseEvent(10, 20));
 
     const { features } = Draw.getAll();
@@ -297,7 +297,7 @@ test("draw_line_string mouse interaction", async (t) => {
     );
   });
 
-  t.test("move mouse", () => {
+  test("move mouse", () => {
     map.fire("mousemove", makeMouseEvent(15, 23));
     const line = Draw.getAll().features[0];
     assertEquals(
@@ -310,7 +310,7 @@ test("draw_line_string mouse interaction", async (t) => {
     );
   });
 
-  t.test("move mouse again", () => {
+  test("move mouse again", () => {
     map.fire("mousemove", makeMouseEvent(30, 33));
     const line = Draw.getAll().features[0];
     assertEquals(
@@ -323,7 +323,7 @@ test("draw_line_string mouse interaction", async (t) => {
     );
   });
 
-  t.test("click to add another vertex", () => {
+  test("click to add another vertex", () => {
     mouseClick(map, makeMouseEvent(35, 35));
     const line = Draw.getAll().features[0];
     assertEquals(
@@ -337,7 +337,7 @@ test("draw_line_string mouse interaction", async (t) => {
     );
   });
 
-  t.test("add more points then click on the last vertex to finish", () => {
+  test("add more points then click on the last vertex to finish", () => {
     mouseClick(map, makeMouseEvent(40, 40));
     mouseClick(map, makeMouseEvent(50, 50));
     mouseClick(map, makeMouseEvent(55, 55));
@@ -369,7 +369,7 @@ test("draw_line_string mouse interaction", async (t) => {
     );
   });
 
-  await t.test("start a line but trash it before completion", () => {
+  await test("start a line but trash it before completion", () => {
     // Start a new line
     Draw.deleteAll();
     Draw.changeMode("draw_line_string");
@@ -392,7 +392,7 @@ test("draw_line_string mouse interaction", async (t) => {
     assertEquals(Draw.getAll().features.length, 0, "no longer drawing");
   });
 
-  t.test("start a line but trash it with Escape before completion", () => {
+  test("start a line but trash it with Escape before completion", () => {
     // Start a new line
     Draw.deleteAll();
     Draw.changeMode("draw_line_string");
@@ -419,7 +419,7 @@ test("draw_line_string mouse interaction", async (t) => {
 
   // ZERO CLICK TESTS
 
-  t.test("start a line and end it with Enter", () => {
+  test("start a line and end it with Enter", () => {
     // Start a new line
     Draw.deleteAll();
     Draw.changeMode("draw_line_string");
@@ -454,7 +454,7 @@ test("draw_line_string mouse interaction", async (t) => {
     assertEquals(Draw.getAll().features.length, 1, "no longer drawing");
   });
 
-  t.test("start draw_line_string mode then changemode before a click", () => {
+  test("start draw_line_string mode then changemode before a click", () => {
     Draw.deleteAll();
     assertEquals(Draw.getAll().features.length, 0, "no features yet");
 
@@ -469,7 +469,7 @@ test("draw_line_string mouse interaction", async (t) => {
 
   // ONE CLICK TESTS
 
-  t.test("start draw_line_string mode then enter after one click", () => {
+  test("start draw_line_string mode then enter after one click", () => {
     Draw.deleteAll();
     assertEquals(Draw.getAll().features.length, 0, "no features yet");
 
@@ -492,7 +492,7 @@ test("draw_line_string mouse interaction", async (t) => {
     assertEquals(Draw.getAll().features.length, 0, "line_string was removed");
   });
 
-  t.test(
+  test(
     "start draw_line_string mode then start a point after one click",
     () => {
       Draw.deleteAll();
@@ -518,7 +518,7 @@ test("draw_line_string mouse interaction", async (t) => {
     },
   );
 
-  t.test(
+  test(
     "start draw_line_string mode then start a line_string after one click",
     () => {
       Draw.deleteAll();
@@ -544,7 +544,7 @@ test("draw_line_string mouse interaction", async (t) => {
     },
   );
 
-  t.test(
+  test(
     "start draw_line_string mode then start a polygon after one click",
     () => {
       Draw.deleteAll();
@@ -570,7 +570,7 @@ test("draw_line_string mouse interaction", async (t) => {
     },
   );
 
-  t.test("start draw_line_string mode then double click", () => {
+  test("start draw_line_string mode then double click", () => {
     Draw.deleteAll();
     assertEquals(Draw.getAll().features.length, 0, "no features yet");
 
@@ -584,7 +584,7 @@ test("draw_line_string mouse interaction", async (t) => {
 
   // THREE CLICK TEST
 
-  await t.test("start draw_line_string mode then double click", async () => {
+  await test("start draw_line_string mode then double click", async () => {
     Draw.deleteAll();
     assertEquals(Draw.getAll().features.length, 0, "no features yet");
 
@@ -625,7 +625,7 @@ test("draw_line_string mouse interaction", async (t) => {
   document.body.removeChild(container);
 });
 
-test("draw_line_string touch interaction", async (t) => {
+describe("draw_line_string touch interaction", async (t) => {
   const container = document.createElement("div");
   document.body.appendChild(container);
   const map = createMap({ container });
@@ -637,7 +637,7 @@ test("draw_line_string touch interaction", async (t) => {
   // The following sub-tests share state ...
 
   Draw.changeMode("draw_line_string");
-  t.test("first tap", () => {
+  test("first tap", () => {
     touchTap(map, makeTouchEvent(100, 200));
 
     const { features } = Draw.getAll();
@@ -655,7 +655,7 @@ test("draw_line_string touch interaction", async (t) => {
     );
   });
 
-  await t.test("tap to add another vertex", () => {
+  await test("tap to add another vertex", () => {
     touchTap(map, makeTouchEvent(200, 400));
     const line = Draw.getAll().features[0];
     assertEquals(
@@ -669,7 +669,7 @@ test("draw_line_string touch interaction", async (t) => {
     );
   });
 
-  t.test("add more points then tap on the last vertex to finish", () => {
+  test("add more points then tap on the last vertex to finish", () => {
     touchTap(map, makeTouchEvent(400, 500));
     touchTap(map, makeTouchEvent(300, 500));
     touchTap(map, makeTouchEvent(200, 500));
@@ -701,7 +701,7 @@ test("draw_line_string touch interaction", async (t) => {
     );
   });
 
-  await t.test("start a line but trash it before completion", () => {
+  await test("start a line but trash it before completion", () => {
     // Start a new line
     Draw.deleteAll();
     Draw.changeMode("draw_line_string");

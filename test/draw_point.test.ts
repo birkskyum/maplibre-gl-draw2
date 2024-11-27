@@ -1,4 +1,4 @@
-import test from "node:test";
+import test, { describe } from "node:test";
 import {assert, assertEquals, assertNotEquals, assertThrows} from "@std/assert";
 import { MapLibreDraw } from "../src/index.ts";
 import { mouseClick } from "./utils/mouse_click.ts";
@@ -193,7 +193,7 @@ test("draw_point render an inactive feature", () => {
   );
 });
 
-test("draw_point mouse interaction", async (t) => {
+describe("draw_point mouse interaction", async (t) => {
   const container = document.createElement("div");
   document.body.appendChild(container);
   const map = createMap({ container });
@@ -204,7 +204,7 @@ test("draw_point mouse interaction", async (t) => {
 
   // The following sub-tests share state ...
 
-  t.test("clicking", () => {
+  test("clicking", () => {
     Draw.deleteAll();
     Draw.changeMode("draw_point");
     mouseClick(map, makeMouseEvent(10, 20));
@@ -224,7 +224,7 @@ test("draw_point mouse interaction", async (t) => {
     );
   });
 
-  await t.test("exist before clicking by hitting Escape", () => {
+  await test("exist before clicking by hitting Escape", () => {
     Draw.deleteAll();
     Draw.changeMode("draw_point");
 
@@ -239,7 +239,7 @@ test("draw_point mouse interaction", async (t) => {
     );
   });
 
-  await t.test("exist before clicking by hitting Enter", () => {
+  await test("exist before clicking by hitting Enter", () => {
     Draw.deleteAll();
     Draw.changeMode("draw_point");
 
@@ -254,7 +254,7 @@ test("draw_point mouse interaction", async (t) => {
     );
   });
 
-  t.test("exist before clicking with Trash", () => {
+  test("exist before clicking with Trash", () => {
     Draw.deleteAll();
     Draw.changeMode("draw_point");
 
@@ -272,7 +272,7 @@ test("draw_point mouse interaction", async (t) => {
   document.body.removeChild(container);
 });
 
-test("draw_point touch interaction", async (t) => {
+describe("draw_point touch interaction", async (t) => {
   const container = document.createElement("div");
   document.body.appendChild(container);
   const map = createMap({ container });
@@ -282,7 +282,7 @@ test("draw_point touch interaction", async (t) => {
   await map.on("load");
   // The following sub-tests share state ...
 
-  t.test("tapping", () => {
+  test("tapping", () => {
     Draw.deleteAll();
     Draw.changeMode("draw_point");
     touchTap(map, makeTouchEvent(10, 20));

@@ -1,4 +1,4 @@
-import test from "node:test";
+import test, { describe } from "node:test";
 import {assert, assertEquals, assertNotEquals, assertThrows} from "@std/assert";
 import { MapLibreDraw } from "../src/index.ts";
 import { createMap } from "./utils/create_map.ts";
@@ -361,7 +361,7 @@ test("draw_polygon render inactive feature", () => {
   );
 });
 
-test("draw_polygon mouse interaction", async (t) => {
+describe("draw_polygon mouse interaction", async (t) => {
   const container = document.createElement("div");
   document.body.appendChild(container);
   const map = createMap({ container });
@@ -374,7 +374,7 @@ test("draw_polygon mouse interaction", async (t) => {
   const afterNextRender = setupAfterNextRender(map);
 
   Draw.changeMode("draw_polygon");
-  t.test("first click", () => {
+  test("first click", () => {
     mouseClick(map, makeMouseEvent(10, 20));
 
     const { features } = Draw.getAll();
@@ -395,7 +395,7 @@ test("draw_polygon mouse interaction", async (t) => {
     );
   });
 
-  await t.test("move mouse", () => {
+  await test("move mouse", () => {
     map.fire("mousemove", makeMouseEvent(15, 23));
     const polygon = Draw.getAll().features[0];
     assertEquals(
@@ -411,7 +411,7 @@ test("draw_polygon mouse interaction", async (t) => {
     );
   });
 
-  await t.test("move mouse again", () => {
+  await test("move mouse again", () => {
     map.fire("mousemove", makeMouseEvent(30, 33));
     const polygon = Draw.getAll().features[0];
     assertEquals(
@@ -427,7 +427,7 @@ test("draw_polygon mouse interaction", async (t) => {
     );
   });
 
-  await t.test("click to add another vertex", () => {
+  await test("click to add another vertex", () => {
     mouseClick(map, makeMouseEvent(35, 35));
     const polygon = Draw.getAll().features[0];
     assertEquals(
@@ -444,7 +444,7 @@ test("draw_polygon mouse interaction", async (t) => {
     );
   });
 
-  t.test("add more points then click on the last vertex to finish", () => {
+  test("add more points then click on the last vertex to finish", () => {
     mouseClick(map, makeMouseEvent(40, 40));
     mouseClick(map, makeMouseEvent(50, 50));
     mouseClick(map, makeMouseEvent(55, 55));
@@ -482,7 +482,7 @@ test("draw_polygon mouse interaction", async (t) => {
     );
   });
 
-  await t.test("start a polygon but trash it before completion", () => {
+  await test("start a polygon but trash it before completion", () => {
     // Start a new polygon
     Draw.deleteAll();
     Draw.changeMode("draw_polygon");
@@ -508,7 +508,7 @@ test("draw_polygon mouse interaction", async (t) => {
     assertEquals(Draw.getAll().features.length, 0, "no longer drawing");
   });
 
-  await t.test(
+  await test(
     "start a polygon but trash it with Escape before completion",
     () => {
       // Start a new polygon
@@ -540,7 +540,7 @@ test("draw_polygon mouse interaction", async (t) => {
 
   // ZERO CLICK TESTS
 
-  await t.test("start a polygon and end it with Enter", () => {
+  await test("start a polygon and end it with Enter", () => {
     // Start a new polygon
     Draw.deleteAll();
     Draw.changeMode("draw_polygon");
@@ -579,7 +579,7 @@ test("draw_polygon mouse interaction", async (t) => {
     assertEquals(Draw.getAll().features.length, 1, "no longer drawing");
   });
 
-  await t.test("start draw_polygon mode then changemode before a click", () => {
+  await test("start draw_polygon mode then changemode before a click", () => {
     Draw.deleteAll();
     assertEquals(Draw.getAll().features.length, 0, "no features yet");
 
@@ -594,7 +594,7 @@ test("draw_polygon mouse interaction", async (t) => {
 
   // ONE CLICK TESTS
 
-  await t.test("start draw_polygon mode then enter after one click", () => {
+  await test("start draw_polygon mode then enter after one click", () => {
     Draw.deleteAll();
     assertEquals(Draw.getAll().features.length, 0, "no features yet");
 
@@ -620,7 +620,7 @@ test("draw_polygon mouse interaction", async (t) => {
     assertEquals(Draw.getAll().features.length, 0, "polygon was removed");
   });
 
-  await t.test(
+  await test(
     "start draw_polygon mode then start a point after one click",
     () => {
       Draw.deleteAll();
@@ -649,7 +649,7 @@ test("draw_polygon mouse interaction", async (t) => {
     },
   );
 
-  await t.test(
+  await test(
     "start draw_polygon mode then start a line_string after one click",
     () => {
       Draw.deleteAll();
@@ -678,7 +678,7 @@ test("draw_polygon mouse interaction", async (t) => {
     },
   );
 
-  await t.test(
+  await test(
     "start draw_polygon mode then start a new polygon after one click",
     () => {
       Draw.deleteAll();
@@ -707,7 +707,7 @@ test("draw_polygon mouse interaction", async (t) => {
     },
   );
 
-  await t.test("start draw_polygon mode then doubleclick", () => {
+  await test("start draw_polygon mode then doubleclick", () => {
     Draw.deleteAll();
     assertEquals(Draw.getAll().features.length, 0, "no features yet");
 
@@ -721,7 +721,7 @@ test("draw_polygon mouse interaction", async (t) => {
 
   // TWO CLICK TESTS
 
-  t.test("start draw_polygon mode then enter after two clicks", () => {
+  test("start draw_polygon mode then enter after two clicks", () => {
     Draw.deleteAll();
     assertEquals(Draw.getAll().features.length, 0, "no features yet");
 
@@ -749,7 +749,7 @@ test("draw_polygon mouse interaction", async (t) => {
     assertEquals(Draw.getAll().features.length, 0, "polygon was removed");
   });
 
-  await t.test(
+  await test(
     "start draw_polygon mode then start a point after two clicks",
     () => {
       Draw.deleteAll();
@@ -780,7 +780,7 @@ test("draw_polygon mouse interaction", async (t) => {
     },
   );
 
-  await t.test(
+  await test(
     "start draw_polygon mode then start a line_string after two clicks",
     () => {
       Draw.deleteAll();
@@ -811,7 +811,7 @@ test("draw_polygon mouse interaction", async (t) => {
     },
   );
 
-  await t.test(
+  await test(
     "start draw_polygon mode then start a new polygon after two clicks",
     () => {
       Draw.deleteAll();
@@ -842,7 +842,7 @@ test("draw_polygon mouse interaction", async (t) => {
     },
   );
 
-  t.test("start draw_polygon mode then doubleclick", () => {
+  test("start draw_polygon mode then doubleclick", () => {
     Draw.deleteAll();
     assertEquals(Draw.getAll().features.length, 0, "no features yet");
 
@@ -857,7 +857,7 @@ test("draw_polygon mouse interaction", async (t) => {
 
   // FIVE CLICK TEST
 
-  await t.test(
+  await test(
     "end draw_polygon mode by clicking on the start point",
     async () => {
       Draw.deleteAll();
@@ -896,7 +896,7 @@ test("draw_polygon mouse interaction", async (t) => {
   document.body.removeChild(container);
 });
 
-test("draw_polygon touch interaction", async (t) => {
+describe("draw_polygon touch interaction", async (t) => {
   const container = document.createElement("div");
   document.body.appendChild(container);
   const map = createMap({ container });
@@ -908,7 +908,7 @@ test("draw_polygon touch interaction", async (t) => {
   // The following sub-tests share state ...
 
   Draw.changeMode("draw_polygon");
-  t.test("first tap", () => {
+  test("first tap", () => {
     touchTap(map, makeTouchEvent(100, 200));
 
     const { features } = Draw.getAll();
@@ -929,7 +929,7 @@ test("draw_polygon touch interaction", async (t) => {
     );
   });
 
-  await t.test("tap to add another vertex", () => {
+  await test("tap to add another vertex", () => {
     touchTap(map, makeTouchEvent(135, 135));
     const polygon = Draw.getAll().features[0];
     assertEquals(
@@ -946,7 +946,7 @@ test("draw_polygon touch interaction", async (t) => {
     );
   });
 
-  await t.test("add more points then tap on the last vertex to finish", () => {
+  await test("add more points then tap on the last vertex to finish", () => {
     touchTap(map, makeTouchEvent(400, 400));
     touchTap(map, makeTouchEvent(500, 500));
     touchTap(map, makeTouchEvent(550, 550));
@@ -984,7 +984,7 @@ test("draw_polygon touch interaction", async (t) => {
     );
   });
 
-  await t.test("start a polygon but trash it before completion", () => {
+  await test("start a polygon but trash it before completion", () => {
     // Start a new polygon
     Draw.deleteAll();
     Draw.changeMode("draw_polygon");

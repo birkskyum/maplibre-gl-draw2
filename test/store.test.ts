@@ -1,4 +1,4 @@
-import test from "node:test";
+import test, { describe } from "node:test";
 import {assert, assertEquals, assertNotEquals, assertThrows} from "@std/assert";
 import { spy } from "sinon";
 
@@ -233,7 +233,7 @@ test("Store#add, Store#get, Store#getAll", () => {
   assertEquals(store.getAll(), [point, line]);
 });
 
-test("selection methods", async (t) => {
+describe("selection methods", async (t) => {
   const store = createStore();
   const f1 = createFeature("point");
   store.add(f1);
@@ -246,7 +246,7 @@ test("selection methods", async (t) => {
 
   assertEquals(store.getSelectedIds(), []);
 
-  t.test("select one feature", () => {
+  test("select one feature", () => {
     store.select(f1.id);
     assertEquals(
       store.getSelectedIds(),
@@ -262,7 +262,7 @@ test("selection methods", async (t) => {
     assertEquals(store.isSelected(f2.id), false, "isSelected rejects f2");
   });
 
-  await t.test("select a second feature", () => {
+  await test("select a second feature", () => {
     store.select(f2.id);
     assertEquals(
       store.getSelectedIds(),
@@ -278,11 +278,11 @@ test("selection methods", async (t) => {
     assertEquals(store.isSelected(f2.id), true, "isSelected affirms f2");
   });
 
-  await t.test("try to re-select first feature", () => {
+  await test("try to re-select first feature", () => {
     store.select(f1.id);
   });
 
-  await t.test("deselect a feature", () => {
+  await test("deselect a feature", () => {
     store.deselect(f1.id);
     assertEquals(
       store.getSelectedIds(),
@@ -291,7 +291,7 @@ test("selection methods", async (t) => {
     );
   });
 
-  await t.test("serially select more features", () => {
+  await test("serially select more features", () => {
     store.select(f3.id);
     store.select(f4.id);
     assertEquals(
@@ -301,17 +301,17 @@ test("selection methods", async (t) => {
     );
   });
 
-  await t.test("clear selection", () => {
+  await test("clear selection", () => {
     store.clearSelected();
     assertEquals(store.getSelectedIds(), []);
   });
 
-  t.test("select an array of features", () => {
+  test("select an array of features", () => {
     store.select([f1.id, f3.id, f4.id]);
     assertEquals(store.getSelectedIds(), [f1.id, f3.id, f4.id]);
   });
 
-  await t.test("deselect an array of features", () => {
+  await test("deselect an array of features", () => {
     store.deselect([f1.id, f4.id]);
     assertEquals(store.getSelectedIds(), [f3.id]);
   });

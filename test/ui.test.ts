@@ -1,4 +1,4 @@
-import test from "node:test";
+import test, { describe } from "node:test";
 import {assert, assertEquals, assertNotEquals, assertThrows} from "@std/assert";
 import { spy } from "sinon";
 
@@ -41,7 +41,7 @@ function getButtons(div) {
   );
 }
 
-test("ui container classes", async (t) => {
+describe("ui container classes", async (t) => {
   const { context, cleanup } = createMockContext();
   const testUi = new DrawUI(context);
 
@@ -53,7 +53,7 @@ test("ui container classes", async (t) => {
 
   // Each sub-test relies on state from the prior sub-tests
 
-  t.test("update all classes", () => {
+  test("update all classes", () => {
     testUi.queueMapClasses({
       mode: "direct_select",
       feature: "vertex",
@@ -74,7 +74,7 @@ test("ui container classes", async (t) => {
     );
   });
 
-  await t.test("update only feature class", () => {
+  await test("update only feature class", () => {
     testUi.queueMapClasses({
       feature: "midpoint",
     });
@@ -93,7 +93,7 @@ test("ui container classes", async (t) => {
     );
   });
 
-  await t.test("update mode and mouse classes", () => {
+  await test("update mode and mouse classes", () => {
     testUi.queueMapClasses({
       mode: "foo",
       mouse: "bar",
@@ -113,7 +113,7 @@ test("ui container classes", async (t) => {
     );
   });
 
-  await t.test("remove only feature class", () => {
+  await test("remove only feature class", () => {
     testUi.queueMapClasses({
       feature: null,
     });
@@ -132,7 +132,7 @@ test("ui container classes", async (t) => {
     );
   });
 
-  await t.test("remove all classes", () => {
+  await test("remove all classes", () => {
     testUi.queueMapClasses({
       feature: null,
       mode: null,
@@ -289,7 +289,7 @@ test("ui buttons with all options.controls, no attribution control", async (t) =
   );
   const trashButton = buttons[3];
 
-  t.test("click line button", () => {
+  test("click line button", () => {
     lineButton.click();
 
     assert(lineButton.classList.contains("active"), "line button is active");
@@ -318,7 +318,7 @@ test("ui buttons with all options.controls, no attribution control", async (t) =
     context.events.changeMode.resetHistory();
   });
 
-  await t.test("click polygon button", () => {
+  await test("click polygon button", () => {
     polygonButton.click();
 
     assertEquals(
@@ -350,7 +350,7 @@ test("ui buttons with all options.controls, no attribution control", async (t) =
     context.events.changeMode.resetHistory();
   });
 
-  await t.test(
+  await test(
     "programmatically activate point button, then programmatically deactivate",
     () => {
       testUi.setActiveButton("point");
@@ -410,7 +410,7 @@ test("ui buttons with all options.controls, no attribution control", async (t) =
     },
   );
 
-  await t.test("click trash button", () => {
+  await test("click trash button", () => {
     trashButton.click();
 
     assertEquals(

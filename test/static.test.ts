@@ -1,5 +1,5 @@
 /* eslint no-shadow:[0] */
-import test from "node:test";
+import test, { describe } from "node:test";
 import {assert, assertEquals, assertNotEquals, assertThrows} from "@std/assert";
 import { spy } from "sinon";
 
@@ -10,7 +10,7 @@ import { getGeoJSON } from "./utils/get_geojson.ts";
 import { createMap } from "./utils/create_map.ts";
 import { StaticMode } from "../src/modes/static_mode.ts";
 
-test("static", async (t) => {
+describe("static", async (t) => {
   const map = createMap();
   const opts = {
     modes: {
@@ -40,7 +40,7 @@ test("static", async (t) => {
     return args;
   };
 
-  t.test("static - init map for tests", () => {
+  test("static - init map for tests", () => {
     const done = function () {
       map.off("load", done);
     };
@@ -52,7 +52,7 @@ test("static", async (t) => {
     }
   });
 
-  await t.test("static - box select", async () => {
+  await test("static - box select", async () => {
     Draw.add(getGeoJSON("negativePoint"));
     Draw.add(getGeoJSON("point"));
     map.fire.resetHistory();
@@ -71,7 +71,7 @@ test("static", async (t) => {
     cleanUp();
   });
 
-  await t.test("static - try clicking many features", async () => {
+  await test("static - try clicking many features", async () => {
     const features = [
       getGeoJSON("point"),
       getGeoJSON("line"),

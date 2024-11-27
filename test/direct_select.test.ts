@@ -1,5 +1,5 @@
 /* eslint no-shadow:[0] */
-import test from "node:test";
+import {describe, test} from "node:test";
 import {assert, assertEquals, assertNotEquals, assertThrows} from "@std/assert";
 import turfCentroid from "@turf/centroid";
 import createSyntheticEvent from "synthetic-dom-events";
@@ -15,7 +15,7 @@ import { makeMouseEvent } from "./utils/make_mouse_event.ts";
 import { makeTouchEvent } from "./utils/make_touch_event.ts";
 import { ModeStrings } from "../src/constants/modes.ts";
 
-test("direct_select", async (t) => {
+describe("direct_select", async () => {
   const mapContainer = document.createElement("div");
   document.body.appendChild(mapContainer);
   const map = createMap({ container: mapContainer });
@@ -41,7 +41,7 @@ test("direct_select", async (t) => {
     return args;
   };
 
-  t.test("direct_select - init map for tests", () => {
+  await test("direct_select - init map for tests", () => {
     const done = function () {
       map.off("load", done);
     };
@@ -53,7 +53,7 @@ test("direct_select", async (t) => {
     }
   });
 
-  await t.test(
+  await test(
     "direct_select - should fire correct actionable when no vertices selected",
     async () => {
       const ids = Draw.add(getGeoJSON("polygon"));
@@ -99,7 +99,7 @@ test("direct_select", async (t) => {
     },
   );
 
-  await t.test(
+  await test(
     "direct_select - should fire correct actionable when a vertex is selected by clicking",
     async () => {
       const ids = Draw.add(getGeoJSON("polygon"));
@@ -142,7 +142,7 @@ test("direct_select", async (t) => {
     },
   );
 
-  await t.test(
+  await test(
     "direct_select - should fire correct actionable when a vertex is selected by tapping",
     async () => {
       const ids = Draw.add(getGeoJSON("polygon"));
@@ -185,7 +185,7 @@ test("direct_select", async (t) => {
     },
   );
 
-  await t.test(
+  await test(
     "direct_select - trashing vertices should delete the correct ones",
     async () => {
       const longLine = {
@@ -239,7 +239,7 @@ test("direct_select", async (t) => {
     },
   );
 
-  await t.test(
+  await test(
     "direct_select - a click on a vertex and than dragging the map shouldn't drag the vertex",
     async () => {
       const ids = Draw.add(getGeoJSON("polygon"));
@@ -267,7 +267,7 @@ test("direct_select", async (t) => {
     },
   );
 
-  await t.test(
+  await test(
     "direct_select - fire one update when dragging mouse leaves container and button is released outside",
     async () => {
       const ids = Draw.add(getGeoJSON("polygon"));
@@ -316,7 +316,7 @@ test("direct_select", async (t) => {
     },
   );
 
-  await t.test(
+  await test(
     "direct_select - fire two updates when dragging mouse leaves container then returns and button is released inside",
     async () => {
       const ids = Draw.add(getGeoJSON("polygon"));
@@ -366,7 +366,7 @@ test("direct_select", async (t) => {
     },
   );
 
-  await t.test(
+  await test(
     "direct_select - drag feature if no vertices are selected",
     async () => {
       const [polygonId] = Draw.add(getGeoJSON("polygon"));
@@ -404,7 +404,7 @@ test("direct_select", async (t) => {
     },
   );
 
-  await t.test(
+  await test(
     "direct_select - dragging a selected vertex updates stored coordinates",
     async () => {
       const [lineId] = Draw.add(getGeoJSON("line"));

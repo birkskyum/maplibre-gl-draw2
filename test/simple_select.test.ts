@@ -1,5 +1,5 @@
 /* eslint no-shadow:[0] */
-import test from "node:test";
+import test, { describe } from "node:test";
 import {assert, assertEquals, assertNotEquals, assertThrows} from "@std/assert";
 import createSyntheticEvent from "synthetic-dom-events";
 import { spy } from "sinon";
@@ -14,7 +14,7 @@ import { createMap } from "./utils/create_map.ts";
 import { createMockDrawModeContext } from "./utils/create_mock_draw_mode_context.ts";
 import { TAP_INTERVAL, TAP_TOLERANCE } from "../src/lib/is_tap.ts";
 
-test("simple_select", async (t) => {
+describe("simple_select", async (t) => {
   const context = createMockDrawModeContext();
   const mapContainer = document.createElement("div");
   document.body.appendChild(mapContainer);
@@ -44,7 +44,7 @@ test("simple_select", async (t) => {
     return args;
   };
 
-  t.test("simple_select - init map for tests", () => {
+  test("simple_select - init map for tests", () => {
     const done = function () {
       map.off("load", done);
     };
@@ -56,7 +56,7 @@ test("simple_select", async (t) => {
     }
   });
 
-  await t.test("simple_select - box select", async () => {
+  await test("simple_select - box select", async () => {
     Draw.add(getGeoJSON("negativePoint"));
     const id = Draw.add(getGeoJSON("point"))[0];
     map.fire.resetHistory();
@@ -136,7 +136,7 @@ test("simple_select", async (t) => {
     cleanUp();
   });
 
-  await t.test("simple_select - box select many features", async () => {
+  await test("simple_select - box select many features", async () => {
     const features: any[] = [];
     for (let i = 0; i < 5; i++) {
       features.push(getGeoJSON("point"));
@@ -200,7 +200,7 @@ test("simple_select", async (t) => {
     cleanUp();
   });
 
-  await t.test("simple_select - box select over no points", async () => {
+  await test("simple_select - box select over no points", async () => {
     Draw.add(getGeoJSON("point"));
     map.fire.resetHistory();
 
@@ -224,7 +224,7 @@ test("simple_select", async (t) => {
     cleanUp();
   });
 
-  await t.test("simple_select - box select then mousemove", async () => {
+  await test("simple_select - box select then mousemove", async () => {
     Draw.add(getGeoJSON("point"));
     map.fire.resetHistory();
 
@@ -244,7 +244,7 @@ test("simple_select", async (t) => {
     cleanUp();
   });
 
-  await t.test("simple_select - deselect", async () => {
+  await test("simple_select - deselect", async () => {
     const id = Draw.add(getGeoJSON("point"))[0];
     Draw.changeMode("simple_select", { featureIds: [id] });
 
@@ -273,7 +273,7 @@ test("simple_select", async (t) => {
     cleanUp();
   });
 
-  await t.test("simple_select - click on a deselected feature", async () => {
+  await test("simple_select - click on a deselected feature", async () => {
     const id = Draw.add(getGeoJSON("polygon"))[0];
     Draw.changeMode("simple_select");
 
@@ -311,7 +311,7 @@ test("simple_select", async (t) => {
     cleanUp();
   });
 
-  await t.test("simple_select - tap on a deselected feature", async () => {
+  await test("simple_select - tap on a deselected feature", async () => {
     const id = Draw.add(getGeoJSON("polygon"))[0];
     Draw.changeMode("simple_select");
 
@@ -344,7 +344,7 @@ test("simple_select", async (t) => {
     cleanUp();
   });
 
-  await t.test(
+  await test(
     "simple_select - click on a selected feature with shift down",
     async () => {
       const id = Draw.add(getGeoJSON("polygon"))[0];
@@ -386,7 +386,7 @@ test("simple_select", async (t) => {
     },
   );
 
-  await t.test("simple_select - delete selected features", async () => {
+  await test("simple_select - delete selected features", async () => {
     const id = Draw.add(getGeoJSON("polygon"))[0];
     Draw.changeMode("simple_select", { featureIds: [id] });
     map.fire.resetHistory();
@@ -419,7 +419,7 @@ test("simple_select", async (t) => {
     cleanUp();
   });
 
-  await t.test(
+  await test(
     "simple_select - click on a selected feature with shift up to enter direct_select",
     async () => {
       Draw.deleteAll();
@@ -467,7 +467,7 @@ test("simple_select", async (t) => {
     },
   );
 
-  await t.test(
+  await test(
     "simple_select - click on a vertex to enter direct_select",
     async () => {
       const id = Draw.add(getGeoJSON("polygon"))[0];
@@ -505,7 +505,7 @@ test("simple_select", async (t) => {
     },
   );
 
-  await t.test(
+  await test(
     "simple_select - tap on a vertex to enter direct_select",
     async () => {
       const id = Draw.add(getGeoJSON("polygon"))[0];
@@ -538,7 +538,7 @@ test("simple_select", async (t) => {
     },
   );
 
-  await t.test(
+  await test(
     "simple_select - tap dragging fires an update event",
     async () => {
       const point = getGeoJSON("point");
@@ -578,7 +578,7 @@ test("simple_select", async (t) => {
     },
   );
 
-  await t.test(
+  await test(
     "simple_select - click on a deselected feature with shift down while having another feature selected",
     async () => {
       const pointId = Draw.add(getGeoJSON("point"))[0];
@@ -634,7 +634,7 @@ test("simple_select", async (t) => {
     },
   );
 
-  await t.test(
+  await test(
     "simple_select - click on a deselected feature with shift up, while having another feature selected",
     async () => {
       const pointId = Draw.add(getGeoJSON("point"))[0];
@@ -685,7 +685,7 @@ test("simple_select", async (t) => {
     },
   );
 
-  await t.test("simple_select - drag every feature type", async () => {
+  await test("simple_select - drag every feature type", async () => {
     const pointId = Draw.add(getGeoJSON("point"))[0];
     const multiPointId = Draw.add(getGeoJSON("multiPoint"))[0];
     const lineStringId = Draw.add(getGeoJSON("line"))[0];
@@ -833,7 +833,7 @@ test("simple_select", async (t) => {
     cleanUp();
   });
 
-  await t.test(
+  await test(
     "simple_select - interrupt drag move with mousemove",
     async () => {
       const pointId = Draw.add(getGeoJSON("point"))[0];
@@ -875,7 +875,7 @@ test("simple_select", async (t) => {
     },
   );
 
-  await t.test(
+  await test(
     "simple_select - fire one update when dragging mouse leaves container and button is released outside",
     async () => {
       const pointId = Draw.add(getGeoJSON("point"))[0];
@@ -918,7 +918,7 @@ test("simple_select", async (t) => {
     },
   );
 
-  await t.test(
+  await test(
     "simple_select - fire two update when dragging mouse leaves container then returns and button is released inside",
     async () => {
       const pointId = Draw.add(getGeoJSON("point"))[0];
@@ -961,7 +961,7 @@ test("simple_select", async (t) => {
     },
   );
 
-  t.test("simple_select - on closing invalid line", () => {
+  test("simple_select - on closing invalid line", () => {
     Draw.changeMode("draw_line_string");
     mouseClick(map, makeMouseEvent(1, 1));
     mouseClick(map, makeMouseEvent(1, 1));
@@ -983,7 +983,7 @@ test("simple_select", async (t) => {
     cleanUp();
   });
 
-  t.test("simple_select - on closing invalid polygon", () => {
+  test("simple_select - on closing invalid polygon", () => {
     Draw.changeMode("draw_polygon");
     mouseClick(map, makeMouseEvent(1, 1));
     mouseClick(map, makeMouseEvent(16, 16));
@@ -1006,7 +1006,7 @@ test("simple_select", async (t) => {
     cleanUp();
   });
 
-  await t.test(
+  await test(
     "simple_select - fire one update after moving point with touch",
     async () => {
       const pointId = Draw.add(getGeoJSON("point"))[0];
