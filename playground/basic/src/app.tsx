@@ -1,5 +1,5 @@
 import { Route, Router } from '@solidjs/router'
-import {Basic} from './routes/basic-1'
+import {Basic} from './routes/basic'
 import {Sasic} from './routes/static'
 import { Suspense } from 'solid-js'
 
