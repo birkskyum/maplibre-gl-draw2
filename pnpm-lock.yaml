@@ -69,6 +69,9 @@ importers:
       '@types/mapbox__point-geometry':
         specifier: ^0.1.4
         version: 0.1.4
+      '@types/node':
+        specifier: ^22.10.0
+        version: 22.10.0
       '@types/sinon':
         specifier: ^17.0.3
         version: 17.0.3
@@ -2065,7 +2068,6 @@ snapshots:
   '@types/node@22.10.0':
     dependencies:
       undici-types: 6.20.0
-    optional: true
 
   '@types/pbf@3.0.5': {}
 
@@ -3213,8 +3215,7 @@ snapshots:
       has-symbols: 1.0.3
       which-boxed-primitive: 1.0.2
 
-  undici-types@6.20.0:
-    optional: true
+  undici-types@6.20.0: {}
 
   uri-js@4.4.1:
     dependencies:
