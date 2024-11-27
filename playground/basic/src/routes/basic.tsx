@@ -17,93 +17,17 @@ export default function Basic() {
       zoom: 1,
       center: [0, 0],
     });
-    map.addControl(new maplibregl.NavigationControl(), "top-left");
-
+    
     const modes = MapLibreDraw.modes;
     const Draw = new MapLibreDraw({ modes });
-    let drawIsActive = true;
-    map.addControl(Draw, "bottom-right");
-
-    map.on("load", () => {
-      // Add Draw to the map if it is inactive
-      const addButton = document.getElementById("addBtn");
-      addButton.onclick = function () {
-        if (drawIsActive) return;
-        drawIsActive = true;
-        map.addControl(Draw, "bottom-right");
-      };
-
-      // Remove draw from the map if it is active
-      const removeButton = document.getElementById("removeBtn");
-      removeButton.onclick = function () {
-        if (!drawIsActive) return;
-        drawIsActive = false;
-        map.removeControl(Draw);
-      };
-
-      // Toggle the style between dark and streets
-      const flipStyleButton = document.getElementById("flipStyleBtn");
-      let currentStyle = "positron-gl-style";
-      flipStyleButton.onclick = function () {
-        const style = currentStyle === "positron-gl-style"
-          ? "dark-matter-gl-style"
-          : "positron-gl-style";
-        map.setStyle(
-          `https://basemaps.cartocdn.com/gl/${currentStyle}/style.json`,
-        );
-        currentStyle = style;
-      };
-
-      // toggle double click zoom
-      const doubleClickZoom = document.getElementById("doubleClickZoom");
-      let doubleClickZoomOn = true;
-      doubleClickZoom.onclick = function () {
-        if (doubleClickZoomOn) {
-          doubleClickZoomOn = false;
-          map.doubleClickZoom.disable();
-          doubleClickZoom.innerText = "enable dblclick zoom";
-        } else {
-          map.doubleClickZoom.enable();
-          doubleClickZoomOn = true;
-          doubleClickZoom.innerText = "disable dblclick zoom";
-        }
-      };
-
-      // Jump into draw point mode via a custom UI element
-      const startPoint = document.getElementById("start-point");
-      startPoint.onclick = function () {
-        Draw.changeMode("draw_point");
-      };
-
-      // Jump into draw line mode via a custom UI element
-      const startLine = document.getElementById("start-line");
-      startLine.onclick = function () {
-        Draw.changeMode("draw_line_string");
-      };
-
-      // Jump into draw polygon mode via a custom UI element
-      const startPolygon = document.getElementById("start-polygon");
-      startPolygon.onclick = function () {
-        Draw.changeMode("draw_polygon");
-      };
-    });
+    map.addControl(Draw, "top-right");
 
 
   });
   return (
     <>
-        <div id="map" class="h-[100vh] "></div>
-    <div class="start-draw">
-      <div id="start-point">POINT</div>
-      <div id="start-line">LINE</div>
-      <div id="start-polygon">POLYGON</div>
-    </div>
-    <div class="toggle">
-      <button id="doubleClickZoom">disable dblclick zoom</button>
-      <button id="addBtn">add draw</button>
-      <button id="removeBtn">remove draw</button>
-      <button id="flipStyleBtn">change style</button>
-    </div>
+        <div id="map"></div>
+  
     </>
   )
 }

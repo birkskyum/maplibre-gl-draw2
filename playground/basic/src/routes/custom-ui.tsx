@@ -5,9 +5,9 @@ import "../../../../dist/maplibre-gl-draw.css";
 import {MapLibreDraw } from "../../../../src/index.ts";
 import { createEffect } from "solid-js";
 
-import './static.css'
+import './basic.css'
 
-export default function Static() {
+export default function ReinitControl() {
   
   createEffect(() => {
 
@@ -17,7 +17,7 @@ export default function Static() {
       zoom: 1,
       center: [0, 0],
     });
-
+    
     const modes = MapLibreDraw.modes;
     const Draw = new MapLibreDraw({ modes });
     let drawIsActive = true;
@@ -96,13 +96,7 @@ export default function Static() {
       <div id="start-point">POINT</div>
       <div id="start-line">LINE</div>
       <div id="start-polygon">POLYGON</div>
-    </div>
-    <div class="toggle">
-      <button id="doubleClickZoom">disable dblclick zoom</button>
-      <button id="addBtn">add draw</button>
-      <button id="removeBtn">remove draw</button>
-      <button id="flipStyleBtn">change style</button>
-    </div>
+    </div> 
     </>
   )
 }

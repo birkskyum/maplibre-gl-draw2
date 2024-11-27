@@ -5,9 +5,9 @@ import "../../../../dist/maplibre-gl-draw.css";
 import {MapLibreDraw } from "../../../../src/index.ts";
 import { createEffect } from "solid-js";
 
-import './static.css'
+import './basic.css'
 
-export default function Static() {
+export default function ReinitControl() {
   
   createEffect(() => {
 
@@ -68,23 +68,6 @@ export default function Static() {
         }
       };
 
-      // Jump into draw point mode via a custom UI element
-      const startPoint = document.getElementById("start-point");
-      startPoint.onclick = function () {
-        Draw.changeMode("draw_point");
-      };
-
-      // Jump into draw line mode via a custom UI element
-      const startLine = document.getElementById("start-line");
-      startLine.onclick = function () {
-        Draw.changeMode("draw_line_string");
-      };
-
-      // Jump into draw polygon mode via a custom UI element
-      const startPolygon = document.getElementById("start-polygon");
-      startPolygon.onclick = function () {
-        Draw.changeMode("draw_polygon");
-      };
     });
 
 
@@ -92,11 +75,7 @@ export default function Static() {
   return (
     <>
         <div id="map" class="h-[100vh] "></div>
-    <div class="start-draw">
-      <div id="start-point">POINT</div>
-      <div id="start-line">LINE</div>
-      <div id="start-polygon">POLYGON</div>
-    </div>
+
     <div class="toggle">
       <button id="doubleClickZoom">disable dblclick zoom</button>
       <button id="addBtn">add draw</button>
