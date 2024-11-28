@@ -10,8 +10,6 @@
   "dependencies": {
     "@solidjs/router": "^0.15.1",
     "@tailwindcss/vite": "^4.0.0-beta.3",
-    "@turf/bearing": "^7.1.0",
-    "@turf/center": "^7.1.0",
     "autoprefixer": "^10.4.20",
     "maplibre-gl": "^4.7.1",
     "solid-js": "^1.9.3",
