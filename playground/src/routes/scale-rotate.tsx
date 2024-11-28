@@ -6,7 +6,7 @@ import {DrawRectangle, MapLibreDraw } from "../../../src/index.ts";
 import { createEffect } from "solid-js";
 import { Button } from "../components/button.tsx";
 import {DrawAssistedRectangle} from "../../../src/modes/draw_assisted_rectangle.ts"
-import {SRMode, SRStyle, SRCenter} from "../../../src/modes/scale-rotate/index.ts"
+import {SRMode, SRStyle, SRCenter} from "../../../src/modes/scale_rotate.ts"
 
 
 

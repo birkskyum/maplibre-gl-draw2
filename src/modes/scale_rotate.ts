@@ -1,19 +1,13 @@
-import * as Constants from '../../constants';
-import {doubleClickZoom} from '../../lib/double_click_zoom';
-import {createSupplementaryPoints} from '../../lib/create_supplementary_points';
-import * as CommonSelectors from '../../lib/common_selectors';
-import {moveFeatures} from '../../lib/move_features';
+import * as Constants from '../constants';
+import {doubleClickZoom} from '../lib/double_click_zoom';
+import {createSupplementaryPoints} from '../lib/create_supplementary_points';
+import * as CommonSelectors from '../lib/common_selectors';
+import {moveFeatures} from '../lib/move_features';
 
-import { lineString, point } from '@turf/helpers';
-import bearing from '@turf/bearing';
-import center from '@turf/center';
-import midpoint from '@turf/midpoint';
-import distance from '@turf/distance';
-import destination from '@turf/destination';
-import transformRotate from '@turf/transform-rotate';
-import transformScale from '@turf/transform-scale';
-import { ModeInterface } from '../mode_interface';
-import { ModeStrings } from '../../constants/modes';
+import {bearing, center, midpoint, distance, destination, transformRotate, transformScale, lineString, point} from "@turf/turf"
+
+import { ModeInterface } from './mode_interface';
+import { ModeStrings } from '../constants/modes';
 
 const rotate = './img/rotate.png'
 const  scale = './img/scale.png'

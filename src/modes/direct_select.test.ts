@@ -1,7 +1,7 @@
 /* eslint no-shadow:[0] */
 import {describe, test} from "vitest";
 import {assert, assertEquals, assertNotEquals, assertThrows} from "@std/assert";
-import turfCentroid from "@turf/centroid";
+import {centroid as turfCentroid} from "@turf/turf";
 import createSyntheticEvent from "synthetic-dom-events";
 import { spy } from "sinon";
 

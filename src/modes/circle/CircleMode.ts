@@ -1,6 +1,6 @@
 import DrawPolygon from '../draw_polygon.ts';
 import * as Constants from '../../constants.ts';
-import circle from '@turf/circle'
+import {circle} from '@turf/turf'
 import {doubleClickZoom} from '../../lib/double_click_zoom.ts';
 import { ModeStrings } from '../../constants/modes.ts';
 

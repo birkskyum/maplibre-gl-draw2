@@ -4,9 +4,8 @@ import {createSupplementaryPoints} from '../../lib/create_supplementary_points.t
 import { moveFeatures } from "../../lib/move_features.ts";
 import * as Constants from '../../constants';
 import {constrainFeatureMovement} from '../../lib/constrain_feature_movement';
-import distance from '@turf/distance';
-import * as turfHelpers from '@turf/helpers';
-import circle from '@turf/circle';
+import {distance, circle, point} from '@turf/turf';
+
 import {createSupplementaryPointsForCircle} from '../../lib/create_supplementary_points_circle.ts';
 
 
@@ -29,7 +28,7 @@ export class DirectModeOverride extends DirectSelect {
     if (state.feature.properties.isCircle) {
       const center = state.feature.properties.center;
       const movedVertex = [e.lngLat.lng, e.lngLat.lat];
-      const radius = distance(turfHelpers.point(center), turfHelpers.point(movedVertex), {units: 'kilometers'});
+      const radius = distance(point(center), point(movedVertex), {units: 'kilometers'});
       const circleFeature = circle(center, radius);
       state.feature.incomingCoords(circleFeature.geometry.coordinates);
       state.feature.properties.radiusInKm = radius;

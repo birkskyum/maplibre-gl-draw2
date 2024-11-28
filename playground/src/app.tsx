@@ -7,7 +7,8 @@ import CustomUI from './routes/custom-ui'
 import DrawRectangle from './routes/draw-rectangle'
 import DrawAssistedRectangle from './routes/draw-assisted-rectangle'
 import Circle from './routes/circle'
-import RotateScaleRectangle from './routes/rotate-scale-rectangle'
+import RotateScaleRectangle from './routes/scale-rotate'
+import Planar from './routes/planar'
 
 import './app.css';
 
@@ -16,38 +17,29 @@ export default function App (){
     return (
         <Router root={(props)=>{
          return (<div class="flex h-screen">
-            <div class="w-[250px] bg-gray-100 p-5">
+            <div class="w-[50px] bg-gray-700 p-5">
                 {/* <h2>Pages</h2> */}
                 <nav>
-                    <ul class="list-none p-0">
-                        <li><A href="/basic" class="no-underline text-gray-700">Basic</A></li>
-                        <li><A href="/reinit-control" class="no-underline text-gray-700">Reinitialize control</A></li>
-                        <li><A href="/custom-ui" class="no-underline text-gray-700">Custom UI</A></li>
-                        <li><A href="/static" class="no-underline text-gray-700">Static Mode</A></li>
-                        <li><A href="/draw-rectangle" class="no-underline text-gray-700">Draw Rectangle</A></li>
-                        <li><A href="/draw-assisted-rectangle" class="no-underline text-gray-700">Draw Assisted Rectangle</A></li>
-                        <li><A href="/circle" class="no-underline text-gray-700">Circle Mode</A></li>
-                        <li><A href="/rotate-scale-rectangle" class="no-underline text-gray-700">Rotate Scale Rectangle Mode</A></li>
-                        
-                    </ul>
+
                 </nav>
             </div>
             <div class="flex-1  relative">
                 <Suspense>
                     {props.children}
-                    
                 </Suspense>
             </div>
         </div>)
         }}>
-            <Route path={'/basic'} component={Basic} />
-            <Route path={'/static'} component={Static} />
-            <Route path={'/reinit-control'} component={ReinitControl} />
-            <Route path={'/custom-ui'} component={CustomUI} />
-            <Route path={'/draw-rectangle'} component={DrawRectangle} />
-            <Route path={'/draw-assisted-rectangle'} component={DrawAssistedRectangle} />
-            <Route path={'/circle'} component={Circle} />
-            <Route path={'/rotate-scale-rectangle'} component={RotateScaleRectangle} />
+
+            <Route path={'/planar'} component={Planar} />
+            <Route path={'/planar/basic'} component={Basic} />
+            <Route path={'/planar/static'} component={Static} />
+            <Route path={'/planar/reinit-control'} component={ReinitControl} />
+            <Route path={'/planar/custom-ui'} component={CustomUI} />
+            <Route path={'/planar/draw-rectangle'} component={DrawRectangle} />
+            <Route path={'/planar/draw-assisted-rectangle'} component={DrawAssistedRectangle} />
+            <Route path={'/planar/circle'} component={Circle} />
+            <Route path={'/planar/scale-rotate'} component={RotateScaleRectangle} />
     </Router>
 )
 }

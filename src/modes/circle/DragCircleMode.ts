@@ -1,8 +1,7 @@
 import * as Constants from '../../constants.ts'
 import {doubleClickZoom} from '../../lib/double_click_zoom.ts'
-import circle from '@turf/circle'
-import distance from '@turf/distance'
-import * as turfHelpers from '@turf/helpers'
+import {circle, distance, point} from '@turf/turf'
+
 import DrawPolygon from '../draw_polygon'
 import { ModeStrings } from '../../constants/modes.ts'
 
@@ -55,8 +54,8 @@ onMouseMove(state, e) {
   const center = state.polygon.properties.center;
   if (center.length > 0) {
     const distanceInKm = distance(
-      turfHelpers.point(center),
-      turfHelpers.point([e.lngLat.lng, e.lngLat.lat]),
+      point(center),
+      point([e.lngLat.lng, e.lngLat.lat]),
       { units : 'kilometers'});
     const circleFeature = circle(center, distanceInKm);
     state.polygon.incomingCoords(circleFeature.geometry.coordinates);
@@ -68,8 +67,8 @@ onDrag(state, e) {
   const center = state.polygon.properties.center;
   if (center.length > 0) {
     const distanceInKm = distance(
-      turfHelpers.point(center),
-      turfHelpers.point([e.lngLat.lng, e.lngLat.lat]),
+      point(center),
+      point([e.lngLat.lng, e.lngLat.lat]),
       { units : 'kilometers'});
     const circleFeature = circle(center, distanceInKm);
     state.polygon.incomingCoords(circleFeature.geometry.coordinates);
