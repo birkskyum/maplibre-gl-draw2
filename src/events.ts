@@ -144,9 +144,9 @@ export class DrawEvents {
     
     const modes: any = {};
 
-    for (const mode in ModeStrings) {
-      const modeString = ModeStrings[mode];
-      const modeClass = ModeClasses[modeString];
+    for (const mode in ctx.options.modes) {
+      const modeString = mode;
+      const modeClass = ctx.options.modes[mode];
       const populatedMode = objectToMode(modeClass)
       modes[modeString] = populatedMode;
     }

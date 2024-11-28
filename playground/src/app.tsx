@@ -6,6 +6,7 @@ import ReinitControl from './routes/reinit-control'
 import CustomUI from './routes/custom-ui'
 import DrawRectangle from './routes/draw-rectangle'
 import DrawAssistedRectangle from './routes/draw-assisted-rectangle'
+import Circle from './routes/circle'
 
 import './app.css';
 
@@ -24,6 +25,7 @@ export default function App (){
                         <li><A href="/static" class="no-underline text-gray-700">Static Mode</A></li>
                         <li><A href="/draw-rectangle" class="no-underline text-gray-700">Draw Rectangle</A></li>
                         <li><A href="/draw-assisted-rectangle" class="no-underline text-gray-700">Draw Assisted Rectangle</A></li>
+                        <li><A href="/circle" class="no-underline text-gray-700">Circle Mode</A></li>
                         
                     </ul>
                 </nav>
@@ -42,6 +44,7 @@ export default function App (){
             <Route path={'/custom-ui'} component={CustomUI} />
             <Route path={'/draw-rectangle'} component={DrawRectangle} />
             <Route path={'/draw-assisted-rectangle'} component={DrawAssistedRectangle} />
+            <Route path={'/circle'} component={Circle} />
     </Router>
 )
 }

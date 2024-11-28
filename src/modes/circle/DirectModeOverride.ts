@@ -58,7 +58,7 @@ export class DirectModeOverride extends DirectSelect {
       push(geojson);
       const supplementaryPoints = geojson.properties.user_isCircle ? createSupplementaryPointsForCircle(geojson)
         : createSupplementaryPoints(geojson, {
-          map: this.map,
+          // map: this.map,
           midpoints: true,
           selectedPaths: state.selectedCoordPaths
         });

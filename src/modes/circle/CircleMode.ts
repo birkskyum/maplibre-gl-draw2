@@ -8,7 +8,7 @@ const DEFAULT_RADIUS_IN_KM = 2;
 
 export class CircleMode extends DrawPolygon {
 
-  override onSetup(opts) {
+  onSetup(opts) {
     const polygon = this.newFeature({
       type: Constants.geojsonTypes.FEATURE,
       properties: {
@@ -20,6 +20,7 @@ export class CircleMode extends DrawPolygon {
         coordinates: [[]]
       }
     });
+
 
     this.addFeature(polygon);
 
