@@ -5,8 +5,9 @@ import * as Constants from "../constants.ts";
 import { createVertex } from "../lib/create_vertex.ts";
 import { ModeInterface } from "./mode_interface.ts";
 import { modes } from "../constants.ts";
+import { ModeInterfaceAccessors } from "./mode_interface_accessors.ts";
 
-export class DrawLineString extends ModeInterface {
+export class DrawLineString extends ModeInterfaceAccessors implements ModeInterface {
   onSetup(opts) {
     opts = opts || {};
     const featureId = opts.featureId;
@@ -133,7 +134,7 @@ export class DrawLineString extends ModeInterface {
     });
   }
 
-  override onMouseMove(state, e) {
+  onMouseMove(state, e) {
     state.line.updateCoordinate(
       state.currentVertexPosition,
       e.lngLat.lng,
@@ -144,17 +145,17 @@ export class DrawLineString extends ModeInterface {
     }
   }
 
-  override onClick(state, e) {
+  onClick(state, e) {
     if (CommonSelectors.isVertex(e)) return this.clickOnVertex(state);
     this.clickAnywhere(state, e);
   }
 
-  override onTap(state, e) {
+  onTap(state, e) {
     // Handle tap same as click
     this.onClick(state, e);
   }
 
-  override onKeyUp(state, e) {
+  onKeyUp(state, e) {
     if (CommonSelectors.isEnterKey(e)) {
       this.changeMode(modes.simple_select, {
         featureIds: [state.line.id],
@@ -165,7 +166,7 @@ export class DrawLineString extends ModeInterface {
     }
   }
 
-  override onStop(state) {
+  onStop(state) {
     doubleClickZoom.enable(this);
     this.activateUIButton();
 
@@ -184,12 +185,12 @@ export class DrawLineString extends ModeInterface {
     }
   }
 
-  override onTrash(state) {
+  onTrash(state) {
     this.deleteFeature([state.line.id], { silent: true });
     this.changeMode(modes.simple_select);
   }
 
-  override toDisplayFeatures(state, geojson, display) {
+  toDisplayFeatures(state, geojson, display) {
     const isActiveLine = geojson.properties.id === state.line.id;
     geojson.properties.active = isActiveLine
       ? Constants.activeStates.ACTIVE

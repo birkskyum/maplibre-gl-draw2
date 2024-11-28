@@ -172,7 +172,6 @@ export const LNG_MAX = 270;
   draw_assisted_rectangle: string,
 };
 
-
 export const modes = {
   simple_select:"simple_select",
   draw_line_string:"draw_line_string",

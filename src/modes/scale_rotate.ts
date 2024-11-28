@@ -7,7 +7,8 @@ import {moveFeatures} from '../lib/move_features';
 import {bearing, center, midpoint, distance, destination, transformRotate, transformScale, lineString, point} from "@turf/turf"
 
 import { ModeInterface } from './mode_interface';
-import { modes } from '../constants/modes';
+import { modes } from '../constants.ts';
+import { ModeInterfaceAccessors } from './mode_interface_accessors.ts';
 
 const rotate = './img/rotate.png'
 const  scale = './img/scale.png'
@@ -435,7 +436,7 @@ function parseSRCenter(value, defaultSRCenter = SRCenter.Center) {
     }
  */
 
-export class SRMode extends ModeInterface {
+export class SRMode extends ModeInterfaceAccessors implements ModeInterface {
 
   onSetup(opts) {
     const featureId = this.getSelected()[0].id;

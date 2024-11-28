@@ -2,8 +2,9 @@ import { ModeInterface } from "./mode_interface.ts";
 import * as CommonSelectors from "../lib/common_selectors.ts";
 import * as Constants from "../constants.ts";
 import { modes } from "../constants.ts";
+import { ModeInterfaceAccessors } from "./mode_interface_accessors.ts";
 
-export class DrawPoint extends ModeInterface {
+export class DrawPoint extends ModeInterfaceAccessors implements ModeInterface {
   onSetup(opts) {
     const point = this.newFeature({
       type: Constants.geojsonTypes.FEATURE as "Feature",
@@ -32,7 +33,7 @@ export class DrawPoint extends ModeInterface {
     this.changeMode(modes.simple_select);
   }
 
-  override onClick(state, e) {
+  onClick(state, e) {
     this.updateUIClasses({ mouse: Constants.cursors.MOVE });
     state.point.updateCoordinate("", e.lngLat.lng, e.lngLat.lat);
     this.fire(Constants.events.CREATE, {
@@ -43,7 +44,7 @@ export class DrawPoint extends ModeInterface {
     });
   }
 
-  override onTap(state, e) {
+  onTap(state, e) {
     // Handle tap events the same way as click events
     this.updateUIClasses({ mouse: Constants.cursors.MOVE });
     state.point.updateCoordinate("", e.lngLat.lng, e.lngLat.lat);
@@ -55,7 +56,7 @@ export class DrawPoint extends ModeInterface {
     });
   }
 
-  override onStop(state) {
+  onStop(state) {
     this.activateUIButton();
     
     if (!state.point.getCoordinate().length) {
@@ -63,7 +64,7 @@ export class DrawPoint extends ModeInterface {
     }
   }
 
-  override toDisplayFeatures(state, geojson, display) {
+  toDisplayFeatures(state, geojson, display) {
     // Never render the point we're drawing
     const isActivePoint = geojson.properties.id === state.point.id;
     geojson.properties.active = isActivePoint
@@ -72,11 +73,11 @@ export class DrawPoint extends ModeInterface {
     if (!isActivePoint) return display(geojson);
   }
 
-  override onTrash(state) {
+  onTrash(state) {
     this.stopDrawingAndRemove(state);
   }
 
-  override onKeyUp(state, e) {
+  onKeyUp(state, e) {
     if (CommonSelectors.isEscapeKey(e) || CommonSelectors.isEnterKey(e)) {
       return this.stopDrawingAndRemove(state);
     }

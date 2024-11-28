@@ -1,17 +1,13 @@
-import { ModeInterfaceAccessors } from "./mode_interface_accessors.ts";
-
 /**
  * Triggered while a mode is being transitioned into.
  * @param opts {Object} - this is the object passed via `draw.changeMode('mode', opts)`;
  * @name MODE.onSetup
  * @returns {Object} - this object will be passed to all other life cycle functions
  */
-export abstract class ModeInterface extends ModeInterfaceAccessors {
+export interface ModeInterface {
+  state?: object;
 
-  public state = {};
-
-
-  abstract onSetup(opts?: object): object;
+  onSetup?(opts?: object): object;
 
   /**
    * Triggered when a drag event is detected on the map

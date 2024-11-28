@@ -1,12 +1,13 @@
 import { ModeInterface } from "./mode_interface.ts";
+import { ModeInterfaceAccessors } from "./mode_interface_accessors.ts";
 
-export class StaticMode extends ModeInterface {
+export class StaticMode extends ModeInterfaceAccessors implements ModeInterface {
   onSetup() {
     this.setActionableState(); // default actionable state is false for all actions
     return {};
   }
 
-  override toDisplayFeatures(state, geojson, display) {
+  toDisplayFeatures(state, geojson, display) {
     display(geojson);
   }
 }

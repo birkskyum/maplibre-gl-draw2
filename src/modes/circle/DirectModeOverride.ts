@@ -10,7 +10,7 @@ import {createSupplementaryPointsForCircle} from '../../lib/create_supplementary
 
 
 
-export class DirectModeOverride extends DirectSelect {
+export class DirectModeextends DirectSelect {
 
   dragFeature(state, e, delta) {
     moveFeatures(this.getSelected(), delta);

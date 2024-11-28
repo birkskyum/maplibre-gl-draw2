@@ -26,7 +26,7 @@ const doubleClickZoom = {
     }
   };
   
-  export class DrawRectangle extends ModeInterface {
+  export class DrawRectangle extends ModeInterfaceAccessors implements ModeInterface {
     // When the mode starts this function will be called.
     onSetup(opts) {
       const rectangle = this.newFeature({

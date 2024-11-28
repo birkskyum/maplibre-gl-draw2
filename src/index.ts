@@ -19,6 +19,7 @@ import type {MapMouseEvent} from './events.ts'
 import { DrawContext } from "./context.ts";
 import { ModeClasses } from "./modes.ts";
 import {DrawRectangle} from './modes/index.ts'
+import { ModeInterface } from "./modes/mode_interface.ts";
 
 
 /**

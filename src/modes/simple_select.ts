@@ -10,8 +10,9 @@ import { modes } from "../constants.ts";
 import type { MultiFeat } from "../feature_types/multi_feature.ts";
 import type Point from "@mapbox/point-geometry";
 import type { PointLike } from "maplibre-gl";
+import { ModeInterfaceAccessors } from "./mode_interface_accessors.ts";
 
-export class SimpleSelect extends ModeInterface {
+export class SimpleSelect extends ModeInterfaceAccessors implements ModeInterface {
   onSetup(opts) {
     const state = {
       dragMoveLocation: null,
@@ -111,11 +112,11 @@ export class SimpleSelect extends ModeInterface {
     state.canDragMove = false;
   }
 
-  override onStop() {
+  onStop() {
     doubleClickZoom.enable(this);
   }
 
-  override onMouseMove(state, e) {
+  onMouseMove(state, e) {
     const isFeature = CommonSelectors.isFeature(e);
     if (isFeature && state.dragMoving) this.fireUpdate();
 
@@ -124,13 +125,13 @@ export class SimpleSelect extends ModeInterface {
     return true;
   }
 
-  override onMouseOut(state) {
+  onMouseOut(state) {
     if (state.dragMoving) return this.fireUpdate();
 
     return true;
   }
 
-  override onTap(state, e) {
+  onTap(state, e) {
     if (CommonSelectors.noTarget(e)) return this.clickAnywhere(state, e);
     if (CommonSelectors.isOfMetaType(Constants.meta.VERTEX)(e)) {
       return this.clickOnVertex(state, e);
@@ -138,7 +139,7 @@ export class SimpleSelect extends ModeInterface {
     if (CommonSelectors.isFeature(e)) return this.clickOnFeature(state, e);
   }
 
-  override onClick(state, e) {
+  onClick(state, e) {
     if (CommonSelectors.noTarget(e)) return this.clickAnywhere(state, e);
     if (CommonSelectors.isOfMetaType(Constants.meta.VERTEX)(e)) {
       return this.clickOnVertex(state, e);
@@ -213,7 +214,7 @@ export class SimpleSelect extends ModeInterface {
     this.doRender(featureId);
   }
 
-  override onMouseDown(state, e) {
+  onMouseDown(state, e) {
     state.initialDragPanState = this.map.dragPan.isEnabled();
     if (CommonSelectors.isActiveFeature(e)) {
       return this.startOnActiveFeature(state, e);
@@ -233,13 +234,13 @@ export class SimpleSelect extends ModeInterface {
     state.canBoxSelect = true;
   }
 
-  override onTouchStart(state, e) {
+  onTouchStart(state, e) {
     if (CommonSelectors.isActiveFeature(e)) {
       return this.startOnActiveFeature(state, e);
     }
   }
 
-  override onDrag(state, e) {
+  onDrag(state, e) {
     if (state.canDragMove) return this.dragMove(state, e);
     if (this.drawConfig.boxSelect && state.canBoxSelect) {
       return this.whileBoxSelect(state, e);
@@ -283,7 +284,7 @@ export class SimpleSelect extends ModeInterface {
   }
 
 
-  override onTouchEnd(state: {dragMoving: boolean, boxSelecting: boolean, boxSelectStartLocation: Point}, e) {
+  onTouchEnd(state: {dragMoving: boolean, boxSelecting: boolean, boxSelectStartLocation: Point}, e) {
     if (state.dragMoving) {
       this.fireUpdate();
     } else if (state.boxSelecting) {
@@ -306,7 +307,7 @@ export class SimpleSelect extends ModeInterface {
     this.stopExtendedInteractions(state);
   }
 
-  override onMouseUp(state, e) {
+  onMouseUp(state, e) {
     if (state.dragMoving) {
       this.fireUpdate();
     } else if (state.boxSelecting) {
@@ -328,7 +329,7 @@ export class SimpleSelect extends ModeInterface {
     this.stopExtendedInteractions(state);
   }
 
-  override toDisplayFeatures(_state, geojson, display) {
+  toDisplayFeatures(_state, geojson, display) {
     geojson.properties.active = this.isSelected(geojson.properties.id)
       ? Constants.activeStates.ACTIVE
       : Constants.activeStates.INACTIVE;
@@ -343,7 +344,7 @@ export class SimpleSelect extends ModeInterface {
     createSupplementaryPoints(geojson).forEach(display);
   }
 
-  override onTrash() {
+  onTrash() {
     this.deleteFeature(this.getSelectedIds());
     this.fireActionable();
   }

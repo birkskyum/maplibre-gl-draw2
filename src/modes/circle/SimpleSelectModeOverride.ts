@@ -4,7 +4,7 @@ import * as Constants from "../../constants.ts";
 import { createSupplementaryPointsForCircle } from "../../lib/create_supplementary_points_circle.ts";
 import SimpleSelect from "../simple_select.ts";
 
-export class SimpleSelectModeOverride extends SimpleSelect {
+export class SimpleSelectModeextends SimpleSelect {
   dragMove(state, e) {
     // Dragging when drag move is enabled
     state.dragMoving = true;

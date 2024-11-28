@@ -5,8 +5,9 @@ import * as Constants from "../constants.ts";
 import { isEventAtCoordinates } from "../lib/is_event_at_coordinates.ts";
 import { createVertex } from "../lib/create_vertex.ts";
 import { modes } from "../constants.ts";
+import { ModeInterfaceAccessors } from "./mode_interface_accessors.ts";
 
-export class DrawPolygon extends ModeInterface {
+export class DrawPolygon extends ModeInterfaceAccessors implements ModeInterface {
   onSetup(opts?) {
     const polygon = this.newFeature({
       type: Constants.geojsonTypes.FEATURE as "Feature",
@@ -64,7 +65,7 @@ export class DrawPolygon extends ModeInterface {
     });
   }
 
-  override onMouseMove(state, e) {
+  onMouseMove(state, e) {
     state.polygon.updateCoordinate(
       `0.${state.currentVertexPosition}`,
       e.lngLat.lng,
@@ -75,17 +76,17 @@ export class DrawPolygon extends ModeInterface {
     }
   }
 
-  override onClick(state, e) {
+  onClick(state, e) {
     if (CommonSelectors.isVertex(e)) return this.clickOnVertex(state);
     return this.clickAnywhere(state, e);
   }
 
-  override onTap(state, e) {
+  onTap(state, e) {
     // Handle tap same as click
     this.onClick(state, e);
   }
 
-  override onKeyUp(state, e) {
+  onKeyUp(state, e) {
     if (CommonSelectors.isEscapeKey(e)) {
       this.deleteFeature([state.polygon.id], { silent: true });
       this.changeMode(modes.simple_select);
@@ -96,7 +97,7 @@ export class DrawPolygon extends ModeInterface {
     }
   }
 
-  override onStop(state) {
+  onStop(state) {
     this.updateUIClasses({ mouse: Constants.cursors.NONE });
     doubleClickZoom.enable(this);
 
@@ -117,7 +118,7 @@ export class DrawPolygon extends ModeInterface {
     }
   }
 
-  override toDisplayFeatures(state, geojson, display) {
+  toDisplayFeatures(state, geojson, display) {
     const isActivePolygon = geojson.properties.id === state.polygon.id;
     geojson.properties.active = isActivePolygon
       ? Constants.activeStates.ACTIVE
@@ -186,7 +187,7 @@ export class DrawPolygon extends ModeInterface {
     return display(geojson);
   }
 
-  override onTrash(state) {
+  onTrash(state) {
     this.deleteFeature([state.polygon.id], { silent: true });
     this.changeMode(modes.simple_select);
   }
