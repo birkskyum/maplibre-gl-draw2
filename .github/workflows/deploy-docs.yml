@@ -44,7 +44,7 @@ jobs:
       - name: Install Deps
         run: cd docs && pnpm i
 
-      - name: Install Deps
+      - name: Build page
         run: cd docs && pnpm run build
 
       - name: Setup Pages
