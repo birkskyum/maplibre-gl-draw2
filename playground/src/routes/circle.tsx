@@ -27,8 +27,8 @@ export default function ReinitControl() {
         ...modes,
         draw_circle  : CircleMode,
         drag_circle  : DragCircleMode,
-        direct_select: DirectModeOverride,
-        simple_select: SimpleSelectModeOverride
+        // direct_select: DirectModeOverride,
+        // simple_select: SimpleSelectModeOverride
     } });
     map.addControl(Draw, "top-right");
 

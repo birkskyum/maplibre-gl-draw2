@@ -7,6 +7,7 @@ import CustomUI from './routes/custom-ui'
 import DrawRectangle from './routes/draw-rectangle'
 import DrawAssistedRectangle from './routes/draw-assisted-rectangle'
 import Circle from './routes/circle'
+import RotateScaleRectangle from './routes/rotate-scale-rectangle'
 
 import './app.css';
 
@@ -26,6 +27,7 @@ export default function App (){
                         <li><A href="/draw-rectangle" class="no-underline text-gray-700">Draw Rectangle</A></li>
                         <li><A href="/draw-assisted-rectangle" class="no-underline text-gray-700">Draw Assisted Rectangle</A></li>
                         <li><A href="/circle" class="no-underline text-gray-700">Circle Mode</A></li>
+                        <li><A href="/rotate-scale-rectangle" class="no-underline text-gray-700">Rotate Scale Rectangle Mode</A></li>
                         
                     </ul>
                 </nav>
@@ -45,6 +47,7 @@ export default function App (){
             <Route path={'/draw-rectangle'} component={DrawRectangle} />
             <Route path={'/draw-assisted-rectangle'} component={DrawAssistedRectangle} />
             <Route path={'/circle'} component={Circle} />
+            <Route path={'/rotate-scale-rectangle'} component={RotateScaleRectangle} />
     </Router>
 )
 }
