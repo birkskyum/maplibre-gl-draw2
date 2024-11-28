@@ -97,3 +97,13 @@ export const LAT_MAX = 90;
 export const LAT_RENDERED_MAX = 85;
 export const LNG_MIN = -270;
 export const LNG_MAX = 270;
+
+// export const modes = {
+//   ...MapLibreDraw.constants.modes,
+//   DRAW_CIRCLE: 'draw_circle'
+// };
+
+// export const properties = {
+//   CIRCLE_RADIUS: 'circleRadius',
+//   CIRCLE_HANDLE_BEARING: 'circleHandleBearing'
+// };
