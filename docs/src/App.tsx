@@ -1,6 +1,7 @@
 import { Suspense } from "solid-js"
 import {Route, Router} from '@solidjs/router';
 import  Home from './routes/index';
+import  Examples from './routes/examples';
 function App() {
   
   
@@ -47,6 +48,7 @@ function App() {
         }}>
 
           <Route path={'/'} component={Home} />
+          <Route path={'/examples/'} component={Examples} />
           
           
     </Router>
