@@ -6,7 +6,7 @@ import { isTap } from "./lib/is_tap.ts";
 import * as Constants from "./constants.ts";
 import { objectToMode } from "./modes/object_to_mode.ts";
 import type { DrawContext } from "./context.ts";
-import { ModeStrings } from "./constants/modes.ts";
+import { modes } from "./constants.ts";
 import type {Point, Feature} from "geojson";
 import { ModeClasses } from "./modes.ts";
 import type { MapMouseEvent as MapLibreMapMouseEvent, MapTouchEvent as  MapLibreMapTouchEvent} from "maplibre-gl";
@@ -295,11 +295,11 @@ export class DrawEvents {
     } else if (this.isKeyModeValid(event.keyCode)) {
       this.currentMode.keydown(event);
     } else if (event.keyCode === 49 && this.ctx.options.controls?.point) {
-      this.changeMode(ModeStrings.draw_point);
+      this.changeMode(modes.draw_point);
     } else if (event.keyCode === 50 && this.ctx.options.controls?.line_string) {
-      this.changeMode(ModeStrings.draw_line_string);
+      this.changeMode(modes.draw_line_string);
     } else if (event.keyCode === 51 && this.ctx.options.controls?.polygon) {
-      this.changeMode(ModeStrings.draw_polygon);
+      this.changeMode(modes.draw_polygon);
     }
   }
 

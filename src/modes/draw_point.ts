@@ -1,7 +1,7 @@
 import { ModeInterface } from "./mode_interface.ts";
 import * as CommonSelectors from "../lib/common_selectors.ts";
 import * as Constants from "../constants.ts";
-import { ModeStrings } from "../constants/modes.ts";
+import { modes } from "../constants.ts";
 
 export class DrawPoint extends ModeInterface {
   onSetup(opts) {
@@ -29,7 +29,7 @@ export class DrawPoint extends ModeInterface {
 
   stopDrawingAndRemove(state) {
     this.deleteFeature([state.point.id], { silent: true });
-    this.changeMode(ModeStrings.simple_select);
+    this.changeMode(modes.simple_select);
   }
 
   override onClick(state, e) {
@@ -38,7 +38,7 @@ export class DrawPoint extends ModeInterface {
     this.fire(Constants.events.CREATE, {
       features: [state.point.toGeoJSON()],
     });
-    this.changeMode(ModeStrings.simple_select, {
+    this.changeMode(modes.simple_select, {
       featureIds: [state.point.id],
     });
   }
@@ -50,7 +50,7 @@ export class DrawPoint extends ModeInterface {
     this.fire(Constants.events.CREATE, {
       features: [state.point.toGeoJSON()],
     });
-    this.changeMode(ModeStrings.simple_select, {
+    this.changeMode(modes.simple_select, {
       featureIds: [state.point.id],
     });
   }

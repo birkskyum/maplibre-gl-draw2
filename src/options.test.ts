@@ -7,7 +7,7 @@ import { dirname, resolve } from 'node:path'
 
 import { MapLibreDraw} from "../src/index.ts";
 import { ModeClasses } from "../src/modes.ts";
-import { ModeStrings } from "../src/constants/modes.ts";
+import { modes } from "../src/constants.ts";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const styleWithSourcesFixture = JSON.parse(
@@ -44,7 +44,7 @@ describe("Options test", async (t) => {
   await test("use custom clickBuffer", () => {
     const Draw = new MapLibreDraw({ clickBuffer: 10 });
     const defaultOptions = {
-      defaultMode: ModeStrings.simple_select,
+      defaultMode: modes.simple_select,
       modes: ModeClasses,
       keybindings: true,
       touchEnabled: true,

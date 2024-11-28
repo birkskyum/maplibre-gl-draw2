@@ -13,7 +13,7 @@ vi.mock("../../lib/double_click_zoom", async (importOriginal) => {
 import { CircleMode } from "./CircleMode";
 import * as Constants from "../../constants.ts";
 // import circle from "@turf/circle";
-import { ModeStrings } from "../../constants/modes.ts";
+import { modes } from "../../constants.ts";
 
 // vi.mock("@turf/circle", () => ({
 //   default: vi.fn(),
@@ -133,7 +133,7 @@ describe("CircleMode tests", () => {
     expect(mockState.currentVertexPosition).toBe(1);
     expect(circle.default).toHaveBeenCalledWith([0, 0], 1);
     expect(mockCircleMode.changeMode).toHaveBeenCalledWith(
-      ModeStrings.simple_select,
+      modes.simple_select,
       { featureIds: [mockState.polygon.id] }
     );
   });
@@ -150,7 +150,7 @@ describe("CircleMode tests", () => {
     mockCircleMode.clickAnywhere(mockState, mockEvent);
     expect(mockState.currentVertexPosition).toBe(1);
     expect(mockCircleMode.changeMode).toHaveBeenCalledWith(
-      ModeStrings.simple_select,
+      modes.simple_select,
       { featureIds: [mockState.polygon.id] }
     );
   });

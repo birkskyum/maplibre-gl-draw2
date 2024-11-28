@@ -7,7 +7,7 @@ import {moveFeatures} from '../lib/move_features';
 import {bearing, center, midpoint, distance, destination, transformRotate, transformScale, lineString, point} from "@turf/turf"
 
 import { ModeInterface } from './mode_interface';
-import { ModeStrings } from '../constants/modes';
+import { modes } from '../constants/modes';
 
 const rotate = './img/rotate.png'
 const  scale = './img/scale.png'
@@ -972,12 +972,12 @@ export class SRMode extends ModeInterface {
   };
 
   clickNoTarget(state, e) {
-    if (state.canSelectFeatures) this.changeMode(ModeStrings.simple_select);
+    if (state.canSelectFeatures) this.changeMode(modes.simple_select);
   };
 
   clickInactive(state, e) {
     if (state.canSelectFeatures)
-      this.changeMode(ModeStrings.simple_select, {
+      this.changeMode(modes.simple_select, {
         featureIds: [e.featureTarget.properties.id],
       });
   };

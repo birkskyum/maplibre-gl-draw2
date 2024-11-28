@@ -1,6 +1,6 @@
 import type { DrawContext } from "./context.ts";
 import * as Constants from "./constants.ts";
-import { ModeStrings } from "./constants/modes.ts";
+import { modes } from "./constants.ts";
 
 type CLASS_TYPE = "mode" | "feature" | "mouse";
 const classTypes: CLASS_TYPE[] = ["mode", "feature", "mouse"];
@@ -143,7 +143,7 @@ export class DrawUI {
           className: Constants.classes.CONTROL_BUTTON_LINE,
           title: `LineString tool ${this.ctx.options.keybindings ? "(l)" : ""}`,
           onActivate: () =>
-            this.ctx.events?.changeMode(ModeStrings.draw_line_string),
+            this.ctx.events?.changeMode(modes.draw_line_string),
           onDeactivate: () => this.ctx.events?.trash(),
         },
       );
@@ -157,7 +157,7 @@ export class DrawUI {
           className: Constants.classes.CONTROL_BUTTON_POLYGON,
           title: `Polygon tool ${this.ctx.options.keybindings ? "(p)" : ""}`,
           onActivate: () =>
-            this.ctx.events?.changeMode(ModeStrings.draw_polygon),
+            this.ctx.events?.changeMode(modes.draw_polygon),
           onDeactivate: () => this.ctx.events?.trash(),
         },
       );
@@ -170,7 +170,7 @@ export class DrawUI {
           container: controlGroup,
           className: Constants.classes.CONTROL_BUTTON_POINT,
           title: `Marker tool ${this.ctx.options.keybindings ? "(m)" : ""}`,
-          onActivate: () => this.ctx.events?.changeMode(ModeStrings.draw_point),
+          onActivate: () => this.ctx.events?.changeMode(modes.draw_point),
           onDeactivate: () => this.ctx.events?.trash(),
         },
       );

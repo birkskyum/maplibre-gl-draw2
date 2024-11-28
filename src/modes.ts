@@ -4,7 +4,7 @@ import { DrawPoint } from "./modes/draw_point.ts";
 import { DrawPolygon } from "./modes/draw_polygon.ts";
 import { DrawLineString } from "./modes/draw_line_string.ts";
 import { StaticMode } from "./modes/static_mode.ts";
-import { ModeStrings } from "./constants/modes.ts";
+import { modes } from "./constants.ts";
 import { ModeInterface } from "./modes/mode_interface.ts";
 
 export const ModeClasses = {

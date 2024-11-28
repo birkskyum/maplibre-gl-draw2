@@ -10,7 +10,7 @@ import { featuresAt } from "./lib/features_at.ts";
 import { stringSetsAreEqual } from "./lib/string_sets_are_equal.ts";
 import { StringSet } from "./lib/string_set.ts";
 import type { Feature, FeatureCollection, GeoJsonProperties, Geometry } from "geojson";
-import { ModeStrings } from "./constants/modes.ts";
+import { modes } from "./constants.ts";
 import { featureTypes } from "./features.ts";
 import type { MapLibreDrawOptions } from "./types.ts";
 
@@ -278,10 +278,10 @@ class MapLibreDraw implements IControl {
   public delete(featureIds: number|string | (string|number)[]): this {
     this.ctx.store?.delete(featureIds, { silent: true });
     if (
-      this.getMode() === ModeStrings.direct_select &&
+      this.getMode() === modes.direct_select &&
       !this.ctx.store?.getSelectedIds().length
     ) {
-      this.ctx.events?.changeMode(ModeStrings.simple_select, undefined, {
+      this.ctx.events?.changeMode(modes.simple_select, undefined, {
         silent: true,
       });
     } else {
@@ -292,8 +292,8 @@ class MapLibreDraw implements IControl {
 
   public deleteAll(): this {
     this.ctx.store?.delete(this.ctx.store?.getAllIds(), { silent: true });
-    if (this.getMode() === ModeStrings.direct_select) {
-      this.ctx.events?.changeMode(ModeStrings.simple_select, undefined, {
+    if (this.getMode() === modes.direct_select) {
+      this.ctx.events?.changeMode(modes.simple_select, undefined, {
         silent: true,
       });
     } else {
@@ -323,8 +323,8 @@ class MapLibreDraw implements IControl {
 
   public changeMode(mode: string, modeOptions: any = {}): this {
     if (
-      mode === ModeStrings.simple_select &&
-      this.getMode() === ModeStrings.simple_select
+      mode === modes.simple_select &&
+      this.getMode() === modes.simple_select
     ) {
       if (
         stringSetsAreEqual(
@@ -340,8 +340,8 @@ class MapLibreDraw implements IControl {
     }
 
     if (
-      mode === ModeStrings.direct_select &&
-      this.getMode() === ModeStrings.direct_select &&
+      mode === modes.direct_select &&
+      this.getMode() === modes.direct_select &&
       modeOptions.featureId === this.ctx.store?.getSelectedIds()[0]
     ) {
       return this;
@@ -380,4 +380,4 @@ class MapLibreDraw implements IControl {
   }
 }
 
-export {MapLibreDraw, DrawRectangle}
+export {MapLibreDraw}

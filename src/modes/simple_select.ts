@@ -6,7 +6,7 @@ import { doubleClickZoom } from "../lib/double_click_zoom.ts";
 import { moveFeatures } from "../lib/move_features.ts";
 import * as Constants from "../constants.ts";
 import { ModeInterface } from "./mode_interface.ts";
-import { ModeStrings } from "../constants/modes.ts";
+import { modes } from "../constants.ts";
 import type { MultiFeat } from "../feature_types/multi_feature.ts";
 import type Point from "@mapbox/point-geometry";
 import type { PointLike } from "maplibre-gl";
@@ -157,7 +157,7 @@ export class SimpleSelect extends ModeInterface {
   }
 
   clickOnVertex(_state, e) {
-    this.changeMode(ModeStrings.direct_select, {
+    this.changeMode(modes.direct_select, {
       featureId: e.featureTarget.properties.parent,
       coordPath: e.featureTarget.properties.coord_path,
       startPos: e.lngLat,
@@ -190,7 +190,7 @@ export class SimpleSelect extends ModeInterface {
       isFeatureSelected &&
       this.getFeature(featureId)?.type !== Constants.geojsonTypes.POINT
     ) {
-      return this.changeMode(ModeStrings.direct_select, {
+      return this.changeMode(modes.direct_select, {
         featureId,
       });
     }

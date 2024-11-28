@@ -2,7 +2,7 @@ import DrawPolygon from '../draw_polygon.ts';
 import * as Constants from '../../constants.ts';
 import {circle} from '@turf/turf'
 import {doubleClickZoom} from '../../lib/double_click_zoom.ts';
-import { ModeStrings } from '../../constants/modes.ts';
+import { modes } from '../../constants.ts';
 
 const DEFAULT_RADIUS_IN_KM = 2;
 
@@ -48,7 +48,7 @@ export class CircleMode extends DrawPolygon {
       state.polygon.properties.center = center;
       state.polygon.properties.radiusInKm = state.initialRadiusInKm;
     }
-    return this.changeMode(ModeStrings.simple_select, { featureIds: [state.polygon.id] });
+    return this.changeMode(modes.simple_select, { featureIds: [state.polygon.id] });
   };
 }
 

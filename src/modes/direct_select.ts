@@ -11,7 +11,7 @@ import { doubleClickZoom } from "../lib/double_click_zoom.ts";
 import * as Constants from "../constants.ts";
 import { moveFeatures } from "../lib/move_features.ts";
 import { ModeInterface } from "./mode_interface.ts";
-import { ModeStrings } from "../constants/modes.ts";
+import { modes } from "../constants.ts";
 
 const isVertex = isOfMetaType(Constants.meta.VERTEX);
 const isMidpoint = isOfMetaType(Constants.meta.MIDPOINT);
@@ -156,11 +156,11 @@ export class DirectSelect extends ModeInterface {
 
   // Click handlers
   clickNoTarget() {
-    this.changeMode(ModeStrings.simple_select);
+    this.changeMode(modes.simple_select);
   }
 
   clickInactive() {
-    this.changeMode(ModeStrings.simple_select);
+    this.changeMode(modes.simple_select);
   }
 
   clickActiveFeature(state) {
@@ -270,7 +270,7 @@ export class DirectSelect extends ModeInterface {
     this.fireActionable(state);
     if (state.feature.isValid() === false) {
       this.deleteFeature([state.featureId]);
-      this.changeMode(ModeStrings.simple_select, {});
+      this.changeMode(modes.simple_select, {});
     }
   }
 

@@ -8,7 +8,7 @@ import { createMap } from "../test/utils/create_map.ts";
 import { getGeoJSON } from "../test/utils/get_geojson.ts";
 import { setupAfterNextRender } from "../test/utils/after_next_render.ts";
 import { getPublicMemberKeys } from "../test/utils/get_public_member_keys.ts";
-import { ModeStrings } from "./constants/modes.ts";
+import { modes } from "./constants.ts";
 
 let map;
 let afterNextRender;

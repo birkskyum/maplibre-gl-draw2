@@ -3,7 +3,7 @@ import {doubleClickZoom} from '../../lib/double_click_zoom.ts'
 import {circle, distance, point} from '@turf/turf'
 
 import DrawPolygon from '../draw_polygon'
-import { ModeStrings } from '../../constants/modes.ts'
+import { modes } from '../../constants.ts'
 
 
 export class DragCircleMode extends DrawPolygon{
@@ -78,11 +78,11 @@ onDrag(state, e) {
 
 onTouchEnd(state, e) {
   dragPan.enable(this);
-  return this.changeMode(ModeStrings.simple_select, { featureIds: [state.polygon.id] });
+  return this.changeMode(modes.simple_select, { featureIds: [state.polygon.id] });
 };
 onMouseUp(state, e) {
   dragPan.enable(this);
-  return this.changeMode(ModeStrings.simple_select, { featureIds: [state.polygon.id] });
+  return this.changeMode(modes.simple_select, { featureIds: [state.polygon.id] });
 };
 
 onTap(state, e) {

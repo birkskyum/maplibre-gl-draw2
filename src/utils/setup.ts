@@ -1,11 +1,11 @@
 import type { MapLibreDrawOptions } from "../types.ts";
 import { ModeClasses } from "../modes.ts";
-import { ModeStrings } from "../constants/modes.ts";
+import { modes } from "../constants.ts";
 import { theme } from "../lib/theme.ts";
 import * as Constants from "../constants.ts";
 
 const defaultOptions: MapLibreDrawOptions = {
-  defaultMode: ModeStrings.simple_select,
+  defaultMode: modes.simple_select,
   keybindings: true,
   touchEnabled: true,
   clickBuffer: 2,

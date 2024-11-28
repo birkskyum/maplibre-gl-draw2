@@ -4,7 +4,7 @@ import { doubleClickZoom } from "../lib/double_click_zoom.ts";
 import * as Constants from "../constants.ts";
 import { createVertex } from "../lib/create_vertex.ts";
 import { ModeInterface } from "./mode_interface.ts";
-import { ModeStrings } from "../constants/modes.ts";
+import { modes } from "../constants.ts";
 
 export class DrawLineString extends ModeInterface {
   onSetup(opts) {
@@ -105,7 +105,7 @@ export class DrawLineString extends ModeInterface {
           state.line.coordinates[state.currentVertexPosition + 1],
         ))
     ) {
-      return this.changeMode(ModeStrings.simple_select, {
+      return this.changeMode(modes.simple_select, {
         featureIds: [state.line.id],
       });
     }
@@ -128,7 +128,7 @@ export class DrawLineString extends ModeInterface {
   }
 
   clickOnVertex(state) {
-    return this.changeMode(ModeStrings.simple_select, {
+    return this.changeMode(modes.simple_select, {
       featureIds: [state.line.id],
     });
   }
@@ -156,12 +156,12 @@ export class DrawLineString extends ModeInterface {
 
   override onKeyUp(state, e) {
     if (CommonSelectors.isEnterKey(e)) {
-      this.changeMode(ModeStrings.simple_select, {
+      this.changeMode(modes.simple_select, {
         featureIds: [state.line.id],
       });
     } else if (CommonSelectors.isEscapeKey(e)) {
       this.deleteFeature([state.line.id], { silent: true });
-      this.changeMode(ModeStrings.simple_select);
+      this.changeMode(modes.simple_select);
     }
   }
 
@@ -180,13 +180,13 @@ export class DrawLineString extends ModeInterface {
       });
     } else {
       this.deleteFeature([state.line.id], { silent: true });
-      this.changeMode(ModeStrings.simple_select, {}, { silent: true });
+      this.changeMode(modes.simple_select, {}, { silent: true });
     }
   }
 
   override onTrash(state) {
     this.deleteFeature([state.line.id], { silent: true });
-    this.changeMode(ModeStrings.simple_select);
+    this.changeMode(modes.simple_select);
   }
 
   override toDisplayFeatures(state, geojson, display) {
