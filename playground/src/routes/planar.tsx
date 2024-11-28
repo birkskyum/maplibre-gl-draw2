@@ -101,6 +101,11 @@ export default function ReinitControl() {
                   </Button>
                 </li>
                 <li>
+                  <Button onClick={() => Draw.changeMode("draw_circle", {
+                    initialRadiusInKm: 1000
+                  })}>1-Click Circle</Button>
+                </li>
+                <li>
                   <Button onClick={() => Draw.changeMode("drag_circle")}>Drag Circle</Button>
                 </li>
                 <li>
@@ -117,23 +122,32 @@ export default function ReinitControl() {
                   <Button onClick={() => Draw.changeMode("scale_rotate")}>Scale and Rotate</Button>
                 </li>
                 <li>
-                  <A href="/planar/scale-rotate" class="no-underline text-gray-700">
-                    Combine
-                  </A>
+                <Button onClick={() => Draw.ctx.events?.combineFeatures()}>Combine</Button>
+                  
                 </li>
                 <li>
-                  <A href="/planar/scale-rotate" class="no-underline text-gray-700">
-                    Uncombine
-                  </A>
+                <Button onClick={() => Draw.ctx.events?.uncombineFeatures()}>Uncombine</Button>
+                </li>
+
+                <li>
+                <Button onClick={() => Draw.ctx.events?.trash()}>Delete</Button>
                 </li>
               </ul>
 
-              <p class="text-xl mt-3">Read-only</p>
+              <p class="text-xl mt-3">Selection modes</p>
               <ul class="list-disc p-0">
                 <li>
-                  <Button onClick={() => Draw.changeMode("static")}>Static Mode</Button>
+                  <Button onClick={() => Draw.changeMode("simple_select")}>Simple Select</Button>
                 </li>
+                <li>
+                  <Button onClick={() => Draw.changeMode("direct_select")}>Direct Select</Button>
+                </li>
+                <li>
+                  <Button onClick={() => Draw.changeMode("static")}>Static (no selection)</Button>
+                </li>
+
               </ul>
+
             </nav>
           </div>
 
