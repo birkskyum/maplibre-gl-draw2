@@ -1,7 +1,7 @@
 import * as turf from "@turf/turf";
 import { MapLibreDraw } from "@birkskyum/maplibre-gl-draw";
-import "@birkskyum/maplibre-gl-draw/dist/maplibre-gl-draw.css";
-import { Map as MapGL } from "maplibre-gl";
+import "https://esm.sh/jsr/@birkskyum/maplibre-gl-draw@^2/dist/maplibre-gl-draw.css";
+import { IControl, Map as MapGL } from "maplibre-gl";
 import { createEffect } from "solid-js";
 
 export default function App() {
@@ -35,7 +35,8 @@ export default function App() {
         trash: true,
         },
     });
-    map.addControl(draw);
+    
+    map.addControl(draw as unknown as IControl);
 
     map.on("draw.create", updateArea);
     map.on("draw.delete", updateArea);
