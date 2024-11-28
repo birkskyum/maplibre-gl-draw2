@@ -47,10 +47,19 @@
     import * as turf from 'https://esm.sh/@turf/turf@7.1.0';
 
     import {MapLibreDraw} from 'https://esm.sh/jsr/@birkskyum/maplibre-gl-draw@^2';
+    import {DrawRectangle} from 'https://esm.sh/jsr/@birkskyum/maplibre-gl-draw@2.1.1/src/modes/draw_rectangle.ts';
+    
+    // import * as MapboxDrawGeodesic from 'https://esm.sh/mapbox-gl-draw-geodesic';
+
 
     MapLibreDraw.constants.classes.CONTROL_BASE  = 'maplibregl-ctrl';
     MapLibreDraw.constants.classes.CONTROL_PREFIX = 'maplibregl-ctrl-';
     MapLibreDraw.constants.classes.CONTROL_GROUP = 'maplibregl-ctrl-group';
+
+
+    let modes = MapLibreDraw.modes;
+    // modes = MapboxDrawGeodesic.enable(modes);
+
 
     const map = new maplibregl.Map({
         container: 'map', // container id
@@ -61,7 +70,10 @@
     });
 
     const draw = new MapLibreDraw({
-        
+        modes: {
+            ...modes,
+            draw_polygon: DrawRectangle
+        },
         displayControlsDefault: false,
         controls: {
             polygon: true,
