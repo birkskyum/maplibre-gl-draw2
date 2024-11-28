@@ -143,7 +143,7 @@ export class DrawUI {
           className: Constants.classes.CONTROL_BUTTON_LINE,
           title: `LineString tool ${this.ctx.options.keybindings ? "(l)" : ""}`,
           onActivate: () =>
-            this.ctx.events?.changeMode(ModeStrings.DRAW_LINE_STRING),
+            this.ctx.events?.changeMode(ModeStrings.draw_line_string),
           onDeactivate: () => this.ctx.events?.trash(),
         },
       );
@@ -157,7 +157,7 @@ export class DrawUI {
           className: Constants.classes.CONTROL_BUTTON_POLYGON,
           title: `Polygon tool ${this.ctx.options.keybindings ? "(p)" : ""}`,
           onActivate: () =>
-            this.ctx.events?.changeMode(ModeStrings.DRAW_POLYGON),
+            this.ctx.events?.changeMode(ModeStrings.draw_polygon),
           onDeactivate: () => this.ctx.events?.trash(),
         },
       );
@@ -170,7 +170,7 @@ export class DrawUI {
           container: controlGroup,
           className: Constants.classes.CONTROL_BUTTON_POINT,
           title: `Marker tool ${this.ctx.options.keybindings ? "(m)" : ""}`,
-          onActivate: () => this.ctx.events?.changeMode(ModeStrings.DRAW_POINT),
+          onActivate: () => this.ctx.events?.changeMode(ModeStrings.draw_point),
           onDeactivate: () => this.ctx.events?.trash(),
         },
       );

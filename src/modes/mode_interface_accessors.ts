@@ -97,7 +97,7 @@ export class ModeInterfaceAccessors {
     return this._ctx.events?.actionable(newSet);
   }
 
-  changeMode(mode: string, opts: object = {}, eventOpts: object = {}): void {
+  public changeMode(mode: string, opts: object = {}, eventOpts: object = {}): void {
     return this._ctx.events?.changeMode(mode, opts, eventOpts);
   }
 

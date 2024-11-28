@@ -105,7 +105,7 @@ export class DrawLineString extends ModeInterface {
           state.line.coordinates[state.currentVertexPosition + 1],
         ))
     ) {
-      return this.changeMode(ModeStrings.SIMPLE_SELECT, {
+      return this.changeMode(ModeStrings.simple_select, {
         featureIds: [state.line.id],
       });
     }
@@ -128,7 +128,7 @@ export class DrawLineString extends ModeInterface {
   }
 
   clickOnVertex(state) {
-    return this.changeMode(ModeStrings.SIMPLE_SELECT, {
+    return this.changeMode(ModeStrings.simple_select, {
       featureIds: [state.line.id],
     });
   }
@@ -156,12 +156,12 @@ export class DrawLineString extends ModeInterface {
 
   override onKeyUp(state, e) {
     if (CommonSelectors.isEnterKey(e)) {
-      this.changeMode(ModeStrings.SIMPLE_SELECT, {
+      this.changeMode(ModeStrings.simple_select, {
         featureIds: [state.line.id],
       });
     } else if (CommonSelectors.isEscapeKey(e)) {
       this.deleteFeature([state.line.id], { silent: true });
-      this.changeMode(ModeStrings.SIMPLE_SELECT);
+      this.changeMode(ModeStrings.simple_select);
     }
   }
 
@@ -180,13 +180,13 @@ export class DrawLineString extends ModeInterface {
       });
     } else {
       this.deleteFeature([state.line.id], { silent: true });
-      this.changeMode(ModeStrings.SIMPLE_SELECT, {}, { silent: true });
+      this.changeMode(ModeStrings.simple_select, {}, { silent: true });
     }
   }
 
   override onTrash(state) {
     this.deleteFeature([state.line.id], { silent: true });
-    this.changeMode(ModeStrings.SIMPLE_SELECT);
+    this.changeMode(ModeStrings.simple_select);
   }
 
   override toDisplayFeatures(state, geojson, display) {

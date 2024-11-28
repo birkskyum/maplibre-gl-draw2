@@ -4,6 +4,6 @@ export default defineConfig({
     test: {
         environment: 'jsdom',
         setupFiles: ['./test/mock-browser.ts'],
-        dir: './test',
+        include: ['**/*.test.ts'],
     }
 })

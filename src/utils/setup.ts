@@ -5,7 +5,7 @@ import { theme } from "../lib/theme.ts";
 import * as Constants from "../constants.ts";
 
 const defaultOptions: MapLibreDrawOptions = {
-  defaultMode: ModeStrings.SIMPLE_SELECT,
+  defaultMode: ModeStrings.simple_select,
   keybindings: true,
   touchEnabled: true,
   clickBuffer: 2,

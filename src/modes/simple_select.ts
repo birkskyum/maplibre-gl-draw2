@@ -157,7 +157,7 @@ export class SimpleSelect extends ModeInterface {
   }
 
   clickOnVertex(_state, e) {
-    this.changeMode(ModeStrings.DIRECT_SELECT, {
+    this.changeMode(ModeStrings.direct_select, {
       featureId: e.featureTarget.properties.parent,
       coordPath: e.featureTarget.properties.coord_path,
       startPos: e.lngLat,
@@ -190,7 +190,7 @@ export class SimpleSelect extends ModeInterface {
       isFeatureSelected &&
       this.getFeature(featureId)?.type !== Constants.geojsonTypes.POINT
     ) {
-      return this.changeMode(ModeStrings.DIRECT_SELECT, {
+      return this.changeMode(ModeStrings.direct_select, {
         featureId,
       });
     }

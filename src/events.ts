@@ -58,12 +58,12 @@ interface DrawSelectionChangeEvent extends DrawEvent {
 
 
 interface DrawModes {
-  DRAW_LINE_STRING: "draw_line_string";
-  DRAW_POLYGON: "draw_polygon";
-  DRAW_POINT: "draw_point";
-  SIMPLE_SELECT: "simple_select";
-  DIRECT_SELECT: "direct_select";
-  STATIC: "static";
+  draw_line_string: "draw_line_string";
+  draw_polygon: "draw_polygon";
+  draw_point: "draw_point";
+  simple_select: "simple_select";
+  direct_select: "direct_select";
+  static: "static";
 }
 
 type DrawMode = DrawModes[keyof DrawModes];
@@ -295,11 +295,11 @@ export class DrawEvents {
     } else if (this.isKeyModeValid(event.keyCode)) {
       this.currentMode.keydown(event);
     } else if (event.keyCode === 49 && this.ctx.options.controls?.point) {
-      this.changeMode(ModeStrings.DRAW_POINT);
+      this.changeMode(ModeStrings.draw_point);
     } else if (event.keyCode === 50 && this.ctx.options.controls?.line_string) {
-      this.changeMode(ModeStrings.DRAW_LINE_STRING);
+      this.changeMode(ModeStrings.draw_line_string);
     } else if (event.keyCode === 51 && this.ctx.options.controls?.polygon) {
-      this.changeMode(ModeStrings.DRAW_POLYGON);
+      this.changeMode(ModeStrings.draw_polygon);
     }
   }
 

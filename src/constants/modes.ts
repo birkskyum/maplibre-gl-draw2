@@ -16,22 +16,22 @@
    * into `simple_select` mode again every time the user finishes drawing a feature
    * or exits `direct_select` mode.
    */
-  SIMPLE_SELECT: string,
+  simple_select: string,
   
   /**
    * Lets you draw a LineString feature.
    */
-  DRAW_LINE_STRING: string,
+  draw_line_string: string,
 
   /**
    * Lets you draw a Polygon feature.
    */
-  DRAW_POLYGON: string,
+  draw_polygon: string,
 
   /**
    * Lets you draw a Point feature.
    */
-  DRAW_POINT: string,
+  draw_point: string,
 
   /**
    * Lets you select, delete, and drag vertices; and drag features.
@@ -42,27 +42,32 @@
    * Draw enters `direct_select` mode when the user clicks a vertex of a selected
    * line or polygon. So `direct_select` mode typically follows `simple_select` mode.
    */
-  DIRECT_SELECT: string,
+  direct_select: string,
 
   /**
    * A static mode where no interactions are allowed.
    */
-  STATIC: string,
+  static: string,
 
 
   /**
    * Lets you draw a Rectangle feature.
    */
-  DRAW_RECTANGLE: string,
+  draw_rectangle: string,
+  /**
+   * Lets you draw a Rectangle feature.
+   */
+  draw_assisted_rectangle: string,
 };
 
 
-export const ModeStrings:ModeStringsI = {
-  SIMPLE_SELECT: "simple_select",
-  DRAW_LINE_STRING: "draw_line_string",
-  DRAW_POLYGON: "draw_polygon",
-  DRAW_RECTANGLE: "draw_rectangle",
-  DRAW_POINT: "draw_point",
-  DIRECT_SELECT: "direct_select",
-  STATIC: "static",
+export enum ModeStrings {
+  simple_select="simple_select",
+  draw_line_string="draw_line_string",
+  draw_polygon="draw_polygon",
+  draw_rectangle="draw_rectangle",
+  draw_assisted_rectangle="draw_assisted_rectangle",
+  draw_point="draw_point",
+  direct_select="direct_select",
+  static="static",
 };

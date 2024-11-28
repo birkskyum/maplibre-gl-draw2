@@ -7,7 +7,7 @@ import { createVertex } from "../lib/create_vertex.ts";
 import { ModeStrings } from "../constants/modes.ts";
 
 export class DrawPolygon extends ModeInterface {
-  onSetup() {
+  onSetup(opts?) {
     const polygon = this.newFeature({
       type: Constants.geojsonTypes.FEATURE as "Feature",
       properties: {},
@@ -40,7 +40,7 @@ export class DrawPolygon extends ModeInterface {
         state.polygon.coordinates[0][state.currentVertexPosition - 1],
       )
     ) {
-      return this.changeMode(ModeStrings.SIMPLE_SELECT, {
+      return this.changeMode(ModeStrings.simple_select, {
         featureIds: [state.polygon.id],
       });
     }
@@ -59,7 +59,7 @@ export class DrawPolygon extends ModeInterface {
   }
 
   clickOnVertex(state) {
-    return this.changeMode(ModeStrings.SIMPLE_SELECT, {
+    return this.changeMode(ModeStrings.simple_select, {
       featureIds: [state.polygon.id],
     });
   }
@@ -88,9 +88,9 @@ export class DrawPolygon extends ModeInterface {
   override onKeyUp(state, e) {
     if (CommonSelectors.isEscapeKey(e)) {
       this.deleteFeature([state.polygon.id], { silent: true });
-      this.changeMode(ModeStrings.SIMPLE_SELECT);
+      this.changeMode(ModeStrings.simple_select);
     } else if (CommonSelectors.isEnterKey(e)) {
-      this.changeMode(ModeStrings.SIMPLE_SELECT, {
+      this.changeMode(ModeStrings.simple_select, {
         featureIds: [state.polygon.id],
       });
     }
@@ -113,7 +113,7 @@ export class DrawPolygon extends ModeInterface {
       });
     } else {
       this.deleteFeature([state.polygon.id], { silent: true });
-      this.changeMode(ModeStrings.SIMPLE_SELECT, {}, { silent: true });
+      this.changeMode(ModeStrings.simple_select, {}, { silent: true });
     }
   }
 
@@ -188,7 +188,7 @@ export class DrawPolygon extends ModeInterface {
 
   override onTrash(state) {
     this.deleteFeature([state.polygon.id], { silent: true });
-    this.changeMode(ModeStrings.SIMPLE_SELECT);
+    this.changeMode(ModeStrings.simple_select);
   }
 }
 

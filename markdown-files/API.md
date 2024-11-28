@@ -70,7 +70,7 @@ The mode name strings are available as an enum at `Draw.modes`.
 
 ### `simple_select`
 
-`Draw.modes.SIMPLE_SELECT === 'simple_select'`
+`Draw.modes.simple_select === 'simple_select'`
 
 Lets you select, delete, and drag features.
 
@@ -82,7 +82,7 @@ or exits `direct_select` mode.
 
 ### `direct_select`
 
-`Draw.modes.DIRECT_SELECT === 'direct_select'`
+`Draw.modes.direct_select === 'direct_select'`
 
 Lets you select, delete, and drag vertices; and drag features.
 

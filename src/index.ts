@@ -278,10 +278,10 @@ class MapLibreDraw implements IControl {
   public delete(featureIds: number|string | (string|number)[]): this {
     this.ctx.store?.delete(featureIds, { silent: true });
     if (
-      this.getMode() === ModeStrings.DIRECT_SELECT &&
+      this.getMode() === ModeStrings.direct_select &&
       !this.ctx.store?.getSelectedIds().length
     ) {
-      this.ctx.events?.changeMode(ModeStrings.SIMPLE_SELECT, undefined, {
+      this.ctx.events?.changeMode(ModeStrings.simple_select, undefined, {
         silent: true,
       });
     } else {
@@ -292,8 +292,8 @@ class MapLibreDraw implements IControl {
 
   public deleteAll(): this {
     this.ctx.store?.delete(this.ctx.store?.getAllIds(), { silent: true });
-    if (this.getMode() === ModeStrings.DIRECT_SELECT) {
-      this.ctx.events?.changeMode(ModeStrings.SIMPLE_SELECT, undefined, {
+    if (this.getMode() === ModeStrings.direct_select) {
+      this.ctx.events?.changeMode(ModeStrings.simple_select, undefined, {
         silent: true,
       });
     } else {
@@ -323,8 +323,8 @@ class MapLibreDraw implements IControl {
 
   public changeMode(mode: string, modeOptions: any = {}): this {
     if (
-      mode === ModeStrings.SIMPLE_SELECT &&
-      this.getMode() === ModeStrings.SIMPLE_SELECT
+      mode === ModeStrings.simple_select &&
+      this.getMode() === ModeStrings.simple_select
     ) {
       if (
         stringSetsAreEqual(
@@ -340,8 +340,8 @@ class MapLibreDraw implements IControl {
     }
 
     if (
-      mode === ModeStrings.DIRECT_SELECT &&
-      this.getMode() === ModeStrings.DIRECT_SELECT &&
+      mode === ModeStrings.direct_select &&
+      this.getMode() === ModeStrings.direct_select &&
       modeOptions.featureId === this.ctx.store?.getSelectedIds()[0]
     ) {
       return this;

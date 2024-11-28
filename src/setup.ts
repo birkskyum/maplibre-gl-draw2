@@ -7,7 +7,7 @@ import { ModeStrings } from "./constants/modes.ts";
 
 
 const defaultOptions: MapLibreDrawOptions = {
-  defaultMode: ModeStrings.SIMPLE_SELECT,
+  defaultMode: ModeStrings.simple_select,
   keybindings: true,
   touchEnabled: true,
   clickBuffer: 2,

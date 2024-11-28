@@ -29,7 +29,7 @@ export class DrawPoint extends ModeInterface {
 
   stopDrawingAndRemove(state) {
     this.deleteFeature([state.point.id], { silent: true });
-    this.changeMode(ModeStrings.SIMPLE_SELECT);
+    this.changeMode(ModeStrings.simple_select);
   }
 
   override onClick(state, e) {
@@ -38,7 +38,7 @@ export class DrawPoint extends ModeInterface {
     this.fire(Constants.events.CREATE, {
       features: [state.point.toGeoJSON()],
     });
-    this.changeMode(ModeStrings.SIMPLE_SELECT, {
+    this.changeMode(ModeStrings.simple_select, {
       featureIds: [state.point.id],
     });
   }
@@ -50,7 +50,7 @@ export class DrawPoint extends ModeInterface {
     this.fire(Constants.events.CREATE, {
       features: [state.point.toGeoJSON()],
     });
-    this.changeMode(ModeStrings.SIMPLE_SELECT, {
+    this.changeMode(ModeStrings.simple_select, {
       featureIds: [state.point.id],
     });
   }

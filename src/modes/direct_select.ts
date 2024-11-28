@@ -156,11 +156,11 @@ export class DirectSelect extends ModeInterface {
 
   // Click handlers
   clickNoTarget() {
-    this.changeMode(ModeStrings.SIMPLE_SELECT);
+    this.changeMode(ModeStrings.simple_select);
   }
 
   clickInactive() {
-    this.changeMode(ModeStrings.SIMPLE_SELECT);
+    this.changeMode(ModeStrings.simple_select);
   }
 
   clickActiveFeature(state) {
@@ -270,7 +270,7 @@ export class DirectSelect extends ModeInterface {
     this.fireActionable(state);
     if (state.feature.isValid() === false) {
       this.deleteFeature([state.featureId]);
-      this.changeMode(ModeStrings.SIMPLE_SELECT, {});
+      this.changeMode(ModeStrings.simple_select, {});
     }
   }
 

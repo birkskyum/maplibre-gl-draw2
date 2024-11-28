@@ -57,13 +57,13 @@ describe("direct_select", async () => {
     "direct_select - should fire correct actionable when no vertices selected",
     async () => {
       const ids = Draw.add(getGeoJSON("polygon"));
-      Draw.changeMode(ModeStrings.SIMPLE_SELECT, {
+      Draw.changeMode(ModeStrings.simple_select, {
         featureIds: ids,
       });
 
       await afterNextRender();
 
-      Draw.changeMode(ModeStrings.DIRECT_SELECT, {
+      Draw.changeMode(ModeStrings.direct_select, {
         featureId: ids[0],
       });
 
@@ -103,7 +103,7 @@ describe("direct_select", async () => {
     "direct_select - should fire correct actionable when a vertex is selected by clicking",
     async () => {
       const ids = Draw.add(getGeoJSON("polygon"));
-      Draw.changeMode(ModeStrings.DIRECT_SELECT, {
+      Draw.changeMode(ModeStrings.direct_select, {
         featureId: ids[0],
       });
       const clickAt = getGeoJSON("polygon").geometry.coordinates[0][0];
@@ -146,7 +146,7 @@ describe("direct_select", async () => {
     "direct_select - should fire correct actionable when a vertex is selected by tapping",
     async () => {
       const ids = Draw.add(getGeoJSON("polygon"));
-      Draw.changeMode(ModeStrings.DIRECT_SELECT, {
+      Draw.changeMode(ModeStrings.direct_select, {
         featureId: ids[0],
       });
       const tapAt = getGeoJSON("polygon").geometry.coordinates[0][0];
@@ -211,7 +211,7 @@ describe("direct_select", async () => {
         },
       };
       const ids = Draw.add(longLine);
-      Draw.changeMode(ModeStrings.DIRECT_SELECT, {
+      Draw.changeMode(ModeStrings.direct_select, {
         featureId: ids[0],
       });
 
@@ -243,7 +243,7 @@ describe("direct_select", async () => {
     "direct_select - a click on a vertex and than dragging the map shouldn't drag the vertex",
     async () => {
       const ids = Draw.add(getGeoJSON("polygon"));
-      Draw.changeMode(ModeStrings.DIRECT_SELECT, {
+      Draw.changeMode(ModeStrings.direct_select, {
         featureId: ids[0],
       });
 
@@ -271,7 +271,7 @@ describe("direct_select", async () => {
     "direct_select - fire one update when dragging mouse leaves container and button is released outside",
     async () => {
       const ids = Draw.add(getGeoJSON("polygon"));
-      Draw.changeMode(ModeStrings.DIRECT_SELECT, {
+      Draw.changeMode(ModeStrings.direct_select, {
         featureId: ids[0],
       });
 
@@ -320,7 +320,7 @@ describe("direct_select", async () => {
     "direct_select - fire two updates when dragging mouse leaves container then returns and button is released inside",
     async () => {
       const ids = Draw.add(getGeoJSON("polygon"));
-      Draw.changeMode(ModeStrings.DIRECT_SELECT, {
+      Draw.changeMode(ModeStrings.direct_select, {
         featureId: ids[0],
       });
 
@@ -370,7 +370,7 @@ describe("direct_select", async () => {
     "direct_select - drag feature if no vertices are selected",
     async () => {
       const [polygonId] = Draw.add(getGeoJSON("polygon"));
-      Draw.changeMode(ModeStrings.DIRECT_SELECT, {
+      Draw.changeMode(ModeStrings.direct_select, {
         featureId: polygonId,
       });
 
@@ -408,7 +408,7 @@ describe("direct_select", async () => {
     "direct_select - dragging a selected vertex updates stored coordinates",
     async () => {
       const [lineId] = Draw.add(getGeoJSON("line"));
-      Draw.changeMode(ModeStrings.DIRECT_SELECT, {
+      Draw.changeMode(ModeStrings.direct_select, {
         featureId: lineId,
       });
 
