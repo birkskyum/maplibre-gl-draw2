@@ -7,10 +7,10 @@ import { createEffect } from "solid-js";
 import { Button } from "../components/button.tsx";
 import { DrawAssistedRectangle } from "../../../src/modes/draw_assisted_rectangle.ts";
 import { A } from "@solidjs/router";
-import { CircleMode } from "../../../src/modes/circle/CircleMode.ts";
+import { DrawCircleMode } from "../../../src/modes/circle/CircleMode.ts";
 import { DragCircleMode } from "../../../src/modes/circle/DragCircleMode.ts";
 import { SRMode, SRStyle, SRCenter } from "../../../src/modes/scale_rotate.ts";
-import { RadiusMode } from "../../../src/modes/circle/RadiusMode.ts";
+import { DrawCircleRadiusMode } from "../../../src/modes/circle/RadiusMode.ts";
 import { DrawRectangle } from "../../../src/modes/draw_rectangle.ts";
 
 export default function ReinitControl() {
@@ -41,8 +41,8 @@ export default function ReinitControl() {
         ...MapLibreDraw.modes,
         draw_assisted_rectangle: DrawAssistedRectangle,
         draw_rectangle: DrawRectangle,
-        draw_circle: CircleMode,
-        draw_circle_radius: RadiusMode,
+        draw_circle: DrawCircleMode,
+        draw_circle_radius: DrawCircleRadiusMode,
         drag_circle: DragCircleMode,
         scale_rotate: SRMode,
       },

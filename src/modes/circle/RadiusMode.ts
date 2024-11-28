@@ -111,7 +111,7 @@ const doubleClickZoom = {
 };
 
 
-export class RadiusMode extends DrawLineString {
+export class DrawCircleRadiusMode extends DrawLineString {
 
     clickAnywhere(state, e) {
     // this ends the drawing after the user creates a second point, triggering this.onStop

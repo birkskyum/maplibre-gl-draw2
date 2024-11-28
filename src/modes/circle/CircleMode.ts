@@ -6,7 +6,7 @@ import { modes } from '../../constants.ts';
 
 const DEFAULT_RADIUS_IN_KM = 2;
 
-export class CircleMode extends DrawPolygon {
+export class DrawCircleMode extends DrawPolygon {
 
   onSetup(opts) {
     const polygon = this.newFeature({

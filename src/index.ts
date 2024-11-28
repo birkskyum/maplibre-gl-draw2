@@ -18,8 +18,8 @@ import type  {IControl, Map as MapLibreMap} from "maplibre-gl";
 import type {MapMouseEvent} from './events.ts'
 import { DrawContext } from "./context.ts";
 import { ModeClasses } from "./modes.ts";
-import {DrawRectangle} from './modes/index.ts'
-import { ModeInterface } from "./modes/mode_interface.ts";
+// import { ModeInterface } from "./modes/mode_interface.ts";
+// import { ModeBase } from "./modes/mode_base.ts";
 
 
 /**
@@ -381,4 +381,4 @@ class MapLibreDraw implements IControl {
   }
 }
 
-export {MapLibreDraw}
+export {MapLibreDraw};

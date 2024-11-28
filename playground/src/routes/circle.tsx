@@ -6,10 +6,10 @@ import {MapLibreDraw } from "../../../src/index.ts";
 import { createEffect } from "solid-js";
 import { Button } from "../components/button.tsx";
 
-import {CircleMode} from "../../../src/modes/circle/CircleMode.ts";
+import {DrawCircleMode} from "../../../src/modes/circle/CircleMode.ts";
 import {DragCircleMode} from "../../../src/modes/circle/DragCircleMode.ts";
-import {DirectModeOverride} from "../../../src/modes/circle/DirectModeOverride.ts";
-import {SimpleSelectModeOverride} from "../../../src/modes/circle/SimpleSelectModeOverride.ts";
+// import {DirectModeOverride} from "../../../src/modes/circle/DirectModeOverride.ts";
+// import {SimpleSelectModeOverride} from "../../../src/modes/circle/SimpleSelectModeOverride.ts";
 
 export default function ReinitControl() {
   
@@ -25,7 +25,7 @@ export default function ReinitControl() {
     const modes = MapLibreDraw.modes;
     const Draw = new MapLibreDraw({ modes:{
         ...modes,
-        draw_circle  : CircleMode,
+        draw_circle  : DrawCircleMode,
         drag_circle  : DragCircleMode,
         // direct_select: DirectModeOverride,
         // simple_select: SimpleSelectModeOverride
