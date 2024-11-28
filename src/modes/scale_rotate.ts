@@ -524,7 +524,6 @@ export class SRMode extends ModeBase implements ModeInterface {
       push(geojson);
 
       var suppPoints = createSupplementaryPoints(geojson, {
-        map: this.map,
         midpoints: false,
         selectedPaths: state.selectedCoordPaths,
       });
@@ -535,8 +534,7 @@ export class SRMode extends ModeBase implements ModeInterface {
       }
 
       if (state.canRotate) {
-        var rotPoints = this.createRotationPoints(state, geojson, suppPoints);
-        rotPoints.forEach(push);
+        this.createRotationPoints(state, geojson, suppPoints)?.forEach(push);
       }
     } else {
       geojson.properties.active = Constants.activeStates.INACTIVE;
@@ -756,7 +754,7 @@ export class SRMode extends ModeBase implements ModeInterface {
     if (polygon.geometry.type === Constants.geojsonTypes.POLYGON)
       corners = polygon.geometry.coordinates[0].slice(0);
     else if (polygon.geometry.type === Constants.geojsonTypes.MULTI_POLYGON) {
-      let temp = [];
+      let temp: any[] = [];
       polygon.geometry.coordinates.forEach((c) => {
         c.forEach((c2) => {
           c2.forEach((c3) => {
@@ -768,7 +766,7 @@ export class SRMode extends ModeBase implements ModeInterface {
     } else if (polygon.geometry.type === Constants.geojsonTypes.LINE_STRING)
       corners = polygon.geometry.coordinates;
     else if (polygon.geometry.type === Constants.geojsonTypes.MULTI_LINE_STRING) {
-      let temp = [];
+      let temp: any[] = [];
       polygon.geometry.coordinates.forEach((c) => {
         c.forEach((c2) => {
           temp.push(c2);
