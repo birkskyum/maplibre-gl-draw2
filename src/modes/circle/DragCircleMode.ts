@@ -2,7 +2,7 @@ import * as Constants from '../../constants.ts'
 import {doubleClickZoom} from '../../lib/double_click_zoom.ts'
 import {circle, distance, point} from '@turf/turf'
 
-import DrawPolygon from '../draw_polygon'
+import DrawPolygon from '../draw_polygon.ts'
 import { modes } from '../../constants.ts'
 
 

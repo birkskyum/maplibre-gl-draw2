@@ -5,9 +5,9 @@ import * as Constants from "../constants.ts";
 import { createVertex } from "../lib/create_vertex.ts";
 import { ModeInterface } from "./mode_interface.ts";
 import { modes } from "../constants.ts";
-import { ModeInterfaceAccessors } from "./mode_interface_accessors.ts";
+import { ModeBase } from "./mode_base.ts";
 
-export class DrawLineString extends ModeInterfaceAccessors implements ModeInterface {
+export class DrawLineString extends ModeBase implements ModeInterface {
   onSetup(opts) {
     opts = opts || {};
     const featureId = opts.featureId;

@@ -1,16 +1,16 @@
-import DirectSelect from "../direct_select";
+import DirectSelect from "../direct_select.ts";
 
 import {createSupplementaryPoints} from '../../lib/create_supplementary_points.ts';
 import { moveFeatures } from "../../lib/move_features.ts";
-import * as Constants from '../../constants';
-import {constrainFeatureMovement} from '../../lib/constrain_feature_movement';
+import * as Constants from '../../constants.ts';
+import {constrainFeatureMovement} from '../../lib/constrain_feature_movement.ts';
 import {distance, circle, point} from '@turf/turf';
 
 import {createSupplementaryPointsForCircle} from '../../lib/create_supplementary_points_circle.ts';
 
 
 
-export class DirectModeextends DirectSelect {
+export class DirectMode extends DirectSelect {
 
   dragFeature(state, e, delta) {
     moveFeatures(this.getSelected(), delta);

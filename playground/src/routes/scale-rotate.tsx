@@ -2,11 +2,12 @@ import "maplibre-gl/dist/maplibre-gl.css";
 import maplibregl from "maplibre-gl";
 
 import "../../../dist/maplibre-gl-draw.css";
-import {DrawRectangle, MapLibreDraw } from "../../../src/index.ts";
+import { MapLibreDraw } from "../../../src/index.ts";
 import { createEffect } from "solid-js";
 import { Button } from "../components/button.tsx";
 import {DrawAssistedRectangle} from "../../../src/modes/draw_assisted_rectangle.ts"
 import {SRMode, SRStyle, SRCenter} from "../../../src/modes/scale_rotate.ts"
+import { DrawRectangle } from "../../../src/modes/draw_rectangle.ts";
 
 
 

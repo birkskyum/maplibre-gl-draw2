@@ -17,7 +17,7 @@ type DrawActionableState = {
   uncombineFeatures?: boolean;
 };
 
-export class ModeInterfaceAccessors {
+export class ModeBase {
   public map: MapLibre;
   public drawConfig: MapLibreDrawOptions;
   public _ctx: DrawContext;

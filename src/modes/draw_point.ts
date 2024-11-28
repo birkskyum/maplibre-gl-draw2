@@ -2,9 +2,9 @@ import { ModeInterface } from "./mode_interface.ts";
 import * as CommonSelectors from "../lib/common_selectors.ts";
 import * as Constants from "../constants.ts";
 import { modes } from "../constants.ts";
-import { ModeInterfaceAccessors } from "./mode_interface_accessors.ts";
+import { ModeBase } from "./mode_base.ts";
 
-export class DrawPoint extends ModeInterfaceAccessors implements ModeInterface {
+export class DrawPoint extends ModeBase implements ModeInterface {
   onSetup(opts) {
     const point = this.newFeature({
       type: Constants.geojsonTypes.FEATURE as "Feature",

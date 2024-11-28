@@ -5,9 +5,9 @@ import * as Constants from "../constants.ts";
 import { isEventAtCoordinates } from "../lib/is_event_at_coordinates.ts";
 import { createVertex } from "../lib/create_vertex.ts";
 import { modes } from "../constants.ts";
-import { ModeInterfaceAccessors } from "./mode_interface_accessors.ts";
+import { ModeBase } from "./mode_base.ts";
 
-export class DrawPolygon extends ModeInterfaceAccessors implements ModeInterface {
+export class DrawPolygon extends ModeBase implements ModeInterface {
   onSetup(opts?) {
     const polygon = this.newFeature({
       type: Constants.geojsonTypes.FEATURE as "Feature",

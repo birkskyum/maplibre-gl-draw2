@@ -4,7 +4,7 @@
 
 import numeral from 'numeral';
 import {length as lineDistance} from '@turf/turf';
-import DrawLineString from '../draw_line_string';
+import DrawLineString from '../draw_line_string.ts';
 
 
 function createVertex(parentId, coordinates, path, selected) {

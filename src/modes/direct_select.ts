@@ -12,12 +12,12 @@ import * as Constants from "../constants.ts";
 import { moveFeatures } from "../lib/move_features.ts";
 import { ModeInterface } from "./mode_interface.ts";
 import { modes } from "../constants.ts";
-import { ModeInterfaceAccessors } from "./mode_interface_accessors.ts";
+import { ModeBase } from "./mode_base.ts";
 
 const isVertex = isOfMetaType(Constants.meta.VERTEX);
 const isMidpoint = isOfMetaType(Constants.meta.MIDPOINT);
 
-export class DirectSelect extends ModeInterfaceAccessors implements ModeInterface {
+export class DirectSelect extends ModeBase implements ModeInterface {
   // Internal methods
   fireUpdate() {
     this.fire(Constants.events.UPDATE, {

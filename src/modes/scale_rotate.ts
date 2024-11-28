@@ -8,7 +8,7 @@ import {bearing, center, midpoint, distance, destination, transformRotate, trans
 
 import { ModeInterface } from './mode_interface';
 import { modes } from '../constants.ts';
-import { ModeInterfaceAccessors } from './mode_interface_accessors.ts';
+import { ModeBase } from './mode_base.ts';
 
 const rotate = './img/rotate.png'
 const  scale = './img/scale.png'
@@ -436,7 +436,7 @@ function parseSRCenter(value, defaultSRCenter = SRCenter.Center) {
     }
  */
 
-export class SRMode extends ModeInterfaceAccessors implements ModeInterface {
+export class SRMode extends ModeBase implements ModeInterface {
 
   onSetup(opts) {
     const featureId = this.getSelected()[0].id;

@@ -1,7 +1,7 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
 vi.mock("../../lib/double_click_zoom", async (importOriginal) => {
-  const {doubleClickZoom} = await import("../../lib/double_click_zoom")
+  const {doubleClickZoom} = await import("../../lib/double_click_zoom.ts")
 
   return {
     ...doubleClickZoom,
@@ -10,7 +10,7 @@ vi.mock("../../lib/double_click_zoom", async (importOriginal) => {
   }});
 
 
-import { CircleMode } from "./CircleMode";
+import { CircleMode } from "./CircleMode.ts";
 import * as Constants from "../../constants.ts";
 // import circle from "@turf/circle";
 import { modes } from "../../constants.ts";

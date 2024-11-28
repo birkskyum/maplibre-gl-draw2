@@ -51,6 +51,7 @@
     "@types/geojson": "^7946.0.14",
     "@types/mapbox__point-geometry": "^0.1.4",
     "@types/node": "^22.10.1",
+    "@types/numeral": "^2.0.5",
     "@types/sinon": "^17.0.3",
     "@types/wgs84": "^0.0.2",
     "jsdom": "^25.0.1",

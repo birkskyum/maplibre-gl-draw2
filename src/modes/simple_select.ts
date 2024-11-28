@@ -10,9 +10,9 @@ import { modes } from "../constants.ts";
 import type { MultiFeat } from "../feature_types/multi_feature.ts";
 import type Point from "@mapbox/point-geometry";
 import type { PointLike } from "maplibre-gl";
-import { ModeInterfaceAccessors } from "./mode_interface_accessors.ts";
+import { ModeBase } from "./mode_base.ts";
 
-export class SimpleSelect extends ModeInterfaceAccessors implements ModeInterface {
+export class SimpleSelect extends ModeBase implements ModeInterface {
   onSetup(opts) {
     const state = {
       dragMoveLocation: null,

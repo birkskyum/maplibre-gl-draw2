@@ -1,5 +1,5 @@
 import { ModeInterface } from "./mode_interface";
-import { ModeInterfaceAccessors } from "./mode_interface_accessors";
+import { ModeBase } from "./mode_base";
 
 
 const doubleClickZoom = {
@@ -28,7 +28,7 @@ const doubleClickZoom = {
     }
   };
   
-  export class DrawAssistedRectangle extends ModeInterfaceAccessors implements ModeInterface  {
+  export class DrawAssistedRectangle extends ModeBase implements ModeInterface  {
   
     onSetup(opts) {
       const rectangle = this.newFeature({

@@ -1,4 +1,4 @@
-import {createVertex} from '../lib/create_vertex';
+import {createVertex} from '../lib/create_vertex.ts';
 
 export function createSupplementaryPointsForCircle(geojson) {
   const { properties, geometry } = geojson;

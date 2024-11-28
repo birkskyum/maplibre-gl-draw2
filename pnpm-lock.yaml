@@ -78,6 +78,9 @@ importers:
       '@types/node':
         specifier: ^22.10.1
         version: 22.10.1
+      '@types/numeral':
+        specifier: ^2.0.5
+        version: 2.0.5
       '@types/sinon':
         specifier: ^17.0.3
         version: 17.0.3
@@ -920,6 +923,9 @@ packages:
 
   '@types/node@22.10.1':
     resolution: {integrity: sha512-qKgsUwfHZV2WCWLAnVP1JqnpE6Im6h3Y0+fYgMTasNQ7V++CBX5OT1as0g0f+OyubbFqhf6XVNIsmN4IIhEgGQ==}
+
+  '@types/numeral@2.0.5':
+    resolution: {integrity: sha512-kH8I7OSSwQu9DS9JYdFWbuvhVzvFRoCPCkGxNwoGgaPeDfEPJlcxNvEOypZhQ3XXHsGbfIuYcxcJxKUfJHnRfw==}
 
   '@types/pbf@3.0.5':
     resolution: {integrity: sha512-j3pOPiEcWZ34R6a6mN07mUkM4o4Lwf6hPNt8eilOeZhTFbxFXmKhvXl9Y28jotFPaI1bpPDJsbCprUoNke6OrA==}
@@ -3818,6 +3824,8 @@ snapshots:
   '@types/node@22.10.1':
     dependencies:
       undici-types: 6.20.0
+
+  '@types/numeral@2.0.5': {}
 
   '@types/pbf@3.0.5': {}
 
