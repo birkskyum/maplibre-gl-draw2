@@ -6,7 +6,7 @@ function App() {
   
     
     return (
-        <Router root={(props)=>{
+        <Router base="/maplibre-gl-draw" root={(props)=>{
          return (<div class="flex h-screen flex-col">
             <div class=" bg-gray-700  w-full h-fit text-center">
 
