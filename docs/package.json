@@ -12,6 +12,7 @@
     "@birkskyum/maplibre-gl-draw": "npm:@jsr/birkskyum__maplibre-gl-draw@^2.1.2",
     "@solidjs/router": "^0.15.1",
     "@tailwindcss/vite": "^4.0.0-beta.3",
+    "@turf/turf": "^7.1.0",
     "autoprefixer": "^10.4.20",
     "maplibre-gl": "5.0.0-pre.8",
     "solid-js": "^1.9.3",

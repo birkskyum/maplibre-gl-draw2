@@ -17,6 +17,9 @@ importers:
       '@tailwindcss/vite':
         specifier: ^4.0.0-beta.3
         version: 4.0.0-beta.3(@babel/core@7.26.0)(postcss@8.4.49)(svelte@5.2.10)(typescript@5.6.3)(vite@6.0.1(jiti@2.4.0)(lightningcss@1.28.2))
+      '@turf/turf':
+        specifier: ^7.1.0
+        version: 7.1.0
       autoprefixer:
         specifier: ^10.4.20
         version: 10.4.20(postcss@8.4.49)

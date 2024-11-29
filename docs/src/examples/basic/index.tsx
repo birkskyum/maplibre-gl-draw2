@@ -1,10 +1,11 @@
 import * as turf from "@turf/turf";
 import { MapLibreDraw } from "@birkskyum/maplibre-gl-draw";
-import "https://esm.sh/jsr/@birkskyum/maplibre-gl-draw@^2/dist/maplibre-gl-draw.css";
 import { IControl, Map as MapGL } from "maplibre-gl";
+import "maplibre-gl/dist/maplibre-gl.css";
+// import "@birkskyum/maplibre-gl-draw/dist/maplibre-gl-draw.css";
 import { createEffect } from "solid-js";
 
-export default function App() {
+export default function() {
 
     let draw;
     let map;
@@ -59,7 +60,7 @@ export default function App() {
 
   return (
     <>
-      <div id="map"></div>
+      <div id="map" class="h-full"></div>
       <div class="calculation-box">
         <p>Draw a polygon using the draw tools.</p>
         <div id="calculated-area"></div>
