@@ -7,8 +7,8 @@ import { createEffect } from "solid-js";
 
 export default function() {
 
-    let draw;
-    let map;
+    let draw: MapLibreDraw;
+    let map: MapGL;
     createEffect(() => {
         
 
@@ -43,16 +43,16 @@ export default function() {
     map.on("draw.delete", updateArea);
     map.on("draw.update", updateArea);
     })
-  function updateArea(e) {
+  function updateArea(e: any) {
     const data = draw.getAll();
     const answer = document.getElementById("calculated-area");
     if (data.features.length > 0) {
       const area = turf.area(data);
       // restrict to area to 2 decimal points
       const roundedArea = Math.round(area * 100) / 100;
-      answer.innerHTML = `<p><strong>${roundedArea}</strong></p><p>square meters</p>`;
+      answer!.innerHTML = `<p><strong>${roundedArea}</strong></p><p>square meters</p>`;
     } else {
-      answer.innerHTML = "";
+      answer!.innerHTML = "";
       if (e.type !== "draw.delete")
         alert("Use the draw tools to draw a polygon!");
     }
