@@ -63,7 +63,7 @@
     "synthetic-dom-events": "0.3.0",
     "typescript": "^5.7.2",
     "vite": "^6.0.1",
-    "vitest": "^2.1.6"
+    "vitest": "^2.1.8"
   },
   "dependencies": {
     "@birkskyum/geojson-area": "npm:@jsr/birkskyum__geojson-area@^1.0.2",
