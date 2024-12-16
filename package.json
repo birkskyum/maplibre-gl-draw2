@@ -39,7 +39,7 @@
     "@biomejs/biome": "1.9.4",
     "@mapbox/cloudfriend": "^8.2.0",
     "@maplibre/maplibre-gl-geocoder": "^1.7.0",
-    "@rollup/plugin-commonjs": "^28.0.1",
+    "@rollup/plugin-commonjs": "^28.0.2",
     "@rollup/plugin-json": "^6.1.0",
     "@rollup/plugin-node-resolve": "^15.3.0",
     "@rollup/plugin-replace": "^6.0.1",
