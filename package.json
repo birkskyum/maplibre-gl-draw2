@@ -47,7 +47,7 @@
     "@rollup/plugin-typescript": "^12.1.1",
     "@std/assert": "npm:@jsr/std__assert@^1.0.8",
     "@turf/bbox-clip": "^7.1.0",
-    "@turf/centroid": "^7.1.0",
+    "@turf/centroid": "^7.2.0",
     "@types/geojson": "^7946.0.14",
     "@types/mapbox__point-geometry": "^0.1.4",
     "@types/node": "^22.10.1",
