@@ -67,8 +67,8 @@ importers:
         specifier: ^7.1.0
         version: 7.1.0
       '@turf/centroid':
-        specifier: ^7.1.0
-        version: 7.1.0
+        specifier: ^7.2.0
+        version: 7.2.0
       '@types/geojson':
         specifier: ^7946.0.14
         version: 7946.0.14
@@ -780,8 +780,8 @@ packages:
   '@turf/center@7.1.0':
     resolution: {integrity: sha512-p9AvBMwNZmRg65kU27cGKHAUQnEcdz8Y7f/i5DvaMfm4e8zmawr+hzPKXaUpUfiTyLs8Xt2W9vlOmNGyH+6X3w==}
 
-  '@turf/centroid@7.1.0':
-    resolution: {integrity: sha512-1Y1b2l+ZB1CZ+ITjUCsGqC4/tSjwm/R4OUfDztVqyyCq/VvezkLmTNqvXTGXgfP0GXkpv68iCfxF5M7QdM5pJQ==}
+  '@turf/centroid@7.2.0':
+    resolution: {integrity: sha512-yJqDSw25T7P48au5KjvYqbDVZ7qVnipziVfZ9aSo7P2/jTE7d4BP21w0/XLi3T/9bry/t9PR1GDDDQljN4KfDw==}
 
   '@turf/circle@7.1.0':
     resolution: {integrity: sha512-6qhF1drjwH0Dg3ZB9om1JkWTJfAqBcbtIrAj5UPlrAeHP87hGoCO2ZEsFEAL9Q18vntpivT89Uho/nqQUjJhYw==}
@@ -852,6 +852,9 @@ packages:
   '@turf/helpers@7.1.0':
     resolution: {integrity: sha512-dTeILEUVeNbaEeoZUOhxH5auv7WWlOShbx7QSd4s0T4Z0/iz90z9yaVCtZOLbU89umKotwKaJQltBNO9CzVgaQ==}
 
+  '@turf/helpers@7.2.0':
+    resolution: {integrity: sha512-cXo7bKNZoa7aC7ydLmUR02oB3IgDe7MxiPuRz3cCtYQHn+BJ6h1tihmamYDWWUlPHgSNF0i3ATc4WmDECZafKw==}
+
   '@turf/hex-grid@7.1.0':
     resolution: {integrity: sha512-I+Apx0smOPkMzaS5HHL44YOxSkSUvrz+wtSIETsDFWWLT2xKNkaaEcYU5MkgSoEfQsj082M7EkOIIpocXlA3kg==}
 
@@ -914,6 +917,9 @@ packages:
 
   '@turf/meta@7.1.0':
     resolution: {integrity: sha512-ZgGpWWiKz797Fe8lfRj7HKCkGR+nSJ/5aKXMyofCvLSc2PuYJs/qyyifDPWjASQQCzseJ7AlF2Pc/XQ/3XkkuA==}
+
+  '@turf/meta@7.2.0':
+    resolution: {integrity: sha512-igzTdHsQc8TV1RhPuOLVo74Px/hyPrVgVOTgjWQZzt3J9BVseCdpfY/0cJBdlSRI4S/yTmmHl7gAqjhpYH5Yaw==}
 
   '@turf/midpoint@7.1.0':
     resolution: {integrity: sha512-uiUU9TwRZOCeiTUn8+7oE6MJUvclfq+n6KQ5VCMTZXiRUJjPu7nDLpBle1t2WSv7/w7O0kSQ4FfKXh0gHnkJOw==}
@@ -3158,7 +3164,7 @@ snapshots:
   '@turf/center-median@7.1.0':
     dependencies:
       '@turf/center-mean': 7.1.0
-      '@turf/centroid': 7.1.0
+      '@turf/centroid': 7.2.0
       '@turf/distance': 7.1.0
       '@turf/helpers': 7.1.0
       '@turf/meta': 7.1.0
@@ -3167,7 +3173,7 @@ snapshots:
 
   '@turf/center-of-mass@7.1.0':
     dependencies:
-      '@turf/centroid': 7.1.0
+      '@turf/centroid': 7.2.0
       '@turf/convex': 7.1.0
       '@turf/helpers': 7.1.0
       '@turf/invariant': 7.1.0
@@ -3182,10 +3188,10 @@ snapshots:
       '@types/geojson': 7946.0.14
       tslib: 2.8.1
 
-  '@turf/centroid@7.1.0':
+  '@turf/centroid@7.2.0':
     dependencies:
-      '@turf/helpers': 7.1.0
-      '@turf/meta': 7.1.0
+      '@turf/helpers': 7.2.0
+      '@turf/meta': 7.2.0
       '@types/geojson': 7946.0.14
       tslib: 2.8.1
 
@@ -3300,7 +3306,7 @@ snapshots:
 
   '@turf/distance-weight@7.1.0':
     dependencies:
-      '@turf/centroid': 7.1.0
+      '@turf/centroid': 7.2.0
       '@turf/helpers': 7.1.0
       '@turf/invariant': 7.1.0
       '@turf/meta': 7.1.0
@@ -3372,6 +3378,11 @@ snapshots:
       '@types/geojson': 7946.0.14
       tslib: 2.8.1
 
+  '@turf/helpers@7.2.0':
+    dependencies:
+      '@types/geojson': 7946.0.14
+      tslib: 2.8.1
+
   '@turf/hex-grid@7.1.0':
     dependencies:
       '@turf/distance': 7.1.0
@@ -3384,7 +3395,7 @@ snapshots:
   '@turf/interpolate@7.1.0':
     dependencies:
       '@turf/bbox': 7.1.0
-      '@turf/centroid': 7.1.0
+      '@turf/centroid': 7.2.0
       '@turf/clone': 7.1.0
       '@turf/distance': 7.1.0
       '@turf/helpers': 7.1.0
@@ -3553,6 +3564,11 @@ snapshots:
       '@turf/helpers': 7.1.0
       '@types/geojson': 7946.0.14
 
+  '@turf/meta@7.2.0':
+    dependencies:
+      '@turf/helpers': 7.2.0
+      '@types/geojson': 7946.0.14
+
   '@turf/midpoint@7.1.0':
     dependencies:
       '@turf/bearing': 7.1.0
@@ -3575,7 +3591,7 @@ snapshots:
       '@turf/area': 7.1.0
       '@turf/bbox': 7.1.0
       '@turf/bbox-polygon': 7.1.0
-      '@turf/centroid': 7.1.0
+      '@turf/centroid': 7.2.0
       '@turf/distance': 7.1.0
       '@turf/helpers': 7.1.0
       '@turf/meta': 7.1.0
@@ -3708,7 +3724,7 @@ snapshots:
       '@turf/area': 7.1.0
       '@turf/bbox': 7.1.0
       '@turf/bbox-polygon': 7.1.0
-      '@turf/centroid': 7.1.0
+      '@turf/centroid': 7.2.0
       '@turf/helpers': 7.1.0
       '@turf/invariant': 7.1.0
       '@turf/point-grid': 7.1.0
@@ -3850,7 +3866,7 @@ snapshots:
 
   '@turf/transform-rotate@7.1.0':
     dependencies:
-      '@turf/centroid': 7.1.0
+      '@turf/centroid': 7.2.0
       '@turf/clone': 7.1.0
       '@turf/helpers': 7.1.0
       '@turf/invariant': 7.1.0
@@ -3865,7 +3881,7 @@ snapshots:
     dependencies:
       '@turf/bbox': 7.1.0
       '@turf/center': 7.1.0
-      '@turf/centroid': 7.1.0
+      '@turf/centroid': 7.2.0
       '@turf/clone': 7.1.0
       '@turf/helpers': 7.1.0
       '@turf/invariant': 7.1.0
@@ -3930,7 +3946,7 @@ snapshots:
       '@turf/center-mean': 7.1.0
       '@turf/center-median': 7.1.0
       '@turf/center-of-mass': 7.1.0
-      '@turf/centroid': 7.1.0
+      '@turf/centroid': 7.2.0
       '@turf/circle': 7.1.0
       '@turf/clean-coords': 7.1.0
       '@turf/clone': 7.1.0
